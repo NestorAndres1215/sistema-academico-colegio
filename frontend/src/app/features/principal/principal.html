@@ -1,338 +1,261 @@
 <!-- ══════════════ NAVBAR ══════════════ -->
 <nav class="navbar navbar-expand-lg fixed-top csa-navbar" [class.scrolled]="isScrolled">
-  <div class="container-fluid px-4">
+    <div class="container-fluid px-4">
 
-    <!-- Logo -->
-    <a class="navbar-brand d-flex align-items-center gap-2" href="#">
-      <div class="csa-emblem">
-        <i class="fas fa-graduation-cap"></i>
-      </div>
-      <span class="csa-brand-name">Colegio San Andrés</span>
-    </a>
+        <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+            <div class="csa-emblem">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <span class="csa-brand-name">Colegio San Andrés</span>
+        </a>
 
-    <!-- Toggler (hamburguesa) -->
-    <button class="navbar-toggler csa-toggler border-0" type="button"
-            data-bs-toggle="collapse" data-bs-target="#navMenu"
-            aria-controls="navMenu" aria-expanded="false">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+        <button class="navbar-toggler csa-toggler border-0" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <!-- Links -->
-    <div class="collapse navbar-collapse" id="navMenu">
-      <ul class="navbar-nav mx-auto gap-lg-1">
-        <li class="nav-item"><a class="nav-link csa-link" (click)="navTo('nosotros')">Nosotros</a></li>
-        <li class="nav-item"><a class="nav-link csa-link" (click)="navTo('niveles')">Niveles</a></li>
-        <li class="nav-item"><a class="nav-link csa-link" (click)="navTo('programas')">Actividades</a></li>
-        <li class="nav-item"><a class="nav-link csa-link" (click)="navTo('testimonios')">Testimonios</a></li>
-        <li class="nav-item"><a class="nav-link csa-link" (click)="navTo('contacto')">Contacto</a></li>
-      </ul>
-      <!-- Botón login -->
-      <button class="btn csa-btn-login d-flex align-items-center gap-2" (click)="onLogin()">
-        <i class="fas fa-user-circle"></i> Iniciar Sesión
-      </button>
+
+        <div class="collapse navbar-collapse" id="navMenu">
+            <ul class="navbar-nav mx-auto gap-lg-1">
+                <li class="nav-item"><a class="nav-link csa-link" (click)="navTo('nosotros')">Nosotros</a></li>
+                <li class="nav-item"><a class="nav-link csa-link" (click)="navTo('niveles')">Niveles</a></li>
+                <li class="nav-item"><a class="nav-link csa-link" (click)="navTo('programas')">Actividades</a></li>
+                <li class="nav-item"><a class="nav-link csa-link" (click)="navTo('testimonios')">Testimonios</a></li>
+                <li class="nav-item"><a class="nav-link csa-link" (click)="navTo('contacto')">Contacto</a></li>
+            </ul>
+            <button class="btn csa-btn-login d-flex align-items-center gap-2" (click)="onLogin()">
+                <i class="fas fa-user-circle"></i> Iniciar Sesión
+            </button>
+        </div>
+
     </div>
-
-  </div>
 </nav>
 
 
-<!-- ══════════════ HERO ══════════════ -->
 <section class="csa-hero d-flex align-items-center">
-  <div class="container position-relative z-2">
-    <div class="row align-items-center">
-      <div class="col-lg-7" data-aos="fade-up">
-        <span class="csa-hero-tag mb-3 d-inline-flex align-items-center gap-2">
-          <i class="fas fa-star"></i>
-          Institución Educativa de Excelencia — Desde 1985
-        </span>
-        <h1 class="csa-hero-title">Formando <span>Líderes</span> del Mañana</h1>
-        <p class="csa-hero-desc">
-          En el Colegio San Andrés ofrecemos educación de calidad en los niveles de
-          <strong>Primaria y Secundaria</strong>, con docentes comprometidos, valores sólidos
-          y una formación integral que prepara a nuestros alumnos para el futuro.
-        </p>
-        <div class="d-flex flex-wrap gap-3">
-          <a (click)="scrollTo('niveles')" class="btn csa-btn-primary">
-            <i class="fas fa-book-open me-2"></i>Ver nuestros niveles
-          </a>
-          <a (click)="scrollTo('contacto')" class="btn csa-btn-outline-white">
-            <i class="fas fa-envelope me-2"></i>Contáctanos
-          </a>
+    <div class="container position-relative z-2">
+        <div class="row align-items-center">
+            <div class="col-lg-7" data-aos="fade-up">
+                <span class="csa-hero-tag mb-3 d-inline-flex align-items-center gap-2">
+                    <i class="fas fa-star"></i>
+                    Institución Educativa de Excelencia — Desde 1985
+                </span>
+                <h1 class="csa-hero-title">Formando <span>Líderes</span> del Mañana</h1>
+                <p class="csa-hero-desc">
+                    En el Colegio San Andrés ofrecemos educación de calidad en los niveles de
+                    <strong>Primaria y Secundaria</strong>, con docentes comprometidos, valores sólidos
+                    y una formación integral que prepara a nuestros alumnos para el futuro.
+                </p>
+                <div class="d-flex flex-wrap gap-3">
+                    <a (click)="scrollTo('niveles')" class="btn csa-btn-primary">
+                        <i class="fas fa-book-open me-2"></i>Ver nuestros niveles
+                    </a>
+                    <a (click)="scrollTo('contacto')" class="btn csa-btn-outline-white">
+                        <i class="fas fa-envelope me-2"></i>Contáctanos
+                    </a>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
 
-    <!-- Stats -->
-    <div class="row mt-5 g-3">
-      <div class="col-4 col-sm-auto" *ngFor="let s of stats">
-        <div class="csa-stat text-center">
-          <div class="csa-stat-num">{{ s.num }}</div>
-          <div class="csa-stat-label">{{ s.label }}</div>
+        <div class="row mt-5 g-3">
+            <div class="col-4 col-sm-auto" *ngFor="let s of stats">
+                <div class="csa-stat text-center">
+                    <div class="csa-stat-num">{{ s.num }}</div>
+                    <div class="csa-stat-label">{{ s.label }}</div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </section>
 
-
-<!-- ══════════════ NOSOTROS ══════════════ -->
 <section class="py-section bg-white" id="nosotros">
-  <div class="container">
-    <div class="row align-items-center g-5">
+    <div class="container">
+        <div class="row align-items-center ">
+            <div class="col-lg-6 mb-4">
+                <div class="csa-img-wrap position-relative">
+                    <div class="csa-img-box rounded-3 overflow-hidden shadow-lg">
+                        <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800&q=80"
+                            alt="Colegio San Andrés" class="w-100 h-100 object-fit-cover" />
+                    </div>
 
-      <!-- Imagen -->
-      <div class="col-lg-6">
-        <div class="csa-img-wrap position-relative">
-          <div class="csa-img-box rounded-3 overflow-hidden shadow-lg">
-            <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800&q=80"
-                 alt="Colegio San Andrés" class="w-100 h-100 object-fit-cover" />
-          </div>
-          <div class="csa-badge-circle">
-            <div class="csa-badge-num">40</div>
-            <div class="csa-badge-txt">AÑOS DE<br>EXCELENCIA</div>
-          </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <p class="csa-section-tag"><i class="fas fa-award me-2"></i>Quiénes Somos</p>
+                <h2 class="csa-section-title">Una institución comprometida con el futuro</h2>
+                <p class="text-secondary lh-lg mb-4">
+                    El <strong>Colegio San Andrés</strong> es una institución educativa privada con más de
+                    cuatro décadas formando ciudadanos íntegros. Contamos con dos niveles:
+                    <strong>Primaria</strong> (1.° a 6.° grado) y <strong>Secundaria</strong>
+                    (1.° a 5.° año), con docentes altamente calificados y un modelo pedagógico
+                    que combina innovación tecnológica con valores humanos.
+                </p>
+                <ul class="list-unstyled csa-value-list">
+                    <li class="d-flex align-items-start gap-3 py-3 border-bottom"
+                        *ngFor="let v of valores; last as isLast" [class.border-bottom]="!isLast">
+                        <div class="csa-value-icon flex-shrink-0">
+                            <i [class]="v.icon"></i>
+                        </div>
+                        <div>
+                            <h6 class="fw-semibold text-navy mb-1">{{ v.titulo }}</h6>
+                            <p class="text-secondary small mb-0">{{ v.descripcion }}</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
-      </div>
-
-      <!-- Texto -->
-      <div class="col-lg-6">
-        <p class="csa-section-tag"><i class="fas fa-award me-2"></i>Quiénes Somos</p>
-        <h2 class="csa-section-title">Una institución comprometida con el futuro</h2>
-        <p class="text-secondary lh-lg mb-4">
-          El <strong>Colegio San Andrés</strong> es una institución educativa privada con más de
-          cuatro décadas formando ciudadanos íntegros. Contamos con dos niveles:
-          <strong>Primaria</strong> (1.° a 6.° grado) y <strong>Secundaria</strong>
-          (1.° a 5.° año), con docentes altamente calificados y un modelo pedagógico
-          que combina innovación tecnológica con valores humanos.
-        </p>
-        <ul class="list-unstyled csa-value-list">
-          <li class="d-flex align-items-start gap-3 py-3 border-bottom" *ngFor="let v of valores; last as isLast"
-              [class.border-bottom]="!isLast">
-            <div class="csa-value-icon flex-shrink-0">
-              <i [class]="v.icon"></i>
-            </div>
-            <div>
-              <h6 class="fw-semibold text-navy mb-1">{{ v.titulo }}</h6>
-              <p class="text-secondary small mb-0">{{ v.descripcion }}</p>
-            </div>
-          </li>
-        </ul>
-      </div>
     </div>
-  </div>
 </section>
 
 
-<!-- ══════════════ NIVELES ══════════════ -->
 <section class="py-section csa-bg-cream" id="niveles">
-  <div class="container">
-    <p class="csa-section-tag"><i class="fas fa-layer-group me-2"></i>Oferta Educativa</p>
-    <h2 class="csa-section-title">Nuestros Niveles Educativos</h2>
-    <p class="text-secondary mb-5" style="max-width:560px">
-      Acompañamos a cada estudiante desde el inicio de su vida escolar hasta su egreso y preparación universitaria.
-    </p>
-
-    <div class="row g-4">
-      <div class="col-md-6" *ngFor="let n of niveles">
-        <div class="csa-nivel-card h-100" [ngClass]="n.colorClass">
-
-          <!-- Foto -->
-          <div class="csa-nivel-foto overflow-hidden">
-            <img [src]="n.foto" [alt]="'Nivel ' + n.nombre" class="w-100 h-100 object-fit-cover" />
-          </div>
-
-          <!-- Header -->
-          <div class="d-flex align-items-start gap-3 p-4 pb-2">
-            <div class="csa-nivel-icon flex-shrink-0">
-              <i [class]="n.icon"></i>
-            </div>
-            <div>
-              <h3 class="csa-nivel-title mb-2">Nivel {{ n.nombre }}</h3>
-              <span class="csa-badge-pill me-2"><i class="fas fa-layer-group me-1"></i>{{ n.grados }}</span>
-              <span class="csa-badge-pill"><i class="fas fa-user-clock me-1"></i>{{ n.edad }}</span>
-            </div>
-          </div>
-
-          <!-- Materias -->
-          <ul class="row g-2 list-unstyled px-4 mb-3">
-            <li class="col-6 d-flex align-items-center gap-2 small text-secondary"
-                *ngFor="let item of n.items">
-              <i class="fas fa-check-circle csa-check-icon"></i> {{ item }}
-            </li>
-          </ul>
-
-          <a href="#" class="csa-learn-link px-4 pb-4 d-inline-flex align-items-center gap-2">
-            Más información <i class="fas fa-arrow-right"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ══════════════ ACTIVIDADES ══════════════ -->
-<section class="py-section csa-bg-cream" id="programas">
-  <div class="container">
-    <p class="csa-section-tag"><i class="fas fa-star me-2"></i>Más allá del aula</p>
-    <h2 class="csa-section-title">Actividades y Programas Complementarios</h2>
-    <p class="text-secondary mb-5" style="max-width:560px">
-      En Primaria y Secundaria ofrecemos una experiencia educativa completa con actividades que potencian los talentos de cada alumno.
-    </p>
-
-    <div class="row g-4">
-      <div class="col-md-6 col-lg-4" *ngFor="let p of programas">
-        <div class="csa-program-card h-100 p-4">
-          <div class="csa-prog-icon mb-3"><i [class]="p.icon"></i></div>
-          <span class="csa-nivel-badge mb-2 d-inline-block">{{ p.nivel }}</span>
-          <h5 class="fw-bold text-navy mb-2">{{ p.titulo }}</h5>
-          <p class="text-secondary small lh-lg mb-3">{{ p.descripcion }}</p>
-          <a href="#" class="csa-learn-link d-inline-flex align-items-center gap-2">
-            Saber más <i class="fas fa-arrow-right"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ══════════════ POR QUÉ ══════════════ -->
-<section class="py-section csa-bg-navy" id="por-que">
-  <div class="container">
-    <p class="csa-section-tag csa-tag-light"><i class="fas fa-medal me-2"></i>Nuestra Diferencia</p>
-    <h2 class="csa-section-title text-white">¿Por qué elegir San Andrés?</h2>
-    <p class="mb-5" style="color:rgba(255,255,255,.62);max-width:560px">
-      Somos una institución con dos niveles sólidos que pone al estudiante en el centro de todo.
-    </p>
-
-    <div class="row g-4">
-      <div class="col-sm-6 col-lg-3" *ngFor="let f of features">
-        <div class="csa-feature-card text-center p-4">
-          <i [class]="f.icon + ' csa-feat-icon mb-3 d-block'"></i>
-          <h6 class="text-white fw-bold mb-2">{{ f.titulo }}</h6>
-          <p class="small mb-0" style="color:rgba(255,255,255,.55)">{{ f.descripcion }}</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ══════════════ TESTIMONIOS ══════════════ -->
-<section class="py-section bg-white" id="testimonios">
-  <div class="container">
-    <p class="csa-section-tag"><i class="fas fa-comment-dots me-2"></i>Opiniones</p>
-    <h2 class="csa-section-title">Lo que dicen nuestras familias</h2>
-    <p class="text-secondary mb-5" style="max-width:560px">
-      Padres de primaria y egresados de secundaria comparten su experiencia en San Andrés.
-    </p>
-
-    <div class="row g-4">
-      <div class="col-md-4" *ngFor="let t of testimonios">
-        <div class="csa-test-card h-100 p-4">
-          <div class="csa-quote">"</div>
-          <p class="text-secondary small lh-lg mb-4">{{ t.texto }}</p>
-          <div class="d-flex align-items-center gap-3 mt-auto">
-            <div class="csa-avatar flex-shrink-0">
-              <i [class]="t.icon"></i>
-            </div>
-            <div>
-              <strong class="d-block small text-navy">{{ t.nombre }}</strong>
-              <small class="text-secondary">{{ t.cargo }}</small>
-              <div class="csa-stars mt-1">
-                <i class="fas fa-star" *ngFor="let s of t.estrellas"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ══════════════ CTA ══════════════ -->
-<section class="csa-cta text-center py-section" id="contacto">
-  <div class="container">
-    <h2 class="csa-section-title text-navy">¿Listo para ser parte de nuestra comunidad?</h2>
-    <p class="mb-5" style="color:rgba(11,31,58,.72)">
-      Inscripciones abiertas para Primaria y Secundaria — año escolar 2026.
-      Agenda una visita guiada y conoce nuestras instalaciones.
-    </p>
-    <div class="d-flex flex-wrap justify-content-center gap-3">
-      <a href="mailto:admisiones@colegiosanandres.edu" class="btn csa-btn-navy">
-        <i class="fas fa-paper-plane me-2"></i>Solicitar información
-      </a>
-      <a href="tel:+5115551234" class="btn csa-btn-navy-outline">
-        <i class="fas fa-phone me-2"></i>Llamar ahora
-      </a>
-    </div>
-  </div>
-</section>
-
-
-
-<footer class="csa-footer pt-5 pb-3">
-  <div class="container">
-    <div class="row g-4 mb-4">
-
-
-      <div class="col-lg-4 col-md-6">
-        <div class="d-flex align-items-center gap-2 mb-3">
-          <i class="fas fa-graduation-cap csa-gold fs-4"></i>
-          <span class="fw-bold text-white" style="font-family:'Playfair Display',serif;font-size:1.2rem">
-            Colegio San Andrés
-          </span>
-        </div>
-        <p class="small" style="color:rgba(255,255,255,.55);line-height:1.8">
-          Formando ciudadanos íntegros desde 1985 en Primaria y Secundaria. Educación con valores, tecnología y vocación humana.
+    <div class="container">
+        <p class="csa-section-tag"><i class="fas fa-layer-group me-2"></i>Oferta Educativa</p>
+        <h2 class="csa-section-title">Nuestros Niveles Educativos</h2>
+        <p class="text-secondary mb-5" style="max-width:560px">
+            Acompañamos a cada estudiante desde el inicio de su vida escolar hasta su egreso y preparación
+            universitaria.
         </p>
-        <div class="d-flex gap-2 mt-3">
-          <a href="#" class="csa-social"><i class="fab fa-facebook-f"></i></a>
-          <a href="#" class="csa-social"><i class="fab fa-instagram"></i></a>
-          <a href="#" class="csa-social"><i class="fab fa-youtube"></i></a>
-          <a href="#" class="csa-social"><i class="fab fa-tiktok"></i></a>
-          <a href="#" class="csa-social"><i class="fab fa-whatsapp"></i></a>
+
+        <div class="row g-4">
+            <div class="col-md-6" *ngFor="let n of niveles">
+                <div class="csa-nivel-card h-100" [ngClass]="n.colorClass">
+
+                    <div class="csa-nivel-foto overflow-hidden">
+                        <img [src]="n.foto" [alt]="'Nivel ' + n.nombre" class="w-100 h-100 object-fit-cover" />
+                    </div>
+                    <div class="d-flex align-items-start gap-3 p-4 pb-2">
+                        <div class="csa-nivel-icon flex-shrink-0">
+                            <i [class]="n.icon"></i>
+                        </div>
+                        <div>
+                            <h3 class="csa-nivel-title mb-2">Nivel {{ n.nombre }}</h3>
+                            <span class="csa-badge-pill me-2"><i class="fas fa-layer-group me-1"></i>{{ n.grados
+                                }}</span>
+                            <span class="csa-badge-pill"><i class="fas fa-user-clock me-1"></i>{{ n.edad }}</span>
+                        </div>
+                    </div>
+                    <ul class="row g-2 list-unstyled px-4 mb-3">
+                        <li class="col-6 d-flex align-items-center gap-2 small text-secondary"
+                            *ngFor="let item of n.items">
+                            <i class="fas fa-check-circle csa-check-icon"></i> {{ item }}
+                        </li>
+                    </ul>
+
+                    <a href="#" class="csa-learn-link px-4 pb-4 d-inline-flex align-items-center gap-2">
+                        Más información <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
         </div>
-      </div>
-
-      <div class="col-lg-2 col-md-6 col-6">
-        <h6 class="text-white text-uppercase small fw-bold ls-wide mb-3">Niveles</h6>
-        <ul class="list-unstyled csa-footer-links">
-          <li><a (click)="scrollTo('niveles')"><i class="fas fa-chevron-right"></i> Primaria (1.°–6.°)</a></li>
-          <li><a (click)="scrollTo('niveles')"><i class="fas fa-chevron-right"></i> Secundaria (1.°–5.°)</a></li>
-          <li><a href="#"><i class="fas fa-chevron-right"></i> Preuniversitario</a></li>
-          <li><a (click)="scrollTo('programas')"><i class="fas fa-chevron-right"></i> Actividades</a></li>
-        </ul>
-      </div>
-
-      <div class="col-lg-2 col-md-6 col-6">
-        <h6 class="text-white text-uppercase small fw-bold ls-wide mb-3">Admisiones</h6>
-        <ul class="list-unstyled csa-footer-links">
-          <li><a href="#"><i class="fas fa-chevron-right"></i> Requisitos</a></li>
-          <li><a href="#"><i class="fas fa-chevron-right"></i> Proceso</a></li>
-          <li><a href="#"><i class="fas fa-chevron-right"></i> Pensiones</a></li>
-          <li><a href="#"><i class="fas fa-chevron-right"></i> Becas</a></li>
-        </ul>
-      </div>
-
-      <div class="col-lg-4 col-md-6">
-        <h6 class="text-white text-uppercase small fw-bold ls-wide mb-3">Contacto</h6>
-        <ul class="list-unstyled csa-footer-links">
-          <li><a href="#"><i class="fas fa-map-marker-alt me-2"></i>Av. Los Libertadores 452, Lima</a></li>
-          <li><a href="tel:+5115551234"><i class="fas fa-phone me-2"></i>(01) 555-1234</a></li>
-          <li><a href="mailto:info@colegiosanandres.edu"><i class="fas fa-envelope me-2"></i>info&#64;colegiosanandres.edu</a></li>
-          <li><a href="#"><i class="fas fa-clock me-2"></i>Lun–Vie: 7:30 a.m. – 4:30 p.m.</a></li>
-        </ul>
-      </div>
-
     </div>
+</section>
 
-    <div class="border-top pt-3 d-flex flex-wrap justify-content-between align-items-center gap-2"
-         style="border-color:rgba(255,255,255,.1)!important">
-      <small style="color:rgba(255,255,255,.45)">© 2026 Colegio San Andrés. Todos los derechos reservados.</small>
-      <small style="color:rgba(255,255,255,.45)">Hecho con <i class="fas fa-heart csa-gold"></i> para nuestros estudiantes</small>
+<section class="py-section csa-bg-cream" id="programas">
+    <div class="container">
+        <p class="csa-section-tag"><i class="fas fa-star me-2"></i>Más allá del aula</p>
+        <h2 class="csa-section-title">Actividades y Programas Complementarios</h2>
+        <p class="text-secondary mb-5" style="max-width:560px">
+            En Primaria y Secundaria ofrecemos una experiencia educativa completa con actividades que potencian los
+            talentos de cada alumno.
+        </p>
+
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-4" *ngFor="let p of programas">
+                <div class="csa-program-card h-100 p-4">
+                    <div class="csa-prog-icon mb-3"><i [class]="p.icon"></i></div>
+                    <span class="csa-nivel-badge mb-2 d-inline-block">{{ p.nivel }}</span>
+                    <h5 class="fw-bold text-navy mb-2">{{ p.titulo }}</h5>
+                    <p class="text-secondary small lh-lg mb-3">{{ p.descripcion }}</p>
+                    <a href="#" class="csa-learn-link d-inline-flex align-items-center gap-2">
+                        Saber más <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
+</section>
+
+<section class="py-section csa-bg-navy" id="por-que">
+    <div class="container">
+        <p class="csa-section-tag csa-tag-light"><i class="fas fa-medal me-2"></i>Nuestra Diferencia</p>
+        <h2 class="csa-section-title text-white">¿Por qué elegir San Andrés?</h2>
+        <p class="mb-5" style="color:rgba(255,255,255,.62);max-width:560px">
+            Somos una institución con dos niveles sólidos que pone al estudiante en el centro de todo.
+        </p>
+
+        <div class="row g-4">
+            <div class="col-sm-6 col-lg-3 d-flex" *ngFor="let f of features">
+                <div class="csa-feature-card text-center p-4 w-100 h-100 d-flex flex-column">
+                    <i [class]="f.icon + ' csa-feat-icon mb-3 d-block'"></i>
+                    <h6 class="text-white fw-bold mb-2">{{ f.titulo }}</h6>
+                    <p class="small mb-0 mt-auto" style="color:rgba(255,255,255,.55)">
+                        {{ f.descripcion }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<section class="py-section bg-white" id="testimonios">
+    <div class="container">
+        <p class="csa-section-tag"><i class="fas fa-comment-dots me-2"></i>Opiniones</p>
+        <h2 class="csa-section-title">Lo que dicen nuestras familias</h2>
+        <p class="text-secondary mb-5" style="max-width:560px">
+            Padres de primaria y egresados de secundaria comparten su experiencia en San Andrés.
+        </p>
+
+        <div class="row g-4">
+            <div class="col-md-4" *ngFor="let t of testimonios">
+                <div class="csa-test-card h-100 p-4">
+                    <div class="csa-quote">"</div>
+                    <p class="text-secondary small lh-lg mb-4">{{ t.texto }}</p>
+                    <div class="d-flex align-items-center gap-3 mt-auto">
+                        <div class="csa-avatar flex-shrink-0">
+                            <i [class]="t.icon"></i>
+                        </div>
+                        <div>
+                            <strong class="d-block small text-navy">{{ t.nombre }}</strong>
+                            <small class="text-secondary">{{ t.cargo }}</small>
+                            <div class="csa-stars mt-1">
+                                <i class="fas fa-star" *ngFor="let s of t.estrellas"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="csa-cta text-center py-section" id="contacto">
+    <div class="container">
+        <h2 class="csa-section-title text-navy">¿Listo para ser parte de nuestra comunidad?</h2>
+        <p class="mb-5" style="color:rgba(11,31,58,.72)">
+            Inscripciones abiertas para Primaria y Secundaria — año escolar 2026.
+            Agenda una visita guiada y conoce nuestras instalaciones.
+        </p>
+        <div class="d-flex flex-wrap justify-content-center gap-3">
+            <a href="mailto:admisiones@colegiosanandres.edu" class="btn csa-btn-navy">
+                <i class="fas fa-paper-plane me-2"></i>Solicitar información
+            </a>
+            <a href="tel:+5115551234" class="btn csa-btn-navy-outline">
+                <i class="fas fa-phone me-2"></i>Llamar ahora
+            </a>
+        </div>
+    </div>
+</section>
+
+
+
+<footer class="csa-footer pt-5 pb-5">
+    <div class="container">
+        <small style="color:rgba(255,255,255,.45)">© 2026 Colegio San Andrés. Todos los derechos reservados.</small>
+        <small style="color:rgba(255,255,255,.45)">Hecho con <i class="fas fa-heart csa-gold"></i> para nuestros
+            estudiantes</small>
+    </div>
 </footer>
