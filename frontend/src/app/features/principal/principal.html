@@ -1,20 +1,15 @@
-
 <nav class="navbar navbar-expand-lg fixed-top csa-navbar" [class.scrolled]="isScrolled">
     <div class="container-fluid px-4">
-
-        <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+        <a class="navbar-brand d-flex align-items-center gap-2" href="/">
             <div class="csa-emblem">
                 <i class="fas fa-graduation-cap"></i>
             </div>
             <span class="csa-brand-name">Colegio San Andrés</span>
         </a>
-
         <button class="navbar-toggler csa-toggler border-0" type="button" data-bs-toggle="collapse"
             data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false">
             <span class="navbar-toggler-icon"></span>
         </button>
-
-
         <div class="collapse navbar-collapse" id="navMenu">
             <ul class="navbar-nav mx-auto gap-lg-1">
                 <li class="nav-item"><a class="nav-link csa-link" (click)="navTo('nosotros')">Nosotros</a></li>
@@ -30,7 +25,6 @@
 
     </div>
 </nav>
-
 
 <section class="csa-hero d-flex align-items-center">
     <div class="container position-relative z-2">
@@ -56,7 +50,6 @@
                 </div>
             </div>
         </div>
-
         <div class="row mt-5 g-3">
             <div class="col-4 col-sm-auto" *ngFor="let s of stats">
                 <div class="csa-stat text-center">
@@ -77,10 +70,8 @@
                         <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800&q=80"
                             alt="Colegio San Andrés" class="w-100 h-100 object-fit-cover" />
                     </div>
-
                 </div>
             </div>
-
             <div class="col-lg-6">
                 <p class="csa-section-tag"><i class="fas fa-award me-2"></i>Quiénes Somos</p>
                 <h2 class="csa-section-title">Una institución comprometida con el futuro</h2>
@@ -108,7 +99,6 @@
     </div>
 </section>
 
-
 <section class="py-section csa-bg-cream" id="niveles">
     <div class="container">
         <p class="csa-section-tag"><i class="fas fa-layer-group me-2"></i>Oferta Educativa</p>
@@ -117,11 +107,9 @@
             Acompañamos a cada estudiante desde el inicio de su vida escolar hasta su egreso y preparación
             universitaria.
         </p>
-
         <div class="row g-4">
             <div class="col-md-6" *ngFor="let n of niveles">
                 <div class="csa-nivel-card h-100" [ngClass]="n.colorClass">
-
                     <div class="csa-nivel-foto overflow-hidden">
                         <img [src]="n.foto" [alt]="'Nivel ' + n.nombre" class="w-100 h-100 object-fit-cover" />
                     </div>
@@ -160,7 +148,6 @@
             En Primaria y Secundaria ofrecemos una experiencia educativa completa con actividades que potencian los
             talentos de cada alumno.
         </p>
-
         <div class="row g-4">
             <div class="col-md-6 col-lg-4" *ngFor="let p of programas">
                 <div class="csa-program-card h-100 p-4">
@@ -184,7 +171,6 @@
         <p class="mb-5" style="color:rgba(255,255,255,.62);max-width:560px">
             Somos una institución con dos niveles sólidos que pone al estudiante en el centro de todo.
         </p>
-
         <div class="row g-4">
             <div class="col-sm-6 col-lg-3 d-flex" *ngFor="let f of features">
                 <div class="csa-feature-card text-center p-4 w-100 h-100 d-flex flex-column">
@@ -199,8 +185,6 @@
     </div>
 </section>
 
-
-
 <section class="py-section bg-white" id="testimonios">
     <div class="container">
         <p class="csa-section-tag"><i class="fas fa-comment-dots me-2"></i>Opiniones</p>
@@ -208,7 +192,6 @@
         <p class="text-secondary mb-5" style="max-width:560px">
             Padres de primaria y egresados de secundaria comparten su experiencia en San Andrés.
         </p>
-
         <div class="row g-4">
             <div class="col-md-4" *ngFor="let t of testimonios">
                 <div class="csa-test-card h-100 p-4">
@@ -249,8 +232,6 @@
         </div>
     </div>
 </section>
-
-
 
 <footer class="csa-footer pt-5 pb-5">
     <div class="container">

@@ -8,4 +8,9 @@ export const routes: Routes = [
         component: Principal,
         pathMatch: 'full'
     },
+    {
+        path: 'auth',
+        loadChildren: () => import('./features/auth/auth.routes').then(m => m.AUTHENTICATION_ROUTES),
+        //  canActivate: [NoAuthGuard]
+    },
 ];

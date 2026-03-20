@@ -1,1 +1,126 @@
-<p>login works!</p>
+<div class="login-wrapper d-flex min-vh-100">
+
+    <div class="login-left d-none d-lg-flex flex-column justify-content-between p-5">
+
+        <!-- Logo -->
+        <a href="/" class="d-flex align-items-center gap-3 text-decoration-none">
+            <div class="csa-emblem">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <span class="csa-brand">Colegio San Andrés</span>
+        </a>
+
+        <!-- Quote central -->
+        <div class="login-quote">
+            <div class="quote-mark">"</div>
+            <p class="quote-text">
+                La educación es el arma más poderosa que puedes usar para cambiar el mundo.
+            </p>
+            <span class="quote-author">— Nelson Mandela</span>
+        </div>
+
+        <!-- Stats bottom -->
+        <div class="d-flex gap-4">
+            <div class="login-stat">
+                <div class="login-stat-num">1,200+</div>
+                <div class="login-stat-label">Estudiantes</div>
+            </div>
+            <div class="login-stat">
+                <div class="login-stat-num">98%</div>
+                <div class="login-stat-label">Aprobación</div>
+            </div>
+            <div class="login-stat">
+                <div class="login-stat-num">40</div>
+                <div class="login-stat-label">Años</div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ── PANEL DERECHO (formulario) ── -->
+    <div class="login-right d-flex flex-column justify-content-center align-items-center p-4 p-md-5 flex-grow-1">
+
+        <!-- Mobile logo -->
+        <div class="d-flex d-lg-none align-items-center gap-2 mb-5">
+            <div class="csa-emblem-sm">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <span class="csa-brand-sm">Colegio San Andrés</span>
+        </div>
+
+        <div class="login-box w-100">
+
+            <!-- Encabezado -->
+            <div class="mb-4">
+                <h1 class="login-title">Bienvenido de vuelta</h1>
+                <p class="login-subtitle">Ingresa tus credenciales para acceder al portal.</p>
+            </div>
+
+            <!-- Selector de rol -->
+            <div class="rol-selector d-flex gap-2 mb-4">
+                <button class="btn rol-btn flex-fill" [class.active]="rol === 'alumno'" (click)="setRol('alumno')">
+                    <i class="fas fa-user-graduate me-2"></i>Alumno
+                </button>
+                <button class="btn rol-btn flex-fill" [class.active]="rol === 'docente'" (click)="setRol('docente')">
+                    <i class="fas fa-chalkboard-teacher me-2"></i>Docente
+                </button>
+                <button class="btn rol-btn flex-fill" [class.active]="rol === 'padre'" (click)="setRol('padre')">
+                    <i class="fas fa-user-friends me-2"></i>Padre
+                </button>
+            </div>
+            <form (ngSubmit)="onSubmit()" #loginForm="ngForm" novalidate>
+                <div class="mb-3">
+                    <label class="form-label csa-label">
+                        <i class="fas fa-user me-2"></i>
+                        {{ rol === 'alumno' ? 'Código de alumno' : rol === 'docente' ? 'Correo institucional' : 'DNI del apoderado' }}
+                    </label>
+                    <div class="input-group csa-input-group">
+                        <span class="input-group-text csa-input-icon">
+                            <i class="fas" [class.fa-id-card]="rol === 'alumno'" [class.fa-envelope]="rol === 'docente'"
+                                [class.fa-address-card]="rol === 'padre'"></i>
+                        </span>
+                        <input type="text" class="form-control csa-input"
+                            [placeholder]="rol === 'alumno' ? 'Ej: 2024-0123' : rol === 'docente' ? 'usuario@sanandres.edu' : 'Ej: 12345678'"
+                            [(ngModel)]="usuario" name="usuario" required [class.is-invalid]="submitted && !usuario" />
+                        <div class="invalid-feedback">Este campo es requerido.</div>
+                    </div>
+                </div>
+
+                <!-- Contraseña -->
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                        <label class="form-label csa-label mb-0">
+                            <i class="fas fa-lock me-2"></i>Contraseña
+                        </label>
+                        <a href="#" class="csa-forgot">¿Olvidaste tu contraseña?</a>
+                    </div>
+                    <div class="input-group csa-input-group">
+                        <span class="input-group-text csa-input-icon">
+                            <i class="fas fa-lock"></i>
+                        </span>
+                        <input [type]="showPass ? 'text' : 'password'" class="form-control csa-input border-end-0"
+                            placeholder="••••••••" [(ngModel)]="password" name="password" required
+                            [class.is-invalid]="submitted && !password" />
+                        <button type="button" class="input-group-text csa-input-icon csa-eye-btn border-start-0"
+                            (click)="togglePass()">
+                            <i class="fas" [class.fa-eye]="!showPass" [class.fa-eye-slash]="showPass"></i>
+                        </button>
+                        <div class="invalid-feedback">Ingresa tu contraseña.</div>
+                    </div>
+                </div>
+
+                <!-- Botón submit -->
+                <button type="submit"
+                    class="btn csa-btn-submit w-100 d-flex align-items-center justify-content-center gap-2"
+                    [disabled]="loading">
+                    <span class="spinner-border spinner-border-sm" *ngIf="loading"></span>
+                    <i class="fas fa-sign-in-alt" *ngIf="!loading"></i>
+                    {{ loading ? 'Ingresando...' : 'Iniciar Sesión' }}
+                </button>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
