@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-principal',
@@ -9,15 +9,42 @@ import { Component } from '@angular/core';
   styleUrl: './principal.css',
 })
 export class Principal {
-   
+  isScrolled = false;
+ 
+  @HostListener('window:scroll')
+  onScroll(): void {
+    this.isScrolled = window.scrollY > 40;
+  }
+ 
   onLogin(): void {
-    // Botón de inicio de sesión — no hace nada por ahora
+    // No hace nada por ahora
   }
  
   scrollTo(sectionId: string): void {
     const el = document.getElementById(sectionId);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   }
+ 
+  navTo(sectionId: string): void {
+    const navMenu = document.getElementById('navMenu');
+    if (navMenu && navMenu.classList.contains('show')) {
+      const bsCollapse = (window as any).bootstrap?.Collapse.getInstance(navMenu);
+      if (bsCollapse) {
+        bsCollapse.hide();
+      } else {
+        navMenu.classList.remove('show');
+      }
+      setTimeout(() => this.scrollTo(sectionId), 350);
+    } else {
+      this.scrollTo(sectionId);
+    }
+  }
+   stats = [
+    { num: '1,200+', label: 'Estudiantes' },
+    { num: '98%',    label: 'Tasa de aprobación' },
+    { num: '40',     label: 'Años de historia' }
+  ];
+ 
  
   // Niveles principales del colegio
   niveles = [
