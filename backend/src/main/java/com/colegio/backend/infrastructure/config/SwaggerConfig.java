@@ -16,15 +16,16 @@ public class SwaggerConfig {
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("Sistema Web - Colegio San Andrés")
+                        .title("Web System - San Andrés School")
                         .version("1.0")
                         .description("""
-                                Documentación de la API REST del sistema web del Colegio San Andrés.
-                                Este sistema permite la gestión de estudiantes, docentes, cursos y administración académica.
+                                REST API documentation for the San Andrés School web system.
+                                This system allows management of students, teachers, courses,
+                                and academic administration.
                                 """)
                         .contact(new Contact()
-                                .name("Equipo de Desarrollo - Colegio San Andrés")
-                                .email("soporte@colegiosanandres.com")
+                                .name("Development Team - San Andrés School")
+                                .email("support@colegiosanandres.com")
                                 .url("https://colegiosanandres.com"))
                 )
                 .components(new Components()
