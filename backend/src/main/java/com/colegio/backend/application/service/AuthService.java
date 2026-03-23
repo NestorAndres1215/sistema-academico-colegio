@@ -20,7 +20,7 @@ public class AuthService implements AuthUseCase {
     private final JwtAdapter jwtUtil;
 
     @Override
-    public User actualUsuario(Authentication authentication) {
+    public User currentUser(Authentication authentication) {
 
         String username = authentication.getName();
 

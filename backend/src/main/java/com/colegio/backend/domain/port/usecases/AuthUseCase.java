@@ -7,7 +7,7 @@ import org.springframework.security.core.Authentication;
 
 public interface AuthUseCase {
 
-    User actualUsuario(Authentication authentication);
+    User currentUser(Authentication authentication);
 
     User authenticate(LoginRequest request);
 

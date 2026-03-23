@@ -2,12 +2,10 @@ package com.colegio.backend.infrastructure.persistence.adapter;
 
 import com.colegio.backend.domain.model.User;
 import com.colegio.backend.domain.port.repository.UserRepositoryPort;
-import com.colegio.backend.infrastructure.persistence.entity.UserEntity;
 import com.colegio.backend.infrastructure.persistence.mapper.UserMapper;
 import com.colegio.backend.infrastructure.persistence.repository.JpaUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-
 import java.util.List;
 import java.util.Optional;
 
