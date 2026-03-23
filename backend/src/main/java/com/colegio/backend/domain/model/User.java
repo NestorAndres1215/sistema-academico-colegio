@@ -21,5 +21,5 @@ public class User {
     private Boolean status;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private List<String> roles;
+    private List<Role> roles;
 }

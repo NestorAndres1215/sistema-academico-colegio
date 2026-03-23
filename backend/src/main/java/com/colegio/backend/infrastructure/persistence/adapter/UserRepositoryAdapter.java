@@ -8,6 +8,7 @@ import com.colegio.backend.infrastructure.persistence.repository.JpaUserReposito
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -20,5 +21,15 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
     @Override
     public Optional<User> findByEmail(String email) {
         return repository.findByEmail(email).map(mapper::toDomain);
+    }
+
+    @Override
+    public List<User> findByStatus(Boolean status) {
+        return repository.findByStatus(status).stream().map(mapper::toDomain).toList();
+    }
+
+    @Override
+    public List<User> findByEmailAndStatus(String email, Boolean status) {
+        return repository.findByEmailAndStatus(email, status).stream().map(mapper::toDomain).toList();
     }
 }
