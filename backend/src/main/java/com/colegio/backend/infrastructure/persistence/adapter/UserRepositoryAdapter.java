@@ -2,6 +2,8 @@ package com.colegio.backend.infrastructure.persistence.adapter;
 
 import com.colegio.backend.domain.model.User;
 import com.colegio.backend.domain.port.repository.UserRepositoryPort;
+import com.colegio.backend.infrastructure.persistence.entity.PositionsEntity;
+import com.colegio.backend.infrastructure.persistence.entity.UserEntity;
 import com.colegio.backend.infrastructure.persistence.mapper.UserMapper;
 import com.colegio.backend.infrastructure.persistence.repository.JpaUserRepository;
 import lombok.RequiredArgsConstructor;
@@ -29,5 +31,27 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
     @Override
     public List<User> findByEmailAndStatus(String email, Boolean status) {
         return repository.findByEmailAndStatus(email, status).stream().map(mapper::toDomain).toList();
+    }
+
+    @Override
+    public User save(User user) {
+        UserEntity entity = mapper.toEntity(user);
+        UserEntity saved = repository.save(entity);
+        return mapper.toDomain(saved);
+    }
+
+    @Override
+    public boolean existsByEmail(String email) {
+        return repository.existsByEmail(email);
+    }
+
+    @Override
+    public Optional<User> findById(String id) {
+        return repository.findById(id).map(mapper::toDomain);
+    }
+
+    @Override
+    public String findLastCode() {
+        return repository.findLastCode();
     }
 }

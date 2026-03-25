@@ -5,6 +5,8 @@ import com.colegio.backend.infrastructure.persistence.entity.UserEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class UserMapper {
@@ -35,6 +37,9 @@ public class UserMapper {
                 .status(user.getStatus())
                 .createdAt(user.getCreatedAt())
                 .updatedAt(user.getUpdatedAt())
+                .roles(user.getRoles() != null ? user.getRoles().stream()
+                        .map(roleMapper::toEntity)
+                        .toList() : List.of())
                 .build();
     }
 }

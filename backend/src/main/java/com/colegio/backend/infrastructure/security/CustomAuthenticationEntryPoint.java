@@ -31,7 +31,7 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
                 .error(HttpStatus.UNAUTHORIZED.getReasonPhrase())
                 .message("No autenticado: " + authException.getMessage())
                 .status(HttpStatus.UNAUTHORIZED.value())
-                .timestamp(LocalDateTime.now())
+                .timestamp(LocalDateTime.now().toString())
                 .traceId(traceId)
                 .build();
 

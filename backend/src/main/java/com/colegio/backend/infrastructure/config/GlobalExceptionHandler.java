@@ -52,7 +52,7 @@ public class GlobalExceptionHandler {
                 .error(status.getReasonPhrase())
                 .message(message)
                 .status(status.value())
-                .timestamp(LocalDateTime.now())
+                .timestamp(LocalDateTime.now().toString())
                 .traceId(traceId)
                 .build();
 

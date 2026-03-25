@@ -1,5 +1,6 @@
 package com.colegio.backend.application.dto.error;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,9 +10,12 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 public class ErrorResponse {
+
     private String error;
     private Object message;
-    private LocalDateTime timestamp;
+
+    private String timestamp;
+
     private int status;
     private String traceId;
 }

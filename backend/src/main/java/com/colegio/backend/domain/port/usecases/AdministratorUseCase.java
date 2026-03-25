@@ -1,0 +1,32 @@
+package com.colegio.backend.domain.port.usecases;
+
+import com.colegio.backend.application.dto.admin.AdministratorRequest;
+import com.colegio.backend.domain.model.Administrator;
+
+import java.util.List;
+import java.util.Optional;
+
+public interface AdministratorUseCase {
+
+    List<Administrator> findByGender(String gender);
+
+    List<Administrator> findByFirstName(String firstName);
+
+    List<Administrator> findByFirstNameAndPaternalLastName(String firstName, String paternalLastName);
+
+    List<Administrator> findByFirstNameAndPaternalLastNameAndMaternalLastName(
+            String firstName, String paternalLastName, String maternalLastName);
+
+    Administrator findByDni(String dni);
+
+    List<Administrator> findByPhone(String phone);
+
+    Administrator findById(String id);
+
+    List<Administrator> findAll();
+
+    Administrator save(AdministratorRequest administratorRequest);
+
+    Administrator update(String id, AdministratorRequest administratorRequest);
+
+}
