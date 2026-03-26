@@ -1,7 +1,6 @@
 package com.colegio.backend.infrastructure.config;
 
 import com.colegio.backend.application.dto.error.ErrorResponse;
-import com.colegio.backend.domain.constants.GlobalErrorMessages;
 import com.colegio.backend.domain.exception.BadRequestException;
 import com.colegio.backend.domain.exception.ConflictException;
 import com.colegio.backend.domain.exception.ExternalServiceException;
@@ -11,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -41,7 +39,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleGeneral(Exception ex) {
-        return buildResponse(GlobalErrorMessages.INTERNAL_SERVER_ERROR, HttpStatus.INTERNAL_SERVER_ERROR);
+        return buildResponse("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     private ResponseEntity<ErrorResponse> buildResponse(String message, HttpStatus status) {

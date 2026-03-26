@@ -26,7 +26,7 @@ public class UserService implements UserUseCase {
     @Override
     public User findByEmail(String email) {
         return repositoryPort.findByEmail(email)
-                .orElseThrow(() -> new ResourceNotFoundException("EMAIL NO ENCONTRADO"));
+                .orElseThrow(() -> new ResourceNotFoundException("Email not found"));
     }
 
     @Override
@@ -43,8 +43,9 @@ public class UserService implements UserUseCase {
     public User save(String id, String email, String password,String role) {
 
         if (repositoryPort.existsByEmail(email)) {
-            throw new ConflictException("El correo ya está registrado");
+            throw new ConflictException("The email is already registered");
         }
+
         String newCode = SequenceGenerator.generateCode(repositoryPort.findLastCode());
         Role roleEntity = roleUseCase.findByName(role);
         User user=  User.builder()
@@ -62,11 +63,11 @@ public class UserService implements UserUseCase {
     @Override
     public User update(String id, String email, String password, String role) {
         User existingUser = repositoryPort.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
 
         if (!existingUser.getEmail().equals(email) && repositoryPort.existsByEmail(email)) {
-            throw new ConflictException("El correo ya está registrado");
+            throw new ConflictException("The email is already registered");
         }
 
         existingUser.setEmail(email);

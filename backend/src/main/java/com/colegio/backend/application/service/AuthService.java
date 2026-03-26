@@ -26,15 +26,14 @@ public class AuthService implements AuthUseCase {
 
         return repositoryPort.findByEmail(username)
                 .orElseThrow(() ->
-                        new UsernameNotFoundException("USUARIO NO ENCONTRADO"));
+                        new UsernameNotFoundException("User not found"));
     }
 
 
     @Override
     public User authenticate(LoginRequest request) {
-        User user = repositoryPort.findByEmail(request.getLogin())
-                                .orElseThrow(() -> new ResourceNotFoundException("USUARIO NO ENCONTRADO"));
-        return user;
+        return repositoryPort.findByEmail(request.getLogin())
+                                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
     }
 
     @Override

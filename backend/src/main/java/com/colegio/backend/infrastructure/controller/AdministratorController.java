@@ -7,32 +7,23 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-import java.util.Map;
+
 
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/administrator")
 @Tag(name = "Administrator")
-public class AdministratorContoller {
+public class AdministratorController {
 
     private final AdministratorUseCase administratorUseCase;
 
     @Operation(summary = "Create administrator")
     @PostMapping
     public ResponseEntity<?> save(@Valid @RequestBody AdministratorRequest request) {
-        try {
-            Administrator admin = administratorUseCase.save(request);
-            return ResponseEntity.ok(admin);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(Map.of("error", "Internal server error"));
-        }
+        return ResponseEntity.ok(administratorUseCase.save(request));
     }
 
     @Operation(summary = "Update administrator by ID")

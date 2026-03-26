@@ -25,13 +25,13 @@ public class PositionService implements PositionUseCase {
     @Override
     public Position findByName(String name) {
         return repositoryPort.findByName(name)
-                .orElseThrow(() -> new ResourceNotFoundException("POSITION NO ENCONTRADO"));
+                .orElseThrow(() -> new ResourceNotFoundException("Position not found"));
     }
 
     @Override
     public Position findById(String id) {
         return repositoryPort.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("POSITION NO ENCONTRADO"));
+                .orElseThrow(() -> new ResourceNotFoundException("Position not found"));
     }
 
     @Override
@@ -51,7 +51,7 @@ public class PositionService implements PositionUseCase {
     public Position update(String id, PositionRequest positionRequest) {
 
         Position position = repositoryPort.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("POSITION NO ENCONTRADO"));
+                .orElseThrow(() -> new ResourceNotFoundException("Position not found"));
         position.setName(positionRequest.getName());
         position.setDescription(positionRequest.getDescription());
         return repositoryPort.save(position);

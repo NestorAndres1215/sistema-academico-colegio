@@ -7,10 +7,10 @@ import lombok.Data;
 @Data
 public class LoginRequest {
 
-    @NotBlank(message = "EL CORREO ES OBLIGATORIO.")
-    @Email(message = "EL FORMATO DEL CORREO NO ES VÁLIDO.")
+    @NotBlank(message = "Email is required.")
+    @Email(message = "The email format is not valid.")
     private String login;
 
-    @NotBlank(message = "LA CONTRASEÑA ES OBLIGATORIA.")
+    @NotBlank(message = "Password is required.")
     private String password;
 }

@@ -6,7 +6,6 @@ import com.colegio.backend.domain.exception.ResourceNotFoundException;
 import com.colegio.backend.domain.model.Administrator;
 import com.colegio.backend.domain.model.User;
 import com.colegio.backend.domain.port.repository.AdministratorRepositoryPort;
-import com.colegio.backend.domain.port.repository.UserRepositoryPort;
 import com.colegio.backend.domain.port.usecases.AdministratorUseCase;
 import com.colegio.backend.domain.port.usecases.UserUseCase;
 import com.colegio.backend.infrastructure.util.SequenceGenerator;
@@ -44,7 +43,7 @@ public class AdministratorService implements AdministratorUseCase {
     @Override
     public Administrator findByDni(String dni) {
         return repositoryPort.findByDni(dni)
-                .orElseThrow(() -> new ResourceNotFoundException("DNI NO ENCONTRADO"));
+                .orElseThrow(() -> new ResourceNotFoundException("Identity Document not found"));
     }
 
     @Override
@@ -55,7 +54,7 @@ public class AdministratorService implements AdministratorUseCase {
     @Override
     public Administrator findById(String id) {
         return repositoryPort.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("CODIGO NO ENCONTRADO"));
+                .orElseThrow(() -> new ResourceNotFoundException("Id not found"));
     }
 
     @Override
@@ -65,13 +64,13 @@ public class AdministratorService implements AdministratorUseCase {
 
     @Override
     public Administrator save(AdministratorRequest request) {
-System.out.println(request);
+
         if (repositoryPort.existsByDni(request.getDni())) {
-            throw new ConflictException("El DNI ya está registrado");
+            throw new ConflictException("The identity document is already registered.");
         }
 
         if (request.getPhone() != null && repositoryPort.existsByPhone(request.getPhone())) {
-            throw new ConflictException("El teléfono ya está registrado");
+            throw new ConflictException("The phone number is already registered.");
         }
 
         String newCode = SequenceGenerator.generateCode(repositoryPort.findLastCode());
@@ -106,17 +105,17 @@ System.out.println(request);
     public Administrator update(String id, AdministratorRequest request) {
 
         Administrator existing = repositoryPort.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Administrador no encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException("Administrator not found"));
 
         if (!existing.getDni().equals(request.getDni()) &&
                 repositoryPort.existsByDni(request.getDni())) {
-            throw new ConflictException("El DNI ya está registrado");
+            throw new ConflictException("The identity document is already registered.");
         }
 
         if (request.getPhone() != null &&
                 !request.getPhone().equals(existing.getPhone()) &&
                 repositoryPort.existsByPhone(request.getPhone())) {
-            throw new ConflictException("El teléfono ya está registrado");
+            throw new ConflictException("The phone number is already registered.");
         }
 
         existing.setFirstName(request.getFirstName());

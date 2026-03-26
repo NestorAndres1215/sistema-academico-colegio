@@ -26,13 +26,13 @@ public class CompanyService implements CompanyUseCase {
     @Override
     public Company findByName(String name) {
         return repositoryPort.findByName(name)
-                .orElseThrow(() -> new ResourceNotFoundException("COMPANY NO ENCONTRADO"));
+                .orElseThrow(() -> new ResourceNotFoundException("Company not found"));
     }
 
     @Override
     public Company findById(String id) {
         return repositoryPort.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("COMPANY NO ENCONTRADO"));
+                .orElseThrow(() -> new ResourceNotFoundException("Company not found"));
     }
 
     @Override
@@ -61,7 +61,7 @@ public class CompanyService implements CompanyUseCase {
     public Company update(String id, CompanyRequest companyRequest) {
 
         Company existing = repositoryPort.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("COMPANY NO ENCONTRADO"));
+                .orElseThrow(() -> new ResourceNotFoundException("Company not found"));
 
         existing.setName(companyRequest.getName());
         existing.setLogo(companyRequest.getLogo());

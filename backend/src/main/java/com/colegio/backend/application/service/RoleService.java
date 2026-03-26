@@ -23,12 +23,12 @@ public class RoleService implements RoleUseCase {
     @Override
     public Role findByName(String name) {
         return repositoryPort.findByName(name)
-                .orElseThrow(() -> new ResourceNotFoundException("ROL NO ENCONTRADO"));
+                .orElseThrow(() -> new ResourceNotFoundException("Role not found"));
     }
 
     @Override
     public Role findById(String id) {
         return repositoryPort.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("CODIGO NO ENCONTRADO"));
+                .orElseThrow(() -> new ResourceNotFoundException("Id not found"));
     }
 }

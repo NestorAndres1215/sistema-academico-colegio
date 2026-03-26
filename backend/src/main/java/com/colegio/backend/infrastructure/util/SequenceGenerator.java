@@ -18,34 +18,34 @@ public final class SequenceGenerator  {
         String parteNumerica = secuenciaActual.substring(secuenciaActual.length() - NUMERIC_LENGTH);
 
         try {
-            int numero = Integer.parseInt(parteNumerica);
-            numero++;
+            int number = Integer.parseInt(parteNumerica);
+            number++;
 
-            if (numero > 99) {
+            if (number > 99) {
                 parteAlfabetica = incrementAlphabetical(parteAlfabetica);
-                numero = 0;
+                number = 0;
             }
 
-            return parteAlfabetica + String.format("%02d", numero);
+            return parteAlfabetica + String.format("%02d", number);
         } catch (NumberFormatException e) {
-            throw new BadRequestException("ERROR");
+            throw new BadRequestException("Error in ID generation");
         }
     }
 
-    private static String incrementAlphabetical(String prefijo) {
+    private static String incrementAlphabetical(String prefigure) {
 
-        char[] letras = prefijo.toCharArray();
+        char[] letters = prefigure.toCharArray();
 
-        for (int i = letras.length - 1; i >= 0; i--) {
-            if (letras[i] == 'Z') {
-                letras[i] = 'A';
+        for (int i = letters.length - 1; i >= 0; i--) {
+            if (letters[i] == 'Z') {
+                letters[i] = 'A';
             } else {
-                letras[i]++;
+                letters[i]++;
                 break;
             }
         }
 
-        return new String(letras);
+        return new String(letters);
     }
 }
 

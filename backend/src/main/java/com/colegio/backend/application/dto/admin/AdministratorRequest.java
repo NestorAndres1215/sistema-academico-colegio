@@ -7,53 +7,52 @@ import lombok.ToString;
 import java.time.LocalDate;
 
 @Data
-@ToString
 public class AdministratorRequest {
 
-    @NotBlank(message = "El correo es obligatorio")
-    @Email(message = "El formato del correo no es válido")
-    @Size(max = 150, message = "El correo no debe exceder 150 caracteres")
+    @NotBlank(message = "Email is required")
+    @Email(message = "The email format is not valid")
+    @Size(max = 150, message = "The email must not exceed 150 characters")
     private String email;
 
-    @NotBlank(message = "La contraseña es obligatoria")
-    @Size(min = 6, max = 100, message = "La contraseña debe tener entre 6 y 100 caracteres")
+    @NotBlank(message = "Password is required")
+    @Size(min = 6, max = 100, message = "The password must be between 6 and 100 characters")
     private String password;
 
-    @NotBlank(message = "El nombre es obligatorio")
-    @Size(min = 2, max = 50, message = "El nombre debe tener entre 2 y 50 caracteres")
+    @NotBlank(message = "First name is required")
+    @Size(min = 2, max = 50, message = "The first name must be between 2 and 50 characters")
     private String firstName;
 
-    @Size(max = 50, message = "El segundo nombre no debe exceder 50 caracteres")
+    @Size(max = 50, message = "The middle name must not exceed 50 characters")
     private String middleName;
 
-    @NotBlank(message = "El apellido paterno es obligatorio")
-    @Size(min = 2, max = 50, message = "El apellido paterno debe tener entre 2 y 50 caracteres")
+    @NotBlank(message = "Paternal last name is required")
+    @Size(min = 2, max = 50, message = "The paternal last name must be between 2 and 50 characters")
     private String paternalLastName;
 
-    @Size(max = 50, message = "El apellido materno no debe exceder 50 caracteres")
+    @Size(max = 50, message = "The maternal last name must not exceed 50 characters")
     private String maternalLastName;
 
-    @NotNull(message = "La edad es obligatoria")
+    @NotNull(message = "Age is required")
     private Integer age;
 
-    @NotBlank(message = "El DNI es obligatorio")
-    @Pattern(regexp = "^[0-9]{8}$", message = "El DNI debe tener 8 dígitos")
+    @NotBlank(message = "DNI is required")
+    @Pattern(regexp = "^[0-9]{8}$", message = "The DNI must have 8 digits")
     private String dni;
 
-    @NotBlank(message = "El teléfono es obligatorio")
-    @Pattern(regexp = "^[0-9+\\- ]{7,15}$", message = "Teléfono inválido")
+    @NotBlank(message = "Phone number is required")
+    @Pattern(regexp = "^[0-9+\\- ]{7,15}$", message = "Invalid phone number")
     private String phone;
 
-    @NotNull(message = "La fecha de nacimiento es obligatoria")
-    @Past(message = "La fecha de nacimiento debe ser en el pasado")
+    @NotNull(message = "Birth date is required")
+    @Past(message = "The birth date must be in the past")
     private LocalDate birthDate;
 
-    @Size(max = 255, message = "El perfil no debe exceder 255 caracteres")
+    @Size(max = 255, message = "The profile must not exceed 255 characters")
     private String profile;
 
-    @NotBlank(message = "El género es obligatorio")
+    @NotBlank(message = "Gender is required")
     private String gender;
 
-    @NotBlank(message = "La nacionalidad es obligatoria")
+    @NotBlank(message = "Nationality is required")
     private String nationality;
 }

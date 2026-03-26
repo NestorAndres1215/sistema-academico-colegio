@@ -8,43 +8,43 @@ import java.time.LocalDate;
 @Data
 public class CompanyRequest {
 
-    @NotBlank(message = "El nombre es obligatorio")
-    @Size(min = 2, max = 100, message = "El nombre debe tener entre 2 y 100 caracteres")
+    @NotBlank(message = "Name is required")
+    @Size(min = 2, max = 100, message = "The name must be between 2 and 100 characters")
     private String name;
 
-    @NotBlank(message = "El logo es obligatorio")
+    @NotBlank(message = "Logo is required")
     private String logo;
 
-    @NotBlank(message = "El RUC es obligatorio")
-    @Pattern(regexp = "^[0-9]{11}$", message = "El RUC debe tener exactamente 11 dígitos")
+    @NotBlank(message = "RUC is required")
+    @Pattern(regexp = "^[0-9]{11}$", message = "The RUC must have exactly 11 digits")
     private String ruc;
 
-    @NotBlank(message = "La descripción es obligatoria")
-    @Size(max = 500, message = "La descripción no debe exceder 500 caracteres")
+    @NotBlank(message = "Description is required")
+    @Size(max = 500, message = "The description must not exceed 500 characters")
     private String description;
 
-    @NotBlank(message = "El teléfono es obligatorio")
-    @Pattern(regexp = "^[0-9+\\- ]{7,15}$", message = "Teléfono inválido")
+    @NotBlank(message = "Phone number is required")
+    @Pattern(regexp = "^[0-9+\\- ]{7,15}$", message = "Invalid phone number")
     private String phone;
 
-    @NotBlank(message = "El email es obligatorio")
-    @Email(message = "Formato de email inválido")
+    @NotBlank(message = "Email is required")
+    @Email(message = "Invalid email format")
     private String email;
 
-    @NotBlank(message = "La dirección es obligatoria")
-    @Size(max = 200, message = "La dirección no debe exceder 200 caracteres")
+    @NotBlank(message = "Address is required")
+    @Size(max = 200, message = "The address must not exceed 200 characters")
     private String address;
 
-    @NotBlank(message = "La ciudad es obligatoria")
+    @NotBlank(message = "City is required")
     private String city;
 
-    @NotBlank(message = "El país es obligatorio")
+    @NotBlank(message = "Country is required")
     private String country;
 
-    @NotBlank(message = "El tipo de empresa es obligatorio")
+    @NotBlank(message = "Company type is required")
     private String companyType;
 
-    @NotNull(message = "La fecha de fundación es obligatoria")
-    @Past(message = "La fecha de fundación debe ser en el pasado")
+    @NotNull(message = "Founding date is required")
+    @Past(message = "The founding date must be in the past")
     private LocalDate foundingDate;
 }

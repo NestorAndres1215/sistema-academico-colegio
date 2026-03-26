@@ -2,9 +2,7 @@ package com.colegio.backend.domain.port.usecases;
 
 import com.colegio.backend.application.dto.admin.AdministratorRequest;
 import com.colegio.backend.domain.model.Administrator;
-
 import java.util.List;
-import java.util.Optional;
 
 public interface AdministratorUseCase {
 
