@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, Router, UrlTree } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { ROLES } from '../constants/roles';
 
 @Injectable({
   providedIn: 'root'
@@ -31,11 +32,11 @@ export class RoleGuard implements CanActivate {
   private redirectByRole(role: string): UrlTree {
 
     const rutasPorRol: Record<string, string> = {
-      'ROLE_ADMINISTRATOR': '/admin',
-      'ROLE_STUDENT': '/inicio',
-      'ROLE_STAFF': '/staff',
-      'ROLE_TEACHER': '/teacher',
-      'ROLE_GUARDIAN': '/guardian'
+      [ROLES.ROLE_ADMINISTRATOR]: '/admin',
+      [ROLES.ROLE_STUDENT]: '/inicio',
+      [ROLES.ROLE_STAFF]: '/staff',
+      [ROLES.ROLE_TEACHER]: '/teacher',
+      [ROLES.ROLE_GUARDIAN]: '/guardian'
     };
 
     return this.router.parseUrl(rutasPorRol[role] || '/auth/login');
