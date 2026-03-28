@@ -39,14 +39,7 @@ export class Principal {
       this.scrollTo(sectionId);
     }
   }
-  stats = [
-    { num: '1,200+', label: 'Estudiantes' },
-    { num: '98%', label: 'Tasa de aprobación' },
-    { num: '40', label: 'Años de historia' }
-  ];
 
-
-  // Niveles principales del colegio
   niveles = [
     {
       icon: 'fas fa-pencil-ruler',

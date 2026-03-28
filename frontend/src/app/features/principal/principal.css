@@ -202,26 +202,6 @@
   max-width: 520px;
 }
 
-.csa-stat-num {
-  font-family: 'Playfair Display', serif;
-  font-size: 2.2rem;
-  font-weight: 900;
-  color: var(--gold);
-  line-height: 1;
-  transition: transform var(--trans);
-}
-
-.csa-stat:hover .csa-stat-num {
-  transform: scale(1.08);
-}
-
-.csa-stat-label {
-  color: rgba(255, 255, 255, .62);
-  font-size: .74rem;
-  letter-spacing: .06em;
-  margin-top: 4px;
-}
-
 
 .csa-btn-primary {
   background: var(--gold);
@@ -608,11 +588,11 @@
 }
 
 .csa-learn-link {
-  color: var(--gold);
+  color: #c8992a;
   font-size: .82rem;
   font-weight: 600;
   text-decoration: none;
-  transition: gap var(--trans), color var(--trans);
+  transition: gap .3s cubic-bezier(.4, 0, .2, 1), color .3s cubic-bezier(.4, 0, .2, 1);
 }
 
 .csa-learn-link:hover {
@@ -621,5 +601,5 @@
 }
 
 .csa-footer {
-  background: var(--navy-dark);
+  background: #07152a;
 }
