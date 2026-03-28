@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-principal',
@@ -9,6 +10,9 @@ import { Component, HostListener } from '@angular/core';
   styleUrl: './principal.css',
 })
 export class Principal {
+
+constructor(private router: Router) {}
+
   isScrolled = false;
 
   @HostListener('window:scroll')
@@ -17,7 +21,8 @@ export class Principal {
   }
 
   onLogin(): void {
-  
+    this.router.navigate(['/auth/login']);
+
   }
 
   scrollTo(sectionId: string): void {
