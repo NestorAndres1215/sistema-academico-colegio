@@ -1,31 +1,21 @@
 :host {
-  --navy: #0b1f3a;
-  --navy-mid: #163260;
-  --navy-dark: #07152a;
-  --accent: #1e4d8c;
-  --gold: #c8992a;
-  --gold-light: #f0c050;
-  --gold-pale: rgba(200, 153, 42, 0.12);
-  --cream: #faf6ef;
-  --text-mid: #4a5568;
-  --trans: .3s cubic-bezier(.4, 0, .2, 1);
   display: block;
 }
 
 .text-navy {
-  color: var(--navy) !important;
+  color: #0b1f3a !important;
 }
 
 .csa-gold {
-  color: var(--gold) !important;
+  color: #c8992a !important;
 }
 
 .csa-bg-navy {
-  background: var(--navy) !important;
+  background: #0b1f3a !important;
 }
 
 .csa-bg-cream {
-  background: var(--cream) !important;
+  background: #faf6ef !important;
 }
 
 .py-section {
@@ -39,8 +29,8 @@
 .csa-navbar {
   background: rgba(11, 31, 58, 0.97) !important;
   backdrop-filter: blur(12px);
-  border-bottom: 2px solid var(--gold);
-  transition: box-shadow var(--trans), background var(--trans);
+  border-bottom: 2px solid #c8992a;
+  transition: box-shadow .3s cubic-bezier(.4, 0, .2, 1), background .3s cubic-bezier(.4, 0, .2, 1);
   min-height: 70px;
 }
 
@@ -52,20 +42,20 @@
 .csa-emblem {
   width: 42px;
   height: 42px;
-  background: var(--gold);
+  background: #c8992a;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 19px;
-  color: var(--navy);
+  color: #0b1f3a;
   flex-shrink: 0;
-  transition: transform var(--trans), background var(--trans);
+  transition: transform .3s cubic-bezier(.4, 0, .2, 1), background .3s cubic-bezier(.4, 0, .2, 1);
 }
 
 .navbar-brand:hover .csa-emblem {
   transform: rotate(-8deg) scale(1.08);
-  background: var(--gold-light);
+  background: #f0c050;
 }
 
 .csa-brand-name {
@@ -83,7 +73,7 @@
   cursor: pointer;
   position: relative;
   padding-bottom: 4px !important;
-  transition: color var(--trans) !important;
+  transition: color .3s cubic-bezier(.4, 0, .2, 1) !important;
 }
 
 .csa-link::after {
@@ -93,9 +83,9 @@
   left: .5rem;
   right: .5rem;
   height: 2px;
-  background: var(--gold);
+  background: #c8992a;
   transform: scaleX(0);
-  transition: transform var(--trans);
+  transition: transform .3s cubic-bezier(.4, 0, .2, 1);
 }
 
 .csa-link:hover {
@@ -107,20 +97,20 @@
 }
 
 .csa-btn-login {
-  background: var(--gold);
-  color: var(--navy);
+  background: #c8992a;
+  color: #0b1f3a;
   font-size: .82rem;
   font-weight: 700;
   letter-spacing: .04em;
   border-radius: 6px;
   padding: 8px 18px;
   white-space: nowrap;
-  transition: background var(--trans), transform var(--trans), box-shadow var(--trans);
+  transition: background .3s cubic-bezier(.4, 0, .2, 1), transform .3s cubic-bezier(.4, 0, .2, 1), box-shadow .3s cubic-bezier(.4, 0, .2, 1);
 }
 
 .csa-btn-login:hover {
-  background: var(--gold-light);
-  color: var(--navy);
+  background: #f0c050;
+  color: #0b1f3a;
   transform: translateY(-2px);
 }
 
@@ -156,7 +146,7 @@
 
 .csa-hero {
   min-height: 100vh;
-  background-color: var(--navy);
+  background-color: #0b1f3a;
   background-image: linear-gradient(135deg, #0b1f3a 0%, #163260 60%, #0f2a50 100%);
   padding: 110px 0 72px;
   position: relative;
@@ -174,7 +164,7 @@
 .csa-hero-tag {
   background: rgba(200, 153, 42, .18);
   border: 1px solid rgba(200, 153, 42, .5);
-  color: var(--gold-light);
+  color: #f0c050;
   padding: 5px 16px;
   border-radius: 999px;
   font-size: .74rem;
@@ -192,7 +182,7 @@
 }
 
 .csa-hero-title span {
-  color: var(--gold);
+  color: #c8992a;
 }
 
 .csa-hero-desc {
@@ -204,18 +194,18 @@
 
 
 .csa-btn-primary {
-  background: var(--gold);
-  color: var(--navy);
+  background: #c8992a;
+  color: #0b1f3a;
   font-weight: 700;
   font-size: .9rem;
   border-radius: 6px;
   padding: 12px 26px;
-  transition: background var(--trans), transform var(--trans), box-shadow var(--trans);
+  transition: background .3s cubic-bezier(.4, 0, .2, 1), transform .3s cubic-bezier(.4, 0, .2, 1), box-shadow .3s cubic-bezier(.4, 0, .2, 1);
 }
 
 .csa-btn-primary:hover {
-  background: var(--gold-light);
-  color: var(--navy);
+  background: #f0c050;
+  color: #0b1f3a;
   transform: translateY(-3px);
 
 }
@@ -227,24 +217,24 @@
   font-size: .9rem;
   border-radius: 6px;
   padding: 12px 26px;
-  transition: border-color var(--trans), background var(--trans), transform var(--trans);
+  transition: border-color .3s cubic-bezier(.4, 0, .2, 1), background .3s cubic-bezier(.4, 0, .2, 1), transform .3s cubic-bezier(.4, 0, .2, 1);
 }
 
 .csa-btn-outline-white:hover {
-  border-color: var(--gold);
+  border-color: #c8992a;
   background: rgba(200, 153, 42, .08);
   color: #fff;
   transform: translateY(-3px);
 }
 
 .csa-btn-navy {
-  background: var(--navy);
+  background: #0b1f3a;
   color: #fff;
   font-weight: 700;
   font-size: .9rem;
   border-radius: 6px;
   padding: 12px 26px;
-  transition: background var(--trans), transform var(--trans), box-shadow var(--trans);
+  transition: background .3s cubic-bezier(.4, 0, .2, 1), transform .3s cubic-bezier(.4, 0, .2, 1), box-shadow .3s cubic-bezier(.4, 0, .2, 1);
 }
 
 .csa-btn-navy:hover {
@@ -255,25 +245,25 @@
 
 .csa-btn-navy-outline {
   background: rgba(11, 31, 58, .1);
-  border: 2px solid var(--navy);
-  color: var(--navy);
+  border: 2px solid #0b1f3a;
+  color: #0b1f3a;
   font-weight: 700;
   font-size: .9rem;
   border-radius: 6px;
   padding: 12px 26px;
-  transition: background var(--trans), transform var(--trans);
+  transition: background .3s cubic-bezier(.4, 0, .2, 1), transform .3s cubic-bezier(.4, 0, .2, 1);
 }
 
 .csa-btn-navy-outline:hover {
   background: rgba(11, 31, 58, .2);
-  color: var(--navy);
+  color: #0b1f3a;
   transform: translateY(-3px);
 }
 
 .csa-section-tag {
   display: inline-flex;
   align-items: center;
-  color: var(--gold);
+  color: #c8992a;
   font-size: .75rem;
   font-weight: 700;
   letter-spacing: .12em;
@@ -286,19 +276,19 @@
   display: inline-block;
   width: 22px;
   height: 2px;
-  background: var(--gold);
+  background: #c8992a;
   margin-right: 8px;
 }
 
 .csa-tag-light {
-  color: var(--gold) !important;
+  color: #c8992a !important;
 }
 
 .csa-section-title {
   font-family: 'Playfair Display', serif;
   font-size: clamp(1.7rem, 3vw, 2.6rem);
   font-weight: 800;
-  color: var(--navy);
+  color: #0b1f3a;
   line-height: 1.2;
   margin-bottom: 1rem;
 }
@@ -325,13 +315,13 @@
   width: 40px;
   height: 40px;
   border-radius: 8px;
-  background: var(--gold-pale);
-  color: var(--gold);
+  background: rgba(200, 153, 42, 0.12);
+  color: #c8992a;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1rem;
-  transition: background var(--trans), transform var(--trans);
+  transition: background .3s cubic-bezier(.4, 0, .2, 1), transform .3s cubic-bezier(.4, 0, .2, 1);
 }
 
 .csa-value-list li:hover .csa-value-icon {
@@ -344,7 +334,7 @@
   border-radius: 14px;
   overflow: hidden;
   border: 2px solid transparent;
-  transition: transform var(--trans), box-shadow var(--trans);
+  transition: transform .3s cubic-bezier(.4, 0, .2, 1), box-shadow .3s cubic-bezier(.4, 0, .2, 1);
   display: flex;
   flex-direction: column;
   position: relative;
@@ -365,7 +355,7 @@
 }
 
 .nivel-primaria::before {
-  background: var(--accent);
+  background:  #1e4d8c;
 }
 
 .nivel-secundaria {
@@ -373,7 +363,7 @@
 }
 
 .nivel-secundaria::before {
-  background: var(--gold);
+  background: #c8992a;
 }
 
 .csa-nivel-card:hover {
@@ -401,7 +391,7 @@
   align-items: center;
   justify-content: center;
   font-size: 1.45rem;
-  transition: transform var(--trans);
+  transition: transform .3s cubic-bezier(.4, 0, .2, 1);
 }
 
 .csa-nivel-card:hover .csa-nivel-icon {
@@ -410,18 +400,18 @@
 
 .nivel-primaria .csa-nivel-icon {
   background: rgba(30, 77, 140, .1);
-  color: var(--accent);
+  color: #1e4d8c;
 }
 
 .nivel-secundaria .csa-nivel-icon {
   background: rgba(200, 153, 42, .12);
-  color: var(--gold);
+  color: #c8992a;
 }
 
 .csa-nivel-title {
   font-family: 'Playfair Display', serif;
   font-size: 1.35rem;
-  color: var(--navy);
+  color: #0b1f3a;
   font-weight: 700;
 }
 
@@ -436,7 +426,7 @@
 
 .nivel-primaria .csa-badge-pill {
   background: rgba(30, 77, 140, .1);
-  color: var(--accent);
+  color:  #1e4d8c;
 }
 
 .nivel-secundaria .csa-badge-pill {
@@ -449,18 +439,18 @@
 }
 
 .nivel-primaria .csa-check-icon {
-  color: var(--accent);
+  color:  #1e4d8c;
 }
 
 .nivel-secundaria .csa-check-icon {
-  color: var(--gold);
+  color: #c8992a;
 }
 
 .csa-program-card {
   background: #fff;
   border-radius: 12px;
   border: 1px solid rgba(11, 31, 58, .07);
-  transition: transform var(--trans), box-shadow var(--trans);
+  transition: transform .3s cubic-bezier(.4, 0, .2, 1), box-shadow .3s cubic-bezier(.4, 0, .2, 1);
   position: relative;
   overflow: hidden;
   display: flex;
@@ -474,7 +464,7 @@
   left: 0;
   right: 0;
   height: 3px;
-  background: var(--gold);
+  background: #c8992a;
   transform: scaleX(0);
   transform-origin: left;
   transition: transform .4s ease;
@@ -493,13 +483,13 @@
   width: 52px;
   height: 52px;
   border-radius: 12px;
-  background: linear-gradient(135deg, var(--navy), var(--accent));
-  color: var(--gold);
+  background: linear-gradient(135deg, #0b1f3a,  #1e4d8c);
+  color: #c8992a;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.3rem;
-  transition: transform var(--trans);
+  transition: transform .3s cubic-bezier(.4, 0, .2, 1);
 }
 
 .csa-program-card:hover .csa-prog-icon {
@@ -507,7 +497,7 @@
 }
 
 .csa-nivel-badge {
-  background: var(--gold-pale);
+  background: rgba(200, 153, 42, 0.12);
   color: #8a6318;
   font-size: .7rem;
   font-weight: 700;
@@ -521,7 +511,7 @@
   background: rgba(255, 255, 255, .04);
   border: 1px solid rgba(255, 255, 255, .09);
   border-radius: 12px;
-  transition: background var(--trans), border-color var(--trans), transform var(--trans);
+  transition: background .3s cubic-bezier(.4, 0, .2, 1), border-color .3s cubic-bezier(.4, 0, .2, 1), transform .3s cubic-bezier(.4, 0, .2, 1);
 }
 
 .csa-feature-card:hover {
@@ -532,8 +522,8 @@
 
 .csa-feat-icon {
   font-size: 1.85rem;
-  color: var(--gold);
-  transition: transform var(--trans);
+  color: #c8992a;
+  transition: transform .3s cubic-bezier(.4, 0, .2, 1);
 }
 
 .csa-feature-card:hover .csa-feat-icon {
@@ -541,12 +531,12 @@
 }
 
 .csa-test-card {
-  background: var(--cream);
+  background: #faf6ef;
   border-radius: 12px;
   border: 1px solid rgba(11, 31, 58, .05);
   display: flex;
   flex-direction: column;
-  transition: transform var(--trans), box-shadow var(--trans);
+  transition: transform .3s cubic-bezier(.4, 0, .2, 1), box-shadow .3s cubic-bezier(.4, 0, .2, 1);
 }
 
 .csa-test-card:hover {
@@ -555,7 +545,7 @@
 
 .csa-quote {
   font-size: 2.8rem;
-  color: var(--gold);
+  color: #c8992a;
   font-family: 'Playfair Display', serif;
   line-height: 1;
   margin-bottom: .5rem;
@@ -565,13 +555,13 @@
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--navy), var(--accent));
-  color: var(--gold);
+  background: linear-gradient(135deg, #0b1f3a,  #1e4d8c);
+  color: #c8992a;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1rem;
-  transition: transform var(--trans);
+  transition: transform .3s cubic-bezier(.4, 0, .2, 1);
 }
 
 .csa-test-card:hover .csa-avatar {
@@ -579,7 +569,7 @@
 }
 
 .csa-stars {
-  color: var(--gold);
+  color: #c8992a;
   font-size: .74rem;
 }
 
