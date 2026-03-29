@@ -15,16 +15,29 @@ export class RoleGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot): boolean | UrlTree {
 
-    if (!this.authService.isLoggedIn()) {
+    const token = localStorage.getItem('jwt');
+
+    // 🔐 1. No hay token → login
+    if (!token) {
+      console.log("No token → login");
       return this.router.parseUrl('/auth/login');
     }
 
     const userRole = this.authService.getUserRole();
-    const allowedRoles = route.data['roles'] as string[];
 
-    if (allowedRoles.includes(userRole)) {
+    // 🔥 2. Validar roles de la ruta
+    const allowedRoles: string[] = route.data?.['roles'] || [];
+
+    console.log("USER ROLE:", userRole);
+    console.log("ALLOWED ROLES:", allowedRoles);
+
+
+    if (allowedRoles.map(r => r.trim()).includes(userRole)) {
+      console.log("Acceso permitido");
       return true;
     }
+
+
 
     return this.redirectByRole(userRole);
   }
@@ -39,6 +52,10 @@ export class RoleGuard implements CanActivate {
       [ROLES.ROLE_GUARDIAN]: '/guardian'
     };
 
-    return this.router.parseUrl(rutasPorRol[role] || '/auth/login');
+    const ruta = rutasPorRol[role] || '/auth/login';
+
+    console.log('Redirigiendo a:', rutasPorRol[role]);
+
+    return this.router.parseUrl(ruta);
   }
 }

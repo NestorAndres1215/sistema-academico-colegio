@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { BehaviorSubject, throwError } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -17,23 +17,19 @@ export class AuthService {
   constructor(
     private router: Router,
     private http: HttpClient
-  ) { }
+  ) {}
 
-  generateToken(loginData: any) {
+  // 🔐 LOGIN
+  generateToken(loginData: any): Observable<any> {
     return this.http.post(`${this.backendUrl}/auth/generate-token`, loginData);
   }
 
-  getCurrentUser() {
-    const token = this.token;
-
-    if (!token) {
-      return throwError(() => new Error('No hay token disponible'));
-    }
-
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.get<any>(`${this.backendUrl}/auth/current-user`, { headers });
+  // 👤 USER
+  getCurrentUser(): Observable<any> {
+    return this.http.get<any>(`${this.backendUrl}/auth/current-user`);
   }
 
+  // 🔑 TOKEN
   get token(): string | null {
     return localStorage.getItem('jwt');
   }
@@ -43,6 +39,7 @@ export class AuthService {
     this.loginStatusSubject.next(true);
   }
 
+  // 👤 USER STORAGE
   saveUser(user: any): void {
     localStorage.setItem('user', JSON.stringify(user));
   }
@@ -54,14 +51,15 @@ export class AuthService {
 
   getUserRole(): string {
     const user = this.getUser();
-    return user?.rol?.nombre || '';
+    return user?.roles?.[0]?.name || '';
   }
 
-
+  // ✅ ESTADO
   isLoggedIn(): boolean {
     return !!this.token;
   }
 
+  // 🚪 LOGOUT
   logout(): void {
     localStorage.removeItem('jwt');
     localStorage.removeItem('user');
