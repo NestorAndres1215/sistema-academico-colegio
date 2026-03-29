@@ -1,0 +1,36 @@
+<div class="example-container">
+    <mat-toolbar class="example-toolbar">
+        <button mat-icon-button (click)="sidenav.toggle()" class="sidenav-icon">
+            <i class="fas fa-bars fa-lg" *ngIf="!sidenav.opened" style="font-size: 26px;"></i>
+            <i class="fas fa-times fa-lg" *ngIf="sidenav.opened" style="font-size: 26px;"></i>
+        </button>
+        <span class="example-spacer"></span>
+        <div class="d-flex justify-content-center align-items-center my-2">
+            <h1 class="mb-0">{{ username }}</h1>
+            <h1 class="mb-0 ms-2">- Administrador</h1>
+        </div>
+    </mat-toolbar>
+
+    <mat-sidenav-container class="example-sidenav-container">
+        <mat-sidenav #sidenav mode="side" [opened]="false">
+            <mat-list>
+                <ng-container *ngFor="let menu of mainMenus">
+                    <mat-list-item (click)="handleClick(menu)" style="cursor: pointer;">
+                        <mat-icon *ngIf="menu.icon">{{ menu.icon }}</mat-icon>
+                        <span>{{ menu.name }}</span>
+                    </mat-list-item>
+                    <ng-container *ngIf="menu.mostrarSubMenu && menu.children?.length">
+                        <mat-list-item *ngFor="let sub of menu.children" (click)="navigateTo(sub.route)"
+                            style="padding-left: 50px; cursor: pointer; display: flex; justify-content: center;">
+                            <span class="mt-2">{{ sub.name }}</span>
+                        </mat-list-item>
+                    </ng-container>
+                </ng-container>
+            </mat-list>
+        </mat-sidenav>
+
+        <mat-sidenav-content>
+            <router-outlet></router-outlet>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>

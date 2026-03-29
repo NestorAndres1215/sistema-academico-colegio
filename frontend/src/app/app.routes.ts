@@ -2,7 +2,6 @@ import { Routes } from '@angular/router';
 import { Principal } from './features/principal/principal';
 import { RoleGuard } from './core/guards/role.guard';
 import { ROLES } from './core/constants/roles';
-import { NoAuthGuard } from './core/guards/noauth.guard';
 import { AdminHome } from './features/admin/admin-home/admin-home';
 
 export const routes: Routes = [

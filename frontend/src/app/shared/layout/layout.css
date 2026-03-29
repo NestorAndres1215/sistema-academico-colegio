@@ -1,0 +1,83 @@
+.example-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: auto;
+    height: 100vh;
+}
+
+.example-toolbar {
+    background: #163260;
+    color: #f9e7c7;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidenav-icon {
+    background-color: #163260;
+    border: none;
+    color: #f9e7c7;;
+}
+
+
+
+.example-sidenav-container {
+    flex: 1;
+    background-color: #faf1e1;
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+mat-sidenav {
+    width: 28%;
+    background-color: #f9e7c7;
+    min-width: 360px;
+    border: none;
+    box-shadow: none;
+}
+
+mat-list-item {
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+mat-list-item span {
+    color: #163260;
+    margin-left: 8px;
+    transform: translateY(-6px);
+    display: inline-block;
+    font-weight: bold;
+}
+
+mat-list-item:hover {
+    background-color: #163260;
+
+}
+
+mat-list-item:hover span,
+mat-list-item:hover mat-icon {
+    color: #f9e7c7;
+}
+
+mat-list-item mat-icon {
+    color: #163260;
+    margin-right: 8px;
+}
+
+.sidenav-content {
+    height: 92vh;
+    background-color: #faf1e1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content-wrapper {
+    height: 100%;
+    width: 100%;
+}
