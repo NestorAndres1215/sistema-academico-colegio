@@ -30,7 +30,7 @@ public class MenuEntity {
     @JoinColumn(name = "parent_id")
     private MenuEntity parent;
 
-    @OneToMany(mappedBy = "parent")
+    @OneToMany(mappedBy = "parent", fetch = FetchType.EAGER)
     private List<MenuEntity> children;
 
     @ManyToMany(mappedBy = "menus")

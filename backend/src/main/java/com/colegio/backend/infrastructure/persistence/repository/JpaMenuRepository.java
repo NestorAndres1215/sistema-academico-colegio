@@ -1,4 +1,13 @@
 package com.colegio.backend.infrastructure.persistence.repository;
 
-public interface JpaMenuRepository {
+import com.colegio.backend.infrastructure.persistence.entity.MenuEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
+
+public interface JpaMenuRepository extends JpaRepository<MenuEntity,String> {
+
+    @Query("SELECT m FROM MenuEntity m LEFT JOIN FETCH m.children")
+    List<MenuEntity> findAllWithChildren();
 }

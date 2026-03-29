@@ -1,4 +1,10 @@
 package com.colegio.backend.domain.port.repository;
 
-public class MenuRepositoryPort {
+import com.colegio.backend.domain.model.Menu;
+
+import java.util.List;
+
+public interface MenuRepositoryPort {
+
+    List<Menu> findAll();
 }

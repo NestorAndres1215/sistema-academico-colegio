@@ -40,6 +40,9 @@ public class StudentEntity {
 
     private Boolean estado;
 
+    @Column(name = "qr_code", nullable = false)
+    private String qrCode;
+
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private UserEntity userEntity;
