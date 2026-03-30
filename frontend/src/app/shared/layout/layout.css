@@ -15,30 +15,34 @@
     color: #c8992a;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 
-    height: auto;          /* 🔥 clave */
-    min-height: 64px;      /* altura normal desktop */
-    padding: 8px 16px;     /* espacio interno */
-    flex-wrap: wrap;       /* 🔥 permite que baje contenido */
+    height: auto;
+    /* 🔥 clave */
+    min-height: 64px;
+    /* altura normal desktop */
+    padding: 8px 16px;
+    /* espacio interno */
+    flex-wrap: wrap;
+    /* 🔥 permite que baje contenido */
 }
 
 .sidenav-icon {
     background-color: #0b1f3a;
     border: none;
-    color:#c8992a;
+    color: #c8992a;
 }
 
 .csa-emblem {
-  width: 42px;
-  height: 42px;
-  background: #c8992a;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 19px;
-  color: #0b1f3a;
-  flex-shrink: 0;
-  transition: transform .3s cubic-bezier(.4, 0, .2, 1), background .3s cubic-bezier(.4, 0, .2, 1);
+    width: 42px;
+    height: 42px;
+    background: #c8992a;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 19px;
+    color: #0b1f3a;
+    flex-shrink: 0;
+    transition: transform .3s cubic-bezier(.4, 0, .2, 1), background .3s cubic-bezier(.4, 0, .2, 1);
 }
 
 .example-sidenav-container {
@@ -64,7 +68,7 @@ mat-list-item {
 }
 
 mat-list-item span {
-    color:#0b1f3a;
+    color: #0b1f3a;
     margin-left: 8px;
     transform: translateY(-6px);
     display: inline-block;
@@ -100,16 +104,16 @@ mat-list-item mat-icon {
 }
 
 @media (max-width: 768px) {
-  .example-toolbar {
-    padding: 25px;
-    min-height: auto; 
-  }
+    .example-toolbar {
+        padding: 25px;
+        min-height: auto;
+    }
 
-  .csa-brand-name {
-    font-size: 25px;
-  }
+    .csa-brand-name {
+        font-size: 25px;
+    }
 
-  .example-toolbar h1 {
-    font-size: 16px;
-  }
+    .example-toolbar h1 {
+        font-size: 16px;
+    }
 }

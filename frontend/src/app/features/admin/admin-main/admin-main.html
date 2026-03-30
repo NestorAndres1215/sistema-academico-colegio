@@ -1,0 +1,76 @@
+<main class="main-content flex-grow-1">
+    <div class="page-content px-4 py-4">
+        <app-tittle title="Panel de Administrador" icon="fas fa-user-shield">
+        </app-tittle>
+        <div class="row  mb-4">
+            <div class="col-6 col-lg-3 mb-3" *ngFor="let k of kpis">
+                <div class="kpi-card">
+                    <div class="d-flex align-items-center justify-content-center mb-3">
+                        <div class="kpi-icon-wrap text-center">
+                            <i [class]="k.icon" style="font-size: 28px; color: #163260;"></i>
+                        </div>
+
+                    </div>
+                    <div class="kpi-value text-center">{{ k.value }}</div>
+                    <div class="kpi-label text-center">{{ k.label }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="row g-3 mb-4">
+            <div class="col-lg-4">
+                <div class="panel-card h-100">
+                    <h6 class="panel-card-title mb-1">Accesos Rápidos</h6>
+                    <p class="panel-card-sub mb-3">Gestiona las secciones principales</p>
+                    <div class="row g-2">
+                        <div class="col-6" *ngFor="let acc of accesos">
+                            <button class="quick-btn w-100">
+                                <div class="quick-icon">
+                                    <i [class]="acc.icon" style="color: #163260"></i>
+                                </div>
+                                <span>{{ acc.label }}</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="panel-card h-100">
+                    <h6 class="panel-card-title mb-1">Resumen de Pagos</h6>
+                    <p class="panel-card-sub mb-3">Estado del mes actual</p>
+                    <div class="pago-resumen-list">
+                        <div class="pago-resumen-item" *ngFor="let pr of pagoResumen">
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <span class="pr-label">{{ pr.label }}</span>
+                                <span class="pr-value" style="color: #163260;">{{ pr.valor }}</span>
+                            </div>
+                            <div class="pr-bar-bg">
+                                <div class="pr-bar" [style.width]="pr.pct" style="background-color: #163260"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-link-navy mt-3 p-0">
+                        Ver detalle de pagos <i class="fas fa-arrow-right ms-1"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="panel-card h-100">
+                    <h6 class="panel-card-title mb-1">Actividad Reciente</h6>
+                    <p class="panel-card-sub mb-3">Últimas acciones del sistema</p>
+                    <ul class="activity-list">
+                        <li class="activity-item" *ngFor="let act of actividad">
+                            <div class="activity-icon-wrap" >
+                                <i [class]="act.icon" style="color: #163260;"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <div class="activity-text">{{ act.texto }}</div>
+                                <div class="activity-time">{{ act.tiempo }}</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
