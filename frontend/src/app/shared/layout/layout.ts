@@ -67,7 +67,7 @@ export class Layout implements OnInit {
 
     this.user = userData ? JSON.parse(userData) : null;
     console.log('userData en Layout:', this.user);
-    this.username = this.user?.name || 'Usuario';
+    this.username = this.user?.email || 'Usuario';
     this.userRoleName = this.user?.roles?.[0]?.name || '';
 
     this.loadMenus();

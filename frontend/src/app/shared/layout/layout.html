@@ -1,11 +1,19 @@
 <div class="example-container">
     <mat-toolbar class="example-toolbar">
-        <button mat-icon-button (click)="sidenav.toggle()" class="sidenav-icon">
-            <i class="fas fa-bars fa-lg" *ngIf="!sidenav.opened" style="font-size: 26px;"></i>
-            <i class="fas fa-times fa-lg" *ngIf="sidenav.opened" style="font-size: 26px;"></i>
-        </button>
+        <div class="d-flex align-items-center gap-3">
+            <button mat-icon-button (click)="sidenav.toggle()" class="sidenav-icon">
+                <i class="fas fa-bars fa-lg" *ngIf="!sidenav.opened" style="font-size: 26px;"></i>
+                <i class="fas fa-times fa-lg" *ngIf="sidenav.opened" style="font-size: 26px;"></i>
+            </button>
+
+            <div class="csa-emblem">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+
+            <span class="csa-brand-name">Colegio San Andrés</span>
+        </div>
         <span class="example-spacer"></span>
-        <div class="d-flex justify-content-center align-items-center my-2">
+        <div class="d-flex justify-content-center align-items-center my-2 d-none d-md-flex">
             <h1 class="mb-0">{{ username }}</h1>
             <h1 class="mb-0 ms-2">- Administrador</h1>
         </div>

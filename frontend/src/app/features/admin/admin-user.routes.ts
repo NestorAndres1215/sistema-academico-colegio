@@ -4,8 +4,8 @@ export const ADMIN_USER_ROUTES: Routes = [
 
   {
     path: '',
-    loadComponent: () => import('../admin/admin-home/admin-home')
-      .then(m => m.AdminHome)
+    loadComponent: () => import('../admin/admin-main/admin-main')
+      .then(m => m.AdminMain)
   },
 
 ];
