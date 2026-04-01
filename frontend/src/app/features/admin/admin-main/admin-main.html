@@ -58,14 +58,15 @@
                 <div class="panel-card h-100">
                     <h6 class="panel-card-title mb-1">Actividad Reciente</h6>
                     <p class="panel-card-sub mb-3">Últimas acciones del sistema</p>
-                    <ul class="activity-list">
-                        <li class="activity-item" *ngFor="let act of actividad">
-                            <div class="activity-icon-wrap" >
+                    <ul class="list-unstyled m-0 p-0">
+                        <li class="d-flex align-items-start gap-3 py-2 border-bottom"
+                            *ngFor="let act of actividad; let last = last" [class.border-0]="last">
+                            <div class="activity-icon-wrap">
                                 <i [class]="act.icon" style="color: #163260;"></i>
                             </div>
                             <div class="flex-grow-1">
-                                <div class="activity-text">{{ act.texto }}</div>
-                                <div class="activity-time">{{ act.tiempo }}</div>
+                                <div class="small fw-medium lh-sm" style="color:#163260;">{{ act.texto }}</div>
+                                <div class="activity-time mt-1" >{{ act.tiempo }}</div>
                             </div>
                         </li>
                     </ul>

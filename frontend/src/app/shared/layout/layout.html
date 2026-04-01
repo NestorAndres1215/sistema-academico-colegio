@@ -1,3 +1,4 @@
+
 <div class="example-container">
     <mat-toolbar class="example-toolbar">
         <div class="d-flex align-items-center gap-3">
@@ -5,11 +6,9 @@
                 <i class="fas fa-bars fa-lg" *ngIf="!sidenav.opened" style="font-size: 26px;"></i>
                 <i class="fas fa-times fa-lg" *ngIf="sidenav.opened" style="font-size: 26px;"></i>
             </button>
-
             <div class="csa-emblem">
                 <i class="fas fa-graduation-cap"></i>
             </div>
-
             <span class="csa-brand-name">Colegio San Andrés</span>
         </div>
         <span class="example-spacer"></span>
@@ -28,15 +27,33 @@
                         <span>{{ menu.name }}</span>
                     </mat-list-item>
                     <ng-container *ngIf="menu.mostrarSubMenu && menu.children?.length">
-                        <mat-list-item *ngFor="let sub of menu.children" (click)="navigateTo(sub.route)"
-                            style="padding-left: 50px; cursor: pointer; display: flex; justify-content: center;">
-                            <span class="mt-2">{{ sub.name }}</span>
-                        </mat-list-item>
+                        <ng-container *ngFor="let sub of menu.children">
+                            <mat-list-item (click)="handleClick(sub)" style="padding-left: 40px; cursor: pointer;">
+                                <mat-icon *ngIf="sub.icon">{{ sub.icon }}</mat-icon>
+                                <span>{{ sub.name }}</span>
+                            </mat-list-item>
+                            <ng-container *ngIf="sub.mostrarSubMenu && sub.children?.length">
+                                <ng-container *ngFor="let sub2 of sub.children">
+                                    <mat-list-item (click)="handleClick(sub2)"
+                                        style="padding-left: 80px; cursor: pointer;">
+                                        <mat-icon *ngIf="sub2.icon">{{ sub2.icon }}</mat-icon>
+                                        <span>{{ sub2.name }}</span>
+                                    </mat-list-item>
+                                    <ng-container *ngIf="sub2.mostrarSubMenu && sub2.children?.length">
+                                        <mat-list-item *ngFor="let sub3 of sub2.children"
+                                            (click)="navigateTo(sub3.route)"
+                                            style="padding-left: 120px; cursor: pointer;">
+                                            <mat-icon *ngIf="sub3.icon">{{ sub3.icon }}</mat-icon>
+                                            <span>{{ sub3.name }}</span>
+                                        </mat-list-item>
+                                    </ng-container>
+                                </ng-container>
+                            </ng-container>
+                        </ng-container>
                     </ng-container>
                 </ng-container>
             </mat-list>
         </mat-sidenav>
-
         <mat-sidenav-content>
             <router-outlet></router-outlet>
         </mat-sidenav-content>
