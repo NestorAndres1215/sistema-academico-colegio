@@ -19,17 +19,15 @@ export class AuthService {
     private http: HttpClient
   ) {}
 
-  // 🔐 LOGIN
   generateToken(loginData: any): Observable<any> {
     return this.http.post(`${this.backendUrl}/auth/generate-token`, loginData);
   }
 
-  // 👤 USER
+
   getCurrentUser(): Observable<any> {
     return this.http.get<any>(`${this.backendUrl}/auth/current-user`);
   }
 
-  // 🔑 TOKEN
   get token(): string | null {
     return localStorage.getItem('jwt');
   }
@@ -39,7 +37,6 @@ export class AuthService {
     this.loginStatusSubject.next(true);
   }
 
-  // 👤 USER STORAGE
   saveUser(user: any): void {
     localStorage.setItem('user', JSON.stringify(user));
   }
@@ -54,12 +51,10 @@ export class AuthService {
     return user?.roles?.[0]?.name || '';
   }
 
-  // ✅ ESTADO
   isLoggedIn(): boolean {
     return !!this.token;
   }
 
-  // 🚪 LOGOUT
   logout(): void {
     localStorage.removeItem('jwt');
     localStorage.removeItem('user');

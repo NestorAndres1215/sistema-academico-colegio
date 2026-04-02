@@ -14,15 +14,10 @@
     background: #0b1f3a;
     color: #c8992a;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-
     height: auto;
-    /* 🔥 clave */
     min-height: 64px;
-    /* altura normal desktop */
     padding: 8px 16px;
-    /* espacio interno */
     flex-wrap: wrap;
-    /* 🔥 permite que baje contenido */
 }
 
 .sidenav-icon {
