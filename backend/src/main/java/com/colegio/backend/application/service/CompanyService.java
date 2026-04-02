@@ -5,11 +5,21 @@ import com.colegio.backend.domain.exception.ResourceNotFoundException;
 import com.colegio.backend.domain.model.Company;
 import com.colegio.backend.domain.port.repository.CompanyRepositoryPort;
 import com.colegio.backend.domain.port.usecases.CompanyUseCase;
+import com.colegio.backend.domain.port.usecases.FileUseCase;
 import com.colegio.backend.infrastructure.util.SequenceGenerator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 
 @Service
@@ -17,6 +27,7 @@ import java.util.List;
 public class CompanyService implements CompanyUseCase {
 
    private final CompanyRepositoryPort repositoryPort;
+   private final FileUseCase fileUseCase;
 
     @Override
     public List<Company> findAll() {
@@ -35,13 +46,27 @@ public class CompanyService implements CompanyUseCase {
                 .orElseThrow(() -> new ResourceNotFoundException("Company not found"));
     }
 
+
+
     @Override
-    public Company save(CompanyRequest companyRequest) {
+    public Company save(MultipartFile logo, CompanyRequest companyRequest) throws IOException {
+
+        if (logo.isEmpty()) {
+            throw new RuntimeException("El archivo está vacío");
+        }
+        String fileName = fileUseCase.storeFile(logo);
+
+        String fileUrl = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/colegio/api/v1/assets/company")
+                .path(fileName)
+                .toUriString();
+
         String newCode = SequenceGenerator.generateCode(repositoryPort.findLastCode());
+
         Company company = Company.builder()
                 .id(newCode)
                 .name(companyRequest.getName())
-                .logo(companyRequest.getLogo())
+                .logo(fileUrl)
                 .ruc(companyRequest.getRuc())
                 .description(companyRequest.getDescription())
                 .phone(companyRequest.getPhone())
@@ -54,7 +79,7 @@ public class CompanyService implements CompanyUseCase {
                 .createdAt(LocalDateTime.now())
                 .build();
 
-        return  repositoryPort.save(company);
+        return repositoryPort.save(company);
     }
 
     @Override

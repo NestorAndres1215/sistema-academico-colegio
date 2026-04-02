@@ -6,8 +6,11 @@ import com.colegio.backend.domain.port.usecases.CompanyUseCase;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import tools.jackson.databind.ObjectMapper;
 
 import java.util.List;
 
@@ -22,7 +25,7 @@ public class CompanyController {
     @Operation(summary = "Get all companies")
     @GetMapping
     public ResponseEntity<List<Company>> getAll() {
-        return ResponseEntity.ok(companyUseCase.findAll());
+            return ResponseEntity.ok(companyUseCase.findAll());
     }
 
     @Operation(summary = "Get company by ID")
@@ -38,9 +41,15 @@ public class CompanyController {
     }
 
     @Operation(summary = "Create a new company")
-    @PostMapping
-    public ResponseEntity<Company> create(@RequestBody CompanyRequest companyRequest) {
-        return ResponseEntity.ok(companyUseCase.save(companyRequest));
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Company> create(
+            @RequestPart("file") MultipartFile file,
+            @RequestPart("data") String data) throws Exception {
+
+        ObjectMapper mapper = new ObjectMapper();
+        CompanyRequest request = mapper.readValue(data, CompanyRequest.class);
+
+        return ResponseEntity.ok(companyUseCase.save(file,request));
     }
 
     @Operation(summary = "Update an existing company")

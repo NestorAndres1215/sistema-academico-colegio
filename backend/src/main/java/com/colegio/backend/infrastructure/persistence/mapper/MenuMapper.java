@@ -51,7 +51,7 @@ public class MenuMapper {
                 .route(menu.getRoute())
                 .menuOrder(menu.getMenuOrder())
                 .category(menu.getCategory())
-                .parent(toEntity(menu.getParent())) // Recursivo para el padre
+                .parent(toEntity(menu.getParent()))
                 .children(menu.getChildren() != null
                         ? menu.getChildren().stream()
                         .map(this::toEntity)
