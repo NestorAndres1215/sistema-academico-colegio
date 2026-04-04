@@ -1,0 +1,18 @@
+<div class="pagination-container">
+  <button class="pagination-btn prev" (click)="prev()" [disabled]="page === 1" [class.disabled]="page === 1">
+    <i class="fas fa-chevron-left"></i>
+    Anterior
+  </button>
+
+  <div class="page-info">
+    <span class="current-page">{{ page }}</span>
+    <span class="separator">/</span>
+    <span class="total-pages">{{ totalPages }}</span>
+  </div>
+
+  <button class="pagination-btn next" (click)="next()" [disabled]="page === totalPages"
+    [class.disabled]="page === totalPages">
+    Siguiente
+    <i class="fas fa-chevron-right"></i>
+  </button>
+</div>

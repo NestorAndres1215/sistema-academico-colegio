@@ -1,1 +1,10 @@
-<p>user-list works!</p>
+<app-table
+  [columnas]="columnas"
+  [datos]="adminPaginado">
+</app-table>
+
+<app-pagination
+  [(page)]="pageActivos"
+  [totalPages]="totalPages"
+  (pageChange)="onPageChange()">
+</app-pagination>
