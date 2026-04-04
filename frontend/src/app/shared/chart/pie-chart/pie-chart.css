@@ -1,0 +1,10 @@
+.same-size-card {
+  height: 400px;   
+}
+h4 {
+    background: #163260;;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 32px;
+    font-weight: 800;
+}
