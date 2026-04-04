@@ -2,10 +2,34 @@ import { Routes } from '@angular/router';
 
 export const ADMIN_USER_ROUTES: Routes = [
 
+
   {
-    path: '',
-    loadComponent: () => import('../admin/admin-main/admin-main')
-      .then(m => m.AdminMain)
+    path: 'listado-usuario',
+    loadComponent: () => import('../admin/general-management/users/user-list/user-list')
+      .then(m => m.UserList)
   },
 
+  {
+    path: 'registro-usuario',
+    loadComponent: () => import('../admin/general-management/users/user-registration/user-registration')
+      .then(m => m.UserRegistration)
+  },
+
+  {
+    path: 'asignacion-rol',
+    loadComponent: () => import('../admin/general-management/users/role-assignment/role-assignment')
+      .then(m => m.RoleAssignment)
+  },
+
+  {
+    path: 'estado-cuenta',
+    loadComponent: () => import('../admin/general-management/users/account-status/account-status')
+      .then(m => m.AccountStatus)
+  },
+
+   {
+    path: 'restablecer-contrasena',
+    loadComponent: () => import('../admin/general-management/users/password-reset/password-reset')
+      .then(m => m.PasswordReset)
+  },
 ];
