@@ -10,6 +10,8 @@ import com.colegio.backend.domain.port.usecases.AdministratorUseCase;
 import com.colegio.backend.domain.port.usecases.UserUseCase;
 import com.colegio.backend.infrastructure.util.SequenceGenerator;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -130,6 +132,11 @@ public class AdministratorService implements AdministratorUseCase {
         existing.setNationality(request.getNationality());
 
         return repositoryPort.save(existing);
+    }
+
+    @Override
+    public Page<Administrator> getByStatus(boolean status, String search, Pageable pageable) {
+        return repositoryPort.getByStatus(status, search, pageable);
     }
 
 

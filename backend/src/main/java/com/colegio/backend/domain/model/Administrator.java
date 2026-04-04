@@ -24,5 +24,7 @@ public class Administrator {
     private String gender;
     private String nationality;
     private User user;
+    private Boolean status;
+
 
 }

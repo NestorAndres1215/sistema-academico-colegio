@@ -6,6 +6,8 @@ import com.colegio.backend.infrastructure.persistence.entity.AdministratorEntity
 import com.colegio.backend.infrastructure.persistence.mapper.AdministratorMapper;
 import com.colegio.backend.infrastructure.persistence.repository.JpaAdministratorRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Optional;
@@ -78,4 +80,12 @@ public class AdministratorRepositoryAdapter implements AdministratorRepositoryPo
     public boolean existsByPhone(String phone) {
         return repository.existsByPhone(phone);
     }
+
+    @Override
+    public Page<Administrator> getByStatus(boolean status, String search, Pageable pageable){
+        return repository.searchByStatus(status, search, pageable)
+                .map(mapper::toDomain);
+    }
+
+
 }

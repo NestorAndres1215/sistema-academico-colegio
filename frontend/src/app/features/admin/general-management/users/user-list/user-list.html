@@ -1,10 +1,15 @@
-<app-table
-  [columnas]="columnas"
-  [datos]="adminPaginado">
-</app-table>
+<div class="container my-4 ">
 
-<app-pagination
-  [(page)]="pageActivos"
-  [totalPages]="totalPages"
-  (pageChange)="onPageChange()">
-</app-pagination>
+  <app-tittle title="Mantenimiento de Usuarios" icon="fas fa-user-shield">
+  </app-tittle>
+
+  <app-search (searchChange)="filtrar($event)">
+  </app-search>
+
+  <app-table [columnas]="columnas" [datos]="adminPaginado">
+  </app-table>
+
+  <app-pagination [page]="pageActivos" [totalPages]="totalPages" (pageChange)="onPageChange($event)">
+  </app-pagination>
+
+</div>

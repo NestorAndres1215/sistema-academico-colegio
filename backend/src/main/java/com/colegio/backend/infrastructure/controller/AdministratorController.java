@@ -7,6 +7,9 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -22,7 +25,7 @@ public class AdministratorController {
 
     @Operation(summary = "Create administrator")
     @PostMapping
-    public ResponseEntity<?> save(@Valid @RequestBody AdministratorRequest request) {
+    public ResponseEntity<Administrator> save(@Valid @RequestBody AdministratorRequest request) {
         return ResponseEntity.ok(administratorUseCase.save(request));
     }
 
@@ -78,5 +81,22 @@ public class AdministratorController {
     @GetMapping("/full-name")
     public ResponseEntity<List<Administrator>> findFullName(@RequestParam String firstName, @RequestParam String paternalLastName, @RequestParam String maternalLastName) {
         return ResponseEntity.ok(administratorUseCase.findByFirstNameAndPaternalLastNameAndMaternalLastName(firstName, paternalLastName, maternalLastName));
+    }
+
+    @GetMapping("/status/{status}")
+    public ResponseEntity<Page<Administrator>> getByStatus(
+            @PathVariable boolean status,
+            @RequestParam int page,
+            @RequestParam int size,
+            @RequestParam(required = false) String search
+    ) {
+        try {
+            Pageable pageable = PageRequest.of(page, size);
+            Page<Administrator> result = administratorUseCase.getByStatus(status, search, pageable);
+            return ResponseEntity.ok(result);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
     }
 }

@@ -3,7 +3,7 @@
 
         <thead>
             <tr>
-                <th *ngFor="let col of columnas" class="text-center sortable">
+                <th *ngFor="let col of columnas" class="text-center">
                     {{ col.etiqueta }}
                 </th>
 
@@ -14,8 +14,6 @@
         </thead>
 
         <tbody>
-
-            <!-- 🔥 DATA -->
             <tr *ngFor="let fila of datos" class="table-row animate__animated animate__fadeInUp">
 
                 <td *ngFor="let col of columnas" class="text-center">
@@ -52,8 +50,6 @@
                     </div>
                 </td>
             </tr>
-
-            <!-- 🔥 EMPTY STATE -->
             <tr *ngIf="(datos || []).length === 0">
                 <td [attr.colspan]="columnas.length + (hasActionButtons() ? 1 : 0)" class="text-center text-muted">
 

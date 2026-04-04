@@ -28,6 +28,7 @@ public class AdministratorMapper {
                 .profile(entity.getProfile())
                 .gender(entity.getGender())
                 .nationality(entity.getNationality())
+                .status(entity.getStatus())
                 .user(userMapper.toDomain(entity.getUserEntity()))
                 .build();
     }
@@ -48,6 +49,7 @@ public class AdministratorMapper {
                 .profile(dto.getProfile())
                 .gender(dto.getGender())
                 .nationality(dto.getNationality())
+                .status(dto.getStatus())
                 .userEntity(userMapper.toEntity(dto.getUser()))
                 .build();
     }

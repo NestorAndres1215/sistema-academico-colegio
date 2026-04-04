@@ -16,11 +16,17 @@ export class AdminService {
     return this.http.get<any>(`${this.backendUrl}/administrator`)
   }
 
-  getByStatus(status: boolean, page: number, size: number): Observable<any> {
+getByStatus(status: boolean, page: number, size: number, search: string = ''): Observable<any> {
+  let params = new HttpParams()
+    .set('page', page)
+    .set('size', size);
 
-    const params = new HttpParams().set('page', page).set('size', size);
-    return this.http.get<any>(`${this.backendUrl}/administrator/status/${status}`, { params });
+  if (search.trim() !== '') {
+    params = params.set('search', search.trim());
   }
+
+  return this.http.get<any>(`${this.backendUrl}/administrator/status/${status}`, { params });
+}
 
   getById(id: number): Observable<any> {
     return this.http.get<any>(`${this.backendUrl}/administrator/${id}`);

@@ -2,6 +2,9 @@ package com.colegio.backend.domain.port.usecases;
 
 import com.colegio.backend.application.dto.admin.AdministratorRequest;
 import com.colegio.backend.domain.model.Administrator;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import java.util.List;
 
 public interface AdministratorUseCase {
@@ -27,4 +30,5 @@ public interface AdministratorUseCase {
 
     Administrator update(String id, AdministratorRequest administratorRequest);
 
+    Page<Administrator> getByStatus(boolean status, String search, Pageable pageable);
 }
