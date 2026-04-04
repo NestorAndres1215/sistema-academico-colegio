@@ -1,7 +1,17 @@
-<button class="btn-custom" [ngClass]="['btn',color,size,block ? 'w-100' : '',loading ? 'loading' : '']"
-    [disabled]="disabled || loading" (click)="handleClick()">
+<button class="btn-custom" 
+        [ngClass]="[
+          'btn',
+          color,
+          size,
+          block ? 'w-100' : '',
+          loading ? 'loading' : '',
+          !label && icon ? 'icon-only' : ''
+        ]"
+        [disabled]="disabled || loading" 
+        (click)="handleClick()">
+
     <span *ngIf="loading" class="spinner-border spinner-border-sm"></span>
     <i *ngIf="icon && iconPosition === 'left' && !loading" [class]="icon"></i>
-    <span>{{ label }}</span>
+    <span *ngIf="label">{{ label }}</span>
     <i *ngIf="icon && iconPosition === 'right' && !loading" [class]="icon"></i>
 </button>

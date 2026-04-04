@@ -4,51 +4,42 @@ import { Button } from '../button/button';
 
 @Component({
   selector: 'app-table',
-imports: [CommonModule, Button],
+  imports: [CommonModule, Button],
   templateUrl: './table.html',
   styleUrl: './table.css',
 })
 export class Table {
- @Input() icono: string = '';
+  @Input() icono: string = '';
   @Input() titulo: string = '';
   @Input() columnas: { etiqueta: string; clave: string }[] = [];
 
-  @Input() onRegistrar!: () => void;
-  @Input() botonesConfig: any = {};
+  @Input() buttonsConfig: any = {};
   @Input() datos: any[] = [];
 
-  paginaActual: number = 1;
-  itemsPorPagina: number = 10;
   datos_vacio: string = '  No hay datos para mostrar.';
   columnaOrden: string = '';
 
-  @Input() onVer!: (fila: any) => void;
-  @Input() onActualizar!: (fila: any) => void;
-  @Input() onDesactivar!: (fila: any) => void;
-  @Input() onActivar!: (fila: any) => void;
-  @Input() onSuspender!: (fila: any) => void;
-  @Input() onInhabilitar!: (fila: any) => void;
-  @Input() onBloquear!: (fila: any) => void;
-  @Input() onImprimir!: (fila: any) => void;
-  @Input() onCancelar!: (fila: any) => void;
+  @Input() onDetail!: (fila: any) => void;
+  @Input() onUpdate!: (fila: any) => void;
+  @Input() onDeactivate!: (fila: any) => void;
+  @Input() onActivate!: (fila: any) => void;
+  @Input() onPrint!: (fila: any) => void;
+
 
   hasActionButtons(): boolean {
     return (
-      this.botonesConfig.actualizar ||
-      this.botonesConfig.activar ||
-      this.botonesConfig.suspender ||
-      this.botonesConfig.desactivar ||
-      this.botonesConfig.inhabilitar ||
-      this.botonesConfig.bloquear ||
-      this.botonesConfig.imprimir ||
-      this.botonesConfig.ver ||
-      this.botonesConfig.cancelar
+      this.buttonsConfig.update ||
+      this.buttonsConfig.activate ||
+      this.buttonsConfig.deactivate ||
+      this.buttonsConfig.print ||
+      this.buttonsConfig.detail
+
     );
   }
 
-  obtenerValor(obj: any, clave: string): any {
+  getValue(obj: any, clave: string): any {
     return clave.split('.').reduce((valor, parte) => valor?.[parte], obj);
   }
 
- 
+
 }
