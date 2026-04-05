@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { AdminService } from '../../../../../core/services/admin.service';
-import { Pagination } from "../../../../../shared/pagination/pagination";
+import { AdminService } from '../../../../../../core/services/admin.service';
+import { Pagination } from "../../../../../../shared/pagination/pagination";
 import { CommonModule } from '@angular/common';
-import { Table } from '../../../../../shared/table/table';
-import { Tittle } from "../../../../../shared/tittle/tittle";
-import { Search } from "../../../../../shared/search/search";
+import { Table } from '../../../../../../shared/table/table';
+import { Tittle } from "../../../../../../shared/tittle/tittle";
+import { Search } from "../../../../../../shared/search/search";
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-list',
@@ -17,17 +18,25 @@ import { debounceTime } from 'rxjs/operators';
 })
 export class UserList implements OnInit {
 
-  constructor(private adminService: AdminService) { }
+  constructor(private adminService: AdminService, private router: Router
+  ) { }
 
-  adminPaginado: any[] = [];
+  adminPaginated: any[] = [];
 
-  columnas = [
+  columns = [
     { clave: 'firstName', etiqueta: 'Nombre' },
     { clave: 'paternalLastName', etiqueta: 'Apellido' },
     { clave: 'dni', etiqueta: 'DNI' },
     { clave: 'phone', etiqueta: 'Teléfono' },
     { clave: 'profile', etiqueta: 'Perfil' }
   ];
+
+  buttonsConfig = {
+    deactivate: true,
+    detail: true,
+    print: false,
+    update: false,
+  };
 
   pageActivos = 1;
   itemsPerPageActivo = 10;
@@ -54,7 +63,7 @@ export class UserList implements OnInit {
       this.searchTerm
     ).subscribe({
       next: (res: any) => {
-        this.adminPaginado = res.content || [];
+        this.adminPaginated = res.content || [];
         this.totalPages = res.totalPages || 0;
 
         if (this.totalPages === 0) this.pageActivos = 1;
@@ -62,13 +71,20 @@ export class UserList implements OnInit {
     });
   }
 
-
-  filtrar(text: string): void {
+  filter(text: string): void {
     this.searchSubject.next(text);
   }
 
   onPageChange(page: number): void {
     this.pageActivos = page;
     this.loadAdmins();
+  }
+
+  desactivate(fila: any): void {
+
+  }
+
+  detail(fila: any): void {
+    this.router.navigate(['/usuarios/detalle-usuario/', fila.id]);
   }
 }

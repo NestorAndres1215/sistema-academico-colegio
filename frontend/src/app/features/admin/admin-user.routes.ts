@@ -5,8 +5,13 @@ export const ADMIN_USER_ROUTES: Routes = [
 
   {
     path: 'listado-usuario',
-    loadComponent: () => import('../admin/general-management/users/user-list/user-list')
+    loadComponent: () => import('./general-management/users/module-users-list/user-list/user-list')
       .then(m => m.UserList)
+  },
+ {
+    path: 'detalle-usuario/:id', // detalle de un usuario específico
+    loadComponent: () => import('./general-management/users/module-users-list/user-detail/user-detail')
+      .then(m => m.UserDetail)
   },
 
   {

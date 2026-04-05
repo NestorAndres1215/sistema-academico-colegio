@@ -3,10 +3,11 @@
   <app-tittle title="Mantenimiento de Usuarios" icon="fas fa-user-shield">
   </app-tittle>
 
-  <app-search (searchChange)="filtrar($event)">
+  <app-search (searchChange)="filter($event)">
   </app-search>
 
-  <app-table [columnas]="columnas" [datos]="adminPaginado">
+  <app-table [columns]="columns" [data]="adminPaginated" [buttonsConfig]="buttonsConfig"
+    [onDeactivate]="desactivate.bind(this)" [onDetail]="detail.bind(this)">
   </app-table>
 
   <app-pagination [page]="pageActivos" [totalPages]="totalPages" (pageChange)="onPageChange($event)">

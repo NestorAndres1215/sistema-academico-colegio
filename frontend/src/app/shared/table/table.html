@@ -3,7 +3,7 @@
 
         <thead>
             <tr>
-                <th *ngFor="let col of columnas" class="text-center">
+                <th *ngFor="let col of columns" class="text-center">
                     {{ col.etiqueta }}
                 </th>
 
@@ -14,44 +14,41 @@
         </thead>
 
         <tbody>
-            <tr *ngFor="let fila of datos" class="table-row animate__animated animate__fadeInUp">
+            <tr *ngFor="let fila of data" class="table-row animate__animated animate__fadeInUp">
 
-                <td *ngFor="let col of columnas" class="text-center">
+                <td *ngFor="let col of columns" class="text-center">
                     {{ getValue(fila, col.clave) }}
                 </td>
 
                 <td *ngIf="hasActionButtons()" class="actions-column">
                     <div class="action-buttons d-flex justify-content-center">
 
-                        <app-button *ngIf="buttonsConfig.detail" label="Detalle" icon="fas fa-info-circle" color="principal"
+                        <app-button *ngIf="buttonsConfig.detail" icon="fas fa-info-circle" color="principal"
                             (click)="onDetail(fila)" />
 
-                        <app-button *ngIf="buttonsConfig.update" label="Actualizar" icon="fas fa-sync-alt"
+                        <app-button *ngIf="buttonsConfig.update"  icon="fas fa-sync-alt"
                             color="actualizar" (click)="onUpdate(fila)" />
 
-                        <app-button *ngIf="buttonsConfig.activate" label="Activar" icon="fas fa-sign-out-alt"
+                        <app-button *ngIf="buttonsConfig.activate"  icon="fas fa-sign-out-alt"
                             color="activar" (click)="onActivate(fila)" />
 
                         <app-button *ngIf="buttonsConfig.deactivate"  icon="fas fa-user-slash"
                             color="principal" (click)="onDeactivate(fila)" />
 
-                        <app-button *ngIf="buttonsConfig.print" label="Imprimir" icon="fas fa-print" color="imprimir"
+                        <app-button *ngIf="buttonsConfig.print"  icon="fas fa-print" color="imprimir"
                             (click)="onPrint(fila)" />
 
                     </div>
                 </td>
             </tr>
-            <tr *ngIf="(datos || []).length === 0">
-                <td [attr.colspan]="columnas.length + (hasActionButtons() ? 1 : 0)" class="text-center text-muted">
-
+            <tr *ngIf="(data || []).length === 0">
+                <td [attr.colspan]="columns.length + (hasActionButtons() ? 1 : 0)" class="text-center text-muted">
                     <div class="fs-1 text-secondary mb-3">
                         <i class="fas fa-info-circle"></i>
                     </div>
-
                     <h6 class="fw-semibold mb-0 text-secondary">
                         No hay datos para mostrar
                     </h6>
-
                 </td>
             </tr>
 

@@ -28,7 +28,7 @@ getByStatus(status: boolean, page: number, size: number, search: string = ''): O
   return this.http.get<any>(`${this.backendUrl}/administrator/status/${status}`, { params });
 }
 
-  getById(id: number): Observable<any> {
+  getById(id: string): Observable<any> {
     return this.http.get<any>(`${this.backendUrl}/administrator/${id}`);
   }
 

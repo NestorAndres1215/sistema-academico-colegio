@@ -9,16 +9,12 @@ import { Button } from '../button/button';
   styleUrl: './table.css',
 })
 export class Table {
-  @Input() icono: string = '';
-  @Input() titulo: string = '';
-  @Input() columnas: { etiqueta: string; clave: string }[] = [];
+
+
+  @Input() columns: { etiqueta: string; clave: string }[] = [];
 
   @Input() buttonsConfig: any = {};
-  @Input() datos: any[] = [];
-
-  datos_vacio: string = '  No hay datos para mostrar.';
-  columnaOrden: string = '';
-
+  @Input() data: any[] = [];
   @Input() onDetail!: (fila: any) => void;
   @Input() onUpdate!: (fila: any) => void;
   @Input() onDeactivate!: (fila: any) => void;
