@@ -54,10 +54,10 @@ public class CompanyService implements CompanyUseCase {
         if (logo.isEmpty()) {
             throw new RuntimeException("El archivo está vacío");
         }
-        String fileName = fileUseCase.storeFile(logo);
+        String fileName = fileUseCase.storeFile(logo,"company");
 
         String fileUrl = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/colegio/api/v1/assets/company")
+                .path("/company/")
                 .path(fileName)
                 .toUriString();
 

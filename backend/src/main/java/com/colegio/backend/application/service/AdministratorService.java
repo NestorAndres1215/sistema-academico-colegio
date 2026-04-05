@@ -7,13 +7,18 @@ import com.colegio.backend.domain.model.Administrator;
 import com.colegio.backend.domain.model.User;
 import com.colegio.backend.domain.port.repository.AdministratorRepositoryPort;
 import com.colegio.backend.domain.port.usecases.AdministratorUseCase;
+import com.colegio.backend.domain.port.usecases.FileUseCase;
 import com.colegio.backend.domain.port.usecases.UserUseCase;
 import com.colegio.backend.infrastructure.util.SequenceGenerator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 @Service
 @RequiredArgsConstructor
@@ -21,6 +26,7 @@ public class AdministratorService implements AdministratorUseCase {
 
     private final AdministratorRepositoryPort repositoryPort;
     private final UserUseCase userUseCase;
+    private final FileUseCase fileUseCase;
 
     @Override
     public List<Administrator> findByGender(String gender) {
@@ -65,7 +71,7 @@ public class AdministratorService implements AdministratorUseCase {
     }
 
     @Override
-    public Administrator save(AdministratorRequest request) {
+    public Administrator save(MultipartFile file, AdministratorRequest request) {
 
         if (repositoryPort.existsByDni(request.getDni())) {
             throw new ConflictException("The identity document is already registered.");
@@ -74,7 +80,12 @@ public class AdministratorService implements AdministratorUseCase {
         if (request.getPhone() != null && repositoryPort.existsByPhone(request.getPhone())) {
             throw new ConflictException("The phone number is already registered.");
         }
+        String fileName = fileUseCase.storeFile(file,"admin");
 
+        String fileUrl = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/assets/")
+                .path(fileName)
+                .toUriString();
         String newCode = SequenceGenerator.generateCode(repositoryPort.findLastCode());
 
         User user = userUseCase.save(
@@ -83,7 +94,10 @@ public class AdministratorService implements AdministratorUseCase {
                 request.getPassword(),
                 "ROLE_ADMINISTRATOR"
         );
+        LocalDate today = LocalDate.now();
+        LocalDate birthDate = request.getBirthDate();
 
+        int age = Period.between(birthDate, today).getYears();
         Administrator administrator = Administrator.builder()
                 .id(newCode)
                 .firstName(request.getFirstName())
@@ -93,9 +107,11 @@ public class AdministratorService implements AdministratorUseCase {
                 .dni(request.getDni())
                 .phone(request.getPhone())
                 .birthDate(request.getBirthDate())
-                .profile(request.getProfile())
+                .profile(fileUrl)
+                .age(age)
                 .gender(request.getGender())
                 .nationality(request.getNationality())
+                .status(true)
                 .user(user)
                 .build();
 

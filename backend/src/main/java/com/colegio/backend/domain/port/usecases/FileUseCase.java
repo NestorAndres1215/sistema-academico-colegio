@@ -8,7 +8,7 @@ import java.net.MalformedURLException;
 import java.nio.file.Path;
 public interface FileUseCase {
 
-    String storeFile(MultipartFile file);
+    String storeFile(MultipartFile file, String folder);
 
     Resource loadAsResource(String nameFile) throws MalformedURLException;
 

@@ -37,23 +37,31 @@ public class FileService implements FileUseCase {
     }
 
     @Override
-    public String storeFile(MultipartFile file) {
-
+    public String storeFile(MultipartFile file, String folder) {
 
         String nameFile = StringUtils.cleanPath(file.getOriginalFilename());
 
         if (nameFile.contains("..")) {
-                throw new ResourceNotFoundException("Invalid file name");
+            throw new ResourceNotFoundException("Invalid file name");
         }
 
-        try (InputStream inputStream = file.getInputStream()) {
-            Path destination = storagePath.resolve(nameFile);
-            Files.copy(inputStream, destination, StandardCopyOption.REPLACE_EXISTING);
+        try {
+            // 📌 Crear subcarpeta dinámica
+            Path folderPath = storagePath.resolve(folder).normalize();
+            Files.createDirectories(folderPath);
+
+            // 📌 Ruta final
+            Path destination = folderPath.resolve(nameFile);
+
+            try (InputStream inputStream = file.getInputStream()) {
+                Files.copy(inputStream, destination, StandardCopyOption.REPLACE_EXISTING);
+            }
+
         } catch (IOException e) {
             throw new ResourceNotFoundException("Error store file");
         }
 
-        return nameFile;
+        return folder + "/" + nameFile;
     }
 
     @Override

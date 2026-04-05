@@ -10,8 +10,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 
 
@@ -24,9 +27,11 @@ public class AdministratorController {
     private final AdministratorUseCase administratorUseCase;
 
     @Operation(summary = "Create administrator")
-    @PostMapping
-    public ResponseEntity<Administrator> save(@Valid @RequestBody AdministratorRequest request) {
-        return ResponseEntity.ok(administratorUseCase.save(request));
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Administrator> save(
+            @RequestPart("file") MultipartFile file,
+            @Valid @RequestPart("user") AdministratorRequest request) {
+        return ResponseEntity.ok(administratorUseCase.save(file,request));
     }
 
     @Operation(summary = "Update administrator by ID")
@@ -90,13 +95,10 @@ public class AdministratorController {
             @RequestParam int size,
             @RequestParam(required = false) String search
     ) {
-        try {
-            Pageable pageable = PageRequest.of(page, size);
-            Page<Administrator> result = administratorUseCase.getByStatus(status, search, pageable);
-            return ResponseEntity.ok(result);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        }
+
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Administrator> result = administratorUseCase.getByStatus(status, search, pageable);
+        return ResponseEntity.ok(result);
+
     }
 }
