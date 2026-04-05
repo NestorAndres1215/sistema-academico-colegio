@@ -24,19 +24,19 @@
                     <div class="action-buttons d-flex justify-content-center">
 
                         <app-button *ngIf="buttonsConfig.detail" icon="fas fa-info-circle" color="principal"
-                            (click)="onDetail(fila)" />
+                            (click)="onDetail(fila)"></app-button>
 
-                        <app-button *ngIf="buttonsConfig.update"  icon="fas fa-sync-alt"
-                            color="actualizar" (click)="onUpdate(fila)" />
+                        <app-button *ngIf="buttonsConfig.update" icon="fas fa-sync-alt" color="actualizar"
+                            (click)="onUpdate(fila)"></app-button>
 
-                        <app-button *ngIf="buttonsConfig.activate"  icon="fas fa-sign-out-alt"
-                            color="activar" (click)="onActivate(fila)" />
+                        <app-button *ngIf="buttonsConfig.activate" icon="fas fa-sign-out-alt" color="activar"
+                            (click)="onActivate(fila)"></app-button>
 
-                        <app-button *ngIf="buttonsConfig.deactivate"  icon="fas fa-user-slash"
-                            color="principal" (click)="onDeactivate(fila)" />
+                        <app-button *ngIf="buttonsConfig.deactivate" icon="fas fa-user-slash" color="principal"
+                            (click)="onDeactivate(fila)"></app-button>
 
-                        <app-button *ngIf="buttonsConfig.print"  icon="fas fa-print" color="imprimir"
-                            (click)="onPrint(fila)" />
+                        <app-button *ngIf="buttonsConfig.print" icon="fas fa-print" color="imprimir"
+                            (click)="onPrint(fila)"></app-button>
 
                     </div>
                 </td>

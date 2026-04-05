@@ -16,17 +16,17 @@ export class AdminService {
     return this.http.get<any>(`${this.backendUrl}/administrator`)
   }
 
-getByStatus(status: boolean, page: number, size: number, search: string = ''): Observable<any> {
-  let params = new HttpParams()
-    .set('page', page)
-    .set('size', size);
+  getByStatus(status: boolean, page: number, size: number, search: string = ''): Observable<any> {
+    let params = new HttpParams()
+      .set('page', page)
+      .set('size', size);
 
-  if (search.trim() !== '') {
-    params = params.set('search', search.trim());
+    if (search.trim() !== '') {
+      params = params.set('search', search.trim());
+    }
+
+    return this.http.get<any>(`${this.backendUrl}/administrator/status/${status}`, { params });
   }
-
-  return this.http.get<any>(`${this.backendUrl}/administrator/status/${status}`, { params });
-}
 
   getById(id: string): Observable<any> {
     return this.http.get<any>(`${this.backendUrl}/administrator/${id}`);
@@ -56,6 +56,8 @@ getByStatus(status: boolean, page: number, size: number, search: string = ''): O
     return this.http.get<any>(`${this.backendUrl}/administrator/full-name?firstName=${firstName}&paternalLastName=${paternalLastName}&maternalLastName=${maternalLastName}`);
   }
 
-
+  create(data: FormData) {
+    return this.http.post(`${this.backendUrl}/administrator`, data);
+  }
 
 }

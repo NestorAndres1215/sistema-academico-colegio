@@ -8,6 +8,7 @@ import { Search } from "../../../../../../shared/search/search";
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { AlertService } from '../../../../../../core/services/alert.service';
 
 @Component({
   selector: 'app-user-list',
@@ -18,7 +19,7 @@ import { Router } from '@angular/router';
 })
 export class UserList implements OnInit {
 
-  constructor(private adminService: AdminService, private router: Router
+  constructor(private adminService: AdminService, private router: Router, private alertService: AlertService
   ) { }
 
   adminPaginated: any[] = [];
@@ -80,8 +81,20 @@ export class UserList implements OnInit {
     this.loadAdmins();
   }
 
-  desactivate(fila: any): void {
-
+  desactivate(fila: any) {
+    this.alertService.confirm(
+      `¿Desactivar a ${fila.id}?`,
+      'Esta acción no se puede revertir'
+    ).then(confirmed => {
+      if (confirmed) {
+        // Acción si confirma
+        fila.status = false; // ejemplo local
+        this.alertService.success('Usuario desactivado', `${fila.label} ha sido desactivado.`);
+      } else {
+        // Mensaje de cancelación
+        this.alertService.info('Acción cancelada', `No se desactivó a ${fila.id}.`);
+      }
+    });
   }
 
   detail(fila: any): void {

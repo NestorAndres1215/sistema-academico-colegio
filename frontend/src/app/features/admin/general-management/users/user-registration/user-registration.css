@@ -1,0 +1,35 @@
+.form-label {
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: #163260;
+  margin-bottom: .45rem;
+}
+
+.form-control {
+  padding: 11px 16px;
+  border: 1.5px solid #163260;
+  border-radius: 9px;
+  font-size: .9rem;
+  color: #0f172a;
+  background: #f8fafc;
+  height: auto;
+  transition: border-color .25s ease, box-shadow .25s ease, background .25s ease;
+}
+
+.form-control::placeholder {
+  color: #163260;
+}
+
+.form-control:hover {
+  border-color: #163260;
+  background: #fff;
+}
+
+.form-control:focus {
+  border-color: #163260;
+  background: #fff;
+  box-shadow: 0 0 0 3.5px rgba(30, 58, 138, .12);
+  outline: none;
+}

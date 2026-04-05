@@ -1,1 +1,72 @@
-<p>user-registration works!</p>
+<div class="container my-4 ">
+
+    <app-tittle title="Registro de Usuarios" icon="fas fa-user-plus">
+    </app-tittle>
+    <div class="bg-white p-4 rounded-4 shadow-sm border mb-4">
+        <form [formGroup]="form" (ngSubmit)="operar()" class="row g-4">
+
+            <div class="col-md-6">
+                <input type="text" class="form-control py-3 px-4" placeholder="First Name" formControlName="firstName">
+            </div>
+
+            <div class="col-md-6">
+                <input type="text" class="form-control py-3 px-4" placeholder="Middle Name"
+                    formControlName="middleName">
+            </div>
+
+            <div class="col-md-6">
+                <input type="text" class="form-control py-3 px-4" placeholder="Paternal Last Name"
+                    formControlName="paternalLastName">
+            </div>
+
+            <div class="col-md-6">
+                <input type="text" class="form-control py-3 px-4" placeholder="Maternal Last Name"
+                    formControlName="maternalLastName">
+            </div>
+
+            <div class="col-md-6">
+                <input type="text" class="form-control py-3 px-4" placeholder="DNI" formControlName="dni">
+            </div>
+
+            <div class="col-md-6">
+                <input type="tel" class="form-control py-3 px-4" placeholder="Phone" (input)="onlyNumbersInput($event)" formControlName="phone">
+            </div>
+
+            <div class="col-md-6">
+                <input type="email" class="form-control py-3 px-4" placeholder="Email" formControlName="email">
+            </div>
+
+            <div class="col-md-6">
+                <input type="password" class="form-control py-3 px-4" placeholder="Password" formControlName="password">
+            </div>
+
+            <div class="col-md-6">
+                <select class="form-control py-3 px-4" formControlName="gender">
+                    <option value="" disabled>Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div class="col-md-6">
+                <input type="text" class="form-control py-3 px-4" placeholder="Nationality"
+                    formControlName="nationality">
+            </div>
+
+            <div class="col-md-6">
+                <input type="date" class="form-control py-3 px-4"  [max]="maxBirthDate"
+                    formControlName="birthDate">
+            </div>
+
+            <!-- FILE -->
+            <div class="col-md-6">
+                <input type="file" class="form-control py-3 px-4" (change)="onFileSelected($event)" accept="image/*" formControlName="profile">
+            </div>
+
+            <app-button icon="fas fa-save" label="Register" color="principal"></app-button>
+
+        </form>
+    </div>
+
+</div>
