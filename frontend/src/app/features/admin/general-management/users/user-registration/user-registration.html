@@ -29,7 +29,8 @@
             </div>
 
             <div class="col-md-6">
-                <input type="tel" class="form-control py-3 px-4" placeholder="Phone" (input)="onlyNumbersInput($event)" formControlName="phone">
+                <input type="tel" class="form-control py-3 px-4" placeholder="Phone" (input)="onlyNumbersInput($event)"
+                    formControlName="phone">
             </div>
 
             <div class="col-md-6">
@@ -55,13 +56,13 @@
             </div>
 
             <div class="col-md-6">
-                <input type="date" class="form-control py-3 px-4"  [max]="maxBirthDate"
-                    formControlName="birthDate">
+                <input type="date" class="form-control py-3 px-4" [max]="maxBirthDate" formControlName="birthDate">
             </div>
 
-            <!-- FILE -->
+
             <div class="col-md-6">
-                <input type="file" class="form-control py-3 px-4" (change)="onFileSelected($event)" accept="image/*" formControlName="profile">
+                <input type="file" class="form-control py-3 px-4" (change)="onFileSelected($event)" accept="image/*"
+                    formControlName="profile">
             </div>
 
             <app-button icon="fas fa-save" label="Register" color="principal"></app-button>

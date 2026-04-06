@@ -23,10 +23,10 @@
                 <td *ngIf="hasActionButtons()" class="actions-column">
                     <div class="action-buttons d-flex justify-content-center">
 
-                        <app-button *ngIf="buttonsConfig.detail" icon="fas fa-info-circle" color="principal"
+                        <app-button *ngIf="buttonsConfig.detail" icon="fas fa-eye" color="principal"
                             (click)="onDetail(fila)"></app-button>
 
-                        <app-button *ngIf="buttonsConfig.update" icon="fas fa-sync-alt" color="actualizar"
+                        <app-button *ngIf="buttonsConfig.update" icon="fas fa-edit" color="principal"
                             (click)="onUpdate(fila)"></app-button>
 
                         <app-button *ngIf="buttonsConfig.activate" icon="fas fa-sign-out-alt" color="activar"
@@ -51,7 +51,6 @@
                     </h6>
                 </td>
             </tr>
-
         </tbody>
     </table>
 </div>

@@ -8,8 +8,8 @@ export const ADMIN_USER_ROUTES: Routes = [
     loadComponent: () => import('./general-management/users/module-users-list/user-list/user-list')
       .then(m => m.UserList)
   },
- {
-    path: 'detalle-usuario/:id', // detalle de un usuario específico
+  {
+    path: 'detalle-usuario/:id',
     loadComponent: () => import('./general-management/users/module-users-list/user-detail/user-detail')
       .then(m => m.UserDetail)
   },
@@ -32,7 +32,7 @@ export const ADMIN_USER_ROUTES: Routes = [
       .then(m => m.AccountStatus)
   },
 
-   {
+  {
     path: 'restablecer-contrasena',
     loadComponent: () => import('../admin/general-management/users/password-reset/password-reset')
       .then(m => m.PasswordReset)

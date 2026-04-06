@@ -12,7 +12,6 @@ export class Table {
 
 
   @Input() columns: { etiqueta: string; clave: string }[] = [];
-
   @Input() buttonsConfig: any = {};
   @Input() data: any[] = [];
   @Input() onDetail!: (fila: any) => void;
@@ -29,7 +28,6 @@ export class Table {
       this.buttonsConfig.deactivate ||
       this.buttonsConfig.print ||
       this.buttonsConfig.detail
-
     );
   }
 

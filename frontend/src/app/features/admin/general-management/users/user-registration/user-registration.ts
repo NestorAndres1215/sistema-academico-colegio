@@ -7,7 +7,6 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { filterOnlyNumbers, getMaxBirthDate } from '../../../../../core/utils/validators';
 import { Button } from "../../../../../shared/button/button";
 import { CommonModule } from '@angular/common';
-import { first } from 'rxjs';
 import { Admin } from '../../../../../core/models/admin';
 
 @Component({
@@ -56,8 +55,6 @@ export class UserRegistration {
   }
 
   operar(): void {
-    console.log(this.selectedFile)
-    console.log(this.form.value);
 
     const register: Admin = {
       email: this.form.value.email,
@@ -104,7 +101,7 @@ export class UserRegistration {
     const input = event.target as HTMLInputElement;
 
     if (input.files && input.files.length > 0) {
-      this.selectedFile = input.files[0]; // ✅ aquí YA tienes la imagen
+      this.selectedFile = input.files[0];
     }
   }
 }

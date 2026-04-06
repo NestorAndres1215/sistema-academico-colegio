@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { Tittle } from "../../../../../shared/tittle/tittle";
 
 @Component({
   selector: 'app-account-status',
-  imports: [],
+  imports: [Tittle],
   templateUrl: './account-status.html',
   styleUrl: './account-status.css',
 })
