@@ -30,7 +30,7 @@ export class AccountStatus {
   ];
 
   buttonsConfig = {
-    deactivate: true,
+    activate: true,
     detail: true,
     print: false,
     update: false,
@@ -78,22 +78,40 @@ export class AccountStatus {
     this.loadAdmins();
   }
 
-  desactivate(fila: any) {
-    this.alertService.confirm(
-      `¿Desactivar a ${fila.id}?`,
-      'Esta acción no se puede revertir'
-    ).then(confirmed => {
-      if (confirmed) {
-        // Acción si confirma
-        fila.status = false; // ejemplo local
-        this.alertService.success('Usuario desactivado', `${fila.label} ha sido desactivado.`);
-      } else {
-        // Mensaje de cancelación
-        this.alertService.info('Acción cancelada', `No se desactivó a ${fila.id}.`);
-      }
-    });
-  }
+  activate(fila: any) {
+  this.alertService.confirm(
+    `¿Activar a ${fila.id}?`,
+    'El usuario volverá a estar disponible'
+  ).then(confirmed => {
+    if (confirmed) {
 
+      this.adminService.activate(fila.id).subscribe({
+        next: () => {
+          fila.status = true; // opcional
+          
+          this.alertService.success(
+            'Usuario activado',
+            `${fila.id} ha sido activado.`
+          );
+
+          this.loadAdmins();
+        },
+        error: () => {
+          this.alertService.error(
+            'Error',
+            'No se pudo activar el usuario'
+          );
+        }
+      });
+
+    } else {
+      this.alertService.info(
+        'Acción cancelada',
+        `No se activó a ${fila.id}.`
+      );
+    }
+  });
+}
   detail(fila: any): void {
     this.router.navigate(['/usuarios/detalle-usuario/', fila.id]);
   }

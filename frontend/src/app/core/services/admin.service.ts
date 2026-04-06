@@ -60,4 +60,12 @@ export class AdminService {
     return this.http.post(`${this.backendUrl}/administrator`, data);
   }
 
+  deactivate(id: string): Observable<any> {
+    return this.http.put(`${this.backendUrl}/administrator/deactivate/${id}`, {});
+  }
+
+  activate(id: string): Observable<any> {
+    return this.http.put(`${this.backendUrl}/administrator/activate/${id}`, {});
+  }
+
 }

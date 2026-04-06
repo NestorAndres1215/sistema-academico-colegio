@@ -81,21 +81,39 @@ export class UserList implements OnInit {
     this.loadAdmins();
   }
 
-  desactivate(fila: any) {
-    this.alertService.confirm(
-      `¿Desactivar a ${fila.id}?`,
-      'Esta acción no se puede revertir'
-    ).then(confirmed => {
-      if (confirmed) {
-        // Acción si confirma
-        fila.status = false; // ejemplo local
-        this.alertService.success('Usuario desactivado', `${fila.label} ha sido desactivado.`);
-      } else {
-        // Mensaje de cancelación
-        this.alertService.info('Acción cancelada', `No se desactivó a ${fila.id}.`);
-      }
-    });
-  }
+desactivate(fila: any) {
+  this.alertService.confirm(
+    `¿Desactivar a ${fila.id}?`,
+    'Esta acción no se puede revertir'
+  ).then(confirmed => {
+    if (confirmed) {
+
+      this.adminService.deactivate(fila.id).subscribe({
+        next: () => {
+          fila.status = false; 
+          this.alertService.success(
+            'Usuario desactivado',
+            `${fila.id} ha sido desactivado.`
+          );
+
+          this.loadAdmins();
+        },
+        error: () => {
+          this.alertService.error(
+            'Error',
+            'No se pudo desactivar el usuario'
+          );
+        }
+      });
+
+    } else {
+      this.alertService.info(
+        'Acción cancelada',
+        `No se desactivó a ${fila.id}.`
+      );
+    }
+  });
+}
 
   detail(fila: any): void {
     this.router.navigate(['/usuarios/detalle-usuario/', fila.id]);
