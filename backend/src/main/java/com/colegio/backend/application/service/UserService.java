@@ -51,7 +51,7 @@ public class UserService implements UserUseCase {
         User user=  User.builder()
                 .id(newCode)
                 .email(email)
-                .password(password)
+                .password(passwordEncoder.encode(password))
                 .status(true)
                 .createdAt(LocalDateTime.now())
                 .roles(Collections.singletonList(roleEntity))

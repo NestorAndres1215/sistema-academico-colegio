@@ -28,6 +28,7 @@ public class AdministratorService implements AdministratorUseCase {
     private final UserUseCase userUseCase;
     private final FileUseCase fileUseCase;
 
+
     @Override
     public List<Administrator> findByGender(String gender) {
         return repositoryPort.findByGender(gender);

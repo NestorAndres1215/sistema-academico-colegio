@@ -1,10 +1,13 @@
 package com.colegio.backend.application.service;
 
 import com.colegio.backend.domain.exception.ResourceNotFoundException;
+import com.colegio.backend.domain.model.Administrator;
 import com.colegio.backend.domain.model.Role;
 import com.colegio.backend.domain.port.repository.RoleRepositoryPort;
 import com.colegio.backend.domain.port.usecases.RoleUseCase;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,9 +18,10 @@ public class RoleService implements RoleUseCase {
 
     private final RoleRepositoryPort repositoryPort;
 
+
     @Override
-    public List<Role> findAll() {
-        return repositoryPort.findAll();
+    public Page<Role> getAll(String search, Pageable pageable) {
+        return repositoryPort.getAll(search, pageable);
     }
 
     @Override

@@ -5,6 +5,8 @@ import com.colegio.backend.domain.port.repository.RoleRepositoryPort;
 import com.colegio.backend.infrastructure.persistence.mapper.RoleMapper;
 import com.colegio.backend.infrastructure.persistence.repository.JpaRoleRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -17,9 +19,10 @@ public class RoleRepositoryAdapter implements RoleRepositoryPort {
     private final JpaRoleRepository repository;
     private  final RoleMapper mapper;
 
+
     @Override
-    public List<Role> findAll() {
-        return repository.findAll().stream().map(mapper::toDomain).toList();
+    public Page<Role> getAll(String search, Pageable pageable) {
+        return repository.search(search, pageable).map(mapper::toDomain);
     }
 
     @Override

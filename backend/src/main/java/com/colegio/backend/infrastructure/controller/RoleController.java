@@ -1,15 +1,16 @@
 package com.colegio.backend.infrastructure.controller;
 
+import com.colegio.backend.domain.model.Administrator;
 import com.colegio.backend.domain.model.Role;
 import com.colegio.backend.domain.port.usecases.RoleUseCase;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,8 +25,15 @@ public class RoleController {
 
     @Operation(summary = "Get all roles")
     @GetMapping
-    public ResponseEntity<List<Role>> findAll() {
-        return ResponseEntity.ok(roleUseCase.findAll());
+    public ResponseEntity<Page<Role>> getByStatus(
+            @RequestParam int page,
+            @RequestParam int size,
+            @RequestParam(required = false) String search
+    ) {
+
+        Pageable pageable = PageRequest.of(page, size);
+        return ResponseEntity.ok(roleUseCase.getAll(search, pageable));
+
     }
 
     @Operation(summary = "Get role by ID")
