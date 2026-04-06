@@ -101,7 +101,5 @@ export class UserList implements OnInit {
     this.router.navigate(['/usuarios/detalle-usuario/', fila.id]);
   }
 
-  update(fila: any) {
-    this.router.navigate(['/usuarios/update-usuario/', fila.id]);
-  }
+
 }

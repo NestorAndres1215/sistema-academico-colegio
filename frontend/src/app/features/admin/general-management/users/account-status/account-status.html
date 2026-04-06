@@ -1,0 +1,16 @@
+<div class="container my-4 ">
+
+<app-tittle title="Mantenimiento de Usuarios Desactivados" icon="fas fa-user-slash">
+</app-tittle>
+
+  <app-search (searchChange)="filter($event)">
+  </app-search>
+
+  <app-table [columns]="columns" [data]="adminPaginated" [buttonsConfig]="buttonsConfig"
+    [onDeactivate]="desactivate.bind(this)" [onDetail]="detail.bind(this)">
+  </app-table>
+
+  <app-pagination [page]="pageActivos" [totalPages]="totalPages" (pageChange)="onPageChange($event)">
+  </app-pagination>
+
+</div>

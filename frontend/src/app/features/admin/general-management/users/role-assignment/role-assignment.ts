@@ -31,18 +31,18 @@ export class RoleAssignment {
 
   ];
 
-    ngOnInit(): void {
-      this.searchSubject.pipe(debounceTime(400)).subscribe(value => {
-        this.searchTerm = value;
-        this.pageActivos = 1;
-        this.loadRoles();
-      });
-  
+  ngOnInit(): void {
+    this.searchSubject.pipe(debounceTime(400)).subscribe(value => {
+      this.searchTerm = value;
+      this.pageActivos = 1;
       this.loadRoles();
-    }
-  
+    });
 
- loadRoles(): void {
+    this.loadRoles();
+  }
+
+
+  loadRoles(): void {
     this.roleService.getAll(
       this.pageActivos - 1,
       this.itemsPerPageActivo,
