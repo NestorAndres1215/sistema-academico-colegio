@@ -87,7 +87,7 @@ public class UserService implements UserUseCase {
     }
 
     @Override
-    public User activate(String id) {
+    public User activateUser(String id) {
 
         User existing = repositoryPort.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Administrator not found"));
@@ -97,7 +97,7 @@ public class UserService implements UserUseCase {
     }
 
     @Override
-    public User deactivate(String id) {
+    public User deactivateUser(String id) {
         User existing = repositoryPort.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Administrator not found"));
 

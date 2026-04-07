@@ -17,7 +17,7 @@ export class AuthService {
   constructor(
     private router: Router,
     private http: HttpClient
-  ) {}
+  ) { }
 
   generateToken(loginData: any): Observable<any> {
     return this.http.post(`${this.backendUrl}/auth/generate-token`, loginData);
@@ -60,5 +60,9 @@ export class AuthService {
     localStorage.removeItem('user');
     this.loginStatusSubject.next(false);
     this.router.navigate(['/auth/login']);
+  }
+
+  changePassword(id: string, data: any) {
+    return this.http.post(`${this.backendUrl}/auth/${id}/change-password`, data);
   }
 }

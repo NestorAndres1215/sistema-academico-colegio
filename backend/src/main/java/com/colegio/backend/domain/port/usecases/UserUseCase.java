@@ -17,8 +17,8 @@ public interface UserUseCase {
 
     User update(String id , String email, String password,String role);
 
-    User activate (String id);
+    User activateUser (String id);
 
-    User deactivate (String id);
+    User deactivateUser (String id);
     User changePassword(String userId, PasswordRequest request);
 }

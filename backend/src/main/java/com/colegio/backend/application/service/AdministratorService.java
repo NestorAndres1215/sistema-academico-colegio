@@ -160,7 +160,7 @@ public class AdministratorService implements AdministratorUseCase {
     public Administrator deactivate(String id) {
         Administrator existing = repositoryPort.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Administrator not found"));
-        userUseCase.deactivate(existing.getUser().getId());
+        userUseCase.deactivateUser(existing.getUser().getId());
         existing.setStatus(false);
         return repositoryPort.save(existing);
     }
@@ -169,7 +169,7 @@ public class AdministratorService implements AdministratorUseCase {
     public Administrator activate(String id) {
         Administrator existing = repositoryPort.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Administrator not found"));
-        userUseCase.activate(existing.getUser().getId());
+        userUseCase.activateUser(existing.getUser().getId());
         existing.setStatus(true);
         return repositoryPort.save(existing);
     }

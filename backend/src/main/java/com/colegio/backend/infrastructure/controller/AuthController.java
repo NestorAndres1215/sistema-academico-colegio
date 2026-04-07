@@ -40,7 +40,6 @@ public class AuthController {
     public ResponseEntity<User> changePassword(
             @PathVariable String id,
             @Valid @RequestBody PasswordRequest passwordRequest) {
-System.out.println(passwordRequest);
         return ResponseEntity.ok(userUseCase.changePassword(id, passwordRequest));
     }
 
