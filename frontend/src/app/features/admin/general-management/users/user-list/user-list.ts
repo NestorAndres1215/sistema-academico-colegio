@@ -1,14 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { AdminService } from '../../../../../../core/services/admin.service';
-import { Pagination } from "../../../../../../shared/pagination/pagination";
+
 import { CommonModule } from '@angular/common';
-import { Table } from '../../../../../../shared/table/table';
-import { Tittle } from "../../../../../../shared/tittle/tittle";
-import { Search } from "../../../../../../shared/search/search";
+
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { AlertService } from '../../../../../../core/services/alert.service';
+import { Search } from '../../../../../shared/search/search';
+import { Tittle } from '../../../../../shared/tittle/tittle';
+import { Table } from '../../../../../shared/table/table';
+import { Pagination } from '../../../../../shared/pagination/pagination';
+import { AdminService } from '../../../../../core/services/admin.service';
+import { AlertService } from '../../../../../core/services/alert.service';
+
 
 @Component({
   selector: 'app-user-list',

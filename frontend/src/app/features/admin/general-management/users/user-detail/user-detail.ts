@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AdminService } from '../../../../../../core/services/admin.service';
-import { DataDetail } from "../../../../../../shared/components/data-detail/data-detail";
-import { Tittle } from "../../../../../../shared/tittle/tittle";
+import { AdminService } from '../../../../../core/services/admin.service';
+import { DataDetail } from "../../../../../shared/components/data-detail/data-detail";
+import { Tittle } from "../../../../../shared/tittle/tittle";
 
 @Component({
   selector: 'app-user-detail',
