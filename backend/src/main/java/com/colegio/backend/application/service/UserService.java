@@ -1,7 +1,10 @@
 package com.colegio.backend.application.service;
 
+import com.colegio.backend.application.dto.auth.PasswordRequest;
+import com.colegio.backend.domain.exception.BadRequestException;
 import com.colegio.backend.domain.exception.ConflictException;
 import com.colegio.backend.domain.exception.ResourceNotFoundException;
+import com.colegio.backend.domain.model.Administrator;
 import com.colegio.backend.domain.model.Role;
 import com.colegio.backend.domain.model.User;
 import com.colegio.backend.domain.port.repository.UserRepositoryPort;
@@ -81,5 +84,47 @@ public class UserService implements UserUseCase {
         existingUser.setUpdatedAt(LocalDateTime.now());
 
         return repositoryPort.save(existingUser);
+    }
+
+    @Override
+    public User activate(String id) {
+
+        User existing = repositoryPort.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Administrator not found"));
+
+        existing.setStatus(true);
+        return repositoryPort.save(existing);
+    }
+
+    @Override
+    public User deactivate(String id) {
+        User existing = repositoryPort.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Administrator not found"));
+
+        existing.setStatus(false);
+        return repositoryPort.save(existing);
+    }
+
+    @Override
+    public User changePassword(String userId, PasswordRequest request) {
+
+        User user = repositoryPort.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+
+        if (!passwordEncoder.matches(request.getCurrentPassword(), user.getPassword())) {
+            throw new BadRequestException("Current password is incorrect");
+        }
+
+        if (!request.getNewPassword().equals(request.getConfirmNewPassword())) {
+            throw new BadRequestException("Passwords do not match");
+        }
+
+        if (passwordEncoder.matches(request.getNewPassword(), user.getPassword())) {
+            throw new BadRequestException("New password must be different from the current password");
+        }
+
+        user.setPassword(passwordEncoder.encode(request.getNewPassword()));
+
+        return repositoryPort.save(user);
     }
 }

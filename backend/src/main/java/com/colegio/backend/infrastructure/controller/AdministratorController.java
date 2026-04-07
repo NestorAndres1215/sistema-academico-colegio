@@ -101,4 +101,14 @@ public class AdministratorController {
         return ResponseEntity.ok(result);
 
     }
+
+    @PutMapping("/deactivate/{id}")
+    public ResponseEntity<Administrator> deactivate(@PathVariable String id) {
+        return ResponseEntity.ok(administratorUseCase.deactivate(id));
+    }
+
+    @PutMapping("/activate/{id}")
+    public ResponseEntity<Administrator> activate(@PathVariable String id) {
+        return ResponseEntity.ok(administratorUseCase.activate(id));
+    }
 }

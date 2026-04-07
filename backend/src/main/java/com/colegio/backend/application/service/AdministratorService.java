@@ -156,5 +156,23 @@ public class AdministratorService implements AdministratorUseCase {
         return repositoryPort.getByStatus(status, search, pageable);
     }
 
+    @Override
+    public Administrator deactivate(String id) {
+        Administrator existing = repositoryPort.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Administrator not found"));
+        userUseCase.deactivate(existing.getUser().getId());
+        existing.setStatus(false);
+        return repositoryPort.save(existing);
+    }
+
+    @Override
+    public Administrator activate(String id) {
+        Administrator existing = repositoryPort.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Administrator not found"));
+        userUseCase.activate(existing.getUser().getId());
+        existing.setStatus(true);
+        return repositoryPort.save(existing);
+    }
+
 
 }

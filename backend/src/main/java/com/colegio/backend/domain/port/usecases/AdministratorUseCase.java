@@ -32,4 +32,8 @@ public interface AdministratorUseCase {
     Administrator update(String id, AdministratorRequest administratorRequest);
 
     Page<Administrator> getByStatus(boolean status, String search, Pageable pageable);
+
+    Administrator deactivate(String id);
+
+    Administrator activate(String id);
 }

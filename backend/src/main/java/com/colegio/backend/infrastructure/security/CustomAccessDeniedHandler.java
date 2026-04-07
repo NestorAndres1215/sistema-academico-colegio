@@ -30,7 +30,7 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 
         ErrorResponse error = ErrorResponse.builder()
                 .error(HttpStatus.FORBIDDEN.getReasonPhrase())
-                .message("Acceso denegado: " + accessDeniedException.getMessage())
+                .message("Access denied: " + accessDeniedException.getMessage())
                 .status(HttpStatus.FORBIDDEN.value())
                 .timestamp(LocalDateTime.now().toString())
                 .traceId(traceId)

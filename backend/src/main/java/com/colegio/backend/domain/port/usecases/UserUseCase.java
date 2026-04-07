@@ -1,9 +1,9 @@
 package com.colegio.backend.domain.port.usecases;
 
+import com.colegio.backend.application.dto.auth.PasswordRequest;
 import com.colegio.backend.domain.model.User;
-
 import java.util.List;
-import java.util.Optional;
+
 
 public interface UserUseCase {
 
@@ -16,4 +16,9 @@ public interface UserUseCase {
     User save(String id , String email, String password, String role);
 
     User update(String id , String email, String password,String role);
+
+    User activate (String id);
+
+    User deactivate (String id);
+    User changePassword(String userId, PasswordRequest request);
 }
