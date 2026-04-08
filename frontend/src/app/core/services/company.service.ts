@@ -12,19 +12,6 @@ export class CompanyService {
 
   constructor(private http: HttpClient) { }
 
-  private config = {
-    title: "Sistema Escolar",
-    icon: "assets/logo.png"
-  };
-
-  loadConfig() {
-    return this.config;
-  }
-
-  getConfig() {
-    return this.config;
-  }
-
   getAll(): Observable<any> {
     return this.http.get<any>(`${this.backendUrl}/company`);
   }
