@@ -18,6 +18,6 @@ public interface CompanyUseCase {
 
     Company save(MultipartFile logo,CompanyRequest companyRequest) throws IOException;
 
-    Company update (String id,CompanyRequest companyRequest);
+    Company update (String id,MultipartFile logo,CompanyRequest companyRequest) throws IOException;
 
 }

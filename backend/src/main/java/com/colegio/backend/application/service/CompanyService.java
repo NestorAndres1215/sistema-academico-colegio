@@ -83,10 +83,26 @@ public class CompanyService implements CompanyUseCase {
     }
 
     @Override
-    public Company update(String id, CompanyRequest companyRequest) {
+    public Company update(String id,MultipartFile logo, CompanyRequest companyRequest) throws IOException {
 
         Company existing = repositoryPort.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Company not found"));
+
+        if (logo != null && !logo.isEmpty()) {
+
+            if (existing.getLogo() != null && !existing.getLogo().isEmpty()) {
+                fileUseCase.deleteFile(existing.getLogo());
+            }
+
+            String fileName = fileUseCase.storeFile(logo, "company");
+
+            String fileUrl = ServletUriComponentsBuilder.fromCurrentContextPath()
+                    .path("/company/")
+                    .path(fileName)
+                    .toUriString();
+
+            existing.setLogo(fileUrl);
+        }
 
         existing.setName(companyRequest.getName());
         existing.setLogo(companyRequest.getLogo());
