@@ -4,11 +4,15 @@ import com.colegio.backend.application.dto.company.CompanyRequest;
 import com.colegio.backend.application.dto.position.PositionRequest;
 import com.colegio.backend.domain.model.Company;
 import com.colegio.backend.domain.model.Position;
+import com.colegio.backend.domain.model.Role;
 import com.colegio.backend.domain.port.usecases.CompanyUseCase;
 import com.colegio.backend.domain.port.usecases.PositionUseCase;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,10 +26,17 @@ public class PositionController {
 
     private final PositionUseCase positionUseCase;
 
-    @Operation(summary = "Get all positions")
+    @Operation(summary = "Search positions")
     @GetMapping
-    public ResponseEntity<List<Position>> getAll() {
-        return ResponseEntity.ok(positionUseCase.findAll());
+    public ResponseEntity<Page<Position>> getByPosition(
+            @RequestParam int page,
+            @RequestParam int size,
+            @RequestParam(required = false) String search
+    ) {
+
+        Pageable pageable = PageRequest.of(page, size);
+        return ResponseEntity.ok(positionUseCase.search(search, pageable));
+
     }
 
     @Operation(summary = "Get position by ID")

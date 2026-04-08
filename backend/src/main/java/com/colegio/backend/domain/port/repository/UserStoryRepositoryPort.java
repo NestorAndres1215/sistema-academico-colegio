@@ -1,0 +1,19 @@
+package com.colegio.backend.domain.port.repository;
+
+import com.colegio.backend.domain.model.Administrator;
+import com.colegio.backend.domain.model.UserStory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import java.util.Optional;
+
+public interface UserStoryRepositoryPort {
+
+    Optional<UserStory> findById(String id);
+
+    UserStory save (UserStory userHistory);
+
+    Page<UserStory> findWithFilters(String email, Boolean status, String action, Pageable pageable);
+
+    String findLastCode();
+}

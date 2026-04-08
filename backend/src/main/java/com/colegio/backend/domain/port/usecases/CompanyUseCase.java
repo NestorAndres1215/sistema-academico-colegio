@@ -12,9 +12,9 @@ public interface CompanyUseCase {
 
     List<Company> findAll();
 
-     Company findByName(String name);
+    Company findByName(String name);
 
-     Company findById(String id);
+    Company findById(String id);
 
     Company save(MultipartFile logo,CompanyRequest companyRequest) throws IOException;
 

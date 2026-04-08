@@ -10,4 +10,5 @@ public interface JpaMenuRepository extends JpaRepository<MenuEntity,String> {
 
     @Query("SELECT m FROM MenuEntity m LEFT JOIN FETCH m.children")
     List<MenuEntity> findAllWithChildren();
+    
 }

@@ -20,4 +20,5 @@ public interface JpaUserRepository extends JpaRepository<UserEntity,String> {
 
     @Query("SELECT MAX(c.id) FROM UserEntity c")
     String findLastCode();
+    
 }

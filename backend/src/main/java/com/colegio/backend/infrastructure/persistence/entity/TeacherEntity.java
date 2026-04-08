@@ -42,6 +42,8 @@ public class TeacherEntity {
     private Boolean active;
     private String specialization;
 
+    private String status;
+
     @Column(name = "hire_date")
     private LocalDate hireDate;
 

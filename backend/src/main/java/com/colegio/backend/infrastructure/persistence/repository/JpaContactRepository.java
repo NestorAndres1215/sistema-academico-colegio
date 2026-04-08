@@ -8,4 +8,5 @@ public interface JpaContactRepository extends JpaRepository<ContactEntity,String
 
     @Query("SELECT MAX(c.id) FROM ContactEntity c")
     String findLastCode();
+    
 }

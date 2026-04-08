@@ -16,10 +16,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class AdministratorService implements AdministratorUseCase {
@@ -81,6 +81,7 @@ public class AdministratorService implements AdministratorUseCase {
         if (request.getPhone() != null && repositoryPort.existsByPhone(request.getPhone())) {
             throw new ConflictException("The phone number is already registered.");
         }
+
         String fileName = fileUseCase.storeFile(file,"admin");
 
         String fileUrl = ServletUriComponentsBuilder.fromCurrentContextPath()
@@ -89,12 +90,7 @@ public class AdministratorService implements AdministratorUseCase {
                 .toUriString();
         String newCode = SequenceGenerator.generateCode(repositoryPort.findLastCode());
 
-        User user = userUseCase.save(
-                "",
-                request.getEmail(),
-                request.getPassword(),
-                "ROLE_ADMINISTRATOR"
-        );
+        User user = userUseCase.save("",request.getEmail(),request.getPassword(),"ROLE_ADMINISTRATOR");
         LocalDate today = LocalDate.now();
         LocalDate birthDate = request.getBirthDate();
 

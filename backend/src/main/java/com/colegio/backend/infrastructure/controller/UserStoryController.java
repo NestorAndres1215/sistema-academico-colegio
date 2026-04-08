@@ -1,0 +1,52 @@
+package com.colegio.backend.infrastructure.controller;
+
+import com.colegio.backend.application.dto.userStory.UserStoryRequest;
+import com.colegio.backend.domain.model.Role;
+import com.colegio.backend.domain.model.UserStory;
+import com.colegio.backend.domain.port.usecases.UserStoryUseCase;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RequiredArgsConstructor
+@RestController
+@RequestMapping("/user-story")
+@Tag(name = "User Story")
+public class UserStoryController {
+
+    private final UserStoryUseCase userStoryUseCase;
+
+    @Operation(summary = "Get user stories with filters")
+    @GetMapping
+    public ResponseEntity<Page<UserStory>> findWithFilters(@RequestParam String email, @RequestParam Boolean status,
+                                                           @RequestParam String action, @RequestParam int page, @RequestParam int size
+    ) {
+        Pageable pageable = PageRequest.of(page, size);
+        return ResponseEntity.ok(userStoryUseCase.findWithFilters(email, status, action, pageable));
+    }
+
+    @Operation(summary = "Register a new user story")
+    @PostMapping
+    public ResponseEntity<UserStory> save(@RequestBody UserStoryRequest request) {
+        return ResponseEntity.ok(userStoryUseCase.save(request));
+    }
+
+    @Operation(summary = "Activate user story")
+    @PutMapping("/{id}/activate")
+    public ResponseEntity<UserStory> activate(@PathVariable String id) {
+        return ResponseEntity.ok(userStoryUseCase.activate(id));
+    }
+
+    @Operation(summary = "Deactivate user story")
+    @PutMapping("/{id}/deactivate")
+    public ResponseEntity<UserStory> deactivate(@PathVariable String id) {
+        return ResponseEntity.ok(userStoryUseCase.deactivate(id));
+    }
+
+
+}

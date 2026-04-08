@@ -22,4 +22,5 @@ public interface JpaRoleRepository extends JpaRepository<RoleEntity,String> {
     )
 """)
     Page<RoleEntity> search(@Param("search") String search, Pageable pageable);
+    
 }

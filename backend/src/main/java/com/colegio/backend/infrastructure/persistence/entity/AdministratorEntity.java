@@ -13,7 +13,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 public class AdministratorEntity {
-@Id
+
+    @Id
     private String id;
 
     @Column(name = "first_name")
@@ -43,4 +44,5 @@ public class AdministratorEntity {
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private UserEntity userEntity;
+    
 }

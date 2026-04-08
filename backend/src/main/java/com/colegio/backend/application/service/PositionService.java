@@ -7,6 +7,8 @@ import com.colegio.backend.domain.port.repository.PositionRepositoryPort;
 import com.colegio.backend.domain.port.usecases.PositionUseCase;
 import com.colegio.backend.infrastructure.util.SequenceGenerator;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -55,5 +57,10 @@ public class PositionService implements PositionUseCase {
         position.setName(positionRequest.getName());
         position.setDescription(positionRequest.getDescription());
         return repositoryPort.save(position);
+    }
+
+    @Override
+    public Page<Position> search(String search, Pageable pageable) {
+        return repositoryPort.search(search, pageable);
     }
 }

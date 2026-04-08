@@ -8,4 +8,5 @@ public interface JpaStudentRepository extends JpaRepository<StudentEntity,String
 
     @Query("SELECT MAX(c.id) FROM StudentEntity c")
     String findLastCode();
+    
 }

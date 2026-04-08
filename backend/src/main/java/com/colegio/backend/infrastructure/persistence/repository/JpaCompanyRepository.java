@@ -8,8 +8,10 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.Optional;
 
 public interface JpaCompanyRepository extends JpaRepository<CompanyEntity,String> {
+
     Optional<CompanyEntity> findByName(String name);
 
     @Query("SELECT MAX(c.id) FROM CompanyEntity c")
     String findLastCode();
+    
 }

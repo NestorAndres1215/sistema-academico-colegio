@@ -87,7 +87,7 @@ public class AdministratorController {
     public ResponseEntity<List<Administrator>> findFullName(@RequestParam String firstName, @RequestParam String paternalLastName, @RequestParam String maternalLastName) {
         return ResponseEntity.ok(administratorUseCase.findByFirstNameAndPaternalLastNameAndMaternalLastName(firstName, paternalLastName, maternalLastName));
     }
-
+    @Operation(summary = "Get administrators by status")
     @GetMapping("/status/{status}")
     public ResponseEntity<Page<Administrator>> getByStatus(
             @PathVariable boolean status,
@@ -102,11 +102,13 @@ public class AdministratorController {
 
     }
 
+    @Operation(summary = "Deactivate admin")
     @PutMapping("/deactivate/{id}")
     public ResponseEntity<Administrator> deactivate(@PathVariable String id) {
         return ResponseEntity.ok(administratorUseCase.deactivate(id));
     }
 
+    @Operation(summary = "Activate admin")
     @PutMapping("/activate/{id}")
     public ResponseEntity<Administrator> activate(@PathVariable String id) {
         return ResponseEntity.ok(administratorUseCase.activate(id));
