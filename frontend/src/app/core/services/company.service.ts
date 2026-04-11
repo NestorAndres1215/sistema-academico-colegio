@@ -24,7 +24,7 @@ export class CompanyService {
     return this.http.get<any>(`${this.backendUrl}/company/name/${name}`);
   }
 
-  create(data: FormData, id: String) {
+  create(data: FormData) {
     return this.http.post(`${this.backendUrl}/company/`, data);
   }
 

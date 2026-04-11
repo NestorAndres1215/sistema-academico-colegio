@@ -28,7 +28,6 @@ export class PositionService {
     return this.http.get<any>(`${this.backendUrl}/position/${id}`);
   }
 
-
   create(data: any) {
     return this.http.post<any>(`${this.backendUrl}/position`, data);
   }
