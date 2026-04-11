@@ -1,7 +1,6 @@
 package com.colegio.backend.infrastructure.controller;
 
 import com.colegio.backend.application.dto.userStory.UserStoryRequest;
-import com.colegio.backend.domain.model.Role;
 import com.colegio.backend.domain.model.UserStory;
 import com.colegio.backend.domain.port.usecases.UserStoryUseCase;
 import io.swagger.v3.oas.annotations.Operation;
