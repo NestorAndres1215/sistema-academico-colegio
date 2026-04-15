@@ -1,17 +1,18 @@
 import { Component } from '@angular/core';
-import { Tittle } from "../../../../../shared/tittle/tittle";
+
 import { AlertService } from '../../../../../core/services/alert.service';
 import { AdminService } from '../../../../../core/services/admin.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { filterOnlyNumbers, getMaxBirthDate } from '../../../../../core/utils/validators';
-import { Button } from "../../../../../shared/button/button";
+import { Button } from "../../../../../shared/ui/button/button";
 import { CommonModule } from '@angular/common';
 import { Admin } from '../../../../../core/models/admin';
+import { PageTitle } from "../../../../../shared/ui/page-title/page-title";
 
 @Component({
   selector: 'app-user-registration',
-  imports: [Tittle, Button, CommonModule, ReactiveFormsModule],
+  imports: [Button, CommonModule, ReactiveFormsModule, PageTitle],
   templateUrl: './user-registration.html',
   styleUrl: './user-registration.css',
 })

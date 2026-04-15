@@ -6,17 +6,17 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class AdminService {
+export class TeacherService {
 
   private backendUrl = environment.baseUrl;
 
   constructor(private http: HttpClient) { }
 
   getAll(): Observable<any> {
-    return this.http.get<any>(`${this.backendUrl}/administrator`)
+    return this.http.get<any>(`${this.backendUrl}/teacher`)
   }
 
-  getByStatus(status: boolean, page: number, size: number, search: string = ''): Observable<any> {
+  getByStatus(status: string, page: number, size: number, search: string = ''): Observable<any> {
     let params = new HttpParams()
       .set('page', page)
       .set('size', size);
@@ -25,23 +25,28 @@ export class AdminService {
       params = params.set('search', search.trim());
     }
 
-    return this.http.get<any>(`${this.backendUrl}/administrator/status/${status}`, { params });
+    return this.http.get<any>(`${this.backendUrl}/teacher/status/${status}`, { params });
   }
 
   getById(id: string): Observable<any> {
-    return this.http.get<any>(`${this.backendUrl}/administrator/${id}`);
+    return this.http.get<any>(`${this.backendUrl}/teacher/${id}`);
   }
 
   create(data: FormData) {
-    return this.http.post(`${this.backendUrl}/administrator`, data);
+    return this.http.post(`${this.backendUrl}/teacher`, data);
   }
 
+  update(id: string, data: FormData) {
+    return this.http.put(`${this.backendUrl}/teacher/${id}`, data);
+  }
+
+
   deactivate(id: string): Observable<any> {
-    return this.http.put(`${this.backendUrl}/administrator/deactivate/${id}`, {});
+    return this.http.put(`${this.backendUrl}/teacher/deactivate/${id}`, {});
   }
 
   activate(id: string): Observable<any> {
-    return this.http.put(`${this.backendUrl}/administrator/activate/${id}`, {});
+    return this.http.put(`${this.backendUrl}/teacher/activate/${id}`, {});
   }
 
 }

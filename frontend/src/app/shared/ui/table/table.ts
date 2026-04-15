@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { Button } from '../button/button';
 
+
 @Component({
   selector: 'app-table',
   imports: [CommonModule, Button],

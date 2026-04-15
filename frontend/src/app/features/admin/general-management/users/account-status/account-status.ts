@@ -1,16 +1,18 @@
 import { Component } from '@angular/core';
-import { Tittle } from "../../../../../shared/tittle/tittle";
-import { Search } from "../../../../../shared/search/search";
-import { Table } from "../../../../../shared/table/table";
-import { Pagination } from "../../../../../shared/pagination/pagination";
+
+import { Search } from "../../../../../shared/ui/search/search";
+
+import { Pagination } from "../../../../../shared/ui/pagination/pagination";
 import { debounceTime, Subject } from 'rxjs';
 import { AdminService } from '../../../../../core/services/admin.service';
 import { Router } from '@angular/router';
 import { AlertService } from '../../../../../core/services/alert.service';
+import { PageTitle } from "../../../../../shared/ui/page-title/page-title";
+import { Table } from '../../../../../shared/ui/table/table';
 
 @Component({
   selector: 'app-account-status',
-  imports: [Tittle, Search, Table, Pagination],
+  imports: [PageTitle, Search, Table, Pagination],
   templateUrl: './account-status.html',
   styleUrl: './account-status.css',
 })

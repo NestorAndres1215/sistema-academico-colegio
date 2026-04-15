@@ -1,15 +1,17 @@
 import { Component } from '@angular/core';
-import { Tittle } from "../../../../../shared/tittle/tittle";
-import { Search } from "../../../../../shared/search/search";
-import { Table } from "../../../../../shared/table/table";
-import { Pagination } from "../../../../../shared/pagination/pagination";
+
+import { Search } from "../../../../../shared/ui/search/search";
+
+import { Pagination } from "../../../../../shared/ui/pagination/pagination";
 import { RoleService } from '../../../../../core/services/role.service';
 import { Router } from '@angular/router';
 import { debounceTime, Subject } from 'rxjs';
+import { PageTitle } from "../../../../../shared/ui/page-title/page-title";
+import { Table } from '../../../../../shared/ui/table/table';
 
 @Component({
   selector: 'app-role-assignment',
-  imports: [Tittle, Search, Table, Pagination],
+  imports: [Search, Table, Pagination, PageTitle],
   templateUrl: './role-assignment.html',
   styleUrl: './role-assignment.css',
 })

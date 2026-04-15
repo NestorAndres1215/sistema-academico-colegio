@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Tittle } from '../../../shared/tittle/tittle';
+import { PageTitle } from "../../../shared/ui/page-title/page-title";
 
 @Component({
   selector: 'app-admin-main',
-  imports: [CommonModule, Tittle],
+  imports: [CommonModule, PageTitle],
   templateUrl: './admin-main.html',
   styleUrl: './admin-main.css',
 })

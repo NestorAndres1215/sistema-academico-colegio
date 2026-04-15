@@ -1,16 +1,17 @@
 import { Component } from '@angular/core';
-import { Tittle } from "../../../../../shared/tittle/tittle";
-import { Button } from "../../../../../shared/button/button";
+
+import { Button } from "../../../../../shared/ui/button/button";
 import { AuthService } from '../../../../../core/services/auth.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AlertService } from '../../../../../core/services/alert.service';
 import { Router } from '@angular/router';
 import { Password } from '../../../../../core/models/password';
+import { PageTitle } from "../../../../../shared/ui/page-title/page-title";
 
 @Component({
   selector: 'app-password-reset',
-  imports: [Tittle, Button, CommonModule, ReactiveFormsModule],
+  imports: [ Button, CommonModule, ReactiveFormsModule, PageTitle],
   templateUrl: './password-reset.html',
   styleUrl: './password-reset.css',
 })
