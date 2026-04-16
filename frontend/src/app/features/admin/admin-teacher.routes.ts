@@ -3,22 +3,17 @@ import { Routes } from "@angular/router";
 export const ADMIN_TEACHER_ROUTES: Routes = [
     {
         path: 'datos',
-        loadComponent: () => import('./general-management/school-staff/teacher/personal-information/personal-information')
-            .then(m => m.PersonalInformation)
-    },
-    {
-        path: 'cursos',
-        loadComponent: () => import('./general-management/school-staff/teacher/teacher-course-assignment/teacher-course-assignment')
-            .then(m => m.TeacherCourseAssignment)
+        loadComponent: () => import('./general-management/teacher-management/teacher-list/teacher-list')
+            .then(m => m.TeacherList)
     },
     {
         path: 'registro',
-        loadComponent: () => import('./general-management/school-staff/teacher/teacher-register/teacher-register')
-            .then(m => m.TeacherRegister)
+        loadComponent: () => import('./general-management/teacher-management/teacher-create/teacher-create')
+            .then(m => m.TeacherCreate)
     },
     {
         path: 'detalle-profesor/:id',
-        loadComponent: () => import('./general-management/school-staff/teacher/teacher-detail/teacher-detail')
+        loadComponent: () => import('./general-management/teacher-management/teacher-detail/teacher-detail')
             .then(m => m.TeacherDetail)
     },
 

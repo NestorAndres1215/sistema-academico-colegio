@@ -29,7 +29,7 @@
                         <app-button *ngIf="buttonsConfig.update" icon="fas fa-edit" color="principal"
                             (click)="onUpdate(fila)"></app-button>
 
-                        <app-button *ngIf="buttonsConfig.activate" icon="fas fa-sign-out-alt" color="principal"
+                        <app-button *ngIf="buttonsConfig.activate" icon="fas fa-user-check" color="principal"
                             (click)="onActivate(fila)"></app-button>
 
                         <app-button *ngIf="buttonsConfig.deactivate" icon="fas fa-user-slash" color="principal"
@@ -37,6 +37,10 @@
 
                         <app-button *ngIf="buttonsConfig.print" icon="fas fa-print" color="principal"
                             (click)="onPrint(fila)"></app-button>
+                            
+                        <app-button *ngIf="buttonsConfig.pdf" icon="fas fa-file-pdf" color="principal"
+                            (click)="onDownloadPdf(fila)">
+                        </app-button>
 
                     </div>
                 </td>

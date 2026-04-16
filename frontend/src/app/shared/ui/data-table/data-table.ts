@@ -17,6 +17,7 @@ export class DataTable {
   @Input() onDetail!: (fila: any) => void;
   @Input() onUpdate!: (fila: any) => void;
   @Input() onDeactivate!: (fila: any) => void;
+  @Input() onDownloadPdf!: (fila: any) => void;
   @Input() onActivate!: (fila: any) => void;
   @Input() onPrint!: (fila: any) => void;
 
