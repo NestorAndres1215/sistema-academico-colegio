@@ -1,0 +1,11 @@
+<div class=" d-flex justify-content-center justify-content-md-end mb-3 p-2">
+    <div class="bg-light btn-group w-100 w-md-auto">
+
+        <button *ngFor="let opt of options" class="btn d-flex align-items-center justify-content-center gap-2 flex-fill"
+            [ngClass]="value === opt.value ? 'btn-primary' : 'btn-outline-primary'" (click)="setView(opt.value)">
+            <i *ngIf="opt.icon" [class]="opt.icon"></i>
+            <span class="d-none d-md-inline">{{ opt.label }}</span>
+        </button>
+
+    </div>
+</div>

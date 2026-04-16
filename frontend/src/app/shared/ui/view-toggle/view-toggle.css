@@ -1,0 +1,35 @@
+.btn-primary {
+    background-color: #163260;
+    border: 1px solid #163260;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0f254a;
+    border-color: #0f254a;
+}
+
+.btn-outline-primary {
+    color: #163260;
+    background-color: transparent;
+    border: 1px solid #163260;
+    border-radius: 6px;
+    padding: 6px 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-outline-primary:hover {
+    color: #fff;
+    background-color: #163260;
+}
+
+.btn-outline-primary:focus,
+.btn-primary:focus {
+    outline: none;
+
+}

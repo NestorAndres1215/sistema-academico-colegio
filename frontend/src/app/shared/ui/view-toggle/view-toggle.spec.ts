@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DetailData } from './detail-data';
+import { ViewToggle } from './view-toggle';
 
-describe('DetailData', () => {
-  let component: DetailData;
-  let fixture: ComponentFixture<DetailData>;
+describe('ViewToggle', () => {
+  let component: ViewToggle;
+  let fixture: ComponentFixture<ViewToggle>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DetailData]
+      imports: [ViewToggle]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DetailData);
+    fixture = TestBed.createComponent(ViewToggle);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

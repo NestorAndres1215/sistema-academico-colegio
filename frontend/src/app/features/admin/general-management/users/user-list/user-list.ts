@@ -5,19 +5,21 @@ import { CommonModule } from '@angular/common';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { Search } from '../../../../../shared/ui/search/search';
+
 
 import { Pagination } from '../../../../../shared/ui/pagination/pagination';
 import { AdminService } from '../../../../../core/services/admin.service';
 import { AlertService } from '../../../../../core/services/alert.service';
 import { PageTitle } from "../../../../../shared/ui/page-title/page-title";
-import { Table } from '../../../../../shared/ui/table/table';
+import { DataTable } from "../../../../../shared/ui/data-table/data-table";
+import { FilterSearch } from '../../../../../shared/ui/filter-search/filter-search';
+
 
 
 @Component({
   selector: 'app-user-list',
   standalone: true,
-  imports: [Pagination, CommonModule, Table, Search, PageTitle],
+  imports: [Pagination, CommonModule, FilterSearch, PageTitle, DataTable],
   templateUrl: './user-list.html',
   styleUrl: './user-list.css',
 })

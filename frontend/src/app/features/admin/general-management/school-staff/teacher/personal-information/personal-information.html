@@ -1,1 +1,34 @@
-<p>personal-information works!</p>
+<div class="container my-4 ">
+
+  <app-page-title title="Mantenimiento de Profesores" icon="fas fa-chalkboard-teacher">
+  </app-page-title>
+
+  <div class="row align-items-center mb-3 g-2">
+
+    <div class="col-12 col-md-8">
+      <app-filter-search (searchChange)="filter($event)"></app-filter-search>
+    </div>
+
+    <div class="col-12 col-md-4 d-flex justify-content-md-end justify-content-start">
+      <app-view-toggle [(value)]="selectedView" [options]="viewOptions"></app-view-toggle>
+    </div>
+
+  </div>
+
+  <div *ngIf="selectedView === 'table'">
+    <app-data-table [columns]="columnsTable" [data]="teacherPaginated" [buttonsConfig]="buttonsConfig"
+      [onDeactivate]="desactivate.bind(this)" [onDetail]="detail.bind(this)">
+    </app-data-table>
+  </div>
+
+  
+  <div *ngIf="selectedView === 'card'">
+    <app-data-card [columns]="columnsCard" [data]="teacherPaginated" [buttonsConfig]="buttonsConfig"
+      imageField="profile" firstNameField="firstName" lastNameField="paternalLastName">
+    </app-data-card>
+  </div>
+
+  <app-pagination [page]="pageActivos" [totalPages]="totalPages" (pageChange)="onPageChange($event)">
+  </app-pagination>
+
+</div>

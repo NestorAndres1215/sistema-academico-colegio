@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Table } from './table';
+import { FilterSelect } from './filter-select';
 
-describe('Table', () => {
-  let component: Table;
-  let fixture: ComponentFixture<Table>;
+describe('FilterSelect', () => {
+  let component: FilterSelect;
+  let fixture: ComponentFixture<FilterSelect>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Table]
+      imports: [FilterSelect]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(Table);
+    fixture = TestBed.createComponent(FilterSelect);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

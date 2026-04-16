@@ -2,12 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-detail-data',
+  selector: 'app-detail-view',
   imports: [CommonModule],
-  templateUrl: './detail-data.html',
-  styleUrl: './detail-data.css',
+  templateUrl: './detail-view.html',
+  styleUrl: './detail-view.css',
 })
-export class DetailData {
+export class DetailView {
   @Input() title!: string;
   @Input() data: any[] = [];
 }

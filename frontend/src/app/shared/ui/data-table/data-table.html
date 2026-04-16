@@ -35,7 +35,7 @@
                         <app-button *ngIf="buttonsConfig.deactivate" icon="fas fa-user-slash" color="principal"
                             (click)="onDeactivate(fila)"></app-button>
 
-                        <app-button *ngIf="buttonsConfig.print" icon="fas fa-print" color="imprimir"
+                        <app-button *ngIf="buttonsConfig.print" icon="fas fa-print" color="principal"
                             (click)="onPrint(fila)"></app-button>
 
                     </div>
@@ -43,12 +43,8 @@
             </tr>
             <tr *ngIf="(data || []).length === 0">
                 <td [attr.colspan]="columns.length + (hasActionButtons() ? 1 : 0)" class="text-center text-muted">
-                    <div class="fs-1 text-secondary mb-3">
-                        <i class="fas fa-info-circle"></i>
-                    </div>
-                    <h6 class="fw-semibold mb-0 text-secondary">
-                        No hay datos para mostrar
-                    </h6>
+                    <app-empty-state icon="fas fa-info-circle" title="No hay datos para mostrar">
+                    </app-empty-state>
                 </td>
             </tr>
         </tbody>

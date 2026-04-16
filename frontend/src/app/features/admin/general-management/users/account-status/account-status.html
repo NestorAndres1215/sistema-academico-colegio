@@ -3,12 +3,12 @@
     <app-page-title  title="Mantenimiento de Usuarios Desactivados" icon="fas fa-user-slash">
     </app-page-title>
 
-    <app-search (searchChange)="filter($event)">
-    </app-search>
+    <app-filter-search (searchChange)="filter($event)">
+    </app-filter-search>
 
-    <app-table [columns]="columns" [data]="adminPaginated" [buttonsConfig]="buttonsConfig"
+    <app-data-table [columns]="columns" [data]="adminPaginated" [buttonsConfig]="buttonsConfig"
         [onActivate]="activate.bind(this)" [onDetail]="detail.bind(this)">
-    </app-table>
+    </app-data-table>
 
     <app-pagination [page]="pageActivos" [totalPages]="totalPages" (pageChange)="onPageChange($event)">
     </app-pagination>

@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AdminService } from '../../../../../core/services/admin.service';
-import { DetailData } from "../../../../../shared/ui/detail-data/detail-data";
+
 import { PageTitle } from "../../../../../shared/ui/page-title/page-title";
+import { DetailView } from "../../../../../shared/ui/detail-view/detail-view";
 
 @Component({
   selector: 'app-user-detail',
-  imports: [DetailData, PageTitle],
+  imports: [PageTitle, DetailView],
   templateUrl: './user-detail.html',
   styleUrl: './user-detail.css',
 })

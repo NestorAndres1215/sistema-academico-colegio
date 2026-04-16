@@ -1,16 +1,15 @@
-import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { Button } from '../button/button';
-
+import { Button } from "../button/button";
+import { CommonModule } from '@angular/common';
+import { EmptyState } from "../empty-state/empty-state";
 
 @Component({
-  selector: 'app-table',
-  imports: [CommonModule, Button],
-  templateUrl: './table.html',
-  styleUrl: './table.css',
+  selector: 'app-data-table',
+  imports: [Button, CommonModule, EmptyState],
+  templateUrl: './data-table.html',
+  styleUrl: './data-table.css',
 })
-export class Table {
-
+export class DataTable {
 
   @Input() columns: { etiqueta: string; clave: string }[] = [];
   @Input() buttonsConfig: any = {};
@@ -35,6 +34,5 @@ export class Table {
   getValue(obj: any, clave: string): any {
     return clave.split('.').reduce((valor, parte) => valor?.[parte], obj);
   }
-
 
 }

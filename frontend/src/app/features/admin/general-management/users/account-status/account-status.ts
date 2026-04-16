@@ -1,18 +1,17 @@
 import { Component } from '@angular/core';
-
-import { Search } from "../../../../../shared/ui/search/search";
-
 import { Pagination } from "../../../../../shared/ui/pagination/pagination";
 import { debounceTime, Subject } from 'rxjs';
 import { AdminService } from '../../../../../core/services/admin.service';
 import { Router } from '@angular/router';
 import { AlertService } from '../../../../../core/services/alert.service';
 import { PageTitle } from "../../../../../shared/ui/page-title/page-title";
-import { Table } from '../../../../../shared/ui/table/table';
+import { DataTable } from "../../../../../shared/ui/data-table/data-table";
+import { FilterSearch } from '../../../../../shared/ui/filter-search/filter-search';
+
 
 @Component({
   selector: 'app-account-status',
-  imports: [PageTitle, Search, Table, Pagination],
+  imports: [PageTitle, FilterSearch, Pagination, DataTable],
   templateUrl: './account-status.html',
   styleUrl: './account-status.css',
 })
@@ -81,39 +80,39 @@ export class AccountStatus {
   }
 
   activate(fila: any) {
-  this.alertService.confirm(
-    `¿Activar a ${fila.id}?`,
-    'El usuario volverá a estar disponible'
-  ).then(confirmed => {
-    if (confirmed) {
+    this.alertService.confirm(
+      `¿Activar a ${fila.id}?`,
+      'El usuario volverá a estar disponible'
+    ).then(confirmed => {
+      if (confirmed) {
 
-      this.adminService.activate(fila.id).subscribe({
-        next: () => {
-          fila.status = true; // opcional
-          
-          this.alertService.success(
-            'Usuario activado',
-            `${fila.id} ha sido activado.`
-          );
+        this.adminService.activate(fila.id).subscribe({
+          next: () => {
+            fila.status = true;
+            this.alertService.success(
+              'Usuario activado',
+              `${fila.id} ha sido activado.`
+            );
 
-          this.loadAdmins();
-        },
-        error: () => {
-          this.alertService.error(
-            'Error',
-            'No se pudo activar el usuario'
-          );
-        }
-      });
+            this.loadAdmins();
+          },
+          error: () => {
+            this.alertService.error(
+              'Error',
+              'No se pudo activar el usuario'
+            );
+          }
+        });
 
-    } else {
-      this.alertService.info(
-        'Acción cancelada',
-        `No se activó a ${fila.id}.`
-      );
-    }
-  });
-}
+      } else {
+        this.alertService.info(
+          'Acción cancelada',
+          `No se activó a ${fila.id}.`
+        );
+      }
+    });
+  }
+
   detail(fila: any): void {
     this.router.navigate(['/usuarios/detalle-usuario/', fila.id]);
   }

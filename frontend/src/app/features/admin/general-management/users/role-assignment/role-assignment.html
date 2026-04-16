@@ -2,11 +2,11 @@
   <app-page-title  title="Listado de Roles" icon="fas fa-user-shield">
   </app-page-title>
 
-  <app-search (searchChange)="filter($event)">
-  </app-search>
+  <app-filter-search (searchChange)="filter($event)">
+  </app-filter-search>
 
-  <app-table [columns]="columns" [data]="rolePaginated">
-  </app-table>
+  <app-data-table [columns]="columns" [data]="rolePaginated">
+  </app-data-table>
 
   <app-pagination [page]="pageActivos" [totalPages]="totalPages" (pageChange)="onPageChange($event)">
   </app-pagination>
