@@ -12,7 +12,7 @@ public interface CompanyUseCase {
 
     List<Company> findAll();
 
-    Company findByName(String name);
+
 
     Company findById(String id);
 

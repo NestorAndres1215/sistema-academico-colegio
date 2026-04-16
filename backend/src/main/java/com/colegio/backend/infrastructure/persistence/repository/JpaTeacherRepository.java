@@ -1,5 +1,6 @@
 package com.colegio.backend.infrastructure.persistence.repository;
 
+import com.colegio.backend.domain.enums.Status;
 import com.colegio.backend.infrastructure.persistence.entity.TeacherEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,19 +12,6 @@ import java.util.Optional;
 
 public interface JpaTeacherRepository extends JpaRepository<TeacherEntity,String> {
 
-
-    List<TeacherEntity> findByGender(String gender);
-
-    List<TeacherEntity> findByFirstName(String firstName);
-
-    List<TeacherEntity> findByFirstNameAndPaternalLastName(String firstName, String paternalLastName);
-
-    List<TeacherEntity> findByFirstNameAndPaternalLastNameAndMaternalLastName(
-            String firstName, String paternalLastName, String maternalLastName);
-
-    Optional<TeacherEntity> findByDni(String dni);
-
-    List<TeacherEntity> findByPhone(String phone);
 
     @Query("SELECT MAX(c.id) FROM TeacherEntity c")
     String findLastCode();
@@ -41,11 +29,10 @@ public interface JpaTeacherRepository extends JpaRepository<TeacherEntity,String
         OR LOWER(a.maternalLastName) LIKE LOWER(CONCAT('%', :search, '%'))
         OR LOWER(a.dni) LIKE LOWER(CONCAT('%', :search, '%'))
         OR LOWER(a.phone) LIKE LOWER(CONCAT('%', :search, '%'))
-        OR LOWER(a.profile) LIKE LOWER(CONCAT('%', :search, '%'))
     )
 """)
     Page<TeacherEntity> searchByStatus(
-            @Param("status") boolean status,
+            @Param("status") Status status,
             @Param("search") String search,
             Pageable pageable
     );

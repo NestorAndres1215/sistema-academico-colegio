@@ -15,7 +15,7 @@ import java.util.List;
 public class MenuEntity {
 
     @Id
-    @Column(length = 8)
+    @Column(length = 10)
     private String id;
     private String code;
     private String name;

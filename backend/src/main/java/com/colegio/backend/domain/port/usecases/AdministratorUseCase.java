@@ -10,19 +10,6 @@ import java.util.List;
 
 public interface AdministratorUseCase {
 
-    List<Administrator> findByGender(String gender);
-
-    List<Administrator> findByFirstName(String firstName);
-
-    List<Administrator> findByFirstNameAndPaternalLastName(String firstName, String paternalLastName);
-
-    List<Administrator> findByFirstNameAndPaternalLastNameAndMaternalLastName(
-            String firstName, String paternalLastName, String maternalLastName);
-
-    Administrator findByDni(String dni);
-
-    List<Administrator> findByPhone(String phone);
-
     Administrator findById(String id);
 
     List<Administrator> findAll();

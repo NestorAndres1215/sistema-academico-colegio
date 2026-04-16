@@ -1,5 +1,6 @@
 package com.colegio.backend.domain.port.repository;
 
+import com.colegio.backend.domain.enums.Status;
 import com.colegio.backend.domain.model.Administrator;
 import com.colegio.backend.domain.model.Teacher;
 import org.springframework.data.domain.Page;
@@ -10,18 +11,6 @@ import java.util.Optional;
 
 public interface TeacherRepositoryPort {
 
-    List<Teacher> findByGender(String gender);
-
-    List<Teacher> findByFirstName(String firstName);
-
-    List<Teacher> findByFirstNameAndPaternalLastName(String firstName, String paternalLastName);
-
-    List<Teacher> findByFirstNameAndPaternalLastNameAndMaternalLastName(
-            String firstName, String paternalLastName, String maternalLastName);
-
-    Optional<Teacher> findByDni(String dni);
-
-    List<Teacher> findByPhone(String phone);
 
     Optional<Teacher> findById(String id);
 
@@ -35,5 +24,5 @@ public interface TeacherRepositoryPort {
 
     boolean existsByPhone(String phone);
 
-    Page<Teacher> getByStatus(boolean status, String search, Pageable pageable);
+    Page<Teacher> getByStatus(Status status, String search, Pageable pageable);
 }

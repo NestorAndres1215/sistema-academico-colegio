@@ -34,11 +34,6 @@ public class CompanyService implements CompanyUseCase {
         return repositoryPort.findAll();
     }
 
-    @Override
-    public Company findByName(String name) {
-        return repositoryPort.findByName(name)
-                .orElseThrow(() -> new ResourceNotFoundException("Company not found"));
-    }
 
     @Override
     public Company findById(String id) {
@@ -52,7 +47,7 @@ public class CompanyService implements CompanyUseCase {
     public Company save(MultipartFile logo, CompanyRequest companyRequest) throws IOException {
 
         if (logo.isEmpty()) {
-            throw new RuntimeException("El archivo está vacío");
+            throw new RuntimeException("The file is empty");
         }
         String fileName = fileUseCase.storeFile(logo,"company");
 
@@ -105,7 +100,6 @@ public class CompanyService implements CompanyUseCase {
         }
 
         existing.setName(companyRequest.getName());
-        existing.setLogo(companyRequest.getLogo());
         existing.setRuc(companyRequest.getRuc());
         existing.setDescription(companyRequest.getDescription());
         existing.setPhone(companyRequest.getPhone());

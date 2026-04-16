@@ -8,19 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AdministratorRepositoryPort {
-
-    List<Administrator> findByGender(String gender);
-
-    List<Administrator> findByFirstName(String firstName);
-
-    List<Administrator> findByFirstNameAndPaternalLastName(String firstName, String paternalLastName);
-
-    List<Administrator> findByFirstNameAndPaternalLastNameAndMaternalLastName(
-            String firstName, String paternalLastName, String maternalLastName);
-
-    Optional<Administrator> findByDni(String dni);
-
-    List<Administrator> findByPhone(String phone);
+    
 
     Optional<Administrator> findById(String id);
 

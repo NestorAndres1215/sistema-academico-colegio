@@ -26,6 +26,18 @@ public class AdministratorController {
 
     private final AdministratorUseCase administratorUseCase;
 
+    @Operation(summary = "Get all administrators")
+    @GetMapping
+    public ResponseEntity<List<Administrator>> findAll() {
+        return ResponseEntity.ok(administratorUseCase.findAll());
+    }
+
+    @Operation(summary = "Get administrator by ID")
+    @GetMapping("/{id}")
+    public ResponseEntity<Administrator> findById(@PathVariable String id) {
+        return ResponseEntity.ok(administratorUseCase.findById(id));
+    }
+
     @Operation(summary = "Create administrator")
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Administrator> save(
@@ -40,53 +52,6 @@ public class AdministratorController {
         return ResponseEntity.ok(administratorUseCase.update(id, request));
     }
 
-    @Operation(summary = "Get administrator by ID")
-    @GetMapping("/{id}")
-    public ResponseEntity<Administrator> findById(@PathVariable String id) {
-        return ResponseEntity.ok(administratorUseCase.findById(id));
-    }
-
-    @Operation(summary = "Get all administrators")
-    @GetMapping
-    public ResponseEntity<List<Administrator>> findAll() {
-        return ResponseEntity.ok(administratorUseCase.findAll());
-    }
-
-    @Operation(summary = "Get administrator by DNI")
-    @GetMapping("/dni/{dni}")
-    public ResponseEntity<Administrator> findByDni(@PathVariable String dni) {
-        return ResponseEntity.ok(administratorUseCase.findByDni(dni));
-    }
-
-    @Operation(summary = "Get administrators by phone")
-    @GetMapping("/phone/{phone}")
-    public ResponseEntity<List<Administrator>> findByPhone(@PathVariable String phone) {
-        return ResponseEntity.ok(administratorUseCase.findByPhone(phone));
-    }
-
-    @Operation(summary = "Get administrators by gender")
-    @GetMapping("/gender/{gender}")
-    public ResponseEntity<List<Administrator>> findByGender(@PathVariable String gender) {
-        return ResponseEntity.ok(administratorUseCase.findByGender(gender));
-    }
-
-    @Operation(summary = "Search administrators by first name")
-    @GetMapping("/name")
-    public ResponseEntity<List<Administrator>> findByFirstName(@RequestParam String firstName) {
-        return ResponseEntity.ok(administratorUseCase.findByFirstName(firstName));
-    }
-
-    @Operation(summary = "Search by first name and paternal last name")
-    @GetMapping("/name-lastname")
-    public ResponseEntity<List<Administrator>> findByFirstNameAndPaternalLastName(@RequestParam String firstName, @RequestParam String paternalLastName) {
-        return ResponseEntity.ok(administratorUseCase.findByFirstNameAndPaternalLastName(firstName, paternalLastName));
-    }
-
-    @Operation(summary = "Search by full name")
-    @GetMapping("/full-name")
-    public ResponseEntity<List<Administrator>> findFullName(@RequestParam String firstName, @RequestParam String paternalLastName, @RequestParam String maternalLastName) {
-        return ResponseEntity.ok(administratorUseCase.findByFirstNameAndPaternalLastNameAndMaternalLastName(firstName, paternalLastName, maternalLastName));
-    }
     @Operation(summary = "Get administrators by status")
     @GetMapping("/status/{status}")
     public ResponseEntity<Page<Administrator>> getByStatus(

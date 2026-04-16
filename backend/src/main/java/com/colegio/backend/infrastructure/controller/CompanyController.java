@@ -37,11 +37,6 @@ public class CompanyController {
         return ResponseEntity.ok(companyUseCase.findById(id));
     }
 
-    @Operation(summary = "Get company by name")
-    @GetMapping("/name/{name}")
-    public ResponseEntity<Company> getByName(@PathVariable String name) {
-        return ResponseEntity.ok(companyUseCase.findByName(name));
-    }
 
     @Operation(summary = "Create a new company")
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)

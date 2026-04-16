@@ -30,37 +30,6 @@ public class AdministratorService implements AdministratorUseCase {
 
 
     @Override
-    public List<Administrator> findByGender(String gender) {
-        return repositoryPort.findByGender(gender);
-    }
-
-    @Override
-    public List<Administrator> findByFirstName(String firstName) {
-        return repositoryPort.findByFirstName(firstName);
-    }
-
-    @Override
-    public List<Administrator> findByFirstNameAndPaternalLastName(String firstName, String paternalLastName) {
-        return repositoryPort.findByFirstNameAndPaternalLastName(firstName, paternalLastName);
-    }
-
-    @Override
-    public List<Administrator> findByFirstNameAndPaternalLastNameAndMaternalLastName(String firstName, String paternalLastName, String maternalLastName) {
-        return repositoryPort.findByFirstNameAndPaternalLastNameAndMaternalLastName(firstName, paternalLastName, maternalLastName);
-    }
-
-    @Override
-    public Administrator findByDni(String dni) {
-        return repositoryPort.findByDni(dni)
-                .orElseThrow(() -> new ResourceNotFoundException("Identity Document not found"));
-    }
-
-    @Override
-    public List<Administrator> findByPhone(String phone) {
-        return repositoryPort.findByPhone(phone);
-    }
-
-    @Override
     public Administrator findById(String id) {
         return repositoryPort.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Id not found"));

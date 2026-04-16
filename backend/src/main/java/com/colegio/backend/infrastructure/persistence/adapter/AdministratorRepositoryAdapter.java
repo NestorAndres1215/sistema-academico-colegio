@@ -20,36 +20,6 @@ public class AdministratorRepositoryAdapter implements AdministratorRepositoryPo
     private final AdministratorMapper mapper;
 
     @Override
-    public List<Administrator> findByGender(String gender) {
-        return repository.findByGender(gender).stream().map(mapper::toDomain).toList();
-    }
-
-    @Override
-    public List<Administrator> findByFirstName(String firstName) {
-        return repository.findByFirstName(firstName).stream().map(mapper::toDomain).toList();
-    }
-
-    @Override
-    public List<Administrator> findByFirstNameAndPaternalLastName(String firstName, String paternalLastName) {
-        return repository.findByFirstNameAndPaternalLastName(firstName,paternalLastName).stream().map(mapper::toDomain).toList();
-    }
-
-    @Override
-    public List<Administrator> findByFirstNameAndPaternalLastNameAndMaternalLastName(String firstName, String paternalLastName, String maternalLastName) {
-        return repository.findByFirstNameAndPaternalLastNameAndMaternalLastName(firstName,paternalLastName,maternalLastName).stream().map(mapper::toDomain).toList();
-    }
-
-    @Override
-    public Optional<Administrator> findByDni(String dni) {
-        return repository.findByDni(dni).map(mapper::toDomain);
-    }
-
-    @Override
-    public List<Administrator> findByPhone(String phone) {
-        return repository.findByPhone(phone).stream().map(mapper::toDomain).toList();
-    }
-
-    @Override
     public Optional<Administrator> findById(String id) {
         return repository.findById(id).map(mapper::toDomain);
     }
