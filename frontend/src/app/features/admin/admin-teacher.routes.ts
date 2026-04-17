@@ -16,6 +16,10 @@ export const ADMIN_TEACHER_ROUTES: Routes = [
         loadComponent: () => import('./general-management/teacher-management/teacher-detail/teacher-detail')
             .then(m => m.TeacherDetail)
     },
-
+    {
+        path: 'actualizar-profesor/:id',
+        loadComponent: () => import('./general-management/teacher-management/teacher-update/teacher-update')
+            .then(m => m.TeacherUpdate)
+    },
 
 ];

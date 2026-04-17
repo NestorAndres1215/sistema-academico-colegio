@@ -6,7 +6,7 @@
   color: #163260;
   margin-bottom: .45rem;
 }
-
+.form-select,
 .form-control {
   padding: 11px 16px;
   border: 1.5px solid #163260;
@@ -17,16 +17,18 @@
   height: auto;
   transition: border-color .25s ease, box-shadow .25s ease, background .25s ease;
 }
-
+.form-select::placeholder,
 .form-control::placeholder {
   color: #163260;
 }
 
+.form-select:hover,
 .form-control:hover {
   border-color: #163260;
   background: #fff;
 }
 
+.form-select:focus,
 .form-control:focus {
   border-color: #163260;
   background: #fff;

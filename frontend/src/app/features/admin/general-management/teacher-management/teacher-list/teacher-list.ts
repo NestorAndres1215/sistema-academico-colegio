@@ -19,6 +19,8 @@ import { ViewToggle } from '../../../../../shared/ui/view-toggle/view-toggle';
   styleUrl: './teacher-list.css',
 })
 export class TeacherList implements OnInit {
+
+
   selectedView = 'table';
 
   viewOptions = [
@@ -130,6 +132,11 @@ export class TeacherList implements OnInit {
 
   detail(fila: any) {
     this.router.navigate(['/profesores/detalle-profesor', fila.id]);
+  }
+
+
+  update(fila: any) {
+    this.router.navigate(['/profesores/actualizar-profesor', fila.id]);
   }
 
   print(fila: any) {

@@ -17,7 +17,7 @@
 
   <div *ngIf="selectedView === 'table'">
     <app-data-table [columns]="columnsTable" [data]="teacherPaginated" [buttonsConfig]="buttonsConfig"
-      [onDeactivate]="desactivate.bind(this)" [onDetail]="detail.bind(this)"[onPrint]="print.bind(this)">
+      [onDeactivate]="desactivate.bind(this)" [onDetail]="detail.bind(this)"[onPrint]="print.bind(this)"[onUpdate]="update.bind(this)">
     </app-data-table>
   </div>
 
