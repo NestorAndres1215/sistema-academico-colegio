@@ -25,7 +25,6 @@ export class RoleService {
     return this.http.get<any>(`${this.backendUrl}/role`, { params });
   }
 
-
   getById(id: string): Observable<any> {
     return this.http.get<any>(`${this.backendUrl}/role/${id}`);
   }

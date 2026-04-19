@@ -63,7 +63,7 @@ export class UserList implements OnInit {
   }
 
   loadAdmins(): void {
-    this.adminService.getByStatus(
+    this.adminService.getAll(
       true,
       this.pageActivos - 1,
       this.itemsPerPageActivo,

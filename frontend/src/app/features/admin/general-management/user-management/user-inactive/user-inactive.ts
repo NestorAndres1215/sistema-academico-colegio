@@ -10,7 +10,7 @@ import { Pagination } from '../../../../../shared/ui/pagination/pagination';
 
 @Component({
   selector: 'app-user-inactive',
-    imports: [PageTitle, FilterSearch, Pagination, DataTable],
+  imports: [PageTitle, FilterSearch, Pagination, DataTable],
   templateUrl: './user-inactive.html',
   styleUrl: './user-inactive.css',
 })
@@ -54,13 +54,14 @@ export class UserInactive implements OnInit {
   }
 
   loadAdmins(): void {
-    this.adminService.getByStatus(
+    this.adminService.getAll(
       false,
       this.pageActivos - 1,
       this.itemsPerPageActivo,
       this.searchTerm
     ).subscribe({
       next: (res: any) => {
+        console.log(res);
         this.adminPaginated = res.content || [];
         this.totalPages = res.totalPages || 0;
 

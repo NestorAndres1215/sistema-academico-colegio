@@ -38,7 +38,7 @@ export class TeacherUpdate {
       firstName: ['', Validators.required],
       middleName: [''],
       paternalLastName: ['', Validators.required],
-      maternalLastName: [''],
+      maternalLastName: ['', Validators.required],
       dni: [''],
       phone: [''],
       email: [''],
@@ -47,7 +47,6 @@ export class TeacherUpdate {
       nationality: [''],
       birthDate: [''],
       specialization: [''],
-
       hireDate: ['']
     });
   }
@@ -55,7 +54,6 @@ export class TeacherUpdate {
   loadTeacher(id: string) {
     this.teacherService.getById(id).subscribe({
       next: (data: any) => {
-        console.log(data)
         this.form.patchValue(data);
         this.form.patchValue({
           ...data,
@@ -63,19 +61,9 @@ export class TeacherUpdate {
           password: data.user?.password
         });
       },
-      error: (err) => {
-        this.alertService.error('Error loading teacher');
-      }
     });
   }
 
-  onFileSelected(event: Event) {
-    const input = event.target as HTMLInputElement;
-
-    if (input.files && input.files.length > 0) {
-      this.selectedFile = input.files[0];
-    }
-  }
 
   operar(): void {
 

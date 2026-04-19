@@ -21,5 +21,11 @@ export const ADMIN_TEACHER_ROUTES: Routes = [
         loadComponent: () => import('./general-management/teacher-management/teacher-update/teacher-update')
             .then(m => m.TeacherUpdate)
     },
+    {
+        path: 'observaciones',
+        loadComponent: () => import('./general-management/teacher-management/teacher-observation/teacher-observation')
+            .then(m => m.TeacherObservation)
+    },
+    
 
 ];
