@@ -26,12 +26,6 @@ public class TeacherController {
 
     private final TeacherUseCase teacherUseCase;
 
-    @Operation(summary = "Get all teachers")
-    @GetMapping
-    public ResponseEntity<List<Teacher>> findAll() {
-        return ResponseEntity.ok(teacherUseCase.findAll());
-    }
-
     @Operation(summary = "Get teacher by ID")
     @GetMapping("/{id}")
     public ResponseEntity<Teacher> findById(@PathVariable String id) {
@@ -58,25 +52,16 @@ public class TeacherController {
         return ResponseEntity.ok(teacherUseCase.update(id, file, request));
     }
 
-    @Operation(summary = "Get teacher by status")
-    @GetMapping("/status/{status}")
+    @Operation(summary = "Get all teachers")
+    @GetMapping
     public ResponseEntity<Page<Teacher>> getByStatus(
-            @PathVariable Status status,
+            @RequestParam Status status,
             @RequestParam int page,
             @RequestParam int size,
             @RequestParam(required = false) String search
     ) {
-        System.out.println("STATUS: " + status);
-        System.out.println("PAGE: " + page);
-        System.out.println("SIZE: " + size);
-        System.out.println("SEARCH: " + search);
-        try{
         Pageable pageable = PageRequest.of(page, size);
-        return ResponseEntity.ok(teacherUseCase.getByStatus(status, search, pageable));} catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        }
-
+        return ResponseEntity.ok(teacherUseCase.getByStatus(status, search, pageable));
     }
 
     @Operation(summary = "Deactivate teacher")

@@ -26,12 +26,6 @@ public class AdministratorController {
 
     private final AdministratorUseCase administratorUseCase;
 
-    @Operation(summary = "Get all administrators")
-    @GetMapping
-    public ResponseEntity<List<Administrator>> findAll() {
-        return ResponseEntity.ok(administratorUseCase.findAll());
-    }
-
     @Operation(summary = "Get administrator by ID")
     @GetMapping("/{id}")
     public ResponseEntity<Administrator> findById(@PathVariable String id) {
@@ -52,18 +46,17 @@ public class AdministratorController {
         return ResponseEntity.ok(administratorUseCase.update(id, request));
     }
 
-    @Operation(summary = "Get administrators by status")
-    @GetMapping("/status/{status}")
+    @Operation(summary = "Get all administrators")
+    @GetMapping
     public ResponseEntity<Page<Administrator>> getByStatus(
-            @PathVariable boolean status,
+            @RequestParam boolean status,
             @RequestParam int page,
             @RequestParam int size,
             @RequestParam(required = false) String search
     ) {
 
         Pageable pageable = PageRequest.of(page, size);
-        Page<Administrator> result = administratorUseCase.getByStatus(status, search, pageable);
-        return ResponseEntity.ok(result);
+        return ResponseEntity.ok(administratorUseCase.getByStatus(status, search, pageable));
 
     }
 

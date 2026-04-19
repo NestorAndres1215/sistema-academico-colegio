@@ -37,29 +37,29 @@ public class TeacherMapper {
                 .build();
     }
 
-    public TeacherEntity toEntity(Teacher dto) {
-        if (dto == null) return null;
+    public TeacherEntity toEntity(Teacher teacher) {
+        if (teacher == null) return null;
 
         return TeacherEntity.builder()
-                .id(dto.getId())
-                .firstName(dto.getFirstName())
-                .middleName(dto.getMiddleName())
-                .paternalLastName(dto.getPaternalLastName())
-                .maternalLastName(dto.getMaternalLastName())
-                .age(dto.getAge())
-                .dni(dto.getDni())
-                .phone(dto.getPhone())
-                .birthDate(dto.getBirthDate())
-                .profile(dto.getProfile())
-                .gender(dto.getGender())
-                .nationality(dto.getNationality())
-                .active(dto.getActive())
-                .specialization(dto.getSpecialization())
-                .status(dto.getStatus())
-                .hireDate(dto.getHireDate())
-                .createdAt(dto.getCreatedAt())
-                .updatedAt(dto.getUpdatedAt())
-                .userEntity(userMapper.toEntity(dto.getUser()))
+                .id(teacher.getId())
+                .firstName(teacher.getFirstName())
+                .middleName(teacher.getMiddleName())
+                .paternalLastName(teacher.getPaternalLastName())
+                .maternalLastName(teacher.getMaternalLastName())
+                .age(teacher.getAge())
+                .dni(teacher.getDni())
+                .phone(teacher.getPhone())
+                .birthDate(teacher.getBirthDate())
+                .profile(teacher.getProfile())
+                .gender(teacher.getGender())
+                .nationality(teacher.getNationality())
+                .active(teacher.getActive())
+                .specialization(teacher.getSpecialization())
+                .status(teacher.getStatus())
+                .hireDate(teacher.getHireDate())
+                .createdAt(teacher.getCreatedAt())
+                .updatedAt(teacher.getUpdatedAt())
+                .userEntity(userMapper.toEntity(teacher.getUser()))
                 .build();
     }
 }

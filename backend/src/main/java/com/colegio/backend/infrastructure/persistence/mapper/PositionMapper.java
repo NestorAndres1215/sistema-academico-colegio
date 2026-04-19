@@ -17,13 +17,13 @@ public class PositionMapper {
                 .build();
     }
 
-    public PositionsEntity toEntity(Position dto) {
-        if (dto == null) return null;
+    public PositionsEntity toEntity(Position position) {
+        if (position == null) return null;
         return PositionsEntity.builder()
-                .id(dto.getId())
-                .name(dto.getName())
-                .description(dto.getDescription())
-                .createdAt(dto.getCreatedAt())
+                .id(position.getId())
+                .name(position.getName())
+                .description(position.getDescription())
+                .createdAt(position.getCreatedAt())
                 .build();
     }
 }

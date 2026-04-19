@@ -80,6 +80,7 @@ public class TeacherService implements TeacherUseCase {
                 .gender(teacherRequest.getGender())
                 .nationality(teacherRequest.getNationality())
                 .status(Status.ACTIVE)
+                .specialization(teacherRequest.getSpecialization())
                 .hireDate(teacherRequest.getHireDate())
                 .createdAt(LocalDateTime.now())
                 .user(user)
@@ -135,7 +136,7 @@ public class TeacherService implements TeacherUseCase {
         existing.setGender(teacherRequest.getGender());
         existing.setNationality(teacherRequest.getNationality());
         existing.setHireDate(teacherRequest.getHireDate());
-
+        existing.setSpecialization(teacherRequest.getSpecialization());
         existing.setUpdatedAt(LocalDateTime.now());
 
         return repositoryPort.save(existing);

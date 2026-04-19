@@ -25,16 +25,16 @@ public class UserStoryMapper {
                 .build();
     }
 
-    public UserStoryEntity toEntity(UserStory domain) {
-        if (domain == null) return null;
+    public UserStoryEntity toEntity(UserStory userStory) {
+        if (userStory == null) return null;
 
         return UserStoryEntity.builder()
-                .id(domain.getId())
-                .action(domain.getAction())
-                .detail(domain.getDetail())
-                .createdAt(domain.getCreatedAt())
-                .status(domain.getStatus())
-                .userEntity(userMapper.toEntity(domain.getUser()))
+                .id(userStory.getId())
+                .action(userStory.getAction())
+                .detail(userStory.getDetail())
+                .createdAt(userStory.getCreatedAt())
+                .status(userStory.getStatus())
+                .userEntity(userMapper.toEntity(userStory.getUser()))
                 .build();
     }
 }

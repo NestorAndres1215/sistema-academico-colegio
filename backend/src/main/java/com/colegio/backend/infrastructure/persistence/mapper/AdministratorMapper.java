@@ -33,24 +33,24 @@ public class AdministratorMapper {
                 .build();
     }
 
-    public AdministratorEntity toEntity(Administrator dto) {
-        if (dto == null) return null;
+    public AdministratorEntity toEntity(Administrator administrator) {
+        if (administrator == null) return null;
 
         return AdministratorEntity.builder()
-                .id(dto.getId())
-                .firstName(dto.getFirstName())
-                .middleName(dto.getMiddleName())
-                .paternalLastName(dto.getPaternalLastName())
-                .maternalLastName(dto.getMaternalLastName())
-                .age(dto.getAge())
-                .dni(dto.getDni())
-                .phone(dto.getPhone())
-                .birthDate(dto.getBirthDate())
-                .profile(dto.getProfile())
-                .gender(dto.getGender())
-                .nationality(dto.getNationality())
-                .status(dto.getStatus())
-                .userEntity(userMapper.toEntity(dto.getUser()))
+                .id(administrator.getId())
+                .firstName(administrator.getFirstName())
+                .middleName(administrator.getMiddleName())
+                .paternalLastName(administrator.getPaternalLastName())
+                .maternalLastName(administrator.getMaternalLastName())
+                .age(administrator.getAge())
+                .dni(administrator.getDni())
+                .phone(administrator.getPhone())
+                .birthDate(administrator.getBirthDate())
+                .profile(administrator.getProfile())
+                .gender(administrator.getGender())
+                .nationality(administrator.getNationality())
+                .status(administrator.getStatus())
+                .userEntity(userMapper.toEntity(administrator.getUser()))
                 .build();
     }
 }
