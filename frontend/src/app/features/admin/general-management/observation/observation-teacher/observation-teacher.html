@@ -1,0 +1,13 @@
+<div class="container my-4 ">
+    <app-page-title title="Observaciónes de Profesores" icon="fas fa-clipboard-list">
+    </app-page-title>
+
+    <app-filter-search (searchChange)="filter($event)"></app-filter-search>
+    <app-data-card [users]="teacherPaginated" titleField="fullName" subtitleField="dni"
+        (viewDetail)="viewDetail($event)">
+    </app-data-card>
+
+    <app-pagination [page]="pageActivos" [totalPages]="totalPages" (pageChange)="onPageChange($event)">
+    </app-pagination>
+
+</div>

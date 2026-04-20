@@ -1,36 +1,36 @@
-<div *ngIf="!data || data.length === 0" class="bg-light border rounded text-center py-5 w-100 shadow-sm my-3">
-    <app-empty-state icon="fas fa-info-circle" title="No hay datos para mostrar">
-    </app-empty-state>
-</div>
+<div *ngIf="users.length > 0; else noUsers">
+    <div *ngFor="let user of users" class="bg-white p-3 p-md-4 rounded-4 shadow-sm border mb-4 mt-3">
 
-<div class="row mt-3 mb-3" *ngIf="data && data.length > 0">
+        <div class="row g-3 align-items-center">
 
-    <div class="col-12 col-sm-6 col-md-3 mb-4" *ngFor="let item of data">
+            <div class="col-12 col-md-8 d-flex align-items-center gap-3">
 
-        <div class="card h-100 shadow-sm text-center">
+                <div class="fs-1 flex-shrink-0">
+                    <i class="fas fa-user-circle icon-gradient"></i>
+                </div>
 
-            <div class="card-header bg-white border-0 pt-4">
-                <img [src]="item[imageField] || 'https://via.placeholder.com/150'" class="img-fluid rounded"
-                    style="width: 150px; height: 150px; object-fit: cover;">
-            </div>
-            <div class="card-body py-2">
+                <div class="text-start">
+                    <h5 class="mb-1 fw-bold">
+                        {{ user[titleField] }}
+                    </h5>
+                    <small class="text-muted d-block">
+                        {{ user[subtitleField] }}
+                    </small>
 
-                <h6 class="fw-bold mb-2">
-                    {{ item[firstNameField] }} {{ item[lastNameField] }}
-                </h6>
-                <div class="flex-grow-1">
-
-                    <div *ngFor="let col of columns">
-
-                        <p *ngIf="col.clave !== firstNameField 
-                               && col.clave !== lastNameField 
-                               && col.clave !== imageField" class="text-muted mb-1">
-                            <strong>{{ col.etiqueta }}:</strong>
-                            {{ item[col.clave] }}
-                        </p>
-                    </div>
                 </div>
             </div>
+
+            <div class="col-12 col-md-4 text-md-end">
+                <app-button icon="fas fa-eye" label="Ver Detalle" color="principal" (click)="openDetail(user)">
+                </app-button>
+            </div>
+
         </div>
     </div>
 </div>
+
+<ng-template #noUsers>
+    <div class="card shadow-sm border-0 text-center p-4 p-md-5 my-4">
+        <app-empty-state></app-empty-state>
+    </div>
+</ng-template>

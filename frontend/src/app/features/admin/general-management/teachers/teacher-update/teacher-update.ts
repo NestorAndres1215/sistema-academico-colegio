@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { PageTitle } from "../../../../../shared/ui/page-title/page-title";
 import { Button } from "../../../../../shared/ui/button/button";
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TeacherService } from '../../../../../core/services/teacher.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Teacher } from '../../../../../core/models/teacher';

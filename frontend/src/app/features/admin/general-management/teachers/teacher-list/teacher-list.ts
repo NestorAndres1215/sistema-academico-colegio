@@ -11,10 +11,12 @@ import { FilterSearch } from '../../../../../shared/ui/filter-search/filter-sear
 import { PageTitle } from '../../../../../shared/ui/page-title/page-title';
 import { Pagination } from '../../../../../shared/ui/pagination/pagination';
 import { ViewToggle } from '../../../../../shared/ui/view-toggle/view-toggle';
+import { UserCard } from "../../../../../shared/ui/user-card/user-card";
 
 @Component({
   selector: 'app-teacher-list',
-  imports: [CommonModule, FormsModule, ViewToggle, PageTitle, FilterSearch, DataTable, Pagination, DataCard],
+  standalone: true,
+  imports: [CommonModule, FormsModule, ViewToggle, PageTitle, FilterSearch, DataTable, Pagination, UserCard],
   templateUrl: './teacher-list.html',
   styleUrl: './teacher-list.css',
 })

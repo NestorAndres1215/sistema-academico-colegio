@@ -23,9 +23,9 @@
 
 
   <div *ngIf="selectedView === 'card'">
-    <app-data-card [columns]="columnsCard" [data]="teacherPaginated" [buttonsConfig]="buttonsConfig"
+    <app-user-card [columns]="columnsCard" [data]="teacherPaginated" [buttonsConfig]="buttonsConfig"
       imageField="profile" firstNameField="firstName" lastNameField="paternalLastName">
-    </app-data-card>
+    </app-user-card>
   </div>
 
   <app-pagination [page]="pageActivos" [totalPages]="totalPages" (pageChange)="onPageChange($event)">
