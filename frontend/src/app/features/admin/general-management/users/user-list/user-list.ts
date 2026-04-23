@@ -64,7 +64,7 @@ export class UserList implements OnInit {
 
   loadAdmins(): void {
     this.adminService.getAll(
-      true,
+      "ACTIVE",
       this.pageActivos - 1,
       this.itemsPerPageActivo,
       this.searchTerm

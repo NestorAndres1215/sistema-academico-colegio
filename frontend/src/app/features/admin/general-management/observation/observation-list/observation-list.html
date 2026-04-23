@@ -1,5 +1,11 @@
 <div class="container my-4 ">
     <app-page-title title="Listado de Observaciones" icon="fas fa-clipboard-list">
     </app-page-title>
+    <app-data-card [users]="teacherPaginated" titleField="" subtitleField="observation" detailField="detailField"
+        (viewDetail)="viewDetail($event)"  [showDetailButton]="false"
+  >
+    </app-data-card>
+      <app-pagination [page]="pageActivos" [totalPages]="totalPages" (pageChange)="onPageChange($event)">
+    </app-pagination>
 
 </div>

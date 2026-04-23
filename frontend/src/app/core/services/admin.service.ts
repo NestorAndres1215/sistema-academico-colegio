@@ -13,22 +13,22 @@ export class AdminService {
   constructor(private http: HttpClient) { }
 
 
-getAll(status: boolean | null, page: number, size: number, search: string = ''): Observable<any> {
+  getAll(status: string, page: number, size: number, search: string = ''): Observable<any> {
 
-  let params = new HttpParams()
-    .set('page', page.toString())
-    .set('size', size.toString());
+    let params = new HttpParams()
+      .set('page', page.toString())
+      .set('size', size.toString());
 
-  if (status !== null && status !== undefined) {
-    params = params.set('status', status.toString());
+    if (status !== null && status !== undefined) {
+      params = params.set('status', status.toString());
+    }
+
+    if (search.trim() !== '') {
+      params = params.set('search', search.trim());
+    }
+
+    return this.http.get<any>(`${this.backendUrl}/administrator`, { params });
   }
-
-  if (search.trim() !== '') {
-    params = params.set('search', search.trim());
-  }
-
-  return this.http.get<any>(`${this.backendUrl}/administrator`, { params });
-}
 
   getById(id: string): Observable<any> {
     return this.http.get<any>(`${this.backendUrl}/administrator/${id}`);

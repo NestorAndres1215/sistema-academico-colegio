@@ -55,7 +55,7 @@ export class UserInactive implements OnInit {
 
   loadAdmins(): void {
     this.adminService.getAll(
-      false,
+      "INACTIVE",
       this.pageActivos - 1,
       this.itemsPerPageActivo,
       this.searchTerm

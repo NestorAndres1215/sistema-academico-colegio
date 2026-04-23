@@ -1,36 +1,60 @@
 <div *ngIf="users.length > 0; else noUsers">
-    <div *ngFor="let user of users" class="bg-white p-3 p-md-4 rounded-4 shadow-sm border mb-4 mt-3">
 
-        <div class="row g-3 align-items-center">
+  <div *ngFor="let user of users" class="bg-white p-3 p-md-4 rounded-4 shadow-sm border mb-4 mt-3">
 
-            <div class="col-12 col-md-8 d-flex align-items-center gap-3">
+    <div class="row g-3 align-items-center">
 
-                <div class="fs-1 flex-shrink-0">
-                    <i class="fas fa-user-circle icon-gradient"></i>
-                </div>
+      <!-- 🔥 COLUMNA DINÁMICA -->
+      <div 
+        class="col-12 d-flex align-items-center gap-3"
+        [class.col-md-8]="showDetailButton"
+      >
 
-                <div class="text-start">
-                    <h5 class="mb-1 fw-bold">
-                        {{ user[titleField] }}
-                    </h5>
-                    <small class="text-muted d-block">
-                        {{ user[subtitleField] }}
-                    </small>
+        <div class="text-start">
 
-                </div>
-            </div>
+          <!-- TITLE -->
+          <h5 *ngIf="user[titleField]" class="mb-1 fw-bold">
+            {{ user[titleField] }}
+          </h5>
 
-            <div class="col-12 col-md-4 text-md-end">
-                <app-button icon="fas fa-eye" label="Ver Detalle" color="principal" (click)="openDetail(user)">
-                </app-button>
-            </div>
+          <!-- DETAIL arriba si NO hay title -->
+          <small *ngIf="!user[titleField] && user[detailField]" class="text-secondary d-block fw-bold mb-1">
+            {{ user[detailField] }}
+          </small>
+
+          <!-- SUBTITLE -->
+          <small *ngIf="user[subtitleField]" class="text-muted d-block">
+            {{ user[subtitleField] }}
+          </small>
+
+          <!-- DETAIL abajo si SÍ hay title -->
+          <small *ngIf="user[titleField] && user[detailField]" class="text-secondary d-block fw-bold mt-2">
+            {{ user[detailField] }}
+          </small>
 
         </div>
+      </div>
+
+      <!-- 🔥 BOTÓN (opcional) -->
+      <div 
+        class="col-12 col-md-4 d-flex justify-content-md-end"
+        *ngIf="showDetailButton"
+      >
+        <app-button
+          icon="fas fa-eye"
+          label="Ver Detalle"
+          color="principal"
+          (click)="openDetail(user)">
+        </app-button>
+      </div>
+
     </div>
+  </div>
+
 </div>
 
 <ng-template #noUsers>
-    <div class="card shadow-sm border-0 text-center p-4 p-md-5 my-4">
-        <app-empty-state></app-empty-state>
-    </div>
+  <div class="card shadow-sm border-0 text-center p-4 p-md-5 my-4">
+    <app-empty-state></app-empty-state>
+  </div>
 </ng-template>

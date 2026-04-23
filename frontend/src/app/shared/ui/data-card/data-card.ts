@@ -21,5 +21,7 @@ export class DataCard {
   openDetail(user: any) {
     this.viewDetail.emit(user);
   }
+@Input() showDetailButton: boolean = true;
+
 
 }
