@@ -41,7 +41,6 @@ public class TeacherEntity {
     private String profile;
     private String gender;
     private String nationality;
-    private Boolean active;
     private String specialization;
 
     @Enumerated(EnumType.STRING)

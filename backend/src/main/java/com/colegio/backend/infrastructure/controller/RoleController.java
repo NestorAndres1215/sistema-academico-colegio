@@ -1,6 +1,6 @@
 package com.colegio.backend.infrastructure.controller;
 
-import com.colegio.backend.domain.model.Administrator;
+
 import com.colegio.backend.domain.model.Role;
 import com.colegio.backend.domain.port.usecases.RoleUseCase;
 import io.swagger.v3.oas.annotations.Operation;
@@ -12,8 +12,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/role")
@@ -21,7 +19,6 @@ import java.util.List;
 public class RoleController {
 
     private final RoleUseCase roleUseCase;
-
 
     @Operation(summary = "Get all roles")
     @GetMapping

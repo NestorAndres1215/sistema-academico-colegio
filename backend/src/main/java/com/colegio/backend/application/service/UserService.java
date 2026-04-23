@@ -1,10 +1,10 @@
 package com.colegio.backend.application.service;
 
 import com.colegio.backend.application.dto.auth.PasswordRequest;
+import com.colegio.backend.domain.enums.Status;
 import com.colegio.backend.domain.exception.BadRequestException;
 import com.colegio.backend.domain.exception.ConflictException;
 import com.colegio.backend.domain.exception.ResourceNotFoundException;
-import com.colegio.backend.domain.model.Administrator;
 import com.colegio.backend.domain.model.Role;
 import com.colegio.backend.domain.model.User;
 import com.colegio.backend.domain.port.repository.UserRepositoryPort;
@@ -33,17 +33,17 @@ public class UserService implements UserUseCase {
     }
 
     @Override
-    public List<User> findByStatus(Boolean status) {
+    public List<User> findByStatus(Status status) {
         return repositoryPort.findByStatus(status);
     }
 
     @Override
-    public List<User> findByEmailAndStatus(String email, Boolean status) {
-        return repositoryPort.findByEmailAndStatus(email,status);
+    public List<User> findByEmailAndStatus(String email, Status status) {
+        return repositoryPort.findByEmailAndStatus(email, status);
     }
 
     @Override
-    public User save(String id, String email, String password,String role) {
+    public User save(String id, String email, String password, String role) {
 
         if (repositoryPort.existsByEmail(email)) {
             throw new ConflictException("The email is already registered");
@@ -51,11 +51,11 @@ public class UserService implements UserUseCase {
 
         String newCode = SequenceGenerator.generateCode(repositoryPort.findLastCode());
         Role roleEntity = roleUseCase.findByName(role);
-        User user=  User.builder()
+        User user = User.builder()
                 .id(newCode)
                 .email(email)
                 .password(passwordEncoder.encode(password))
-                .status(true)
+                .status(Status.ACTIVE)
                 .createdAt(LocalDateTime.now())
                 .roles(Collections.singletonList(roleEntity))
                 .build();
@@ -67,7 +67,6 @@ public class UserService implements UserUseCase {
     public User update(String id, String email, String password, String role) {
         User existingUser = repositoryPort.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
-
 
         if (!existingUser.getEmail().equals(email) && repositoryPort.existsByEmail(email)) {
             throw new ConflictException("The email is already registered");
@@ -92,7 +91,7 @@ public class UserService implements UserUseCase {
         User existing = repositoryPort.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Administrator not found"));
 
-        existing.setStatus(true);
+        existing.setStatus(Status.ACTIVE);
         return repositoryPort.save(existing);
     }
 
@@ -101,7 +100,7 @@ public class UserService implements UserUseCase {
         User existing = repositoryPort.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Administrator not found"));
 
-        existing.setStatus(false);
+        existing.setStatus(Status.INACTIVE);
         return repositoryPort.save(existing);
     }
 

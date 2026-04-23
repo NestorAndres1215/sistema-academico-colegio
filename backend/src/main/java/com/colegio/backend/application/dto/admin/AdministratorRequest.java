@@ -1,9 +1,9 @@
 package com.colegio.backend.application.dto.admin;
 
+import com.colegio.backend.domain.enums.Gender;
+import com.colegio.backend.domain.enums.Status;
 import jakarta.validation.constraints.*;
 import lombok.Data;
-import lombok.ToString;
-
 import java.time.LocalDate;
 
 @Data
@@ -50,8 +50,8 @@ public class AdministratorRequest {
     @Size(max = 255, message = "The profile must not exceed 255 characters")
     private String profile;
 
-    @NotBlank(message = "Gender is required")
-    private String gender;
+    @NotNull(message = "Gender is required")
+    private Gender gender;
 
     @NotBlank(message = "Nationality is required")
     private String nationality;

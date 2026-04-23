@@ -1,11 +1,10 @@
 package com.colegio.backend.domain.model;
 
-import jakarta.persistence.Column;
+import com.colegio.backend.domain.enums.Status;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -18,7 +17,7 @@ public class User {
     private String id;
     private String email;
     private String password;
-    private Boolean status;
+    private Status status;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private List<Role> roles;

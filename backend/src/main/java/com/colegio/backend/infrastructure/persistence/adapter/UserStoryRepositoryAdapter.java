@@ -3,7 +3,7 @@ package com.colegio.backend.infrastructure.persistence.adapter;
 import com.colegio.backend.domain.model.UserStory;
 import com.colegio.backend.domain.port.repository.UserStoryRepositoryPort;
 import com.colegio.backend.infrastructure.persistence.entity.UserStoryEntity;
-import com.colegio.backend.infrastructure.persistence.mapper.UserStoryMapper;
+import com.colegio.backend.infrastructure.persistence.mapper.flat.UserStoryMapper;
 import com.colegio.backend.infrastructure.persistence.repository.JpaUserStoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

@@ -1,11 +1,7 @@
 package com.colegio.backend.infrastructure.controller;
 
-import com.colegio.backend.application.dto.company.CompanyRequest;
 import com.colegio.backend.application.dto.position.PositionRequest;
-import com.colegio.backend.domain.model.Company;
 import com.colegio.backend.domain.model.Position;
-import com.colegio.backend.domain.model.Role;
-import com.colegio.backend.domain.port.usecases.CompanyUseCase;
 import com.colegio.backend.domain.port.usecases.PositionUseCase;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -16,7 +12,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RequiredArgsConstructor
 @RestController

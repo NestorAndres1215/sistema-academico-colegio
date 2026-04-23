@@ -1,6 +1,5 @@
 package com.colegio.backend.infrastructure.controller;
 
-import com.colegio.backend.domain.model.Company;
 import com.colegio.backend.domain.model.Menu;
 import com.colegio.backend.domain.port.usecases.MenuUseCase;
 import io.swagger.v3.oas.annotations.Operation;

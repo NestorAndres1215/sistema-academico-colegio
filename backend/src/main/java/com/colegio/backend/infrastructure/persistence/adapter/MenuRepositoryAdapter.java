@@ -2,7 +2,7 @@ package com.colegio.backend.infrastructure.persistence.adapter;
 
 import com.colegio.backend.domain.model.Menu;
 import com.colegio.backend.domain.port.repository.MenuRepositoryPort;
-import com.colegio.backend.infrastructure.persistence.mapper.MenuMapper;
+import com.colegio.backend.infrastructure.persistence.mapper.tree.MenuMapper;
 import com.colegio.backend.infrastructure.persistence.repository.JpaMenuRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

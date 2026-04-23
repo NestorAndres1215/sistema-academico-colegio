@@ -1,5 +1,6 @@
 package com.colegio.backend.infrastructure.persistence.entity;
 
+import com.colegio.backend.domain.enums.Status;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -26,7 +27,9 @@ public class UserStoryEntity {
     @Column(nullable = false)
     private LocalDateTime createdAt;
 
-    private Boolean status;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private Status status;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")

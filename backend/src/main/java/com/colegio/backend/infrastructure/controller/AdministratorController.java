@@ -1,6 +1,7 @@
 package com.colegio.backend.infrastructure.controller;
 
 import com.colegio.backend.application.dto.admin.AdministratorRequest;
+import com.colegio.backend.domain.enums.Status;
 import com.colegio.backend.domain.model.Administrator;
 import com.colegio.backend.domain.port.usecases.AdministratorUseCase;
 import io.swagger.v3.oas.annotations.Operation;
@@ -14,9 +15,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.util.List;
-
 
 @RequiredArgsConstructor
 @RestController
@@ -49,13 +47,14 @@ public class AdministratorController {
     @Operation(summary = "Get all administrators")
     @GetMapping
     public ResponseEntity<Page<Administrator>> getByStatus(
-            @RequestParam boolean status,
+            @RequestParam Status status,
             @RequestParam int page,
             @RequestParam int size,
             @RequestParam(required = false) String search
     ) {
 
         Pageable pageable = PageRequest.of(page, size);
+        System.out.println(status + " " + search + " " + pageable);
         return ResponseEntity.ok(administratorUseCase.getByStatus(status, search, pageable));
 
     }

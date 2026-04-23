@@ -1,6 +1,5 @@
 package com.colegio.backend.infrastructure.controller;
 
-import com.colegio.backend.application.dto.admin.AdministratorRequest;
 import com.colegio.backend.application.dto.company.CompanyRequest;
 import com.colegio.backend.domain.model.Company;
 import com.colegio.backend.domain.port.usecases.CompanyUseCase;
@@ -12,8 +11,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import tools.jackson.databind.ObjectMapper;
-
 import java.io.IOException;
 import java.util.List;
 

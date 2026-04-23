@@ -2,9 +2,9 @@ package com.colegio.backend.infrastructure.persistence.adapter;
 
 import com.colegio.backend.domain.model.Position;
 import com.colegio.backend.domain.port.repository.PositionRepositoryPort;
-import com.colegio.backend.infrastructure.persistence.entity.CompanyEntity;
+
 import com.colegio.backend.infrastructure.persistence.entity.PositionsEntity;
-import com.colegio.backend.infrastructure.persistence.mapper.PositionMapper;
+import com.colegio.backend.infrastructure.persistence.mapper.flat.PositionMapper;
 import com.colegio.backend.infrastructure.persistence.repository.JpaPositionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

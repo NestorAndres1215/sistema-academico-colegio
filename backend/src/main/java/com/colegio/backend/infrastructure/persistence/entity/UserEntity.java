@@ -1,5 +1,6 @@
 package com.colegio.backend.infrastructure.persistence.entity;
 
+import com.colegio.backend.domain.enums.Status;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,7 +23,10 @@ public class UserEntity {
     private String email;
 
     private String password;
-    private Boolean status;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private Status status;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;

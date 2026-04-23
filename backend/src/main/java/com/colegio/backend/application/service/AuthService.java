@@ -44,6 +44,7 @@ public class AuthService implements AuthUseCase {
     @Override
     public TokenResponse login(LoginRequest request) {
         User login = authenticate(request);
+
         String token = generateToken(login);
 
         return TokenResponse.builder().token(token).build();

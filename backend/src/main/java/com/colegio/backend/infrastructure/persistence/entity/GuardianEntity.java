@@ -1,5 +1,7 @@
 package com.colegio.backend.infrastructure.persistence.entity;
 
+import com.colegio.backend.domain.enums.Gender;
+import com.colegio.backend.domain.enums.Status;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -32,9 +34,13 @@ public class GuardianEntity {
     private String dni;
     private String phone;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "gender")
+    private Gender gender;
+
     private String relationships;
 
-    private Boolean estado;
+    private Status status;
 
     @OneToOne
     @JoinColumn(name = "user_id")

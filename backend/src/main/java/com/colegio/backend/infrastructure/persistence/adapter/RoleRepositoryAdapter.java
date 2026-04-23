@@ -2,14 +2,12 @@ package com.colegio.backend.infrastructure.persistence.adapter;
 
 import com.colegio.backend.domain.model.Role;
 import com.colegio.backend.domain.port.repository.RoleRepositoryPort;
-import com.colegio.backend.infrastructure.persistence.mapper.RoleMapper;
+import com.colegio.backend.infrastructure.persistence.mapper.flat.RoleMapper;
 import com.colegio.backend.infrastructure.persistence.repository.JpaRoleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 import java.util.Optional;
 
 @Component

@@ -1,10 +1,10 @@
 package com.colegio.backend.infrastructure.persistence.adapter;
 
+import com.colegio.backend.domain.enums.Status;
 import com.colegio.backend.domain.model.User;
 import com.colegio.backend.domain.port.repository.UserRepositoryPort;
-import com.colegio.backend.infrastructure.persistence.entity.PositionsEntity;
 import com.colegio.backend.infrastructure.persistence.entity.UserEntity;
-import com.colegio.backend.infrastructure.persistence.mapper.UserMapper;
+import com.colegio.backend.infrastructure.persistence.mapper.flat.UserMapper;
 import com.colegio.backend.infrastructure.persistence.repository.JpaUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -24,12 +24,12 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
     }
 
     @Override
-    public List<User> findByStatus(Boolean status) {
+    public List<User> findByStatus(Status status) {
         return repository.findByStatus(status).stream().map(mapper::toDomain).toList();
     }
 
     @Override
-    public List<User> findByEmailAndStatus(String email, Boolean status) {
+    public List<User> findByEmailAndStatus(String email, Status status) {
         return repository.findByEmailAndStatus(email, status).stream().map(mapper::toDomain).toList();
     }
 

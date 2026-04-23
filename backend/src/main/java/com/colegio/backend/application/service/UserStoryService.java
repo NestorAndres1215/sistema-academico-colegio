@@ -1,6 +1,7 @@
 package com.colegio.backend.application.service;
 
 import com.colegio.backend.application.dto.userStory.UserStoryRequest;
+import com.colegio.backend.domain.enums.Status;
 import com.colegio.backend.domain.exception.ResourceNotFoundException;
 import com.colegio.backend.domain.model.User;
 import com.colegio.backend.domain.model.UserStory;
@@ -30,7 +31,7 @@ public class UserStoryService implements UserStoryUseCase {
                 .id(newCode)
                 .action(userStoryRequest.getAction())
                 .detail(userStoryRequest.getDetail())
-                .status(true)
+                .status(Status.ACTIVE)
                 .createdAt(LocalDateTime.now())
                 .user(user)
                 .build();
@@ -53,7 +54,7 @@ public class UserStoryService implements UserStoryUseCase {
         UserStory existing = repositoryPort.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User Story not found"));
 
-        existing.setStatus(true);
+        existing.setStatus(Status.ACTIVE);
         return repositoryPort.save(existing);
     }
 
@@ -62,7 +63,7 @@ public class UserStoryService implements UserStoryUseCase {
         UserStory existing = repositoryPort.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User Story not found"));
 
-        existing.setStatus(false);
+        existing.setStatus(Status.INACTIVE);
         return repositoryPort.save(existing);
     }
 }

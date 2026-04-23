@@ -1,7 +1,9 @@
-package com.colegio.backend.infrastructure.persistence.mapper;
+package com.colegio.backend.infrastructure.persistence.mapper.tree;
 
 import com.colegio.backend.domain.model.Menu;
 import com.colegio.backend.infrastructure.persistence.entity.MenuEntity;
+import com.colegio.backend.infrastructure.persistence.mapper.flat.RoleMapper;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

@@ -1,7 +1,6 @@
 package com.colegio.backend.application.service;
 
 import com.colegio.backend.domain.exception.ResourceNotFoundException;
-import com.colegio.backend.domain.model.Administrator;
 import com.colegio.backend.domain.model.Role;
 import com.colegio.backend.domain.port.repository.RoleRepositoryPort;
 import com.colegio.backend.domain.port.usecases.RoleUseCase;
@@ -9,8 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor

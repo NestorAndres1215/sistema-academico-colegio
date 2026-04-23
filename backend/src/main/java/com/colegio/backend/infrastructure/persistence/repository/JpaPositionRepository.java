@@ -1,13 +1,11 @@
 package com.colegio.backend.infrastructure.persistence.repository;
 
 import com.colegio.backend.infrastructure.persistence.entity.PositionsEntity;
-import com.colegio.backend.infrastructure.persistence.entity.RoleEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-
 import java.util.Optional;
 
 public interface JpaPositionRepository extends JpaRepository<PositionsEntity,String> {

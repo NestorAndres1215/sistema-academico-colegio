@@ -3,7 +3,7 @@ package com.colegio.backend.infrastructure.persistence.adapter;
 import com.colegio.backend.domain.model.Company;
 import com.colegio.backend.domain.port.repository.CompanyRepositoryPort;
 import com.colegio.backend.infrastructure.persistence.entity.CompanyEntity;
-import com.colegio.backend.infrastructure.persistence.mapper.CompanyMapper;
+import com.colegio.backend.infrastructure.persistence.mapper.flat.CompanyMapper;
 import com.colegio.backend.infrastructure.persistence.repository.JpaCompanyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -21,6 +21,7 @@ public class CompanyRepositoryAdapter implements CompanyRepositoryPort {
 
     @Override
     public List<Company> findAll() {
+        System.out.println("ETSA ES LA LISTA "+repository.findAll().stream().map(mapper::toDomain).toList());
         return repository.findAll().stream().map(mapper::toDomain).toList();
     }
 

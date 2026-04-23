@@ -1,9 +1,10 @@
 package com.colegio.backend.infrastructure.persistence.adapter;
 
+import com.colegio.backend.domain.enums.Status;
 import com.colegio.backend.domain.model.Administrator;
 import com.colegio.backend.domain.port.repository.AdministratorRepositoryPort;
 import com.colegio.backend.infrastructure.persistence.entity.AdministratorEntity;
-import com.colegio.backend.infrastructure.persistence.mapper.AdministratorMapper;
+import com.colegio.backend.infrastructure.persistence.mapper.flat.AdministratorMapper;
 import com.colegio.backend.infrastructure.persistence.repository.JpaAdministratorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -52,7 +53,7 @@ public class AdministratorRepositoryAdapter implements AdministratorRepositoryPo
     }
 
     @Override
-    public Page<Administrator> getByStatus(boolean status, String search, Pageable pageable){
+    public Page<Administrator> getByStatus(Status status, String search, Pageable pageable){
         return repository.searchByStatus(status, search, pageable)
                 .map(mapper::toDomain);
     }

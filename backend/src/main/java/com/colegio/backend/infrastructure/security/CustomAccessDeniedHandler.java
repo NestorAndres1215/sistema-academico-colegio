@@ -1,6 +1,5 @@
 package com.colegio.backend.infrastructure.security;
 
-
 import com.colegio.backend.application.dto.error.ErrorResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +13,6 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-
 @Component
 @RequiredArgsConstructor
 public class CustomAccessDeniedHandler implements AccessDeniedHandler {
@@ -23,8 +21,8 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 
     @Override
     public void handle(HttpServletRequest request,
-                       HttpServletResponse response,
-                       AccessDeniedException accessDeniedException) throws IOException {
+            HttpServletResponse response,
+            AccessDeniedException accessDeniedException) throws IOException {
 
         String traceId = UUID.randomUUID().toString();
 

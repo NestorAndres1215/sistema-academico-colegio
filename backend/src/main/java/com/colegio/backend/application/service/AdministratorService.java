@@ -1,6 +1,7 @@
 package com.colegio.backend.application.service;
 
 import com.colegio.backend.application.dto.admin.AdministratorRequest;
+import com.colegio.backend.domain.enums.Status;
 import com.colegio.backend.domain.exception.ConflictException;
 import com.colegio.backend.domain.exception.ResourceNotFoundException;
 import com.colegio.backend.domain.model.Administrator;
@@ -28,7 +29,6 @@ public class AdministratorService implements AdministratorUseCase {
     private final UserUseCase userUseCase;
     private final FileUseCase fileUseCase;
 
-
     @Override
     public Administrator findById(String id) {
         return repositoryPort.findById(id)
@@ -51,7 +51,7 @@ public class AdministratorService implements AdministratorUseCase {
             throw new ConflictException("The phone number is already registered.");
         }
 
-        String fileName = fileUseCase.storeFile(file,"admin");
+        String fileName = fileUseCase.storeFile(file, "admin");
 
         String fileUrl = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/assets/")
@@ -59,7 +59,7 @@ public class AdministratorService implements AdministratorUseCase {
                 .toUriString();
         String newCode = SequenceGenerator.generateCode(repositoryPort.findLastCode());
 
-        User user = userUseCase.save("",request.getEmail(),request.getPassword(),"ROLE_ADMINISTRATOR");
+        User user = userUseCase.save("", request.getEmail(), request.getPassword(), "ROLE_ADMINISTRATOR");
         LocalDate today = LocalDate.now();
         LocalDate birthDate = request.getBirthDate();
 
@@ -77,13 +77,12 @@ public class AdministratorService implements AdministratorUseCase {
                 .age(age)
                 .gender(request.getGender())
                 .nationality(request.getNationality())
-                .status(true)
+                .status(Status.ACTIVE)
                 .user(user)
                 .build();
 
         return repositoryPort.save(administrator);
     }
-
 
     @Override
     public Administrator update(String id, AdministratorRequest request) {
@@ -117,7 +116,7 @@ public class AdministratorService implements AdministratorUseCase {
     }
 
     @Override
-    public Page<Administrator> getByStatus(boolean status, String search, Pageable pageable) {
+    public Page<Administrator> getByStatus(Status status, String search, Pageable pageable) {
         return repositoryPort.getByStatus(status, search, pageable);
     }
 
@@ -126,7 +125,7 @@ public class AdministratorService implements AdministratorUseCase {
         Administrator existing = repositoryPort.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Administrator not found"));
         userUseCase.deactivateUser(existing.getUser().getId());
-        existing.setStatus(false);
+        existing.setStatus(Status.INACTIVE);
         return repositoryPort.save(existing);
     }
 
@@ -135,9 +134,8 @@ public class AdministratorService implements AdministratorUseCase {
         Administrator existing = repositoryPort.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Administrator not found"));
         userUseCase.activateUser(existing.getUser().getId());
-        existing.setStatus(true);
+        existing.setStatus(Status.ACTIVE);
         return repositoryPort.save(existing);
     }
-
 
 }

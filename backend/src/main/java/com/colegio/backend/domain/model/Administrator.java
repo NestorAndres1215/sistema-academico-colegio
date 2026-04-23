@@ -1,5 +1,7 @@
 package com.colegio.backend.domain.model;
 
+import com.colegio.backend.domain.enums.Gender;
+import com.colegio.backend.domain.enums.Status;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,10 +23,9 @@ public class Administrator {
     private String phone;
     private LocalDate birthDate;
     private String profile;
-    private String gender;
+    private Gender gender;
     private String nationality;
     private User user;
-    private Boolean status;
-
+    private Status status;
 
 }

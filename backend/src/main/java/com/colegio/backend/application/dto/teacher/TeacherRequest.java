@@ -1,5 +1,6 @@
 package com.colegio.backend.application.dto.teacher;
 
+import com.colegio.backend.domain.enums.Gender;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -29,7 +30,7 @@ public class TeacherRequest {
     private String phone;
     private LocalDate birthDate;
     private String profile;
-    private String gender;
+    private Gender gender;
     private String nationality;
     private Boolean active;
     private String specialization;

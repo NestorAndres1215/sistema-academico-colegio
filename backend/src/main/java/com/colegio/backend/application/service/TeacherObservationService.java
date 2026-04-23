@@ -3,7 +3,6 @@ package com.colegio.backend.application.service;
 import com.colegio.backend.application.dto.teacher.TeacherObservationRequest;
 import com.colegio.backend.domain.enums.Status;
 import com.colegio.backend.domain.exception.ResourceNotFoundException;
-import com.colegio.backend.domain.model.Teacher;
 import com.colegio.backend.domain.model.TeacherObservation;
 import com.colegio.backend.domain.port.repository.TeacherObservationRepositoryPort;
 import com.colegio.backend.domain.port.usecases.TeacherObservationUseCase;
@@ -11,8 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class TeacherObservationService implements TeacherObservationUseCase {

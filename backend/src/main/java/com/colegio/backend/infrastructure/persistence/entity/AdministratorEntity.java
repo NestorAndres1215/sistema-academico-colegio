@@ -1,5 +1,7 @@
 package com.colegio.backend.infrastructure.persistence.entity;
 
+import com.colegio.backend.domain.enums.Gender;
+import com.colegio.backend.domain.enums.Status;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -37,9 +39,16 @@ public class AdministratorEntity {
     private LocalDate birthDate;
 
     private String profile;
-    private String gender;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "gender")
+    private Gender gender;
+
     private String nationality;
-    private Boolean status;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private Status status;
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", referencedColumnName = "id")

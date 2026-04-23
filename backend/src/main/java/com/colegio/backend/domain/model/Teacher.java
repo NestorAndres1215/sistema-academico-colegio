@@ -1,5 +1,6 @@
 package com.colegio.backend.domain.model;
 
+import com.colegio.backend.domain.enums.Gender;
 import com.colegio.backend.domain.enums.Status;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,14 +25,14 @@ public class Teacher {
     private String phone;
     private LocalDate birthDate;
     private String profile;
-    private String gender;
+    private Gender gender;
     private String nationality;
-    private Boolean active;
     private String specialization;
-    private Status status;
+
     private LocalDate hireDate;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private Status status;
     private User user;
 
 }

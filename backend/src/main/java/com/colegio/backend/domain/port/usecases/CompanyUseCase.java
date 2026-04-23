@@ -12,8 +12,6 @@ public interface CompanyUseCase {
 
     List<Company> findAll();
 
-
-
     Company findById(String id);
 
     Company save(MultipartFile logo,CompanyRequest companyRequest) throws IOException;
