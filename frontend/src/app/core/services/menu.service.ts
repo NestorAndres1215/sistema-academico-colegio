@@ -5,12 +5,10 @@ import { Observable } from 'rxjs';
 
 @Service()
 export class MenuService {
+  private readonly http = inject(HttpClient);
+  private readonly backendUrl = environment.apiUrl;
 
-    private readonly http = inject(HttpClient);
-    private readonly backendUrl = environment.apiUrl;
-
-    getAll(): Observable<any> {
-        return this.http.get<any>(`${this.backendUrl}/menu`);
-    }
-
+  getAll(): Observable<any> {
+    return this.http.get<any>(`${this.backendUrl}/menu`);
+  }
 }
