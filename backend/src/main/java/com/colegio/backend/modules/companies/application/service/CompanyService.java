@@ -45,7 +45,6 @@ public class CompanyService implements CompanyUseCase {
         return companyMapper.toResponse(findCompanyByCode(code));
     }
 
-
     @Override
     public Company save(MultipartFile logo,CompanyRequest companyRequest) throws IOException {
         companyValidator.validateForCreate(companyRequest);
@@ -70,13 +69,13 @@ public class CompanyService implements CompanyUseCase {
 
         if (logo != null && !logo.isEmpty()) {
 
-            if (existing.getLogoUrl() != null && !existing.getLogoUrl().isBlank()) {
-                fileUseCase.deleteFile(existing.getLogoUrl());
-            }
-
+            String oldLogoUrl = existing.getLogoUrl();
             String fileUrl = fileUseCase.storeFile(logo, "company");
-
             existing.setLogoUrl(fileUrl);
+
+            if (oldLogoUrl != null && !oldLogoUrl.isBlank()) {
+                fileUseCase.deleteFile(oldLogoUrl);
+            }
         }
 
         existing.setUpdatedAt(LocalDateTime.now());

@@ -29,6 +29,13 @@ export const routes: Routes = [
         data: { roles: [ROLES.ROLE_ADMIN] },
         loadChildren: () => import('./features/admin/admin.routes').then((m) => m.ADMIN_ROUTES),
       },
+     {
+        path: 'configuracion',
+        loadChildren: () =>
+          import('./features/configuration/configuration.routes')
+            .then(m => m.CONFIGURATION_ROUTES)
+      },
+
     ],
   },
 ];

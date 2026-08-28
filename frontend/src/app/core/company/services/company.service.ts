@@ -3,9 +3,9 @@ import { inject, Service } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
-import { Company } from '../models/company.model';
 import { CompanyRequest } from '../models/company-request';
 import { environment } from '../../../../environments/environment';
+import { CompanyModel } from '../models/company.model';
 
 @Service()
 export class CompanyService {
@@ -26,24 +26,24 @@ export class CompanyService {
     return this.http.get<any>(`${this.backendUrl}/companies`, { params });
   }
 
-  findByCode(code: string): Observable<Company> {
-    return this.http.get<Company>(`${this.backendUrl}/companies/code/${code}`);
+  findByCode(code: string): Observable<CompanyModel> {
+    return this.http.get<CompanyModel>(`${this.backendUrl}/companies/code/${code}`);
   }
 
-  findById(id: number): Observable<Company> {
-    return this.http.get<Company>(`${this.backendUrl}/companies/${id}`);
+  findById(id: number): Observable<CompanyModel> {
+    return this.http.get<CompanyModel>(`${this.backendUrl}/companies/${id}`);
   }
 
-  create(request: CompanyRequest, logo?: File): Observable<Company> {
+  create(request: CompanyRequest, logo?: File): Observable<CompanyModel> {
     const formData = this.toFormData(request, logo);
 
-    return this.http.post<Company>(`${this.backendUrl}/companies`, formData);
+    return this.http.post<CompanyModel>(`${this.backendUrl}/companies`, formData);
   }
 
-  update(id: number, request: CompanyRequest, logo?: File): Observable<Company> {
+  update(id: number, request: CompanyRequest, logo?: File): Observable<CompanyModel> {
     const formData = this.toFormData(request, logo);
 
-    return this.http.put<Company>(`${this.backendUrl}/companies/${id}`, formData);
+    return this.http.put<CompanyModel>(`${this.backendUrl}/companies/${id}`, formData);
   }
 
   private toFormData(request: CompanyRequest, logo?: File): FormData {

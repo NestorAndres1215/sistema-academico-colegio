@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable, Service } from '@angular/core';
+import { inject, Service } from '@angular/core';
 import { catchError, Observable, of, shareReplay, Subject, tap } from 'rxjs';
 
 import { environment } from '../../../../environments/environment';
 import { LoginRequest } from '../models/login.model';
+import { UserResponse } from '../models/user-response';
 
 export interface TokenResponse {
   message: string;
@@ -14,13 +15,7 @@ export interface TokenResponse {
   expiration: string;
 }
 
-export interface UserResponse {
-  id: number;
-  username: string;
-  email: string;
-  status: string;
-  role: string;
-}
+
 
 @Service()
 export class AuthService {

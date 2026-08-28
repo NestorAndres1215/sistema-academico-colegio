@@ -1,89 +1,47 @@
 package com.colegio.backend.modules.file.application.service;
 
-
+import com.colegio.backend.modules.file.application.validator.FileValidator;
+import com.colegio.backend.modules.file.domain.port.repository.FileStoragePort;
 import com.colegio.backend.modules.file.domain.port.usecase.FileUseCase;
 import com.colegio.backend.shared.exception.NotFoundException;
-import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
-import org.springframework.util.FileSystemUtils;
-import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.MalformedURLException;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 
 @Service
 @RequiredArgsConstructor
 public class FileService implements FileUseCase {
 
-    @Value("${storage.location}")
-    private String storageLocation;
-
-    private Path storagePath;
-
-    @PostConstruct
-    public void init() throws IOException {
-        storagePath = Paths.get(storageLocation)
-                .toAbsolutePath()
-                .normalize();
-
-        Files.createDirectories(storagePath);
-    }
+    private final FileValidator fileValidator;
+    private final FileStoragePort fileStoragePort;
 
     @Override
     public String storeFile(MultipartFile file, String folder) {
 
-        String fileName = StringUtils.cleanPath(
-                file.getOriginalFilename()
-        );
-
-        if (fileName.contains("..")) {
-            throw new NotFoundException("Nombre de archivo no válido");
+        if (file == null || file.isEmpty()) {
+            return null;
         }
+
+        fileValidator.validate(file);
 
         try {
-            Path folderPath = storagePath
-                    .resolve(folder)
-                    .normalize();
-
-            Files.createDirectories(folderPath);
-
-            Path destination = folderPath.resolve(fileName);
-
-            try (InputStream inputStream = file.getInputStream()) {
-                Files.copy(
-                        inputStream,
-                        destination,
-                        StandardCopyOption.REPLACE_EXISTING
-                );
-            }
+            return fileStoragePort.store(file, folder);
 
         } catch (IOException e) {
-            throw new NotFoundException(
-                    "Error al guardar el archivo"
-            );
+            throw new NotFoundException("Error al guardar el archivo");
         }
-
-        return "/assets/" + folder + "/" + fileName;
     }
 
     @Override
-    public Resource loadAsResource(String fileName)
-            throws MalformedURLException {
+    public Resource loadAsResource(String fileName) throws MalformedURLException {
 
-        Path file = storagePath
-                .resolve(fileName)
-                .normalize();
+        Path file = fileStoragePort.getPath(fileName);
 
         Resource resource = new UrlResource(file.toUri());
 
@@ -91,27 +49,21 @@ public class FileService implements FileUseCase {
             return resource;
         }
 
-        throw new NotFoundException(
-                "Archivo no encontrado"
-        );
+        throw new NotFoundException("Archivo no encontrado");
     }
 
     @Override
-    public void deleteFile(String nameFile) throws IOException {
+    public void deleteFile(String fileName) {
 
-        if (nameFile.startsWith("http")) {
-            nameFile = nameFile.substring(nameFile.indexOf("/assets/") + 8);
+        if (fileName == null || fileName.isBlank()) {
+            return;
         }
 
-        Path file = uploadFile(nameFile);
+        try {
+            fileStoragePort.delete(fileName);
 
-        if (Files.exists(file)) {
-            FileSystemUtils.deleteRecursively(file);
+        } catch (IOException e) {
+            throw new NotFoundException("Error al eliminar el archivo");
         }
-    }
-
-    @Override
-    public Path uploadFile(String nameFile) {
-        return null;
     }
 }

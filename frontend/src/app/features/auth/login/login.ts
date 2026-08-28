@@ -64,13 +64,9 @@ export class Login {
     };
 
     try {
-      console.log(login);
-      const response = await firstValueFrom(this.authService.generateToken(login));
 
-      console.log('RESPUESTA LOGIN:', response);
-
+      await firstValueFrom(this.authService.generateToken(login));
       this.authService.clearCurrentUser();
-
       const user = await firstValueFrom(this.authService.getCurrentUser());
 
       if (!user?.role) {

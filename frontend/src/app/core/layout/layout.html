@@ -7,7 +7,8 @@
     [user]="user()"
     [sidenavOpened]="sidenav.opened"
     (toggleSidenav)="sidenav.toggle()"
-  />
+  >
+  </app-toolbar>
 
   <mat-sidenav-container class="example-sidenav-container" [hasBackdrop]="isMobile()">
     <mat-sidenav
@@ -21,7 +22,8 @@
         [footerText]="footerText()"
         [isMobile]="isMobile()"
         [sidenavRef]="sidenav"
-      />
+      >
+      </app-sidebar>
     </mat-sidenav>
 
     <mat-sidenav-content class="csa-content">

@@ -34,10 +34,12 @@ public class CompanyController {
     @Operation(summary = "Create a new company")
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Company> create(
-            @RequestPart("file") MultipartFile file,
+            @RequestPart(value = "file", required = false) MultipartFile file,
             @Valid @RequestPart("company") CompanyRequest request
     ) throws Exception {
-        return ResponseEntity.ok(companyUseCase.save(file,request));
+        return ResponseEntity.ok(
+                companyUseCase.save(file, request)
+        );
     }
 
     @Operation(summary = "Update an existing company")

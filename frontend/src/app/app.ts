@@ -5,6 +5,7 @@ import { firstValueFrom } from 'rxjs';
 import { CompanyService } from './core/company/services/company.service';
 import { ThemeService } from './core/services/theme.service';
 import { Title } from '@angular/platform-browser';
+import { FileService } from './core/services/file.service';
 
 @Component({
   imports: [RouterOutlet],
@@ -17,6 +18,7 @@ export class App {
   private readonly themeService = inject(ThemeService);
   private readonly titleService = inject(Title);
   private readonly configService = inject(CompanyService);
+  private readonly fileService = inject(FileService);
 
   async ngOnInit(): Promise<void> {
     this.themesSystem();
@@ -30,15 +32,17 @@ export class App {
 
     const link = document.getElementById('appFavicon') as HTMLLinkElement | null;
 
-    if (!link || !company.logoUrl) {
+    if (!link) {
       return;
     }
 
-    const newHref = company.logoUrl.startsWith('http')
-      ? company.logoUrl
-      : `${window.location.origin}/${company.logoUrl}`;
+    const logoUrl = this.fileService.getFileUrl(company.logoUrl);
 
-    link.href = `${newHref}?v=${Date.now()}`;
+    if (!logoUrl) {
+      return;
+    }
+
+    link.href = `${logoUrl}?v=${Date.now()}`;
   }
 
   themesSystem(): void {

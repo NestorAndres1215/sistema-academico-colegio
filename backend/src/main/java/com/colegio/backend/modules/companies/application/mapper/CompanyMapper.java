@@ -18,11 +18,14 @@ public class CompanyMapper {
                 company.getCode(),
                 company.getName(),
                 company.getBusinessName(),
-                company.getCountry(),
+                company.getTaxId(),
+                company.getEmail(),
+                company.getPhone(),
+                company.getAddress(),
                 company.getCity(),
+                company.getCountry(),
                 company.getLogoUrl(),
-                company.getWebsite(),
-                company.getStatus()
+                company.getWebsite()
         );
     }
 
