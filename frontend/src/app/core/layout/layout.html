@@ -1,0 +1,388 @@
+<div class="example-container">
+  <mat-toolbar class="csa-toolbar">
+    <div class="toolbar-left">
+      <button
+        mat-icon-button
+        (click)="sidenav.toggle()"
+        class="toolbar-btn hamburger-btn"
+        [attr.aria-label]="sidenav.opened ? 'Cerrar menú' : 'Abrir menú'"
+      >
+        <i class="fas" [class.fa-bars]="!sidenav.opened" [class.fa-times]="sidenav.opened"></i>
+      </button>
+
+      <div class="csa-logo-wrap">
+        <div class="csa-emblem">
+          <i class="fas fa-graduation-cap"></i>
+        </div>
+        <div class="csa-brand">
+          <span class="csa-brand-name">{{ nameSchool() }}</span>
+          <span class="csa-brand-sub">Sistema de Gestión Escolar</span>
+        </div>
+      </div>
+    </div>
+
+    <span class="example-spacer"></span>
+
+    <div class="toolbar-actions toolbar-actions--desktop">
+      <button
+        mat-icon-button
+        matBadge="12"
+        matBadgeColor="warn"
+        matBadgeSize="small"
+        [matMenuTriggerFor]="messageMenu"
+        class="toolbar-btn action-btn"
+        matTooltip="Mensajes"
+        matTooltipPosition="below"
+      >
+        <i class="fas fa-envelope"></i>
+      </button>
+
+      <button
+        mat-icon-button
+        matBadge="4"
+        matBadgeColor="warn"
+        matBadgeSize="small"
+        [matMenuTriggerFor]="notificationMenu"
+        class="toolbar-btn action-btn"
+        matTooltip="Notificaciones"
+        matTooltipPosition="below"
+      >
+        <i class="fas fa-bell"></i>
+      </button>
+
+      <div class="toolbar-divider"></div>
+
+      <button mat-button [matMenuTriggerFor]="profileMenu" class="toolbar-btn profile-chip">
+        <div class="profile-avatar">
+          <i class="fas fa-user"></i>
+        </div>
+        <span class="profile-name">{{ username() }}</span>
+        <i class="fas fa-chevron-down profile-chevron"></i>
+      </button>
+
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="menu"
+        class="toolbar-btn action-btn"
+        matTooltip="Más opciones"
+        matTooltipPosition="below"
+      >
+        <i class="fas fa-ellipsis-vertical"></i>
+      </button>
+    </div>
+
+    <div class="toolbar-actions toolbar-actions--mobile">
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="mobileActionsMenu"
+        matBadge="16"
+        matBadgeColor="warn"
+        matBadgeSize="small"
+        class="toolbar-btn action-btn mobile-actions-btn"
+        aria-label="Acciones"
+      >
+        <i class="fas fa-bars-staggered"></i>
+      </button>
+    </div>
+  </mat-toolbar>
+
+  <mat-menu #mobileActionsMenu="matMenu" panelClass="csa-menu csa-menu--mobile">
+    <div class="mobile-menu-profile" (click)="$event.stopPropagation()">
+      <div class="mobile-menu-avatar">
+        <i class="fas fa-user-circle"></i>
+      </div>
+      <div>
+        <div class="mobile-menu-username">{{ username() }}</div>
+        <div class="mobile-menu-role">{{ userRoleName() }}</div>
+      </div>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="mobile-menu-section-label" (click)="$event.stopPropagation()">
+      <i class="fas fa-envelope"></i> Mensajes
+    </div>
+    <button mat-menu-item class="menu-item-counter">
+      <i class="fas fa-inbox"></i>
+      <span>Mensajes recibidos</span>
+      <span class="menu-badge">7</span>
+    </button>
+    <button mat-menu-item class="menu-item-counter">
+      <i class="fas fa-paper-plane"></i>
+      <span>Mensajes enviados</span>
+      <span class="menu-badge">3</span>
+    </button>
+    <button mat-menu-item class="menu-item-counter">
+      <i class="fas fa-pen-to-square"></i>
+      <span>Borradores</span>
+      <span class="menu-badge">2</span>
+    </button>
+
+    <mat-divider></mat-divider>
+
+    <div class="mobile-menu-section-label" (click)="$event.stopPropagation()">
+      <i class="fas fa-bell"></i> Notificaciones
+    </div>
+    <button mat-menu-item>
+      <i class="fas fa-user-graduate"></i>
+      <span>Nuevo estudiante registrado</span>
+    </button>
+    <button mat-menu-item>
+      <i class="fas fa-chalkboard-teacher"></i>
+      <span>Clase reprogramada</span>
+    </button>
+    <button mat-menu-item>
+      <i class="fas fa-calendar-days"></i>
+      <span>Reunión de padres programada</span>
+    </button>
+    <button mat-menu-item>
+      <i class="fas fa-triangle-exclamation"></i>
+      <span>Incidencia en plataforma</span>
+    </button>
+
+    <mat-divider></mat-divider>
+
+    <div class="mobile-menu-section-label" (click)="$event.stopPropagation()">
+      <i class="fas fa-user"></i> Mi cuenta
+    </div>
+    <button mat-menu-item><i class="fas fa-id-card"></i><span>Mi perfil</span></button>
+    <button mat-menu-item><i class="fas fa-key"></i><span>Cambiar contraseña</span></button>
+    <button mat-menu-item (click)="toggleTheme()">
+      <i class="fas fa-circle-half-stroke"></i><span>Cambiar tema</span>
+    </button>
+    <button mat-menu-item (click)="historial()">
+      <i class="fas fa-clock-rotate-left"></i><span>Historial</span>
+    </button>
+    @if (isAdmin()) {
+      <button mat-menu-item (click)="company()">
+        <i class="fas fa-building"></i>
+        <span>Empresa</span>
+      </button>
+    }
+    <button mat-menu-item (click)="help()">
+      <i class="fas fa-circle-question"></i><span>Ayuda</span>
+    </button>
+
+    <mat-divider></mat-divider>
+
+    <button mat-menu-item class="menu-item--danger" (click)="logout()">
+      <i class="fas fa-right-from-bracket"></i><span>Cerrar sesión</span>
+    </button>
+  </mat-menu>
+
+  <mat-menu #messageMenu="matMenu" panelClass="csa-menu csa-menu--messages">
+    <div class="menu-header-banner" (click)="$event.stopPropagation()">
+      <i class="fas fa-envelope-open-text"></i>
+      <span>Bandeja de entrada</span>
+    </div>
+    <button mat-menu-item class="menu-item-counter">
+      <i class="fas fa-inbox"></i>
+      <span>Mensajes recibidos</span>
+      <span class="menu-badge">7</span>
+    </button>
+    <button mat-menu-item class="menu-item-counter">
+      <i class="fas fa-paper-plane"></i>
+      <span>Mensajes enviados</span>
+      <span class="menu-badge">3</span>
+    </button>
+    <button mat-menu-item class="menu-item-counter">
+      <i class="fas fa-pen-to-square"></i>
+      <span>Borradores</span>
+      <span class="menu-badge">2</span>
+    </button>
+    <mat-divider></mat-divider>
+    <button mat-menu-item class="menu-item-counter menu-item--all">
+      <i class="fas fa-layer-group"></i>
+      <span>Ver todos los mensajes</span>
+      <span class="menu-badge menu-badge--navy">12</span>
+    </button>
+  </mat-menu>
+
+  <mat-menu #notificationMenu="matMenu" panelClass="csa-menu">
+    <div class="menu-header-banner" (click)="$event.stopPropagation()">
+      <i class="fas fa-school"></i>
+      <span>Notificaciones del Colegio</span>
+    </div>
+    <button mat-menu-item class="menu-item-notif">
+      <i class="fas fa-user-graduate"></i>
+      <span>Nuevo estudiante registrado</span>
+    </button>
+    <button mat-menu-item class="menu-item-notif">
+      <i class="fas fa-chalkboard-teacher"></i>
+      <span>Clase reprogramada</span>
+    </button>
+    <button mat-menu-item class="menu-item-notif">
+      <i class="fas fa-calendar-days"></i>
+      <span>Reunión de padres programada</span>
+    </button>
+    <button mat-menu-item class="menu-item-notif">
+      <i class="fas fa-triangle-exclamation"></i>
+      <span>Incidencia en plataforma académica</span>
+    </button>
+    <button mat-menu-item class="menu-item-notif">
+      <i class="fas fa-bullhorn"></i>
+      <span>Nuevo anuncio institucional</span>
+    </button>
+    <mat-divider></mat-divider>
+    <button mat-menu-item class="menu-item--all">
+      <i class="fas fa-inbox"></i>
+      <span>Ir al centro de notificaciones</span>
+    </button>
+  </mat-menu>
+
+  <mat-menu #profileMenu="matMenu" panelClass="csa-menu">
+    <div class="menu-profile-header" (click)="$event.stopPropagation()">
+      <div class="menu-profile-avatar">
+        <i class="fas fa-user-circle"></i>
+      </div>
+      <div>
+        <div class="menu-profile-name">{{ username() }}</div>
+        <div class="menu-profile-role">{{ userRoleName() }}</div>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <button mat-menu-item (click)="perfil()">
+      <i class="fas fa-user"></i><span>Mi perfil</span>
+    </button>
+    <button mat-menu-item (click)="cuenta()">
+      <i class="fas fa-id-card"></i><span>Mi cuenta</span>
+    </button>
+    <button mat-menu-item (click)="contrana()">
+      <i class="fas fa-key"></i><span>Cambiar contraseña</span>
+    </button>
+    <mat-divider></mat-divider>
+    <button mat-menu-item class="menu-item--danger" (click)="logout()">
+      <i class="fas fa-right-from-bracket"></i><span>Cerrar sesión</span>
+    </button>
+  </mat-menu>
+
+  <mat-menu #menu="matMenu" panelClass="csa-menu">
+    <button mat-menu-item (click)="settings()">
+      <i class="fas fa-gear"></i><span>Configuración</span>
+    </button>
+    <button mat-menu-item (click)="toggleTheme()">
+      <i class="fas fa-circle-half-stroke"></i><span>Cambiar tema</span>
+    </button>
+    <button mat-menu-item (click)="historial()">
+      <i class="fas fa-clock-rotate-left"></i><span>Historial</span>
+    </button>
+    @if (isAdmin()) {
+      <button mat-menu-item (click)="company()">
+        <i class="fas fa-building"></i>
+        <span>Empresa</span>
+      </button>
+    }
+    <button mat-menu-item (click)="help()">
+      <i class="fas fa-circle-question"></i><span>Ayuda</span>
+    </button>
+    <mat-divider></mat-divider>
+    <button mat-menu-item disabled>
+      <i class="fas fa-code-branch"></i><span>Versión 1.0.0</span>
+    </button>
+  </mat-menu>
+  <mat-sidenav-container class="example-sidenav-container" [hasBackdrop]="isMobile()">
+    <mat-sidenav
+      #sidenav
+      [mode]="isMobile() ? 'over' : 'side'"
+      [opened]="!isMobile()"
+      class="csa-sidenav"
+    >
+      <mat-nav-list class="csa-nav-list">
+        @for (menu of mainMenus(); track menu.id) {
+          <mat-list-item
+            (click)="handleClick(menu)"
+            [class.has-children]="hasChildren(menu)"
+            [class.is-open]="menu.mostrarSubMenu"
+            class="nav-item"
+          >
+            <div class="nav-item-inner">
+              @if (menu.icon) {
+                <mat-icon class="nav-icon">{{ menu.icon }}</mat-icon>
+              }
+
+              <span class="nav-label">{{ menu.name }}</span>
+
+              @if (hasChildren(menu)) {
+                <i
+                  class="fas nav-arrow"
+                  [class.fa-chevron-down]="!menu.mostrarSubMenu"
+                  [class.fa-chevron-up]="menu.mostrarSubMenu"
+                >
+                </i>
+              }
+            </div>
+          </mat-list-item>
+
+          @if (menu.mostrarSubMenu && hasChildren(menu)) {
+            @for (sub of menu.children; track sub.id) {
+              <mat-list-item (click)="handleClick(sub)" class="nav-item nav-item--sub">
+                <div class="nav-item-inner">
+                  <span class="nav-sub-dot"></span>
+
+                  @if (sub.icon) {
+                    <mat-icon class="nav-icon">{{ sub.icon }}</mat-icon>
+                  }
+
+                  <span class="nav-label">{{ sub.name }}</span>
+
+                  @if (hasChildren(sub)) {
+                    <i
+                      class="fas nav-arrow"
+                      [class.fa-chevron-down]="!sub.mostrarSubMenu"
+                      [class.fa-chevron-up]="sub.mostrarSubMenu"
+                    >
+                    </i>
+                  }
+                </div>
+              </mat-list-item>
+
+              @if (sub.mostrarSubMenu && hasChildren(sub)) {
+                @for (sub2 of sub.children; track sub2.id) {
+                  <mat-list-item (click)="handleClick(sub2)" class="nav-item nav-item--sub2">
+                    <div class="nav-item-inner">
+                      <span class="nav-sub-dot nav-sub-dot--sm"></span>
+
+                      @if (sub2.icon) {
+                        <mat-icon class="nav-icon">{{ sub2.icon }}</mat-icon>
+                      }
+
+                      <span class="nav-label">{{ sub2.name }}</span>
+                    </div>
+                  </mat-list-item>
+
+                  @if (sub2.mostrarSubMenu && hasChildren(sub2)) {
+                    @for (sub3 of sub2.children; track sub3.id) {
+                      <mat-list-item
+                        (click)="navigateTo(sub3.route)"
+                        class="nav-item nav-item--sub3"
+                      >
+                        <div class="nav-item-inner">
+                          <span class="nav-sub-dot nav-sub-dot--xs"></span>
+
+                          @if (sub3.icon) {
+                            <mat-icon class="nav-icon">{{ sub3.icon }}</mat-icon>
+                          }
+
+                          <span class="nav-label">{{ sub3.name }}</span>
+                        </div>
+                      </mat-list-item>
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      </mat-nav-list>
+
+      <div class="sidenav-footer">
+        <mat-icon>shield</mat-icon>
+        <span>{{ footerText() }}</span>
+      </div>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="csa-content">
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

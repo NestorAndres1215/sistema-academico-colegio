@@ -1,1 +1,35 @@
-/* You can add global styles to this file, and also import other style files */
+@import '@fortawesome/fontawesome-free/css/all.min.css';
+@import "bootstrap/dist/css/bootstrap.min.css";
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+@import "./styles/forms/checkbox.css";
+@import "./styles/forms//datepicker.css";
+@import "./styles/forms/select.css";
+@import "./styles/forms/input.css";
+@import "./styles/forms/form-field.css";
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  background: var(--color-bg-page);
+  color: var(--color-text-primary);
+  transition: background-color .3s ease, color .3s ease;
+}
+
+:root {
+  --color-principal: #1A3A6B;
+  --color-secundario: #F4F6FA;
+  --color-tercero: #F5A623;
+  --color-pagina-principal: #F4F6FA;
+  --color-texto-primario: #1A3A6B;
+  --color-texto-secundario: #5A6D8C;
+  --letra-principal: 'Segoe UI', Arial, sans-serif;
+  --letra-secundaria: Georgia, 'Times New Roman', serif;
+  --color-border: #D0D7E8;
+  --color-shadow: rgba(26, 44, 91, 0.15);
+  --color-danger: #D32F2F;
+}
+
+body {
+  color: var(--color-text-primary);
+}

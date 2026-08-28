@@ -1,0 +1,18 @@
+<button
+  class="app-btn"
+  [class]="'variant-' + variant() + ' shape-' + shape()"
+  [matTooltip]="tooltip()"
+  (click)="onClick()"
+>
+  @if (icon() && iconPosition() === 'left') {
+    <mat-icon class="btn-icon">{{ icon() }}</mat-icon>
+  }
+
+  @if (label() && shape() !== 'icon') {
+    <span class="btn-label">{{ label() }}</span>
+  }
+
+  @if (icon() && iconPosition() === 'right') {
+    <mat-icon class="btn-icon">{{ icon() }}</mat-icon>
+  }
+</button>
