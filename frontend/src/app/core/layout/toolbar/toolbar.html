@@ -1,0 +1,94 @@
+<mat-toolbar class="csa-toolbar">
+  <div class="toolbar-left">
+    <button
+      mat-icon-button
+      (click)="toggleSidenav.emit()"
+      class="toolbar-btn hamburger-btn"
+      [attr.aria-label]="sidenavOpened() ? 'Cerrar menú' : 'Abrir menú'"
+    >
+      <i class="fas" [class.fa-bars]="!sidenavOpened()" [class.fa-times]="sidenavOpened()"></i>
+    </button>
+
+    <div class="csa-logo-wrap">
+      <div class="csa-emblem">
+        <i class="fas fa-graduation-cap"></i>
+      </div>
+      <div class="csa-brand">
+        <span class="csa-brand-name">{{ nameSchool() }}</span>
+        <span class="csa-brand-sub">Sistema de Gestión Escolar</span>
+      </div>
+    </div>
+  </div>
+
+  <span class="example-spacer"></span>
+
+  <div class="toolbar-actions toolbar-actions--desktop">
+    <button
+      mat-icon-button
+      matBadge="12"
+      matBadgeColor="warn"
+      matBadgeSize="small"
+      [matMenuTriggerFor]="menus.messageMenu"
+      class="toolbar-btn action-btn"
+      matTooltip="Mensajes"
+      matTooltipPosition="below"
+    >
+      <i class="fas fa-envelope"></i>
+    </button>
+
+    <button
+      mat-icon-button
+      matBadge="4"
+      matBadgeColor="warn"
+      matBadgeSize="small"
+      [matMenuTriggerFor]="menus.notificationMenu"
+      class="toolbar-btn action-btn"
+      matTooltip="Notificaciones"
+      matTooltipPosition="below"
+    >
+      <i class="fas fa-bell"></i>
+    </button>
+
+    <div class="toolbar-divider"></div>
+
+    <button mat-button [matMenuTriggerFor]="menus.profileMenu" class="toolbar-btn profile-chip">
+      <div class="profile-avatar">
+        <i class="fas fa-user"></i>
+      </div>
+      <span class="profile-name">{{ username() }}</span>
+      <i class="fas fa-chevron-down profile-chevron"></i>
+    </button>
+
+    <button
+      mat-icon-button
+      [matMenuTriggerFor]="menus.menu"
+      class="toolbar-btn action-btn"
+      matTooltip="Más opciones"
+      matTooltipPosition="below"
+    >
+      <i class="fas fa-ellipsis-vertical"></i>
+    </button>
+  </div>
+
+  <div class="toolbar-actions toolbar-actions--mobile">
+    <button
+      mat-icon-button
+      [matMenuTriggerFor]="menus.mobileActionsMenu"
+      matBadge="16"
+      matBadgeColor="warn"
+      matBadgeSize="small"
+      class="toolbar-btn action-btn mobile-actions-btn"
+      aria-label="Acciones"
+    >
+      <i class="fas fa-bars-staggered"></i>
+    </button>
+  </div>
+</mat-toolbar>
+
+<app-menu
+  #menus
+  [username]="username()"
+  [userRoleName]="userRoleName()"
+  [isAdmin]="isAdmin()"
+  [user]="user()"
+/>

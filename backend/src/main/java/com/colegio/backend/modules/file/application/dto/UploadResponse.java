@@ -1,4 +1,8 @@
 package com.colegio.backend.modules.file.application.dto;
 
-public class UploadResponse {
+public record UploadResponse(
+        String fileUrl,
+        String fileName,
+        long fileSize
+) {
 }

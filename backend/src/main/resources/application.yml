@@ -5,11 +5,12 @@ spring:
   profiles:
     active: dev
 
-  servlet:
-    context-path: /colegio/api/v1
-
   config:
     import: optional:file:.env[.properties]
+
+server:
+  servlet:
+    context-path: /colegio/api/v1
 
 springdoc:
   swagger-ui:

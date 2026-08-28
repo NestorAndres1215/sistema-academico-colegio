@@ -43,6 +43,9 @@ jwt:
   secret: ${JWT_SECRET}
   expiration-ms: ${JWT_EXPIRATION_MS}
 
+storage:
+  location: assets
+
 springdoc:
   swagger-ui:
     path: /docs

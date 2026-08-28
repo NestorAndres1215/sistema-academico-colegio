@@ -23,8 +23,7 @@ public class AuthController {
     @Operation(summary = "Generate authentication token")
     @PostMapping("/generate-token")
     public ResponseEntity<TokenResponse> generarToken(
-            @RequestBody LoginRequest request,
-            HttpServletResponse response
+            @RequestBody LoginRequest request
     ) {
         return ResponseEntity.ok(authUseCase.login(request));
     }

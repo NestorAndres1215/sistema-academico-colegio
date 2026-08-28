@@ -1,31 +1,26 @@
 package com.colegio.backend.modules.companies.domain.port.usecase;
 
+import com.colegio.backend.modules.companies.application.dto.CompanyRequest;
+import com.colegio.backend.modules.companies.application.dto.CompanyResponse;
 import com.colegio.backend.modules.companies.domain.model.Company;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
 public interface CompanyUseCase {
 
-    Page<Company> getByStatus(String status, String search, Pageable pageable);
+    Page<CompanyResponse> getByStatus(String status, String search, Pageable pageable);
 
-    Optional<Company> findByEmail(String email);
+    CompanyResponse findById(Long id);
 
-    Optional<Company> findByCode(String code);
+    CompanyResponse findByCode(String code);
 
-    List<Company> findByStatus(String status);
+    Company save(MultipartFile logo, CompanyRequest companyRequest) throws IOException;
 
-    List<Company> findAll();
-
-    Optional<Company> findById(Long id);
-
-    Company save (Company company);
-
-
-    Company activate(Long id);
-
-    Company deactivate(Long id);
+    Company update (Long id, MultipartFile logo, CompanyRequest companyRequest) throws IOException;
 
 }

@@ -24,7 +24,7 @@ export class App {
   }
 
   async getCompany(): Promise<void> {
-    const company = await firstValueFrom(this.configService.findByCode('COMP0001'));
+    const company = await firstValueFrom(this.configService.findByCode('COMSANANDRES'));
 
     this.titleService.setTitle(company.name);
 

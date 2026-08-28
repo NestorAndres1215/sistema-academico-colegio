@@ -25,4 +25,10 @@ public interface CompanyRepositoryPort {
     Optional<Company> findById(Long id);
 
     Company save (Company company);
+
+    boolean existsByEmail(String email);
+
+    boolean existsByCode(String code);
+
+    boolean existsByTaxId(String taxId);
 }

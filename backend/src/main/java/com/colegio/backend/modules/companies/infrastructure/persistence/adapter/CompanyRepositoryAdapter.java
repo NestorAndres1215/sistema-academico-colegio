@@ -65,4 +65,19 @@ public class CompanyRepositoryAdapter implements CompanyRepositoryPort {
         CompanyEntity savedEntity = jpaCompanyRepository.save(entity);
         return companyMapperPersistence.toDomain(savedEntity);
     }
+
+    @Override
+    public boolean existsByEmail(String email) {
+        return jpaCompanyRepository.existsByEmail(email);
+    }
+
+    @Override
+    public boolean existsByCode(String code) {
+        return jpaCompanyRepository.existsByCode(code);
+    }
+
+    @Override
+    public boolean existsByTaxId(String taxId) {
+        return jpaCompanyRepository.existsByTaxId(taxId);
+    }
 }
