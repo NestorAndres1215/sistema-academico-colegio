@@ -10,6 +10,10 @@ export const CONFIGURATION_ROUTES: Routes = [
     loadComponent: () => import('./theme/theme').then((m) => m.Theme),
   },
   {
+    path: 'historial-usuarios',
+    loadComponent: () => import('./user-history/user-history').then((m) => m.UserHistory),
+  },
+  {
     path: 'company',
     loadComponent: () => import('./company/company').then((m) => m.Company),
   },

@@ -4,8 +4,9 @@ import { inject, Service } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { CompanyRequest } from '../models/company-request';
-import { environment } from '../../../../environments/environment';
-import { CompanyModel } from '../models/company.model';
+import { environment } from '../../../../../environments/environment';
+import { CompanyResponse } from '../models/company-response';
+
 
 @Service()
 export class CompanyService {
@@ -26,24 +27,24 @@ export class CompanyService {
     return this.http.get<any>(`${this.backendUrl}/companies`, { params });
   }
 
-  findByCode(code: string): Observable<CompanyModel> {
-    return this.http.get<CompanyModel>(`${this.backendUrl}/companies/code/${code}`);
+  findByCode(code: string): Observable<CompanyResponse> {
+    return this.http.get<CompanyResponse>(`${this.backendUrl}/companies/code/${code}`);
   }
 
-  findById(id: number): Observable<CompanyModel> {
-    return this.http.get<CompanyModel>(`${this.backendUrl}/companies/${id}`);
+  findById(id: number): Observable<CompanyResponse> {
+    return this.http.get<CompanyResponse>(`${this.backendUrl}/companies/${id}`);
   }
 
-  create(request: CompanyRequest, logo?: File): Observable<CompanyModel> {
+  create(request: CompanyRequest, logo?: File): Observable<CompanyResponse> {
     const formData = this.toFormData(request, logo);
 
-    return this.http.post<CompanyModel>(`${this.backendUrl}/companies`, formData);
+    return this.http.post<CompanyResponse>(`${this.backendUrl}/companies`, formData);
   }
 
-  update(id: number, request: CompanyRequest, logo?: File): Observable<CompanyModel> {
+  update(id: number, request: CompanyRequest, logo?: File): Observable<CompanyResponse> {
     const formData = this.toFormData(request, logo);
 
-    return this.http.put<CompanyModel>(`${this.backendUrl}/companies/${id}`, formData);
+    return this.http.put<CompanyResponse>(`${this.backendUrl}/companies/${id}`, formData);
   }
 
   private toFormData(request: CompanyRequest, logo?: File): FormData {

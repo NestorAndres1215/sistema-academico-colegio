@@ -13,7 +13,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Button } from '../../../shared/ui/button/button';
-import { CompanyService } from '../../../core/company/services/company.service';
+import { CompanyService } from '../../../core/modules/company/services/company.service';
+import { FileService } from '../../../core/services/file.service';
+
 @Component({
   imports: [
     CommonModule,
@@ -33,6 +35,7 @@ export class Login {
   private readonly authService = inject(AuthService);
   private readonly companyService = inject(CompanyService);
   private readonly alertService = inject(AlertService);
+  private readonly fileService = inject(FileService);
   private readonly formBuilder = inject(FormBuilder);
   private readonly formValidationService = inject(FormValidationService);
 
@@ -54,6 +57,7 @@ export class Login {
   }
 
   async operar(): Promise<void> {
+    
     if (!this.formValidationService.validate(this.loginForm)) {
       return;
     }
@@ -64,9 +68,10 @@ export class Login {
     };
 
     try {
-
       await firstValueFrom(this.authService.generateToken(login));
+
       this.authService.clearCurrentUser();
+
       const user = await firstValueFrom(this.authService.getCurrentUser());
 
       if (!user?.role) {
@@ -75,12 +80,16 @@ export class Login {
       }
 
       this.navigateByRole(user.role);
+
     } catch (error: any) {
+
       this.alertService.error(error?.error?.message);
+
     }
   }
 
   private navigateByRole(role: string): void {
+
     const routes: Record<string, string> = {
       [ROLES.ROLE_ADMIN]: '/admin',
       [ROLES.ROLE_GUARDIAN]: '/guardian',
@@ -99,9 +108,19 @@ export class Login {
     this.router.navigate([route]);
   }
 
+  async ngOnInit(): Promise<void> {
+    await this.getCompanyLogo();
+  }
+
   async getCompanyLogo(): Promise<void> {
-    const company = await firstValueFrom(this.companyService.findByCode('COMP0001'));
-    this.logoUrl.set(company.logoUrl);
+
+    const company = await firstValueFrom(this.companyService.findByCode('COMSANANDRES'));
+
+    const logoUrl = this.fileService.getFileUrl(company.logoUrl);
+
+    this.logoUrl.set(logoUrl);
+
     this.companyName.set(company.name);
   }
+
 }

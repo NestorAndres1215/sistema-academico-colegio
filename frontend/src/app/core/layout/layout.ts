@@ -19,8 +19,9 @@ import { Toolbar } from './toolbar/toolbar';
 import { Sidebar } from './sidebar/sidebar';
 import { Menu } from '../models/menu.model';
 import { AuthService } from '../auth/service/auth.service';
-import { CompanyService } from '../company/services/company.service';
+
 import { ROLES } from '../auth/constants/roles';
+import { CompanyService } from '../modules/company/services/company.service';
 
 @Component({
   selector: 'app-layout',

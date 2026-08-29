@@ -1,0 +1,145 @@
+.pagination-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 32px 0;
+  flex-wrap: wrap;
+}
+
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: nowrap;
+}
+
+/* --- mat-select de tamaño de página --- */
+.page-size-field {
+  width: 160px;
+}
+
+:host ::ng-deep .page-size-field .mat-mdc-form-field-subscript-wrapper {
+  display: none;
+}
+
+:host ::ng-deep .page-size-field .mat-mdc-text-field-wrapper {
+  background-color: var(--color-bg-card);
+  border-radius: 14px;
+}
+
+:host ::ng-deep .page-size-field .mat-mdc-form-field-flex {
+  height: 48px;
+  align-items: center;
+}
+
+:host ::ng-deep .page-size-field .mdc-notched-outline__leading,
+:host ::ng-deep .page-size-field .mdc-notched-outline__notch,
+:host ::ng-deep .page-size-field .mdc-notched-outline__trailing {
+  border-color: var(--color-border) !important;
+}
+
+:host ::ng-deep .page-size-field .mdc-notched-outline__leading {
+  border-radius: 14px 0 0 14px !important;
+}
+
+:host ::ng-deep .page-size-field .mdc-notched-outline__trailing {
+  border-radius: 0 14px 14px 0 !important;
+}
+
+/* Texto y flecha del select — el color debe llegar hasta el span interno */
+:host ::ng-deep .page-size-field .mat-mdc-select-value,
+:host ::ng-deep .page-size-field .mat-mdc-select-value-text,
+:host ::ng-deep .page-size-field .mat-mdc-select-min-line {
+  color: var(--color-texto-primario) !important;
+  opacity: 1 !important;
+  font-size: 14px;
+}
+
+:host ::ng-deep .page-size-field .mat-mdc-select-arrow {
+  color: var(--color-texto-primario) !important;
+}
+
+:host ::ng-deep .page-size-field.mat-focused .mdc-notched-outline__leading,
+:host ::ng-deep .page-size-field.mat-focused .mdc-notched-outline__notch,
+:host ::ng-deep .page-size-field.mat-focused .mdc-notched-outline__trailing {
+  border-color: var(--color-principal) !important;
+  border-width: 2px !important;
+}
+
+/* --- Botones de navegación --- */
+.btn-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 48px;
+  padding: 0 20px;
+  font-weight: 600;
+  font-size: 14px;
+  background-color: var(--color-bg-card);
+  color: var(--color-texto-primario);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease, transform 0.1s ease;
+}
+
+.btn-nav i {
+  font-size: 12px;
+}
+
+.btn-nav:hover:not(:disabled) {
+  background-color: var(--color-bg-hover, rgba(255, 255, 255, 0.06));
+  border-color: var(--color-principal);
+}
+
+.btn-nav:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.btn-nav:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.page-info {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 48px;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--color-texto-primario);
+  padding: 0 12px;
+  white-space: nowrap;
+}
+
+.current-page {
+  color: var(--color-principal);
+}
+
+.separator {
+  opacity: 0.5;
+}
+
+.total-pages {
+  opacity: 0.7;
+}
+
+@media (max-width: 480px) {
+  .btn-nav {
+    padding: 0 14px;
+    font-size: 13px;
+  }
+
+  .btn-nav .fas {
+    display: none;
+  }
+
+  .page-size-field {
+    width: 130px;
+  }
+}

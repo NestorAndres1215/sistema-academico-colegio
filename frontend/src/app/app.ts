@@ -2,10 +2,11 @@ import { Component, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ThemeOption } from './core/models/theme.model';
 import { firstValueFrom } from 'rxjs';
-import { CompanyService } from './core/company/services/company.service';
+
 import { ThemeService } from './core/services/theme.service';
 import { Title } from '@angular/platform-browser';
 import { FileService } from './core/services/file.service';
+import { CompanyService } from './core/modules/company/services/company.service';
 
 @Component({
   imports: [RouterOutlet],

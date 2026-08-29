@@ -1,0 +1,79 @@
+<div class="container">
+  <app-bread-crumb [items]="breadcrumbs()"></app-bread-crumb>
+
+  <app-page-header [icon]="icon" [title]="title" [subtitle]="subtitle"> </app-page-header>
+
+  <div class="filters-row">
+    <app-search
+      [placeholder]="'Buscar por acción, módulo o descripción...'"
+      (searchChange)="onSearch($event)"
+    >
+    </app-search>
+
+    <div class="date-group">
+      <mat-form-field appearance="outline" class="date-field">
+        <input
+          matInput
+          [matDatepicker]="fromPicker"
+          placeholder="Desde"
+          [ngModel]="dateFrom()"
+          (ngModelChange)="onDateFromChange($event)"
+        />
+        <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+        <mat-datepicker #fromPicker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="date-field">
+        <input
+          matInput
+          [matDatepicker]="toPicker"
+          placeholder="Hasta"
+          [ngModel]="dateTo()"
+          (ngModelChange)="onDateToChange($event)"
+        />
+        <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+        <mat-datepicker #toPicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="actions-group">
+      @if (dateFrom() || dateTo()) {
+        <app-button
+          label="Limpiar fechas"
+          icon="close"
+          variant="secondary"
+          (clicked)="clearDateFilters()"
+        >
+        </app-button>
+      }
+
+      <app-button
+        [label]="sort() === 'desc' ? 'Más reciente' : 'Más antiguo'"
+        [icon]="sort() === 'desc' ? 'south' : 'north'"
+        variant="secondary"
+        (clicked)="toggleSortByDate()"
+      >
+      </app-button>
+    </div>
+  </div>
+  <app-data-table [columns]="columns" [data]="logs()" [actions]="[]">
+    <ng-template #cellTemplate let-column="column" let-value="value">
+      @if (column === 'createdAt') {
+        {{ value | date: 'dd/MM/yyyy HH:mm' }}
+      } @else if (column === 'action') {
+        <span class="action-badge">{{ value }}</span>
+      } @else {
+        {{ value }}
+      }
+    </ng-template>
+  </app-data-table>
+
+  <app-pagination
+    [totalItems]="totalItems()"
+    [currentPage]="currentPage() + 1"
+    [pageSize]="pageSize()"
+    (pageChange)="onPageChange($event)"
+    (pageSizeChange)="onPageSizeChange($event)"
+  >
+  </app-pagination>
+</div>

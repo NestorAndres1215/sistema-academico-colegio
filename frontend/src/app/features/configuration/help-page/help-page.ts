@@ -31,7 +31,7 @@ export class HelpPage {
 
     this.breadcrumbs.set([
       { label: 'Inicio', href: homeRoute },
-      { label: 'Gui de Sistema' }
+      { label: 'Guia de Sistema' }
     ]);
 
   }

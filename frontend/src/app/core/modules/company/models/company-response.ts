@@ -1,4 +1,4 @@
-export interface CompanyModel {
+export interface CompanyResponse {
   id: number;
   code: string;
   name: string;

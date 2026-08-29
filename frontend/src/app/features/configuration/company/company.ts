@@ -10,13 +10,15 @@ import { BreadCrumb } from '../../../shared/ui/bread-crumb/bread-crumb';
 import { FormValidationService } from '../../../core/services/form-validation.service';
 import { AlertService } from '../../../core/services/alert.service';
 import { Button } from '../../../shared/ui/button/button';
-import { CompanyService } from '../../../core/company/services/company.service';
+
 import { AuthService } from '../../../core/auth/service/auth.service';
 import { BreadcrumbItem } from '../../../shared/models/breadcrumb.model';
-import { CompanyModel } from '../../../core/company/models/company.model';
-import { CompanyRequest } from '../../../core/company/models/company-request';
+
 import { PageHeader } from '../../../shared/ui/page-header/page-header';
 import { FileService } from '../../../core/services/file.service';
+import { CompanyService } from '../../../core/modules/company/services/company.service';
+import { CompanyResponse } from '../../../core/modules/company/models/company-response';
+import { CompanyRequest } from '../../../core/modules/company/models/company-request';
 
 @Component({
   selector: 'app-company',
@@ -46,7 +48,7 @@ export class Company implements OnInit {
   readonly editMode = signal(false);
   readonly success = signal(false);
   readonly logoPreview = signal<string | null>(null);
-  readonly company = signal<CompanyModel | null>(null);
+  readonly company = signal<CompanyResponse | null>(null);
 
   readonly icon = 'business';
   readonly title = 'Mi compañía';
@@ -101,7 +103,7 @@ export class Company implements OnInit {
     this.patchForm(data);
   }
 
-  private patchForm(c: CompanyModel): void {
+  private patchForm(c: CompanyResponse): void {
     this.companyForm.patchValue({
       name: c.name,
       businessName: c.businessName,
@@ -207,5 +209,4 @@ export class Company implements OnInit {
   triggerLogoInput(): void {
     document.getElementById('logo-input')?.click();
   }
-  
 }
