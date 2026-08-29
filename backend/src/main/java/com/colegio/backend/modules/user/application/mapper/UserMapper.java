@@ -22,12 +22,7 @@ public class UserMapper {
         );
     }
 
-    public User toDomain(
-            String email,
-            String username,
-            String password,
-            Role role
-    ) {
+    public User toDomain(String email, String username, String password, Role role) {
         return User.builder()
                 .email(email)
                 .username(username)
@@ -38,18 +33,11 @@ public class UserMapper {
                 .build();
     }
 
-    public User updateDomain(
-            User user,
-            String email,
-            String username,
-            Role role
-    ) {
+    public void updateDomain(User user, String email, String username, Role role) {
         user.setEmail(email);
         user.setUsername(username);
         user.setRoles(Collections.singletonList(role));
         user.setUpdatedAt(LocalDateTime.now());
-
-        return user;
     }
 
     private String getRole(User user) {

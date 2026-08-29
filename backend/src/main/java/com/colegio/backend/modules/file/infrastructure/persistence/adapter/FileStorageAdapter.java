@@ -48,12 +48,7 @@ public class FileStorageAdapter implements FileStoragePort {
                 .normalize();
 
         try (InputStream inputStream = file.getInputStream()) {
-
-            Files.copy(
-                    inputStream,
-                    destination,
-                    StandardCopyOption.REPLACE_EXISTING
-            );
+            Files.copy(inputStream, destination, StandardCopyOption.REPLACE_EXISTING);
         }
 
         return "/assets/" + folder + "/" + fileName;

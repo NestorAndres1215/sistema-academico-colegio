@@ -14,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
-import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -37,9 +36,7 @@ public class CompanyController {
             @RequestPart(value = "file", required = false) MultipartFile file,
             @Valid @RequestPart("company") CompanyRequest request
     ) throws Exception {
-        return ResponseEntity.ok(
-                companyUseCase.save(file, request)
-        );
+        return ResponseEntity.ok(companyUseCase.save(file, request));
     }
 
     @Operation(summary = "Update an existing company")

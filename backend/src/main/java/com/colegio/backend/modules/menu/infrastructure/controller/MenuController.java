@@ -20,10 +20,10 @@ public class MenuController {
 
     private final MenuUseCase menuUseCase;
 
-    @Operation(summary = "Get all menu")
+    @Operation(summary = "Get all with children menu")
     @GetMapping
-    public ResponseEntity<List<Menu>> getAll() {
-        return ResponseEntity.ok(menuUseCase.findAll());
+    public ResponseEntity<List<Menu>> getAllWithChildren() {
+        return ResponseEntity.ok(menuUseCase.findAllWithChildren());
     }
 
 }

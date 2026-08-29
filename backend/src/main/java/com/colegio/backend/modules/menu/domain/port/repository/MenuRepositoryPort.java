@@ -4,5 +4,5 @@ import com.colegio.backend.modules.menu.domain.model.Menu;
 import java.util.List;
 
 public interface MenuRepositoryPort {
-    List<Menu> findAll();
+    List<Menu> findAllWithChildren();
 }

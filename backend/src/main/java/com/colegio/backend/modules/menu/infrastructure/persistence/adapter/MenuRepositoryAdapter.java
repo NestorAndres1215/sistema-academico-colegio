@@ -19,7 +19,7 @@ public class MenuRepositoryAdapter implements MenuRepositoryPort {
     private final MenuMapperPersistence menuMapperPersistence;
 
     @Override
-    public List<Menu> findAll() {
+    public List<Menu> findAllWithChildren() {
         Set<Long> visited = new HashSet<>();
         return jpaMenuRepository.findAllWithChildren().stream()
                 .map(menuEntity ->

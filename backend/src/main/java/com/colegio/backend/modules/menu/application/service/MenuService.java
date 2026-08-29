@@ -15,8 +15,8 @@ public class MenuService implements MenuUseCase {
     private final MenuRepositoryPort menuRepositoryPort;
 
     @Override
-    public List<Menu> findAll() {
-        return menuRepositoryPort.findAll();
+    public List<Menu> findAllWithChildren() {
+        return menuRepositoryPort.findAllWithChildren();
     }
 
 }

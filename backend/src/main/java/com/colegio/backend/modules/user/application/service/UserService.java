@@ -32,20 +32,14 @@ public class UserService implements UserUseCase {
 
     @Override
     public UserResponse findByEmail(String email) {
-
-        User user = userRepositoryPort.findByEmail(email)
-                .orElseThrow(() -> new NotFoundException("Email not found"));
-
-        return userMapper.toResponse(user);
+        return userRepositoryPort.findByEmail(email)
+                .map(userMapper::toResponse)
+                .orElseThrow(() -> new NotFoundException("Correo electrónico no encontrado"));
     }
-
 
     @Override
     public UserResponse findById(Long id) {
-
-        User user = findUserById(id);
-
-        return userMapper.toResponse(user);
+        return userMapper.toResponse(findUserById(id));
     }
 
     @Override
