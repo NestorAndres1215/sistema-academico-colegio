@@ -3,23 +3,12 @@ import { inject, Service } from '@angular/core';
 import { catchError, Observable, of, shareReplay, Subject, tap } from 'rxjs';
 
 import { environment } from '../../../../environments/environment';
-import { LoginRequest } from '../models/login.model';
-import { UserResponse } from '../models/user-response';
-
-export interface TokenResponse {
-  message: string;
-  token: string;
-  user: string;
-  email: string;
-  role: string;
-  expiration: string;
-}
-
-
+import { LoginRequest } from '../models/login-response';
+import { TokenResponse } from '../models/token-response';
+import { UserResponse } from '../../modules/user/models/user-response';
 
 @Service()
 export class AuthService {
-
   private readonly http = inject(HttpClient);
   private readonly backendUrl = environment.apiUrl;
 
@@ -27,28 +16,19 @@ export class AuthService {
 
   private currentUser$: Observable<UserResponse | null> | null = null;
 
-generateToken(loginData: LoginRequest): Observable<TokenResponse> {
+  generateToken(loginData: LoginRequest): Observable<TokenResponse> {
+    console.log('URL:', `${this.backendUrl}/auth/generate-token`);
+    console.log('BODY:', loginData);
 
-  console.log('URL:', `${this.backendUrl}/auth/generate-token`);
-  console.log('BODY:', loginData);
-
-  return this.http.post<TokenResponse>(
-    `${this.backendUrl}/auth/generate-token`,
-    loginData
-  );
-}
+    return this.http.post<TokenResponse>(`${this.backendUrl}/auth/generate-token`, loginData);
+  }
 
   getCurrentUser(): Observable<UserResponse | null> {
-
     if (!this.currentUser$) {
-      this.currentUser$ = this.http
-        .get<UserResponse>(
-          `${this.backendUrl}/auth/current-user`
-        )
-        .pipe(
-          catchError(() => of(null)),
-          shareReplay(1)
-        );
+      this.currentUser$ = this.http.get<UserResponse>(`${this.backendUrl}/auth/current-user`).pipe(
+        catchError(() => of(null)),
+        shareReplay(1),
+      );
     }
 
     return this.currentUser$;
@@ -59,25 +39,20 @@ generateToken(loginData: LoginRequest): Observable<TokenResponse> {
   }
 
   logout(): Observable<unknown> {
-    return this.http
-      .post(
-        `${this.backendUrl}/auth/logout`,
-        {}
-      )
-      .pipe(
-        tap(() => {
-          this.clearCurrentUser();
-          this.loginStatusSubject.next(false);
-        }),
-        catchError(error => {
-          console.error('Error cerrando sesión:', error);
+    return this.http.post(`${this.backendUrl}/auth/logout`, {}).pipe(
+      tap(() => {
+        this.clearCurrentUser();
+        this.loginStatusSubject.next(false);
+      }),
+      catchError((error) => {
+        console.error('Error cerrando sesión:', error);
 
-          this.clearCurrentUser();
-          this.loginStatusSubject.next(false);
+        this.clearCurrentUser();
+        this.loginStatusSubject.next(false);
 
-          return of(null);
-        })
-      );
+        return of(null);
+      }),
+    );
   }
 
   getHomeByRole(role: string): string {
@@ -86,7 +61,7 @@ generateToken(loginData: LoginRequest): Observable<TokenResponse> {
       ROLE_GUARDIAN: '/guardian',
       ROLE_STAFF: '/staff',
       ROLE_TEACHER: '/teacher',
-      ROLE_STUDENT: '/student'
+      ROLE_STUDENT: '/student',
     };
 
     return map[role] ?? '/';

@@ -4,7 +4,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormValidationService } from '../../../core/services/form-validation.service';
 import { AuthService } from '../../../core/auth/service/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { LoginRequest } from '../../../core/auth/models/login.model';
+import { LoginRequest } from '../../../core/auth/models/login-response';
 import { firstValueFrom } from 'rxjs';
 import { ROLES } from '../../../core/auth/constants/roles';
 import { CommonModule } from '@angular/common';

@@ -1,8 +1,8 @@
-import { Role } from "./role.interface";
+import { RoleResponse } from "./role-response";
 
 
 
-export interface Menu {
+export interface MenuResponse {
     id: string;
     code: string;
     name: string;
@@ -10,8 +10,8 @@ export interface Menu {
     route?: string;
     menuOrder?: string;
     category?: string;
-    parent?: Menu | null;
-    roles: Role[];
-    children?: Menu[];
+    parent?: MenuResponse | null;
+    roles: RoleResponse[];
+    children?: MenuResponse[];
     mostrarSubMenu?: boolean;
 }

@@ -17,11 +17,12 @@ import { firstValueFrom, Subscription } from 'rxjs';
 
 import { Toolbar } from './toolbar/toolbar';
 import { Sidebar } from './sidebar/sidebar';
-import { Menu } from '../models/menu.model';
+
 import { AuthService } from '../auth/service/auth.service';
 
 import { ROLES } from '../auth/constants/roles';
 import { CompanyService } from '../modules/company/services/company.service';
+import { MenuResponse } from '../models/menu-response';
 
 @Component({
   selector: 'app-layout',
@@ -38,7 +39,7 @@ export class Layout implements OnInit, OnDestroy {
   readonly userRoleName = signal('');
   readonly username = signal('');
   readonly codigo = signal(0);
-  readonly mainMenus = signal<Menu[]>([]);
+  readonly mainMenus = signal<MenuResponse[]>([]);
   readonly nameSchool = signal('');
   readonly footerText = signal('Sistema seguro · v1.0.0');
   private readonly menuService = inject(MenuService);
@@ -100,20 +101,20 @@ export class Layout implements OnInit, OnDestroy {
   async loadMenus(): Promise<void> {
     const menus = await firstValueFrom(this.menuService.getAll());
 
-    const valid = menus.filter((m: Menu) => !!m);
+    const valid = menus.filter((m: MenuResponse) => !!m);
 
     this.mainMenus.set(
       valid
-        .filter((m: Menu) => m.roles?.some((r) => r.name === this.userRoleName()))
-        .sort((a: Menu, b: Menu) => Number(a.menuOrder) - Number(b.menuOrder))
-        .map((m: Menu) => ({
+        .filter((m: MenuResponse) => m.roles?.some((r) => r.name === this.userRoleName()))
+        .sort((a: MenuResponse, b: MenuResponse) => Number(a.menuOrder) - Number(b.menuOrder))
+        .map((m: MenuResponse) => ({
           ...m,
           children: (m.children ?? [])
-            .sort((a: Menu, b: Menu) => Number(a.menuOrder) - Number(b.menuOrder))
-            .map((child: Menu) => ({
+            .sort((a: MenuResponse, b: MenuResponse) => Number(a.menuOrder) - Number(b.menuOrder))
+            .map((child: MenuResponse) => ({
               ...child,
               children: (child.children ?? []).sort(
-                (a: Menu, b: Menu) => Number(a.menuOrder) - Number(b.menuOrder),
+                (a: MenuResponse, b: MenuResponse) => Number(a.menuOrder) - Number(b.menuOrder),
               ),
             })),
           mostrarSubMenu: false,

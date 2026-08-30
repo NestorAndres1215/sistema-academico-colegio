@@ -3,8 +3,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { Router } from '@angular/router';
 import { MatSidenav } from '@angular/material/sidenav';
-import { Menu } from '../../models/menu.model';
-
+import { MenuResponse } from '../../models/menu-response';
 
 @Component({
   selector: 'app-sidebar',
@@ -14,18 +13,18 @@ import { Menu } from '../../models/menu.model';
   styleUrl: './sidebar.css',
 })
 export class Sidebar {
-  readonly mainMenus = input<Menu[]>([]);
+  readonly mainMenus = input<MenuResponse[]>([]);
   readonly footerText = input('');
   readonly isMobile = input(false);
   readonly sidenavRef = input<MatSidenav | null>(null);
 
   private readonly router = inject(Router);
 
-  toggleSubMenu(menu: Menu): void {
+  toggleSubMenu(menu: MenuResponse): void {
     menu.mostrarSubMenu = !menu.mostrarSubMenu;
   }
 
-  handleClick(menu: Menu): void {
+  handleClick(menu: MenuResponse): void {
     if (menu.children?.length) {
       this.toggleSubMenu(menu);
       return;
@@ -44,7 +43,7 @@ export class Sidebar {
     if (this.isMobile()) this.sidenavRef()?.close();
   }
 
-  hasChildren(menu: Menu): boolean {
+  hasChildren(menu: MenuResponse): boolean {
     return !!menu.children?.length;
   }
 }
