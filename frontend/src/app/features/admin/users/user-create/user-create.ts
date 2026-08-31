@@ -19,6 +19,7 @@ import { firstValueFrom } from 'rxjs';
 import { CreateUserRequest } from '../../../../core/modules/user/models/create-user-request';
 import { ROLES } from '../../../../core/auth/constants/roles';
 import { Router } from '@angular/router';
+import { HttpErrorService } from '../../../../core/services/http-error.service';
 
 @Component({
   imports: [
@@ -45,6 +46,7 @@ export class UserCreate {
   private readonly userService = inject(UserService);
   private readonly alertService = inject(AlertService);
   private readonly formValidationService = inject(FormValidationService);
+  private readonly httpErrorService = inject(HttpErrorService);
   private readonly router = inject(Router);
   readonly icon = 'person_add';
   readonly title = 'Registrar usuario';
@@ -71,7 +73,6 @@ export class UserCreate {
       password: ['', [Validators.required]],
       confirmPassword: ['', Validators.required],
     },
-    {},
   );
 
   togglePassword(): void {
@@ -99,8 +100,9 @@ export class UserCreate {
       this.alertService.success('Administrador Registro');
 
       this.router.navigate(['/admin/usuarios/listado-usuario']);
-    } catch (error: any) {
-      this.alertService.error(error.error?.message);
+    } catch (error: unknown) {
+
+      this.alertService.error(this.httpErrorService.getMessage(error));
     }
   }
 

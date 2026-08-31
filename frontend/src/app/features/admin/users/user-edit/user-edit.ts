@@ -17,6 +17,7 @@ import { FormValidationService } from '../../../../core/services/form-validation
 import { AlertService } from '../../../../core/services/alert.service';
 import { UserService } from '../../../../core/modules/user/services/user.service';
 import { BreadcrumbItem } from '../../../../shared/models/breadcrumb.model';
+import { HttpErrorService } from '../../../../core/services/http-error.service';
 
 @Component({
   imports: [
@@ -46,6 +47,7 @@ export class UserEdit {
   private readonly adminService = inject(UserService);
   private readonly formValidationService = inject(FormValidationService);
   private readonly alertService = inject(AlertService);
+  private readonly httpErrorService = inject(HttpErrorService);
   private readonly router = inject(Router);
   private readonly fb = inject(FormBuilder)
 
@@ -105,10 +107,10 @@ export class UserEdit {
 
       this.router.navigate(['/admin/usuarios/listado-usuario']);
 
-    } catch (error: any) {
+    } catch (error: unknown) {
+
       this.alertService.error(
-        'Error al actualizar',
-        error?.error?.message ?? 'No se pudo actualizar el administrador.'
+        this.httpErrorService.getMessage(error)
       );
     }
   }

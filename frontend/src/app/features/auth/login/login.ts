@@ -15,6 +15,7 @@ import { MatInputModule } from '@angular/material/input';
 import { Button } from '../../../shared/ui/button/button';
 import { CompanyService } from '../../../core/modules/company/services/company.service';
 import { FileService } from '../../../core/services/file.service';
+import { HttpErrorService } from '../../../core/services/http-error.service';
 
 @Component({
   imports: [
@@ -38,7 +39,7 @@ export class Login {
   private readonly fileService = inject(FileService);
   private readonly formBuilder = inject(FormBuilder);
   private readonly formValidationService = inject(FormValidationService);
-
+  private readonly httpErrorService = inject(HttpErrorService);
   readonly hidePassword = signal(true);
   readonly logoUrl = signal<string | null>(null);
   readonly companyName = signal<string>('');
@@ -57,7 +58,7 @@ export class Login {
   }
 
   async operar(): Promise<void> {
-    
+
     if (!this.formValidationService.validate(this.loginForm)) {
       return;
     }
@@ -81,10 +82,8 @@ export class Login {
 
       this.navigateByRole(user.role);
 
-    } catch (error: any) {
-
-      this.alertService.error(error?.error?.message);
-
+    } catch (error: unknown) {
+      this.alertService.error(this.httpErrorService.getMessage(error));
     }
   }
 

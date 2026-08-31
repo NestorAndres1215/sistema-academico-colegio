@@ -19,6 +19,7 @@ import { FileService } from '../../../core/services/file.service';
 import { CompanyService } from '../../../core/modules/company/services/company.service';
 import { CompanyResponse } from '../../../core/modules/company/models/company-response';
 import { CompanyRequest } from '../../../core/modules/company/models/company-request';
+import { HttpErrorService } from '../../../core/services/http-error.service';
 
 @Component({
   selector: 'app-company',
@@ -49,7 +50,7 @@ export class Company implements OnInit {
   readonly success = signal(false);
   readonly logoPreview = signal<string | null>(null);
   readonly company = signal<CompanyResponse | null>(null);
-
+  private readonly httpErrorService = inject(HttpErrorService);
   readonly icon = 'business';
   readonly title = 'Mi compañía';
   readonly subtitle = 'Administra la información de tu institución';
@@ -173,9 +174,9 @@ export class Company implements OnInit {
       this.selectedFile = null;
 
       await this.getCompany();
-    } catch (error: any) {
-      console.log(error)
-      this.alertService.error(error.error.message);
+    } catch (error: unknown) {
+
+      this.alertService.error(this.httpErrorService.getMessage(error));
     }
   }
 

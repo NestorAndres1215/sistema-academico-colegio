@@ -112,10 +112,7 @@ export class ChangePassword {
       this.editMode.set(false);
       this.passwordForm.reset();
     } catch (error: unknown) {
-    
-      this.alertService.error(
-        this.httpErrorService.getMessage(error)
-      );
+      this.alertService.error(this.httpErrorService.getMessage(error));
     }
   }
 }
