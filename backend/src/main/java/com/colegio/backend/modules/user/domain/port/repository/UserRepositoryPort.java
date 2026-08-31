@@ -15,13 +15,7 @@ public interface UserRepositoryPort {
 
     Optional<User> findByUsername(String username);
 
-    Optional<User> findByLogin(String login);
-
     Page<User> getByStatus(String status, String search, Pageable pageable);
-
-    List<User> findByStatus(String status);
-
-    List<User> findByEmailAndStatus(String email, String status);
 
     List<User> search(String search, int limit);
 

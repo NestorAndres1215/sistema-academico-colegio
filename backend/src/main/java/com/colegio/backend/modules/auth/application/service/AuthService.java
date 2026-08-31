@@ -76,8 +76,7 @@ public class AuthService implements AuthUseCase {
         return userRepositoryPort.findByUsername(login)
                 .orElseGet(() ->
                         userRepositoryPort.findByEmail(login)
-                                .orElseThrow(() ->
-                                        new NotFoundException("Usuario no encontrado")));
+                                .orElseThrow(() -> new NotFoundException("Usuario no encontrado")));
     }
 
 }

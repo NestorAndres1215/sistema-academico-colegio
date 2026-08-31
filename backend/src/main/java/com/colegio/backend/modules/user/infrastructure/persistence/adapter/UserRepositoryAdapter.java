@@ -34,32 +34,11 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
     }
 
     @Override
-    public Optional<User> findByLogin(String login) {
-        return jpaUserRepository.findByEmailOrUsername(login, login)
-                .map(userMapperPersistence::toDomain);
-    }
-
-    @Override
     public Page<User> getByStatus(String status, String search, Pageable pageable) {
         return jpaUserRepository.searchByStatus(status, search, pageable)
                 .map(userMapperPersistence::toDomain);
     }
 
-    @Override
-    public List<User> findByStatus(String status) {
-        return jpaUserRepository.findByStatus(status)
-                .stream()
-                .map(userMapperPersistence::toDomain)
-                .toList();
-    }
-
-    @Override
-    public List<User> findByEmailAndStatus(String email, String status) {
-        return jpaUserRepository.findByEmailAndStatus(email,status)
-                .stream()
-                .map(userMapperPersistence::toDomain)
-                .toList();
-    }
 
     @Override
     public List<User> search(String search, int limit) {

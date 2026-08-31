@@ -14,10 +14,6 @@ public interface UserUseCase {
 
     UserResponse findById(Long id);
 
-    List<UserResponse> findByStatus(String status);
-
-    List<UserResponse> findByEmailAndStatus(String email, String status);
-
     List<UserResponse> search(String search);
 
     Page<UserResponse> getByStatus(String status, String search, Pageable pageable);
@@ -29,8 +25,6 @@ public interface UserUseCase {
     User activateUser (Long id);
 
     User deactivateUser (Long id);
-
-    User blockedUser (Long id);
 
     User changePassword(Long userId, PasswordRequest passwordRequest);
 }

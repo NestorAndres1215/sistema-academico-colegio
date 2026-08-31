@@ -15,28 +15,38 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class RefreshTokenService implements RefreshTokenUseCase {
 
+
     private final RefreshTokenRepositoryPort refreshTokenRepositoryPort;
     private final RefreshTokenMapper refreshTokenMapper;
     private final UserRepositoryPort userRepositoryPort;
 
     @Override
     public RefreshToken save(Long userId, String jwt) {
-        User user = userRepositoryPort.findById(userId)
-                .orElseThrow(() -> new NotFoundException("User not found"));
+
+        User user = findUserById(userId);
 
         RefreshToken refreshToken = refreshTokenMapper.toDomain(jwt, user);
 
         return refreshTokenRepositoryPort.save(refreshToken);
     }
 
-
-
+    @Override
     public void invalidateToken(String jwt) {
 
-        RefreshToken token = refreshTokenRepositoryPort.findByToken(jwt)
-                .orElseThrow(() -> new NotFoundException("Token not found"));
+        RefreshToken token = findTokenByJwt(jwt);
 
         token.setStatus(StatusConstants.INACTIVE);
+
         refreshTokenRepositoryPort.save(token);
+    }
+
+    private User findUserById(Long userId) {
+        return userRepositoryPort.findById(userId)
+                .orElseThrow(() -> new NotFoundException("Usuario no encontrado"));
+    }
+
+    private RefreshToken findTokenByJwt(String jwt) {
+        return refreshTokenRepositoryPort.findByToken(jwt)
+                .orElseThrow(() -> new NotFoundException("Token no encontrado"));
     }
 }

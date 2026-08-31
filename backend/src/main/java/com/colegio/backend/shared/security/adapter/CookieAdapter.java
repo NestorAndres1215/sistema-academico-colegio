@@ -12,6 +12,7 @@ public class CookieAdapter implements CookiePort {
 
     private static final String JWT_COOKIE = "jwt";
     private static final int MAX_AGE = 7 * 24 * 60 * 60;
+
     private final HttpServletResponse response;
 
     @Override
@@ -32,37 +33,22 @@ public class CookieAdapter implements CookiePort {
 
     @Override
     public void saveJwt(String token) {
-        saveCookie(JWT_COOKIE, token);
+        addCookie(token, MAX_AGE);
     }
 
     @Override
     public void deleteJwt() {
-        deleteCookie(JWT_COOKIE);
+        addCookie("", 0);
     }
 
+    private void addCookie(String value, int maxAge) {
 
-    private void saveCookie(String name, String value) {
-
-        Cookie cookie = new Cookie(name, value);
-
+        Cookie cookie = new Cookie(CookieAdapter.JWT_COOKIE, value);
         cookie.setHttpOnly(true);
         cookie.setSecure(false);
         cookie.setPath("/");
-        cookie.setMaxAge(MAX_AGE);
+        cookie.setMaxAge(maxAge);
 
         response.addCookie(cookie);
     }
-
-    private void deleteCookie(String name) {
-
-        Cookie cookie = new Cookie(name, "");
-
-        cookie.setHttpOnly(true);
-        cookie.setSecure(false);
-        cookie.setPath("/");
-        cookie.setMaxAge(0);
-
-        response.addCookie(cookie);
-    }
-
 }

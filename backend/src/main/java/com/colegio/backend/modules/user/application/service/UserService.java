@@ -2,6 +2,7 @@ package com.colegio.backend.modules.user.application.service;
 
 import com.colegio.backend.modules.auth.application.dto.PasswordRequest;
 import com.colegio.backend.modules.auth.domain.model.Role;
+import com.colegio.backend.modules.auth.domain.port.repository.RoleRepositoryPort;
 import com.colegio.backend.modules.auth.domain.port.usecase.RoleUseCase;
 import com.colegio.backend.modules.user.application.dto.UserResponse;
 import com.colegio.backend.modules.user.application.mapper.UserMapper;
@@ -25,7 +26,7 @@ public class UserService implements UserUseCase {
 
     private final UserRepositoryPort userRepositoryPort;
     private final PasswordEncoder passwordEncoder;
-    private final RoleUseCase roleUseCase;
+    private final RoleRepositoryPort roleRepositoryPort;
     private final UserMapper userMapper;
     private final UserValidator userValidator;
     private final PasswordValidator passwordValidator;
@@ -42,23 +43,7 @@ public class UserService implements UserUseCase {
         return userMapper.toResponse(findUserById(id));
     }
 
-    @Override
-    public List<UserResponse> findByStatus(String status) {
 
-        return userRepositoryPort.findByStatus(status)
-                .stream()
-                .map(userMapper::toResponse)
-                .toList();
-    }
-
-    @Override
-    public List<UserResponse> findByEmailAndStatus(String email, String status) {
-
-        return userRepositoryPort.findByEmailAndStatus(email, status)
-                .stream()
-                .map(userMapper::toResponse)
-                .toList();
-    }
 
     @Override
     public List<UserResponse> search(String search) {
@@ -89,7 +74,7 @@ public class UserService implements UserUseCase {
 
         userValidator.validateUserDoesNotExist(email, username);
 
-        Role roleModel = roleUseCase.findByName(role);
+        Role roleModel = findRoleByName(role);
 
         User user = userMapper.toDomain(
                 email,
@@ -99,6 +84,11 @@ public class UserService implements UserUseCase {
         );
 
         return userRepositoryPort.save(user);
+    }
+
+    private Role findRoleByName(String name) {
+        return roleRepositoryPort.findByName(name)
+                .orElseThrow(() -> new NotFoundException("Rol no encontrado"));
     }
 
     @Override
@@ -111,7 +101,7 @@ public class UserService implements UserUseCase {
                 username
         );
 
-        Role roleModel = roleUseCase.findByName(role);
+        Role roleModel = findRoleByName(role);
 
         userMapper.updateDomain(
                 existingUser,
@@ -131,11 +121,6 @@ public class UserService implements UserUseCase {
     @Override
     public User deactivateUser(Long id) {
         return updateStatus(id, StatusConstants.INACTIVE);
-    }
-
-    @Override
-    public User blockedUser(Long id) {
-        return updateStatus(id, StatusConstants.BLOCKED);
     }
 
     private User updateStatus(Long id, String status) {

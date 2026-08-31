@@ -54,7 +54,7 @@ public interface JpaUserRepository extends JpaRepository<UserEntity,Long> {
         FROM UserEntity u
         JOIN u.roleEntities r
         WHERE u.status = 'ACTIVE'
-        AND r.name = 'ADMIN'
+        AND r.name = 'ROLE_ADMIN'
         AND (
             LOWER(u.username) LIKE LOWER(CONCAT('%', :search, '%'))
             OR LOWER(u.email) LIKE LOWER(CONCAT('%', :search, '%'))

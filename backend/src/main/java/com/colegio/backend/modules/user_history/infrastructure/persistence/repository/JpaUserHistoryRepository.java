@@ -12,7 +12,7 @@ public interface JpaUserHistoryRepository extends JpaRepository<UserHistoryEntit
 
     @Query("""
         SELECT u
-        FROM UserStoryEntity u
+        FROM UserHistoryEntity u
         WHERE u.user.email = :email
           AND (:status IS NULL OR u.status = :status)
           AND (:action IS NULL OR LOWER(u.action) LIKE LOWER(CONCAT('%', :action, '%')))
