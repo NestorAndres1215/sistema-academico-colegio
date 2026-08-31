@@ -3,36 +3,42 @@ import { inject, Service } from '@angular/core';
 import { environment } from '../../../../../environments/environment';
 import { Observable } from 'rxjs';
 import { UserHistoryResponse } from '../models/user-history-response';
+import { UserHistoryFilter } from '../models/user-history-request';
+import { PageResponse } from '../../../models/page-response';
 
 @Service()
 export class UserHistoryService {
   private readonly http = inject(HttpClient);
   private readonly backendUrl = environment.apiUrl;
 
-  findWithFilters(filters: any): Observable<any> {
+  findWithFilters(
+    userHistoryFilter: UserHistoryFilter,
+  ): Observable<PageResponse<UserHistoryResponse>> {
     let params = new HttpParams()
-      .set('email', filters.email ?? '')
-      .set('page', filters.page ?? 0)
-      .set('size', filters.size ?? 10)
-      .set('sort', filters.sort ?? 'desc');
+      .set('email', userHistoryFilter.email ?? '')
+      .set('page', userHistoryFilter.page ?? 0)
+      .set('size', userHistoryFilter.size ?? 10)
+      .set('sort', userHistoryFilter.sort ?? 'desc');
 
-    if (filters.status) {
-      params = params.set('status', filters.status);
+    if (userHistoryFilter.status) {
+      params = params.set('status', userHistoryFilter.status);
     }
 
-    if (filters.action) {
-      params = params.set('action', filters.action);
+    if (userHistoryFilter.action) {
+      params = params.set('action', userHistoryFilter.action);
     }
 
-    if (filters.dateFrom) {
-      params = params.set('dateFrom', this.formatDate(filters.dateFrom));
+    if (userHistoryFilter.dateFrom) {
+      params = params.set('dateFrom', this.formatDate(userHistoryFilter.dateFrom));
     }
 
-    if (filters.dateTo) {
-      params = params.set('dateTo', this.formatDate(filters.dateTo));
+    if (userHistoryFilter.dateTo) {
+      params = params.set('dateTo', this.formatDate(userHistoryFilter.dateTo));
     }
 
-    return this.http.get<any>(`${this.backendUrl}/user-history`, { params });
+    return this.http.get<PageResponse<UserHistoryResponse>>(`${this.backendUrl}/user-history`, {
+      params,
+    });
   }
 
   private formatDate(date: Date): string {

@@ -1,1 +1,41 @@
-<p>user-edit works!</p>
+<div class="container mb-3">
+  <app-bread-crumb [items]="breadcrumbs()"></app-bread-crumb>
+  <app-page-header [icon]="icon" [title]="title" [subtitle]="subtitle"> </app-page-header>
+  <div class="info-card">
+    <form [formGroup]="editForm" class="register-form">
+      <div class="section-header">
+        <mat-icon>badge</mat-icon>
+        <h3>Datos personales</h3>
+      </div>
+
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <div class="field-group">
+            <label class="field-label">Username</label>
+
+            <mat-form-field appearance="outline" class="field-input">
+              <input matInput formControlName="username" />
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6">
+          <div class="field-group">
+            <label class="field-label">Correo</label>
+
+            <mat-form-field appearance="outline" class="field-input">
+              <input matInput formControlName="email" type="email" />
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <app-button label="Cancelar" icon="close" variant="secondary" (clicked)="cancelar()">
+        </app-button>
+        <app-button label="Guardar cambios" icon="save" variant="primary" (clicked)="operar()">
+        </app-button>
+      </div>
+    </form>
+  </div>
+</div>

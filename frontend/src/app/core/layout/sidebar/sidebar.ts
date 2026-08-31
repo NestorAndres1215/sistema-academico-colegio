@@ -20,18 +20,18 @@ export class Sidebar {
 
   private readonly router = inject(Router);
 
-  toggleSubMenu(menu: MenuResponse): void {
-    menu.mostrarSubMenu = !menu.mostrarSubMenu;
+  toggleSubMenu(menuResponse: MenuResponse): void {
+    menuResponse.mostrarSubMenu = !menuResponse.mostrarSubMenu;
   }
 
-  handleClick(menu: MenuResponse): void {
-    if (menu.children?.length) {
-      this.toggleSubMenu(menu);
+  handleClick(menuResponse: MenuResponse): void {
+    if (menuResponse.children?.length) {
+      this.toggleSubMenu(menuResponse);
       return;
     }
 
-    if (menu.route) {
-      this.router.navigateByUrl(menu.route);
+    if (menuResponse.route) {
+      this.router.navigateByUrl(menuResponse.route);
       if (this.isMobile()) this.sidenavRef()?.close();
       return;
     }
@@ -43,7 +43,7 @@ export class Sidebar {
     if (this.isMobile()) this.sidenavRef()?.close();
   }
 
-  hasChildren(menu: MenuResponse): boolean {
-    return !!menu.children?.length;
+  hasChildren(menuResponse: MenuResponse): boolean {
+    return !!menuResponse.children?.length;
   }
 }

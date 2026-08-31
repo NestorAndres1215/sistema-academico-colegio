@@ -20,7 +20,7 @@ import { PageHeader } from '../../../../shared/ui/page-header/page-header';
   templateUrl: './user-list.html',
 })
 export class UserList {
-  private readonly adminService = inject(UserService);
+  private readonly userService = inject(UserService);
   private readonly router = inject(Router);
   readonly breadcrumbs = signal<BreadcrumbItem[]>([]);
   readonly users = signal<UserResponse[]>([]);
@@ -28,7 +28,7 @@ export class UserList {
   readonly currentPage = signal(1);
   readonly pageSize = signal(5);
   readonly searchTerm = signal('');
-  readonly statusFilter = signal('');
+  readonly statusFilter = signal('ACTIVE');
   readonly icon = 'manage_accounts';
   readonly title = 'Gestión de usuarios';
   readonly subtitle = 'Búsqueda, filtros y administración de usuarios del sistema';
@@ -60,26 +60,18 @@ export class UserList {
   }
 
   async loadUsers(): Promise<void> {
-    const res: any = await firstValueFrom(
-      this.adminService.getByStatus(
-        'ACTIVE',
+    const response = await firstValueFrom(
+      this.userService.getByStatus(
+        this.statusFilter(),
         this.currentPage() - 1,
         this.pageSize(),
         this.searchTerm(),
       ),
     );
 
-    this.users.set(
-      res.content.map((userResponse: UserResponse) => ({
-        id: userResponse.id,
-        username: userResponse.username,
-        email: userResponse.email,
-        role: userResponse.role,
-        status: userResponse.status === 'ACTIVE' ? 'activo' : 'inactivo',
-      })),
-    );
+    this.users.set(response.content);
 
-    this.totalItems.set(res.totalElements);
+    this.totalItems.set(response.totalElements);
   }
 
   onSearch(term: string): void {
@@ -105,7 +97,7 @@ export class UserList {
     this.loadUsers();
   }
 
-  readonly tableActions: TableAction[] = ['print', 'detail', 'edit'];
+  readonly tableActions: TableAction[] = ['detail', 'edit'];
 
   onDetail(userResponse: UserResponse): void {
     this.router.navigate(['/admin/usuarios', userResponse.id]);

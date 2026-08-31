@@ -11,11 +11,12 @@ import { FormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatDatepickerModule } from "@angular/material/datepicker";
-import { Button } from "../../../shared/ui/button/button";
-import { DataTable } from "../../../shared/ui/data-table/data-table";
-import { Pagination } from "../../../shared/ui/pagination/pagination";
-import { Search } from "../../../shared/ui/search/search";
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { Button } from '../../../shared/ui/button/button';
+import { DataTable } from '../../../shared/ui/data-table/data-table';
+import { Pagination } from '../../../shared/ui/pagination/pagination';
+import { Search } from '../../../shared/ui/search/search';
+import { UserHistoryFilter } from '../../../core/modules/user-history/models/user-history-request';
 
 @Component({
   imports: [
@@ -30,8 +31,8 @@ import { Search } from "../../../shared/ui/search/search";
     Button,
     DataTable,
     Pagination,
-    Search
-],
+    Search,
+  ],
   selector: 'app-user-history',
   styleUrl: './user-history.css',
   templateUrl: './user-history.html',
@@ -57,7 +58,8 @@ export class UserHistory {
     { key: 'action', label: 'Acción', sortable: true },
     { key: 'module', label: 'Módulo', sortable: true, width: '160px' },
     { key: 'detail', label: 'Descripción' },
-    { key: 'createdAt', label: 'Fecha', sortable: true, width: '180px' },
+    { key: 'date', label: 'Fecha', sortable: true, width: '180px' },
+    { key: 'time', label: 'Hora', sortable: true, width: '180px' },
   ];
 
   async ngOnInit(): Promise<void> {
@@ -84,9 +86,9 @@ export class UserHistory {
   }
 
   async loadHistory(): Promise<void> {
-    const filters = {
+    const filters: UserHistoryFilter = {
       email: this.userName(),
-      page: this.currentPage(),
+      page: this.currentPage() - 1,
       size: this.pageSize(),
       sort: this.sort(),
       action: this.searchTerm() || null,
@@ -129,13 +131,13 @@ export class UserHistory {
     this.loadHistory();
   }
 
-  onDateFromChange(date: Date | null) {
+  onDateFromChange(date: Date) {
     this.dateFrom.set(date);
     this.currentPage.set(0);
     this.loadHistory();
   }
 
-  onDateToChange(date: Date | null) {
+  onDateToChange(date: Date) {
     this.dateTo.set(date);
     this.currentPage.set(0);
     this.loadHistory();

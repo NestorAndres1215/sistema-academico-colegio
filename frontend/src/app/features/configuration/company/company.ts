@@ -103,47 +103,37 @@ export class Company implements OnInit {
     this.patchForm(data);
   }
 
-  private patchForm(c: CompanyResponse): void {
-    this.companyForm.patchValue({
-      name: c.name,
-      businessName: c.businessName,
-      taxId: c.taxId,
-      email: c.email,
-      phone: c.phone,
-      address: c.address,
-      city: c.city,
-      country: c.country,
-      website: c.website,
-    });
+  private patchForm(companyResponse: CompanyResponse): void {
+    this.companyForm.patchValue(companyResponse);
   }
 
   toggleEdit(): void {
-    const c = this.company();
+    const company = this.company();
 
-    if (!c) {
+    if (!company) {
       return;
     }
 
     this.selectedFile = null;
 
-    this.logoPreview.set(this.fileService.getFileUrl(c.logoUrl));
+    this.logoPreview.set(this.fileService.getFileUrl(company.logoUrl));
 
-    this.patchForm(c);
+    this.patchForm(company);
     this.editMode.set(true);
   }
 
   cancelar(): void {
-    const c = this.company();
+    const company = this.company();
 
-    if (!c) {
+    if (!company) {
       return;
     }
 
     this.selectedFile = null;
 
-    this.logoPreview.set(this.fileService.getFileUrl(c.logoUrl));
+    this.logoPreview.set(this.fileService.getFileUrl(company.logoUrl));
 
-    this.patchForm(c);
+    this.patchForm(company);
     this.editMode.set(false);
   }
 
@@ -184,7 +174,8 @@ export class Company implements OnInit {
 
       await this.getCompany();
     } catch (error: any) {
-      this.alertService.error(error?.error?.message ?? 'Error al actualizar la compañía');
+      console.log(error)
+      this.alertService.error(error.error.message);
     }
   }
 

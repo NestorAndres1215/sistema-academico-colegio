@@ -1,0 +1,120 @@
+<div class="results-container">
+  @if (items().length === 0) {
+    <div class="state-box">
+      <mat-icon class="empty-icon">search_off</mat-icon>
+      <span>{{ emptyMessage() }}</span>
+    </div>
+  } @else {
+    <div class="results-list">
+      @for (item of items(); track trackByFn($index, item)) {
+        <div class="result-card">
+          <div class="result-main">
+            <div class="result-avatar">
+              @if (item.avatar) {
+                <img [src]="item.avatar" [alt]="item.name" />
+              } @else {
+                <span>{{ getInitial(item.name) }}</span>
+              }
+            </div>
+
+            <div class="result-info">
+              <div class="result-name-row">
+                <span class="result-name">{{ item.name }}</span>
+                @if (item.status) {
+                  <span class="status-dot" [class]="'status-' + item.status"></span>
+                }
+              </div>
+
+              @if (item.subtitle) {
+                <span class="result-subtitle">{{ item.subtitle }}</span>
+              }
+
+              <div class="result-meta">
+                @if (item.role) {
+                  <span class="meta-chip">
+                    <mat-icon>badge</mat-icon>
+                    {{ item.role }}
+                  </span>
+                }
+                @if (item.extraInfo) {
+                  <span class="meta-chip">
+                    <mat-icon>info</mat-icon>
+                    {{ item.extraInfo }}
+                  </span>
+                }
+              </div>
+            </div>
+          </div>
+
+          <div class="result-actions">
+            @if (hasAction('message')) {
+              <app-button
+                [label]="messageTooltip()"
+                icon="chat_bubble_outline"
+                variant="secondary"
+                [disabled]="isActionDisabled('message', item)"
+                (click)="onMessage(item, $event)"
+              >
+              </app-button>
+            }
+
+            @if (hasAction('viewProfile')) {
+              <app-button
+                [label]="viewProfileTooltip()"
+                icon="person"
+                variant="primary"
+                [disabled]="isActionDisabled('viewProfile', item)"
+                (click)="onViewProfile(item, $event)"
+              >
+              </app-button>
+            }
+
+            @if (hasAction('activate')) {
+              <app-button
+                [label]="activateTooltip()"
+                icon="check_circle"
+                variant="success"
+                [disabled]="isActionDisabled('activate', item)"
+                (click)="onActivate(item, $event)"
+              >
+              </app-button>
+            }
+
+            @if (hasAction('deactivate')) {
+              <app-button
+                [label]="deactivateTooltip()"
+                icon="block"
+                variant="danger"
+                [disabled]="isActionDisabled('deactivate', item)"
+                (click)="onDeactivate(item, $event)"
+              >
+              </app-button>
+            }
+
+            @if (hasAction('blocked')) {
+              <app-button
+                [label]="blockedTooltip()"
+                icon="lock_person"
+                variant="danger"
+                [disabled]="isActionDisabled('blocked', item)"
+                (click)="onBlocked(item, $event)"
+              >
+              </app-button>
+            }
+
+            @if (hasAction('closeSession')) {
+              <app-button
+                [label]="closeSessionTooltip()"
+                icon="logout"
+                variant="danger"
+                [disabled]="isActionDisabled('closeSession', item)"
+                (click)="onCloseSession(item, $event)"
+              >
+              </app-button>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>

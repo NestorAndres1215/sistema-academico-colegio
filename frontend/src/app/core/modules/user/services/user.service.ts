@@ -6,18 +6,13 @@ import { UserResponse } from '../models/user-response';
 import { CreateUserRequest } from '../models/create-user-request';
 import { UpdateUserRequest } from '../models/update-user-request';
 import { PasswordRequest } from '../models/password-request';
+import { PageResponse } from '../../../models/page-response';
 
 
 
 
 
-export interface PageResponse<T> {
-  content: T[];
-  totalElements: number;
-  totalPages: number;
-  size: number;
-  number: number;
-}
+
 @Service()
 export class UserService {
   private readonly http = inject(HttpClient);

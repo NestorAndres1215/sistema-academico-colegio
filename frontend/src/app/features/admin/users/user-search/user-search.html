@@ -1,1 +1,16 @@
-<p>user-search works!</p>
+<div class="container">
+
+    <app-bread-crumb [items]="breadcrumbs()">
+    </app-bread-crumb>
+
+    <app-page-header [icon]="icon" [title]="title" [subtitle]="subtitle">
+    </app-page-header>
+    <div class="my-3">
+        <app-search placeholder="Buscar por nombre o correo..." (searchChange)="onSearchChange($event)">
+        </app-search>
+    </div>
+    <main class="results-column mb-5">
+        <app-search-result [items]="results()"  [actions]="sessionAction" (message)="onMessage($event)" (viewProfile)="onViewProfile($event)">
+        </app-search-result>
+    </main>
+</div>

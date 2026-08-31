@@ -18,6 +18,5 @@ export class Toolbar {
   readonly isAdmin = input(false);
   readonly user = input<any | null>(null);
   readonly sidenavOpened = input(false);
-
   readonly toggleSidenav = output<void>();
 }
