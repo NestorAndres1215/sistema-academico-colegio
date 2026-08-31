@@ -21,4 +21,8 @@ export const CONFIGURATION_ROUTES: Routes = [
     path: 'ayuda',
     loadComponent: () => import('./help-page/help-page').then((m) => m.HelpPage),
   },
+  {
+    path: 'cambiar-contrasena',
+    loadComponent: () => import('./change-password/change-password').then((m) => m.ChangePassword),
+  },
 ];
