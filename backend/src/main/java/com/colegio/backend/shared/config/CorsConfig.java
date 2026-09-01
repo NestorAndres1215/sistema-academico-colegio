@@ -1,4 +1,4 @@
-package com.colegio.backend.config;
+package com.colegio.backend.shared.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -22,17 +22,13 @@ public class AuthController {
 
     @Operation(summary = "Generate authentication token")
     @PostMapping("/generate-token")
-    public ResponseEntity<TokenResponse> generarToken(
-            @RequestBody LoginRequest request
-    ) {
+    public ResponseEntity<TokenResponse> generarToken(@RequestBody LoginRequest request) {
         return ResponseEntity.ok(authUseCase.login(request));
     }
 
     @Operation(summary = "Get currently authenticated user")
     @GetMapping("/current-user")
-    public ResponseEntity<UserResponse> getCurrentUser(
-            Authentication authentication
-    ) {
+    public ResponseEntity<UserResponse> getCurrentUser(Authentication authentication) {
         return ResponseEntity.ok(authUseCase.currentUser(authentication.getName()));
     }
 
@@ -41,5 +37,4 @@ public class AuthController {
         authUseCase.logout(jwt);
         return ResponseEntity.ok().build();
     }
-
 }

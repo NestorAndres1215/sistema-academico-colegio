@@ -52,6 +52,7 @@ public class UserService implements UserUseCase {
 
         if (search == null || search.isBlank()) {
             users = userRepositoryPort.findRandom(5);
+            System.out.println(users);
         } else {
             users = userRepositoryPort.search(search.trim(), 5);
         }

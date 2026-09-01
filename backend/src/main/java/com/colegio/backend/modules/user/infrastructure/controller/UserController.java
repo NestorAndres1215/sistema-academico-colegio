@@ -51,7 +51,7 @@ public class UserController {
 
     @Operation(summary = "Create a new position")
     @PostMapping
-    public ResponseEntity<User> create(@RequestBody CreateUserRequest createUserRequest) {
+    public ResponseEntity<User> create(@Valid @RequestBody CreateUserRequest createUserRequest) {
         return ResponseEntity.ok(
                 userUseCase.save(
                         createUserRequest.email(),
@@ -66,7 +66,7 @@ public class UserController {
     @PutMapping("/{id}")
     public ResponseEntity<User> update(
             @PathVariable Long id,
-            @RequestBody UpdateUserRequest updateUserRequest
+            @Valid @RequestBody UpdateUserRequest updateUserRequest
     ) {
         return ResponseEntity.ok(
                 userUseCase.update(
