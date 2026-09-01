@@ -42,7 +42,7 @@ public class SecurityConfig {
                                 "/verification-code/**",
                                 "/assets/**",
                                 "/auth/**",
-                                "/users",
+                                "/users/**",
                                 "/role/**",
                                 "/v3/api-docs/**",
                                 "/swagger-ui/**",

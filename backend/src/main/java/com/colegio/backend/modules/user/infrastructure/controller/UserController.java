@@ -1,9 +1,6 @@
 package com.colegio.backend.modules.user.infrastructure.controller;
 
-import com.colegio.backend.modules.auth.application.dto.PasswordRequest;
-import com.colegio.backend.modules.user.application.dto.CreateUserRequest;
-import com.colegio.backend.modules.user.application.dto.UpdateUserRequest;
-import com.colegio.backend.modules.user.application.dto.UserResponse;
+import com.colegio.backend.modules.user.application.dto.*;
 import com.colegio.backend.modules.user.domain.model.User;
 import com.colegio.backend.modules.user.domain.port.usecase.UserUseCase;
 import io.swagger.v3.oas.annotations.Operation;
@@ -84,6 +81,12 @@ public class UserController {
         return ResponseEntity.ok(userUseCase.findById(id));
     }
 
+    @Operation(summary = "Get user by email")
+    @GetMapping("/email/{email}")
+    public ResponseEntity<UserResponse> findByEmail(@PathVariable String email) {
+        return ResponseEntity.ok(userUseCase.findByEmail(email));
+    }
+
     @Operation(summary = "Change user password")
     @PostMapping("/{id}/change-password")
     public ResponseEntity<User> changePassword(
@@ -91,6 +94,16 @@ public class UserController {
             @Valid @RequestBody PasswordRequest passwordRequest
     ) {
         return ResponseEntity.ok(userUseCase.changePassword(id, passwordRequest));
+    }
+
+
+    @Operation(summary = "Update Change user password")
+    @PostMapping("/{id}/update-change-password")
+    public ResponseEntity<User> updateChangePassword(
+            @PathVariable Long id,
+            @Valid @RequestBody UpdatePasswordRequest updatePasswordRequest
+    ) {
+        return ResponseEntity.ok(userUseCase.updateChangePassword(id, updatePasswordRequest));
     }
 
     @Operation(summary = "Activate admin")

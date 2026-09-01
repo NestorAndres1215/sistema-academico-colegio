@@ -27,7 +27,7 @@ public class VerificationCodeMapper {
                 .verificationCode(verificationCode)
                 .generatedAt(generatedAt)
                 .expiresAt(generatedAt.plusMinutes(10))
-                .verified(false)
+                .verified(true)
                 .attempts(0)
                 .build();
     }

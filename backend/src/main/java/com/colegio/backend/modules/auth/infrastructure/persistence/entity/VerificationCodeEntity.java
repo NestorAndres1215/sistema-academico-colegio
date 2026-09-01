@@ -26,7 +26,7 @@ public class VerificationCodeEntity {
     @Column(nullable = false, length = 50)
     private String verificationType;
 
-    @Column(nullable = false, length = 10)
+    @Column(name = "verification_code",nullable = false, length = 10)
     private String verificationCode;
 
     @Column(nullable = false)

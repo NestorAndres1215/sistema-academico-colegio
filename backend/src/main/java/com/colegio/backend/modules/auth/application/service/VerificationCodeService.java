@@ -14,6 +14,7 @@ import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 
 @Service
@@ -21,8 +22,11 @@ import java.time.LocalDateTime;
 public class VerificationCodeService implements VerificationCodeUseCase {
 
     private final VerificationCodeRepositoryPort verificationCodeRepositoryPort;
+
     private final UserRepositoryPort userRepositoryPort;
+
     private final VerificationCodeMapper verificationCodeMapper;
+
     private final EmailPort emailPort;
 
     @Override
@@ -41,19 +45,15 @@ public class VerificationCodeService implements VerificationCodeUseCase {
         return create(verificationCode);
     }
 
-
     public VerificationCode create(VerificationCode verificationCode) {
         return verificationCodeRepositoryPort.create(verificationCode);
     }
 
     private VerificationCode getOrCreateVerificationCode(User user, String email, String code, LocalDateTime now) {
+
         return verificationCodeRepositoryPort.findByUserEmail(email)
-                .map(existing ->
-                        verificationCodeMapper.updateCode(existing, code, now)
-                )
-                .orElseGet(() ->
-                        verificationCodeMapper.createPasswordRecoveryCode(user, code, now)
-                );
+                .map(existing -> verificationCodeMapper.updateCode(existing, code, now))
+                .orElseGet(() -> verificationCodeMapper.createPasswordRecoveryCode(user, code, now));
     }
 
     private void sendVerificationCode(VerificationCode verificationCode) {
@@ -69,22 +69,21 @@ public class VerificationCodeService implements VerificationCodeUseCase {
 
         VerificationCode verificationCode = findByVerificationCode(code);
 
-        verificationCode.setVerificationCode(null);
-        verificationCode.setGeneratedAt(LocalDateTime.now());
+        User user = findByEmail(verificationCode.getUser().getEmail());
 
-        return create(verificationCode);
+        LocalDateTime now = LocalDateTime.now();
+
+        return getOrCreateVerificationCode(user, verificationCode.getUser().getEmail(), "", now);
     }
 
     public VerificationCode findByVerificationCode(String code) {
         return verificationCodeRepositoryPort.findByVerificationCode(code)
-                .orElseThrow(() ->
-                        new NotFoundException("Código de verificación no encontrado"));
+                .orElseThrow(() -> new NotFoundException("Código de verificación no encontrado"));
     }
 
     public User findByEmail(String email) {
         return userRepositoryPort.findByEmail(email)
-                .orElseThrow(() ->
-                        new NotFoundException("Correo no encontrado"));
+                .orElseThrow(() -> new NotFoundException("Correo no encontrado"));
     }
 
 }

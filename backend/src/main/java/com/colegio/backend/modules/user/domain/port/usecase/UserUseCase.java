@@ -1,6 +1,7 @@
 package com.colegio.backend.modules.user.domain.port.usecase;
 
-import com.colegio.backend.modules.auth.application.dto.PasswordRequest;
+import com.colegio.backend.modules.user.application.dto.PasswordRequest;
+import com.colegio.backend.modules.user.application.dto.UpdatePasswordRequest;
 import com.colegio.backend.modules.user.application.dto.UserResponse;
 import com.colegio.backend.modules.user.domain.model.User;
 import org.springframework.data.domain.Page;
@@ -27,4 +28,6 @@ public interface UserUseCase {
     User deactivateUser (Long id);
 
     User changePassword(Long userId, PasswordRequest passwordRequest);
+    User updateChangePassword(Long userId, UpdatePasswordRequest updatePasswordRequest);
+
 }

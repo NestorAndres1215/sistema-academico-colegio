@@ -23,8 +23,9 @@ public class VerificationCodeController {
         return ResponseEntity.ok(verificationCodeUseCase.passwordRecoveryVerification(username));
     }
 
-    @PostMapping("/verify/code/{id}")
+    @PostMapping("/verify/code/{verificationCode}")
     public ResponseEntity<VerificationCode> verificationCode(@PathVariable String verificationCode) {
+
         return ResponseEntity.ok(verificationCodeUseCase.verificationCode(verificationCode));
     }
 }

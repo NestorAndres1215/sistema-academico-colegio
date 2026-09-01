@@ -1,9 +1,9 @@
 package com.colegio.backend.modules.user.application.service;
 
-import com.colegio.backend.modules.auth.application.dto.PasswordRequest;
+import com.colegio.backend.modules.user.application.dto.PasswordRequest;
 import com.colegio.backend.modules.auth.domain.model.Role;
 import com.colegio.backend.modules.auth.domain.port.repository.RoleRepositoryPort;
-import com.colegio.backend.modules.auth.domain.port.usecase.RoleUseCase;
+import com.colegio.backend.modules.user.application.dto.UpdatePasswordRequest;
 import com.colegio.backend.modules.user.application.dto.UserResponse;
 import com.colegio.backend.modules.user.application.mapper.UserMapper;
 import com.colegio.backend.modules.user.application.validator.PasswordValidator;
@@ -141,6 +141,17 @@ public class UserService implements UserUseCase {
         passwordValidator.validateChangePassword(user, request);
 
         user.setPassword(passwordEncoder.encode(request.newPassword()));
+
+        return userRepositoryPort.save(user);
+    }
+
+    @Override
+    public User updateChangePassword(Long userId, UpdatePasswordRequest updatePasswordRequest) {
+
+        User user = findUserById(userId);
+        passwordValidator.validateUpdateChangePassword(user, updatePasswordRequest);
+
+        user.setPassword(passwordEncoder.encode(updatePasswordRequest.newPassword()));
 
         return userRepositoryPort.save(user);
     }

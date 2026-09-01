@@ -1,13 +1,9 @@
-package com.colegio.backend.modules.auth.application.dto;
+package com.colegio.backend.modules.user.application.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-public record PasswordRequest(
-
-        @NotBlank(message = "La contraseña actual es obligatoria")
-        String currentPassword,
-
+public record UpdatePasswordRequest(
         @NotBlank(message = "La nueva contraseña es obligatoria")
         @Size(
                 min = 8,
@@ -18,6 +14,5 @@ public record PasswordRequest(
 
         @NotBlank(message = "La confirmación de la contraseña es obligatoria")
         String confirmNewPassword
-
 ) {
 }

@@ -34,6 +34,7 @@ public class VerificationCodeRepositoryAdapter implements VerificationCodeReposi
 
     @Override
     public Optional<VerificationCode> findByVerificationCode(String verificationCode) {
+        System.out.println("Código buscado en BD: " + verificationCode);
         return jpaVerificationCodeRepository.findByVerificationCode(verificationCode)
                 .map(verificationCodeMapperPersistence::toDomain);
     }
