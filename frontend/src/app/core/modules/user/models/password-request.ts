@@ -3,3 +3,7 @@ export interface PasswordRequest {
     newPassword: string;
     confirmNewPassword: string;
 }
+export interface UpdatePasswordRequest {
+    newPassword: string;
+    confirmNewPassword: string;
+}

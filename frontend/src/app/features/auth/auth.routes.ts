@@ -19,4 +19,10 @@ export const AUTHENTICATION_ROUTES: Routes = [
     loadComponent: () => import('./verification-code/verification-code')
       .then(m => m.VerificationCode)
   },
+
+  {
+    path: 'cambiar-contrasenia',
+    loadComponent: () => import('./change-password/change-password')
+      .then(m => m.ChangePassword)
+  },
 ];

@@ -5,7 +5,7 @@ import { environment } from '../../../../../environments/environment';
 import { UserResponse } from '../models/user-response';
 import { CreateUserRequest } from '../models/create-user-request';
 import { UpdateUserRequest } from '../models/update-user-request';
-import { PasswordRequest } from '../models/password-request';
+import { PasswordRequest, UpdatePasswordRequest } from '../models/password-request';
 import { PageResponse } from '../../../models/page-response';
 
 
@@ -55,8 +55,16 @@ export class UserService {
     return this.http.get<UserResponse>(`${this.backendUrl}/users/${id}`);
   }
 
+  findByEmail(email: string): Observable<UserResponse> {
+    return this.http.get<UserResponse>(`${this.backendUrl}/users/email/${email}`);
+  }
+
   changePassword(id: number, request: PasswordRequest): Observable<UserResponse> {
     return this.http.post<UserResponse>(`${this.backendUrl}/users/${id}/change-password`, request);
+  }
+
+  updatechangePassword(id: number, request: UpdatePasswordRequest): Observable<UserResponse> {
+    return this.http.post<UserResponse>(`${this.backendUrl}/users/${id}/update-change-password`, request);
   }
 
   activate(id: number): Observable<UserResponse> {

@@ -59,9 +59,6 @@ export class VerificationCode implements OnInit {
 
   async enviarCodigo(): Promise<void> {
 
-    if (!this.formValidationService.validate(this.form)) {
-      return;
-    }
 
     const { digit1, digit2, digit3, digit4, digit5, digit6 } = this.form.value;
     const codigo = `${digit1}${digit2}${digit3}${digit4}${digit5}${digit6}`;
