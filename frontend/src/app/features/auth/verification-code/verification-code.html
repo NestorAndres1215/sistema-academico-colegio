@@ -1,0 +1,101 @@
+<div class="verification-code-page">
+  <div class="verification-code-card">
+    <div class="verification-code-header">
+      <div class="verification-code-logo">
+        @if (logoUrl()) {
+          <img [src]="logoUrl()" alt="Logo" class="logo-img" />
+        } @else {
+          <span class="logo-placeholder">{{ inicial }}</span>
+        }
+      </div>
+      <h1 class="verification-code-title">Introduce tu código de seguridad</h1>
+      <p class="verification-code-subtitle">
+        Introduce el código de seis dígitos que hemos enviado a tu correo electrónico
+      </p>
+    </div>
+
+    <form [formGroup]="form">
+      <div class="otp-wrapper my-4">
+        <mat-form-field appearance="outline" class="code-field">
+          <input
+            matInput
+            #digit1
+            formControlName="digit1"
+            maxlength="1"
+            class="code-input text-center"
+            (input)="autoFocusNext($event, digit2)"
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="code-field">
+          <input
+            matInput
+            #digit2
+            formControlName="digit2"
+            maxlength="1"
+            class="code-input text-center"
+            (input)="autoFocusNext($event, digit3)"
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="code-field">
+          <input
+            matInput
+            #digit3
+            formControlName="digit3"
+            maxlength="1"
+            class="code-input text-center"
+            (input)="autoFocusNext($event, digit4)"
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="code-field">
+          <input
+            matInput
+            #digit4
+            formControlName="digit4"
+            maxlength="1"
+            class="code-input text-center"
+            (input)="autoFocusNext($event, digit5)"
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="code-field">
+          <input
+            matInput
+            #digit5
+            formControlName="digit5"
+            maxlength="1"
+            class="code-input text-center"
+            (input)="autoFocusNext($event, digit6)"
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="code-field">
+          <input
+            matInput
+            #digit6
+            formControlName="digit6"
+            maxlength="1"
+            class="code-input text-center"
+          />
+        </mat-form-field>
+      </div>
+
+      <app-button
+        label="Enviar"
+        icon="fas fa-paper-plane"
+        color="registrar"
+        class="w-100 mb-4"
+        [disabled]="form.invalid"
+        (click)="enviarCodigo()"
+      ></app-button>
+    </form>
+
+    <p class="verification-code-subtitle mt-4 text-center">
+      ¿No has recibido el código?
+      <br class="d-md-none" />
+      <a (click)="send()" class="resend-link ms-1" style="cursor: pointer"> Obtén uno nuevo. </a>
+    </p>
+  </div>
+</div>

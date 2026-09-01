@@ -10,7 +10,7 @@ import { MatDividerModule } from '@angular/material/divider';
 @Component({
   selector: 'app-menu',
   standalone: true,
-  imports: [CommonModule, MatMenuModule,MatDividerModule],
+  imports: [CommonModule, MatMenuModule, MatDividerModule],
   templateUrl: './menu.html',
   styleUrl: './menu.css',
 })
@@ -62,9 +62,7 @@ export class Menu {
   }
 
   async logout(): Promise<void> {
-   /* await firstValueFrom(this.authService.logoutSession(this.user()?.id));
-    await this.authService.logout();
-    await this.authService.logoutSession(this.user().id);
-    this.router.navigate(['/auth/login']);*/
+    await firstValueFrom(this.authService.logout());
+    this.router.navigate(['/auth/login'])
   }
 }

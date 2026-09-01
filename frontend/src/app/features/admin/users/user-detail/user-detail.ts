@@ -31,11 +31,8 @@ export class UserDetail {
 
   async ngOnInit(): Promise<void> {
     this.userId = Number(this.route.snapshot.paramMap.get('id'));
-
     await this.initUser();
     await this.loadUsers();
-
-    console.log('ID usuario:', this.userId);
   }
 
   async loadUsers(): Promise<void> {

@@ -32,6 +32,7 @@ import { HttpErrorService } from '../../../core/services/http-error.service';
   templateUrl: './login.html',
 })
 export class Login {
+
   private readonly router = inject(Router);
   private readonly authService = inject(AuthService);
   private readonly companyService = inject(CompanyService);
@@ -120,6 +121,10 @@ export class Login {
     this.logoUrl.set(logoUrl);
 
     this.companyName.set(company.name);
+  }
+
+  forgotPassword(): void {
+    this.router.navigate(['/auth/olvidar-contrasena'])
   }
 
 }

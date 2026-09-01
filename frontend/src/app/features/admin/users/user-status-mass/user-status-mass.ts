@@ -102,21 +102,17 @@ export class UserStatusMass {
   async loadUsers(): Promise<void> {
     const status = this.statusFilter() ? this.statusFilter().toUpperCase() : '';
 
-    const res: any = await firstValueFrom(
-      this.userService.getByStatus(status, this.currentPage() - 1, this.pageSize(), this.searchTerm()),
+    const response = await firstValueFrom(
+      this.userService.getByStatus(
+        status,
+        this.currentPage() - 1,
+        this.pageSize(),
+        this.searchTerm()
+      ),
     );
 
-    this.users.set(
-      res.content.map((admin: any) => ({
-        id: admin.id,
-        username: admin.username,
-        email: admin.email,
-        role: admin.role,
-        status: admin.status === 'ACTIVE' ? 'activo' : 'inactivo',
-      })),
-    );
-
-    this.totalItems.set(res.totalElements);
+    this.users.set(response.content);
+    this.totalItems.set(response.totalElements);
   }
 
   async onStatusFilterChange(status: string): Promise<void> {
@@ -161,7 +157,7 @@ export class UserStatusMass {
     try {
       const status = this.statusFilter() ? this.statusFilter().toUpperCase() : '';
 
-      const res: any = await firstValueFrom(
+      const res = await firstValueFrom(
         this.userService.getByStatus(status, 0, this.totalItems(), this.searchTerm()),
       );
 

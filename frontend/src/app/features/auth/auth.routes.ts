@@ -8,4 +8,15 @@ export const AUTHENTICATION_ROUTES: Routes = [
     canActivate: [noAuthGuard],
     component: Login,
   },
+  {
+    path: 'olvidar-contrasena',
+    loadComponent: () => import('./forgot-password/forgot-password')
+      .then(m => m.ForgotPassword)
+  },
+
+  {
+    path: 'codigo-verificacion',
+    loadComponent: () => import('./verification-code/verification-code')
+      .then(m => m.VerificationCode)
+  },
 ];

@@ -23,6 +23,9 @@ export class AuthService {
     return this.http.post<TokenResponse>(`${this.backendUrl}/auth/generate-token`, loginData);
   }
 
+
+
+
   getCurrentUser(): Observable<UserResponse | null> {
     if (!this.currentUser$) {
       this.currentUser$ = this.http.get<UserResponse>(`${this.backendUrl}/auth/current-user`).pipe(
@@ -38,20 +41,25 @@ export class AuthService {
     this.currentUser$ = null;
   }
 
-  logout(): Observable<unknown> {
-    return this.http.post(`${this.backendUrl}/auth/logout`, {}).pipe(
+  logout(): Observable<void> {
+    return this.http.post<void>(
+      `${this.backendUrl}/auth/logout`,
+      {},
+      { withCredentials: true }
+    ).pipe(
       tap(() => {
+        console.log("Entro")
         this.clearCurrentUser();
         this.loginStatusSubject.next(false);
       }),
-      catchError((error) => {
+      catchError(error => {
         console.error('Error cerrando sesión:', error);
 
         this.clearCurrentUser();
         this.loginStatusSubject.next(false);
 
-        return of(null);
-      }),
+        return of(void 0);
+      })
     );
   }
 
