@@ -12,18 +12,13 @@ import { SearchResultItem } from '../../models/search-result-model';
   templateUrl: './search-result.html',
 })
 export class SearchResult {
-
   readonly items = input<SearchResultItem[]>([]);
 
   readonly loading = input<boolean>(false);
 
   readonly emptyMessage = input<string>('No se encontraron resultados');
 
-  readonly actions = input<SearchResultAction[]>([
-    'message',
-    'viewProfile',
-    'closeSession'
-  ]);
+  readonly actions = input<SearchResultAction[]>(['message', 'viewProfile', 'closeSession']);
 
   readonly messageTooltip = input('Enviar mensaje');
 
@@ -38,7 +33,7 @@ export class SearchResult {
   readonly closeSessionTooltip = input('Cerrar sesión');
 
   readonly actionDisabled = input<(action: SearchResultAction, item: SearchResultItem) => boolean>(
-    () => false
+    () => false,
   );
 
   readonly message = output<SearchResultItem>();
@@ -62,8 +57,7 @@ export class SearchResult {
   }
 
   getInitial(name: string): string {
-  console.log(name)
-    return name?.charAt(0).toUpperCase() ?? '';
+    return name.charAt(0).toUpperCase();
   }
 
   onMessage(item: SearchResultItem, event: Event): void {
@@ -102,8 +96,7 @@ export class SearchResult {
     this.closeSession.emit(item);
   }
 
-  trackByFn(index: number, item: SearchResultItem): string {
-    return item.id ?? index.toString();
+  trackByFn(index: number, item: SearchResultItem): number | string {
+    return item.id ?? index;
   }
-
 }

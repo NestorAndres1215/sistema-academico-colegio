@@ -3,7 +3,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { SelectFilterOption } from '../../../core/models/select-filter-option';
 
-
 @Component({
   selector: 'app-select-filter',
   standalone: true,
@@ -12,7 +11,6 @@ import { SelectFilterOption } from '../../../core/models/select-filter-option';
   styleUrl: './select-filter.css',
 })
 export class SelectFilter {
-
   readonly placeholder = input<string>('Seleccionar');
   readonly options = input.required<SelectFilterOption[]>();
   readonly value = input<string>('');

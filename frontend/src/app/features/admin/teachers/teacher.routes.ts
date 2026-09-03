@@ -9,7 +9,7 @@ export const TEACHERS_ROUTES: Routes = [
     path: 'registro',
     loadComponent: () => import('./teacher-create/teacher-create').then((m) => m.TeacherCreate),
   },
-
+/*
   {
     path: ':id/edit',
     loadComponent: () => import('./teacher-edit/teacher-edit').then((m) => m.TeacherEdit),
@@ -17,5 +17,5 @@ export const TEACHERS_ROUTES: Routes = [
   {
     path: ':id',
     loadComponent: () => import('./teacher-detail/teacher-detail').then((m) => m.TeacherDetail),
-  },
+  },*/
 ];

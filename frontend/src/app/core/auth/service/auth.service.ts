@@ -17,14 +17,8 @@ export class AuthService {
   private currentUser$: Observable<UserResponse | null> | null = null;
 
   generateToken(loginData: LoginRequest): Observable<TokenResponse> {
-    console.log('URL:', `${this.backendUrl}/auth/generate-token`);
-    console.log('BODY:', loginData);
-
     return this.http.post<TokenResponse>(`${this.backendUrl}/auth/generate-token`, loginData);
   }
-
-
-
 
   getCurrentUser(): Observable<UserResponse | null> {
     if (!this.currentUser$) {
@@ -42,25 +36,20 @@ export class AuthService {
   }
 
   logout(): Observable<void> {
-    return this.http.post<void>(
-      `${this.backendUrl}/auth/logout`,
-      {},
-      { withCredentials: true }
-    ).pipe(
-      tap(() => {
-        console.log("Entro")
-        this.clearCurrentUser();
-        this.loginStatusSubject.next(false);
-      }),
-      catchError(error => {
-        console.error('Error cerrando sesión:', error);
+    return this.http
+      .post<void>(`${this.backendUrl}/auth/logout`, {}, { withCredentials: true })
+      .pipe(
+        tap(() => {
+          this.clearCurrentUser();
+          this.loginStatusSubject.next(false);
+        }),
+        catchError((error) => {
+          this.clearCurrentUser();
+          this.loginStatusSubject.next(false);
 
-        this.clearCurrentUser();
-        this.loginStatusSubject.next(false);
-
-        return of(void 0);
-      })
-    );
+          return of(void 0);
+        }),
+      );
   }
 
   getHomeByRole(role: string): string {

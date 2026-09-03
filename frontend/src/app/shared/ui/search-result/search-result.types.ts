@@ -1,7 +1,2 @@
 export type SearchResultAction =
-    | 'message'
-    | 'viewProfile'
-    | 'activate'
-    | 'deactivate'
-    | 'blocked'
-    | 'closeSession';
+  'message' | 'viewProfile' | 'activate' | 'deactivate' | 'blocked' | 'closeSession';

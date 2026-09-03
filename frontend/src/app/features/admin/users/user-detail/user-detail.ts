@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { UserResponse } from '../../../../core/modules/user/models/user-response';
 import { UserService } from '../../../../core/modules/user/services/user.service';
 import { firstValueFrom } from 'rxjs';
@@ -16,7 +16,6 @@ import { PageHeader } from '../../../../shared/ui/page-header/page-header';
   templateUrl: './user-detail.html',
 })
 export class UserDetail {
-
   private readonly route = inject(ActivatedRoute);
   private readonly userService = inject(UserService);
   readonly user = signal<UserResponse | null>(null);
@@ -26,17 +25,20 @@ export class UserDetail {
   readonly title = 'Detalle del usuario';
   readonly subtitle = 'Consulta la información personal y los datos de la cuenta del usuario.';
 
-  editMode = signal(false);
-  userId!: number;
+  readonly editMode = signal(false);
+  readonly userId = signal<number>(0);
 
   async ngOnInit(): Promise<void> {
-    this.userId = Number(this.route.snapshot.paramMap.get('id'));
+    this.userId.set(
+      Number(this.route.snapshot.paramMap.get('id'))
+    );
+
     await this.initUser();
     await this.loadUsers();
   }
 
   async loadUsers(): Promise<void> {
-    const admin = await firstValueFrom(this.userService.findById(this.userId));
+    const admin = await firstValueFrom(this.userService.findById(this.userId()));
     this.user.set(admin);
   }
 
@@ -60,5 +62,4 @@ export class UserDetail {
   cancelar(): void {
     this.editMode.set(false);
   }
-
 }

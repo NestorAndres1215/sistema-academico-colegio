@@ -20,7 +20,8 @@ export const routes: Routes = [
 
   {
     path: '',
-    loadComponent: () => import('./core/layout/layout').then((m) => m.Layout),
+    loadComponent: () =>
+      import('./core/layout/layout').then((m) => m.Layout),
 
     children: [
       {
@@ -29,13 +30,13 @@ export const routes: Routes = [
         data: { roles: [ROLES.ROLE_ADMIN] },
         loadChildren: () => import('./features/admin/admin.routes').then((m) => m.ADMIN_ROUTES),
       },
-     {
+      {
         path: 'configuracion',
         loadChildren: () =>
-          import('./features/configuration/configuration.routes')
-            .then(m => m.CONFIGURATION_ROUTES)
+          import('./features/configuration/configuration.routes').then(
+            (m) => m.CONFIGURATION_ROUTES,
+          ),
       },
-
     ],
   },
 ];

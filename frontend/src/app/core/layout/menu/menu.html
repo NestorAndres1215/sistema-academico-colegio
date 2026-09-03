@@ -1,5 +1,4 @@
 <mat-menu #mobileActionsMenu="matMenu" panelClass="csa-menu csa-menu--mobile">
-
   <div class="mobile-menu-profile" (click)="$event.stopPropagation()">
     <div class="mobile-menu-avatar">
       <i class="fas fa-user-circle"></i>
@@ -58,23 +57,19 @@
   <div class="mobile-menu-section-label" (click)="$event.stopPropagation()">
     <i class="fas fa-user"></i> Mi cuenta
   </div>
-  <button mat-menu-item>
-    <i class="fas fa-id-card"></i><span>Mi perfil</span>
-  </button>
-  <button mat-menu-item>
-    <i class="fas fa-key"></i><span>Cambiar contraseña</span>
-  </button>
+  <button mat-menu-item><i class="fas fa-id-card"></i><span>Mi perfil</span></button>
+  <button mat-menu-item><i class="fas fa-key"></i><span>Cambiar contraseña</span></button>
   <button mat-menu-item (click)="toggleTheme()">
     <i class="fas fa-circle-half-stroke"></i><span>Cambiar tema</span>
   </button>
   <button mat-menu-item (click)="historial()">
     <i class="fas fa-clock-rotate-left"></i><span>Historial</span>
   </button>
-  @if(isAdmin()){
-  <button mat-menu-item (click)="company()">
-    <i class="fas fa-building"></i>
-    <span>Empresa</span>
-  </button>
+  @if (isAdmin()) {
+    <button mat-menu-item (click)="company()">
+      <i class="fas fa-building"></i>
+      <span>Empresa</span>
+    </button>
   }
   <button mat-menu-item (click)="help()">
     <i class="fas fa-circle-question"></i><span>Ayuda</span>
@@ -183,11 +178,11 @@
   <button mat-menu-item (click)="historial()">
     <i class="fas fa-clock-rotate-left"></i><span>Historial</span>
   </button>
-  @if(isAdmin()){
-  <button mat-menu-item (click)="company()">
-    <i class="fas fa-building"></i>
-    <span>Empresa</span>
-  </button>
+  @if (isAdmin()) {
+    <button mat-menu-item (click)="company()">
+      <i class="fas fa-building"></i>
+      <span>Empresa</span>
+    </button>
   }
   <button mat-menu-item (click)="help()">
     <i class="fas fa-circle-question"></i><span>Ayuda</span>
