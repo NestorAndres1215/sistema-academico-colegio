@@ -31,7 +31,7 @@ export class ForgotPassword {
   readonly companyName = signal<string>('');
   readonly recoveryEmail = signal<string>('');
   private readonly httpErrorService = inject(HttpErrorService);
-  
+
   readonly forgotForm = this.formBuilder.group({
     email: ['', [Validators.required, Validators.email]],
   });
@@ -41,7 +41,6 @@ export class ForgotPassword {
   }
 
   async forgotPassword(): Promise<void> {
-
     if (!this.formValidationService.validate(this.forgotForm)) {
       return;
     }
@@ -52,8 +51,6 @@ export class ForgotPassword {
     }
 
     try {
-      console.log(email);
-
       await firstValueFrom(this.verificationCodeService.verifyEmail(email));
 
       localStorage.setItem('recoveryEmail', email);
@@ -61,11 +58,8 @@ export class ForgotPassword {
       this.recoveryEmail.set(email);
 
       this.router.navigate(['/auth/codigo-verificacion']);
-
     } catch (error: unknown) {
-
       this.alertService.error(this.httpErrorService.getMessage(error));
-
     }
   }
 

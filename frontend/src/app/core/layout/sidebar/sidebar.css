@@ -1,25 +1,24 @@
 .sidenav-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 20px 16px 16px;
-    background: var(--color-pagina-principal);
-    border-bottom: 2px solid var(--color-tercero);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 16px 16px;
+  background: var(--color-pagina-principal);
+  border-bottom: 2px solid var(--color-tercero);
 }
 
 .sidenav-header-emblem {
-    width: 40px;
-    height: 40px;
-    background: var(--color-tercero);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 17px;
-    color: var(--color-principal);
-    flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  background: var(--color-tercero);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  color: var(--color-principal);
+  flex-shrink: 0;
 }
-
 .sidenav-header-title {
     font-family: Georgia, serif;
     font-size: 14px;
@@ -28,7 +27,6 @@
     letter-spacing: 0.03em;
     line-height: 1.2;
 }
-
 .sidenav-header-subtitle {
     font-size: 10px;
     color: var(--color-pagina-principal);
@@ -55,6 +53,7 @@
     overflow-y: auto;
     overflow-x: hidden;
 }
+
 
 .nav-item {
 
@@ -89,14 +88,12 @@
 .nav-item--sub3:hover {
     background: var(--color-hover) !important;
 }
-
 .nav-icon {
     color: var(--color-texto-primario) !important;
     font-size: 20px !important;
     flex-shrink: 0;
     opacity: 0.8;
 }
-
 .nav-label {
     flex: 1;
     font-size: 14px;
@@ -113,19 +110,7 @@
     flex-shrink: 0;
     transition: transform 0.2s ease;
 }
-
-.nav-item--sub {
-    margin-left: 12px !important;
-}
-
-.nav-item--sub2 {
-    margin-left: 24px !important;
-}
-
-.nav-item--sub3 {
-    margin-left: 36px !important;
-}
-
+/*
 .nav-sub-dot {
     width: 6px;
     height: 6px;
@@ -145,7 +130,7 @@
     height: 4px;
     opacity: 0.5;
 }
-
+*/
 .sidenav-footer {
     display: flex;
     align-items: center;
@@ -161,4 +146,23 @@
     height: 16px;
     font-size: 16px;
     color: var(--color-texto-primario);
+}
+/*
+
+
+
+
+
+
+
+*/
+.nav-item--sub {
+    margin-left: 5px !important;
+}
+
+.nav-item--sub2 {
+    margin-left: 16px !important;
+}
+.nav-item--sub3 {
+    margin-left: 36px !important;
 }

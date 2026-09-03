@@ -2,11 +2,11 @@ import { Routes } from '@angular/router';
 
 export const USERS_ROUTES: Routes = [
     {
-        path: 'listado-usuario',
+        path: 'listar',
         loadComponent: () => import('./user-list/user-list').then((m) => m.UserList),
     },
     {
-        path: 'registro-usuario',
+        path: 'registro',
         loadComponent: () => import('./user-create/user-create').then((m) => m.UserCreate),
     },
     {

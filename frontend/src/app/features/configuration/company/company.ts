@@ -175,7 +175,6 @@ export class Company implements OnInit {
 
       await this.getCompany();
     } catch (error: unknown) {
-
       this.alertService.error(this.httpErrorService.getMessage(error));
     }
   }

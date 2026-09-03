@@ -9,4 +9,8 @@ export const ADMIN_ROUTES: Routes = [
     path: 'usuarios',
     loadChildren: () => import('./users/user.routes').then((m) => m.USERS_ROUTES),
   },
+  {
+    path: 'profesores',
+    loadChildren: () => import('./teachers/teacher.routes').then((m) => m.TEACHERS_ROUTES),
+  },
 ];

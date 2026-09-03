@@ -63,7 +63,7 @@ export class UserEdit {
     this.breadcrumbs.set([
       { label: 'Inicio', href: '/admin' },
       { label: 'Usuarios' },
-      { label: 'Listado de Usuarios', href: '/admin/usuarios/listado-usuario' },
+      { label: 'Listado de Usuarios', href: '/admin/usuarios/listar' },
       { label: 'Editar Usuario' },
     ]);
   }
@@ -81,7 +81,7 @@ export class UserEdit {
   }
 
   cancelar(): void {
-    this.router.navigate(['/admin/usuarios/listado-usuario']);
+    this.router.navigate(['/admin/usuarios/listar']);
   }
 
   async operar(): Promise<void> {
@@ -105,7 +105,7 @@ export class UserEdit {
         'Los datos del administrador se actualizaron correctamente.',
       );
 
-      this.router.navigate(['/admin/usuarios/listado-usuario']);
+      this.router.navigate(['/admin/usuarios/listar']);
 
     } catch (error: unknown) {
 

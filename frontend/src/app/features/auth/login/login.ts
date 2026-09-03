@@ -32,7 +32,6 @@ import { HttpErrorService } from '../../../core/services/http-error.service';
   templateUrl: './login.html',
 })
 export class Login {
-
   private readonly router = inject(Router);
   private readonly authService = inject(AuthService);
   private readonly companyService = inject(CompanyService);
@@ -59,7 +58,6 @@ export class Login {
   }
 
   async operar(): Promise<void> {
-
     if (!this.formValidationService.validate(this.loginForm)) {
       return;
     }
@@ -82,14 +80,12 @@ export class Login {
       }
 
       this.navigateByRole(user.role);
-
     } catch (error: unknown) {
       this.alertService.error(this.httpErrorService.getMessage(error));
     }
   }
 
   private navigateByRole(role: string): void {
-
     const routes: Record<string, string> = {
       [ROLES.ROLE_ADMIN]: '/admin',
       [ROLES.ROLE_GUARDIAN]: '/guardian',
@@ -113,7 +109,6 @@ export class Login {
   }
 
   async getCompanyLogo(): Promise<void> {
-
     const company = await firstValueFrom(this.companyService.findByCode('COMSANANDRES'));
 
     const logoUrl = this.fileService.getFileUrl(company.logoUrl);
@@ -124,7 +119,6 @@ export class Login {
   }
 
   forgotPassword(): void {
-    this.router.navigate(['/auth/olvidar-contrasena'])
+    this.router.navigate(['/auth/olvidar-contrasena']);
   }
-
 }

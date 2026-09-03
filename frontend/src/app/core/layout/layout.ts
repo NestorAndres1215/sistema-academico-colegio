@@ -100,28 +100,30 @@ export class Layout implements OnInit, OnDestroy {
 
   async loadMenus(): Promise<void> {
     const menus = await firstValueFrom(this.menuService.getAll());
-
     const valid = menus.filter((m: MenuResponse) => !!m);
 
-    this.mainMenus.set(
-      valid
-        .filter((m: MenuResponse) => m.roles?.some((r) => r.name === this.userRoleName()))
-        .sort((a: MenuResponse, b: MenuResponse) => Number(a.menuOrder) - Number(b.menuOrder))
-        .map((m: MenuResponse) => ({
-          ...m,
-          children: (m.children ?? [])
-            .sort((a: MenuResponse, b: MenuResponse) => Number(a.menuOrder) - Number(b.menuOrder))
-            .map((child: MenuResponse) => ({
-              ...child,
-              children: (child.children ?? []).sort(
-                (a: MenuResponse, b: MenuResponse) => Number(a.menuOrder) - Number(b.menuOrder),
-              ),
-            })),
-          mostrarSubMenu: false,
-        })),
-    );
+    const userMenus = valid
+      .filter((m: MenuResponse) => this.hasUserRole(m))
+      .sort(this.byOrder)
+      .map((m: MenuResponse) => this.buildMenuTree(m));
 
+    this.mainMenus.set(userMenus);
     this.cdr.markForCheck();
+  }
+
+  private hasUserRole(menu: MenuResponse): boolean {
+    return !!menu.roles?.some((r) => r.name === this.userRoleName());
+  }
+
+  private byOrder = (a: MenuResponse, b: MenuResponse): number =>
+    Number(a.menuOrder) - Number(b.menuOrder);
+
+  private buildMenuTree(menu: MenuResponse): MenuResponse {
+    return {
+      ...menu,
+      children: (menu.children ?? []).sort(this.byOrder).map((child) => this.buildMenuTree(child)),
+      mostrarSubMenu: false,
+    };
   }
 
   isAdmin = computed(() => this.userRoleName() === ROLES.ROLE_ADMIN);

@@ -44,7 +44,7 @@ export class UserDetail {
     this.breadcrumbs.set([
       { label: 'Inicio', href: '/admin' },
       { label: 'Usuarios' },
-      { label: 'Listado de Usuarios', href: '/admin/usuarios/listado-usuario' },
+      { label: 'Listado de Usuarios', href: '/admin/usuarios/listar' },
       { label: 'Detalle de Usuarios' },
     ]);
   }

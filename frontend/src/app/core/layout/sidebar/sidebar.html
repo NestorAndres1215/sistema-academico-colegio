@@ -58,6 +58,15 @@
                 }
 
                 <span class="nav-label">{{ sub2.name }}</span>
+
+                @if (hasChildren(sub2)) {
+                  <i
+                    class="fas nav-arrow"
+                    [class.fa-chevron-down]="!sub2.mostrarSubMenu"
+                    [class.fa-chevron-up]="sub2.mostrarSubMenu"
+                  >
+                  </i>
+                }
               </div>
             </mat-list-item>
 
