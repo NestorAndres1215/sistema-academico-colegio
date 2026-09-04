@@ -109,13 +109,13 @@ public class UserController {
     @Operation(summary = "Activate admin")
     @PutMapping("/activate/{id}")
     public ResponseEntity<User> activate(@PathVariable Long id) {
-        return ResponseEntity.ok(userUseCase.activateUser(id));
+        return ResponseEntity.ok(userUseCase.activate(id));
     }
 
     @Operation(summary = "Deactivate admin")
     @PutMapping("/deactivate/{id}")
     public ResponseEntity<User> deactivate(@PathVariable Long id) {
-        return ResponseEntity.ok(userUseCase.deactivateUser(id));
+        return ResponseEntity.ok(userUseCase.deactivate(id));
     }
 
 }

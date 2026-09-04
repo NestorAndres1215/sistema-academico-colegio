@@ -1,7 +1,9 @@
 package com.colegio.backend.modules.teacher.domain.port.repository;
 
+import com.colegio.backend.modules.teacher.application.dto.TeacherResponse;
 import com.colegio.backend.modules.teacher.domain.model.Teacher;
-import com.colegio.backend.modules.teacher.infrastructure.persistence.entity.TeacherEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.Optional;
 
@@ -9,15 +11,8 @@ public interface TeacherRepositoryPort {
 
     Optional<Teacher> findById(Long id);
 
-    Optional<Teacher> findByCode(String code);
+    Page<Teacher> findByAllStatus(String status, String search, Pageable pageable);
 
-    Optional<Teacher> findByDni(String dni);
-
-    Optional<Teacher> findByProfessionalLicenseNumber(String professionalLicenseNumber);
-
-    Optional<Teacher> findByUser_Email(String email);
-
-    Optional<Teacher> findByUser_Username(String username);
 
     Teacher save (Teacher teacher);
 

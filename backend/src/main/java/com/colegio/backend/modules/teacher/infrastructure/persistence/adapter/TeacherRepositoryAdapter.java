@@ -6,6 +6,8 @@ import com.colegio.backend.modules.teacher.infrastructure.persistence.entity.Tea
 import com.colegio.backend.modules.teacher.infrastructure.persistence.mapper.TeacherMapperPersistence;
 import com.colegio.backend.modules.teacher.infrastructure.persistence.repository.JpaTeacherRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
@@ -24,32 +26,8 @@ public class TeacherRepositoryAdapter implements TeacherRepositoryPort {
     }
 
     @Override
-    public Optional<Teacher> findByCode(String code) {
-        return jpaTeacherRepository.findByCode(code)
-                .map(teacherMapperPersistence::toDomain);
-    }
-
-    @Override
-    public Optional<Teacher> findByDni(String dni) {
-        return jpaTeacherRepository.findByDni(dni)
-                .map(teacherMapperPersistence::toDomain);
-    }
-
-    @Override
-    public Optional<Teacher> findByProfessionalLicenseNumber(String professionalLicenseNumber) {
-        return jpaTeacherRepository.findByProfessionalLicenseNumber(professionalLicenseNumber)
-                .map(teacherMapperPersistence::toDomain);
-    }
-
-    @Override
-    public Optional<Teacher> findByUser_Email(String email) {
-        return jpaTeacherRepository.findByUser_Email(email)
-                .map(teacherMapperPersistence::toDomain);
-    }
-
-    @Override
-    public Optional<Teacher> findByUser_Username(String username) {
-        return jpaTeacherRepository.findByUser_Username(username)
+    public Page<Teacher> findByAllStatus(String status, String search, Pageable pageable) {
+        return jpaTeacherRepository.findByAllStatus(status,search ,pageable)
                 .map(teacherMapperPersistence::toDomain);
     }
 

@@ -5,6 +5,7 @@ import com.colegio.backend.modules.teacher.domain.model.Teacher;
 import com.colegio.backend.modules.teacher.domain.model.TeacherDetails;
 import com.colegio.backend.modules.teacher.domain.port.repository.TeacherDetailsRepositoryPort;
 import com.colegio.backend.modules.teacher.domain.port.usecase.TeacherDetailsUseCase;
+import com.colegio.backend.shared.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,6 +27,8 @@ public class TeacherDetailsService implements TeacherDetailsUseCase {
         return teacherDetailsRepositoryPort.save(teacherDetails);
     }
 
+
+
     private void saveCv(TeacherDetails teacherDetails, MultipartFile cv) {
 
         if (cv == null || cv.isEmpty()) {
@@ -36,4 +39,6 @@ public class TeacherDetailsService implements TeacherDetailsUseCase {
 
         teacherDetails.setCurriculum(fileUrl);
     }
+
+
 }

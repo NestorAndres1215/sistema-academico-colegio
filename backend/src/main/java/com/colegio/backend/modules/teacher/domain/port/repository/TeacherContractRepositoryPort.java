@@ -5,6 +5,8 @@ import java.util.Optional;
 
 public interface TeacherContractRepositoryPort {
 
+    Optional<TeacherContract> findByTeacher_Id(Long id);
+
     Optional<TeacherContract> findById(Long id);
 
     TeacherContract save (TeacherContract teacherContract);

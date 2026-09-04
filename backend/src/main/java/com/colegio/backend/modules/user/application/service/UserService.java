@@ -107,12 +107,12 @@ public class UserService implements UserUseCase {
     }
 
     @Override
-    public User activateUser(Long id) {
+    public User activate(Long id) {
         return updateStatus(id, StatusConstants.ACTIVE);
     }
 
     @Override
-    public User deactivateUser(Long id) {
+    public User deactivate(Long id) {
         return updateStatus(id, StatusConstants.INACTIVE);
     }
 

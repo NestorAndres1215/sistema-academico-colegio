@@ -23,9 +23,9 @@ public interface UserUseCase {
 
     User update(Long id, String email, String username, String role);
 
-    User activateUser (Long id);
+    User activate (Long id);
 
-    User deactivateUser (Long id);
+    User deactivate (Long id);
 
     User changePassword(Long userId, PasswordRequest passwordRequest);
 

@@ -21,6 +21,12 @@ public class TeacherDetailsRepositoryAdapter implements TeacherDetailsRepository
 
 
     @Override
+    public Optional<TeacherDetails> findByTeacher_Id(Long id) {
+        return jpaTeacherDetailsRepository.findByTeacher_Id(id)
+                .map(teacherDetailsMapperPersistence::toDomain);
+    }
+
+    @Override
     public Optional<TeacherDetails> findById(Long id) {
         return jpaTeacherDetailsRepository.findById(id)
                 .map(teacherDetailsMapperPersistence::toDomain);

@@ -7,6 +7,8 @@ import java.util.Optional;
 
 public interface TeacherDetailsRepositoryPort {
 
+    Optional<TeacherDetails> findByTeacher_Id(Long id);
+
     Optional<TeacherDetails> findById(Long id);
 
     TeacherDetails save (TeacherDetails teacherDetails);

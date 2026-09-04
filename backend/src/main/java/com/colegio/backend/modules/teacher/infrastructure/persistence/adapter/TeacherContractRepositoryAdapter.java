@@ -19,6 +19,12 @@ public class TeacherContractRepositoryAdapter implements TeacherContractReposito
 
 
     @Override
+    public Optional<TeacherContract> findByTeacher_Id(Long id) {
+        return jpaTeacherContractRepository.findByTeacher_Id(id)
+                .map(teacherContractMapperPersistence::toDomain);
+    }
+
+    @Override
     public Optional<TeacherContract> findById(Long id) {
         return jpaTeacherContractRepository.findById(id)
                 .map(teacherContractMapperPersistence::toDomain);
