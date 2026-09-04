@@ -32,8 +32,7 @@ public class UserHistoryService implements UserHistoryUseCase {
     @Override
     public UserHistory save(UserHistoryRequest request) {
 
-        User user = userRepositoryPort.findByEmail(request.email())
-                .orElseThrow(() -> new NotFoundException("Usuario no encontrado"));
+        User user = findUserByEmail(request.email());
 
         UserHistory history = userHistoryMapper.toDomain(request, user);
 
@@ -93,5 +92,10 @@ public class UserHistoryService implements UserHistoryUseCase {
     private UserHistory findUserHistoryById(Long id) {
         return userHistoryRepositoryPort.findById(id)
                 .orElseThrow(() -> new NotFoundException("Historial no encontrado"));
+    }
+
+    private User findUserByEmail(String email) {
+        return userRepositoryPort.findByEmail(email)
+                .orElseThrow(() -> new NotFoundException("Usuario no encontrado"));
     }
 }

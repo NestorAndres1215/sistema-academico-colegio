@@ -94,22 +94,14 @@ public class UserService implements UserUseCase {
 
     @Override
     public User update(Long id, String email, String username, String role) {
+
         User existingUser = findUserById(id);
 
-        userValidator.validateUserUpdate(
-                existingUser,
-                email,
-                username
-        );
+        userValidator.validateUserUpdate(existingUser, email, username);
 
         Role roleModel = findRoleByName(role);
 
-        userMapper.updateDomain(
-                existingUser,
-                email,
-                username,
-                roleModel
-        );
+        userMapper.updateDomain(existingUser, email, username, roleModel);
 
         return userRepositoryPort.save(existingUser);
     }
@@ -149,6 +141,7 @@ public class UserService implements UserUseCase {
     public User updateChangePassword(Long userId, UpdatePasswordRequest updatePasswordRequest) {
 
         User user = findUserById(userId);
+
         passwordValidator.validateUpdateChangePassword(user, updatePasswordRequest);
 
         user.setPassword(passwordEncoder.encode(updatePasswordRequest.newPassword()));
@@ -157,7 +150,6 @@ public class UserService implements UserUseCase {
     }
 
     private User findUserById(Long id) {
-
         return userRepositoryPort.findById(id)
                 .orElseThrow(() -> new NotFoundException("User not found"));
     }

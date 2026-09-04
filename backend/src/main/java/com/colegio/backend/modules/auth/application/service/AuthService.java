@@ -33,7 +33,9 @@ public class AuthService implements AuthUseCase {
 
     @Override
     public UserResponse currentUser(String username) {
+
         User user = findUser(username);
+
         return userMapper.toResponse(user);
     }
 
