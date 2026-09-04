@@ -1,0 +1,174 @@
+.info-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 2rem;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.1rem 0 1rem;
+  color: var(--color-texto-primario);
+}
+
+.section-header mat-icon {
+  color: var(--color-texto-primario);
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.section-header h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-navy);
+  margin: 0;
+}
+
+
+.field-input {
+  width: 100%;
+}
+
+/* Avatar foto */
+.avatar-preview {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 2px dashed var(--color-border);
+  background: var(--color-bg-page);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.avatar-preview:hover {
+  border-color: var(--color-blue);
+}
+
+.avatar-preview:hover .avatar-overlay {
+  opacity: 1;
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar-icon {
+  font-size: 40px;
+  width: 40px;
+  height: 40px;
+  color: var(--color-border);
+}
+
+.avatar-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.avatar-overlay mat-icon {
+  color: #fff;
+  font-size: 28px;
+}
+
+.file-hint {
+  font-size: 11px;
+  color: var(--color-text-secondary);
+}
+
+/* CV upload */
+.cv-upload {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 2px dashed var(--color-border);
+  border-radius: 10px;
+  background: var(--color-bg-page);
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  transition:
+    border-color 0.2s,
+    background 0.2s;
+  min-height: 56px;
+}
+
+.cv-upload:hover {
+  border-color: var(--color-blue);
+  background: var(--color-bg-card);
+}
+
+.cv-icon {
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+  color: var(--color-text-secondary);
+  flex-shrink: 0;
+}
+
+.cv-icon.success {
+  color: var(--color-danger);
+}
+
+.cv-nombre {
+  flex: 1;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Acciones */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    margin-top: 1rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-border);
+}
+
+.save-btn {
+  background: var(--color-navy) !important;
+  color: #ffffff !important;
+  border-radius: 10px !important;
+  height: 42px !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.save-btn mat-icon {
+  font-size: 18px;
+}
+
+.cancel-btn {
+  border-radius: 10px !important;
+  height: 42px !important;
+  font-size: 14px !important;
+  color: var(--color-text-secondary) !important;
+  border-color: var(--color-border) !important;
+}
+
+.save-btn:disabled {
+  opacity: 0.5 !important;
+  cursor: not-allowed !important;
+}

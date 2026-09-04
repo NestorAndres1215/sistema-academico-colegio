@@ -62,18 +62,16 @@ export class UserCreate {
     this.breadcrumbs.set([
       { label: 'Inicio', href: '/admin' },
       { label: 'Usuarios' },
-      { label: 'Listado de Usuarios' },
+      { label: 'Registrar de Usuarios' },
     ]);
   }
 
-  readonly registerForm: FormGroup = this.fb.group(
-    {
-      email: ['', [Validators.required]],
-      username: ['', [Validators.required]],
-      password: ['', [Validators.required]],
-      confirmPassword: ['', Validators.required],
-    },
-  );
+  readonly registerForm: FormGroup = this.fb.group({
+    email: ['', [Validators.required]],
+    username: ['', [Validators.required]],
+    password: ['', [Validators.required]],
+    confirmPassword: ['', Validators.required],
+  });
 
   togglePassword(): void {
     this.hidePassword.set(!this.hidePassword());
@@ -101,7 +99,6 @@ export class UserCreate {
 
       this.router.navigate(['/admin/usuarios/listado-usuario']);
     } catch (error: unknown) {
-
       this.alertService.error(this.httpErrorService.getMessage(error));
     }
   }
