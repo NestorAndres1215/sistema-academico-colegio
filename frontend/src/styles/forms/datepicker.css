@@ -1,9 +1,9 @@
 .mat-datepicker-toggle .mat-mdc-icon-button {
-    color: var(--color-texto-primario);
+    color: var(--color-texto-secundario) !important;
 }
 
 .mat-datepicker-toggle .mat-datepicker-toggle-default-icon {
-    fill: var(--color-texto-primario);
+    fill: var(--color-texto-secundario) !important;
 }
 
 .mat-datepicker-content {

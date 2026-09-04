@@ -20,6 +20,7 @@ import { firstValueFrom } from 'rxjs';
 import { TeacherService } from '../../../../core/modules/teacher/services/teacher.service';
 import { HttpErrorService } from '../../../../core/services/http-error.service';
 import { FormValidationService } from '../../../../core/services/form-validation.service';
+import { Button } from "../../../../shared/ui/button/button";
 
 @Component({
   selector: 'app-teacher-create',
@@ -36,7 +37,8 @@ import { FormValidationService } from '../../../../core/services/form-validation
     PageHeader,
     MatDatepickerModule,
     MatNativeDateModule,
-  ],
+    Button
+],
   templateUrl: './teacher-create.html',
   styleUrl: './teacher-create.css',
 })
@@ -57,6 +59,7 @@ export class TeacherCreate {
   private readonly teacherService = inject(TeacherService);
   private readonly httpErrorService = inject(HttpErrorService);
   private readonly formValidationService = inject(FormValidationService);
+  
   readonly form: FormGroup = this.fb.group({
     personal: this.fb.group({
       firstName: ['', Validators.required],

@@ -20,3 +20,22 @@ input:-webkit-autofill:active {
         background-color 99999s ease-in-out 0s,
         color 99999s ease-in-out 0s !important;
 }
+
+.mat-mdc-form-field input::placeholder,
+.mat-mdc-form-field textarea::placeholder,
+.mat-mdc-form-field .mdc-text-field__input::placeholder {
+    color: var(--color-texto-secundario) !important;
+    opacity: 1 !important;
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
+input[type='number'] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}

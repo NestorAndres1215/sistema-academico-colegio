@@ -87,7 +87,7 @@
 
 .file-hint {
   font-size: 11px;
-  color: var(--color-text-secondary);
+  color: var(--color-texto-secundario) !important;
 }
 
 /* CV upload */
@@ -101,7 +101,7 @@
   background: var(--color-bg-page);
   cursor: pointer;
   font-size: 13px;
-  color: var(--color-text-secondary);
+  color: var(--color-texto-secundario) !important;
   transition:
     border-color 0.2s,
     background 0.2s;
@@ -117,7 +117,7 @@
   font-size: 24px;
   width: 24px;
   height: 24px;
-  color: var(--color-text-secondary);
+  color: var(--color-texto-secundario) !important;
   flex-shrink: 0;
 }
 
@@ -128,7 +128,7 @@
 .cv-nombre {
   flex: 1;
   font-weight: 500;
-  color: var(--color-text-primary);
+  color: var(--color-texto-primario);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -142,33 +142,4 @@
     margin-top: 1rem;
     padding-top: 1.5rem;
     border-top: 1px solid var(--color-border);
-}
-
-.save-btn {
-  background: var(--color-navy) !important;
-  color: #ffffff !important;
-  border-radius: 10px !important;
-  height: 42px !important;
-  font-size: 14px !important;
-  font-weight: 500 !important;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.save-btn mat-icon {
-  font-size: 18px;
-}
-
-.cancel-btn {
-  border-radius: 10px !important;
-  height: 42px !important;
-  font-size: 14px !important;
-  color: var(--color-text-secondary) !important;
-  border-color: var(--color-border) !important;
-}
-
-.save-btn:disabled {
-  opacity: 0.5 !important;
-  cursor: not-allowed !important;
 }
