@@ -1,4 +1,16 @@
 <div class="container">
   <app-bread-crumb [items]="breadcrumbs()"></app-bread-crumb>
   <app-page-header [icon]="icon" [title]="title" [subtitle]="subtitle"> </app-page-header>
+      <div class="my-3">
+        <app-search [placeholder]="'Buscar por nombre o correo...'" (searchChange)="onSearch($event)">
+        </app-search>
+    </div>
+
+    <app-data-table [columns]="columns" [data]="teachers()" [actions]="tableActions" (detail)="onDetail($event)"
+        (edit)="onEdit($event)">
+    </app-data-table>
+
+    <app-pagination [totalItems]="totalItems()" [currentPage]="currentPage()" [pageSize]="pageSize()"
+        (pageChange)="onPageChange($event)" (pageSizeChange)="onPageSizeChange($event)">
+    </app-pagination>
 </div>

@@ -8,11 +8,6 @@ import { UpdateUserRequest } from '../models/update-user-request';
 import { PasswordRequest, UpdatePasswordRequest } from '../models/password-request';
 import { PageResponse } from '../../../models/page-response';
 
-
-
-
-
-
 @Service()
 export class UserService {
   private readonly http = inject(HttpClient);
@@ -24,6 +19,7 @@ export class UserService {
     size: number = 10,
     search?: string,
   ): Observable<PageResponse<UserResponse>> {
+
     let params = new HttpParams().set('status', status).set('page', page).set('size', size);
 
     if (search) {
@@ -64,7 +60,10 @@ export class UserService {
   }
 
   updatechangePassword(id: number, request: UpdatePasswordRequest): Observable<UserResponse> {
-    return this.http.post<UserResponse>(`${this.backendUrl}/users/${id}/update-change-password`, request);
+    return this.http.post<UserResponse>(
+      `${this.backendUrl}/users/${id}/update-change-password`,
+      request,
+    );
   }
 
   activate(id: number): Observable<UserResponse> {

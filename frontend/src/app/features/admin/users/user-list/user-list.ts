@@ -33,11 +33,6 @@ export class UserList {
   readonly title = 'Gestión de usuarios';
   readonly subtitle = 'Búsqueda, filtros y administración de usuarios del sistema';
 
-  readonly statusOptions: SelectFilterOption[] = [
-    { value: '', label: 'Todos los estados' },
-    { value: 'active', label: 'Activo' },
-    { value: 'inactive', label: 'Inactivo' },
-  ];
 
   readonly columns: TableColumn[] = [
     { key: 'username', label: 'Usuario', sortable: true },
