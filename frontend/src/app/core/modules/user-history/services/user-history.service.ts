@@ -11,9 +11,7 @@ export class UserHistoryService {
   private readonly http = inject(HttpClient);
   private readonly backendUrl = environment.apiUrl;
 
-  findWithFilters(
-    userHistoryFilter: UserHistoryFilter,
-  ): Observable<PageResponse<UserHistoryResponse>> {
+  findWithFilters(userHistoryFilter: UserHistoryFilter,): Observable<PageResponse<UserHistoryResponse>> {
     let params = new HttpParams()
       .set('email', userHistoryFilter.email ?? '')
       .set('page', userHistoryFilter.page ?? 0)

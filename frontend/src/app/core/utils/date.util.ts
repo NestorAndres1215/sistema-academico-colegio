@@ -1,4 +1,3 @@
-// src/app/core/utils/date.utils.ts
 
 /**
  * Convierte "yyyy-MM-dd" a Date local
@@ -15,8 +14,12 @@ export function toLocalDate(date: string | null | undefined): Date | null {
 /**
  * Convierte un Date a "yyyy-MM-dd"
  */
-export function toApiDate(date: Date | null | undefined): string | null {
+export function toApiDate(date: string | Date | null | undefined): string | null {
   if (!date) return null;
+
+  if (typeof date === 'string') {
+    return date;
+  }
 
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -24,7 +27,6 @@ export function toApiDate(date: Date | null | undefined): string | null {
 
   return `${year}-${month}-${day}`;
 }
-
 /**
  * Obtiene únicamente el año.
  */
@@ -38,7 +40,6 @@ export function getYear(date: string | Date | null | undefined): string {
   return String(date.getFullYear());
 }
 
-
 export function parseDate(date: string | Date | null | undefined): Date | null {
   if (!date) return null;
 
@@ -49,7 +50,7 @@ export function parseDate(date: string | Date | null | undefined): Date | null {
   return toLocalDate(date);
 }
 
-export function formatDate( date: string | Date | null | undefined): string {
+export function formatDate(date: string | Date | null | undefined): string {
   if (!date) return '—';
 
   const d = typeof date === 'string' ? new Date(date) : date;
@@ -57,6 +58,6 @@ export function formatDate( date: string | Date | null | undefined): string {
   return new Intl.DateTimeFormat('es-PE', {
     day: '2-digit',
     month: '2-digit',
-    year: 'numeric'
+    year: 'numeric',
   }).format(d);
 }

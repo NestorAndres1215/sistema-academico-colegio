@@ -140,6 +140,13 @@
     flex-shrink: 0;
 }
 
+.result-actions {
+    display: flex;
+    gap: 0.6rem;
+    flex-shrink: 0;
+    flex-wrap: wrap; /* permite que los botones bajen de línea */
+}
+
 @media (max-width: 640px) {
     .result-card {
         flex-direction: column;
@@ -147,6 +154,22 @@
     }
 
     .result-actions {
-        justify-content: flex-end;
+        justify-content: flex-start; /* mejor que flex-end en mobile */
+        width: 100%;
+    }
+
+    .result-actions app-button {
+        flex: 1 1 auto; /* los botones se reparten el ancho disponible */
+        min-width: 0;
+    }
+}
+
+@media (max-width: 420px) {
+    .result-actions {
+        flex-direction: column; /* en pantallas muy chicas, uno debajo del otro */
+    }
+
+    .result-actions app-button {
+        width: 100%;
     }
 }

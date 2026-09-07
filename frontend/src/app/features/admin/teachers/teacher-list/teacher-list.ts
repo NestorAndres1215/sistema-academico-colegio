@@ -29,13 +29,14 @@ export class TeacherList {
   readonly pageSize = signal(5);
   readonly searchTerm = signal('');
   readonly statusFilter = signal('ACTIVE');
-
   readonly icon = 'school';
   readonly title = 'Gestión de profesores';
   readonly subtitle = 'Búsqueda, filtros y administración de profesores del sistema';
-
+  readonly tableActions: TableAction[] = ['detail', 'edit'];
+  
   async ngOnInit(): Promise<void> {
     await this.initUser();
+    await this.loadTeachers();
   }
 
   private async initUser(): Promise<void> {
@@ -97,7 +98,7 @@ export class TeacherList {
     this.loadTeachers();
   }
 
-  readonly tableActions: TableAction[] = ['detail', 'edit'];
+
   onDetail(userResponse: TeacherResponse): void {
     this.router.navigate(['/admin/usuarios', userResponse.id]);
   }

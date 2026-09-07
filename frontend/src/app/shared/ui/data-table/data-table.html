@@ -147,7 +147,16 @@
                         <mat-icon>delete</mat-icon>
                       </button>
                     }
-
+                    @if (hasAction('download')) {
+                      <button
+                        mat-icon-button
+                        class="action-btn download-action"
+                        [matTooltip]="downloadTooltip()"
+                        (click)="onDownload(row, $event)"
+                      >
+                        <mat-icon>download</mat-icon>
+                      </button>
+                    }
                     <!-- Imprimir -->
                     @if (hasAction('print')) {
                       <button

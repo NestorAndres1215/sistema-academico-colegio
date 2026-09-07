@@ -26,32 +26,23 @@ export class DataTable<T extends Record<string, any>> {
   // ======================
 
   readonly actions = input<TableAction[]>(['detail', 'edit', 'delete']);
-
   readonly columns = input<TableColumn[]>([]);
-
   readonly data = input<T[]>([]);
-
   readonly emptyMessage = input('No se encontraron registros');
-
   readonly trackByKey = input('id');
 
   readonly detailTooltip = input('Ver detalle');
-
   readonly editTooltip = input('Actualizar');
-
   readonly deleteTooltip = input('Eliminar');
-
   readonly activateTooltip = input('Activar');
-
   readonly deactivateTooltip = input('Desactivar');
-
   readonly blockedTooltip = input('Bloquear');
-
   readonly printTooltip = input('Imprimir');
+  readonly downloadTooltip = input('Descargar'); // 👈 AGREGAR
 
   // --- Selección múltiple ---
-  readonly selectable = input(false);
 
+  readonly selectable = input(false);
   readonly selectedIds = input<Set<any>>(new Set());
 
   // ======================
@@ -59,21 +50,14 @@ export class DataTable<T extends Record<string, any>> {
   // ======================
 
   readonly rowClick = output<T>();
-
   readonly detail = output<T>();
-
   readonly edit = output<T>();
-
   readonly delete = output<T>();
-
   readonly activate = output<T>();
-
   readonly deactivate = output<T>();
-
   readonly blocked = output<T>();
-
   readonly print = output<T>();
-
+  readonly download = output<T>(); // 👈 AGREGAR
   readonly selectionChange = output<Set<any>>();
 
   // ======================
@@ -99,12 +83,14 @@ export class DataTable<T extends Record<string, any>> {
   readonly allSelected = computed(() => {
     const rows = this.data();
     const ids = this.selectedIds();
+
     return rows.length > 0 && rows.every((row) => ids.has(this.rowId(row)));
   });
 
   readonly someSelected = computed(() => {
     const rows = this.data();
     const ids = this.selectedIds();
+
     return rows.some((row) => ids.has(this.rowId(row))) && !this.allSelected();
   });
 
@@ -165,6 +151,12 @@ export class DataTable<T extends Record<string, any>> {
   onPrint(row: T, event: Event): void {
     event.stopPropagation();
     this.print.emit(row);
+  }
+
+  onDownload(row: T, event: Event): void {
+    // 👈 AGREGAR
+    event.stopPropagation();
+    this.download.emit(row);
   }
 
   toggleRow(row: T, event: Event): void {

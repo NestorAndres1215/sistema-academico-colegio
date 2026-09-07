@@ -1,18 +1,11 @@
 <div class="container">
-  <app-bread-crumb [items]="breadcrumbs()"></app-bread-crumb>
+  <app-bread-crumb [items]="breadcrumbs()"> </app-bread-crumb>
   <app-page-header [icon]="icon" [title]="title" [subtitle]="subtitle"> </app-page-header>
-  <div class="my-3">
-    <app-search [placeholder]="'Buscar por nombre o correo...'" (searchChange)="onSearch($event)">
-    </app-search>
-  </div>
 
-  <app-data-table
-    [columns]="columns"
-    [data]="users()"
-    [actions]="tableActions"
-    (detail)="onDetail($event)"
-    (edit)="onEdit($event)"
-  >
+  <div class="d-flex justify-content-end mb-3">
+    <app-button label="Registrar" icon="add" variant="primary" class="register-btn"> </app-button>
+  </div>
+  <app-data-table [columns]="columns" [data]="teacherContract()" [actions]="tableActions">
   </app-data-table>
 
   <app-pagination

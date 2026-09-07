@@ -50,6 +50,8 @@ export class UserHistory {
   readonly searchTerm = signal('');
   readonly dateFrom = signal<Date | null>(null);
   readonly dateTo = signal<Date | null>(null);
+  // currentPage es SIEMPRE 1-indexado. Solo se convierte a 0-indexado
+  // justo antes de llamar al backend, dentro de loadHistory().
   readonly currentPage = signal(1);
   readonly pageSize = signal(10);
   readonly sort = signal<'asc' | 'desc'>('desc');
@@ -106,6 +108,7 @@ export class UserHistory {
   clearDateFilters() {
     this.dateFrom.set(null);
     this.dateTo.set(null);
+    this.currentPage.set(1);
     this.loadHistory();
   }
 
@@ -115,31 +118,31 @@ export class UserHistory {
   }
 
   onPageChange(page: number) {
-    this.currentPage.set(page - 1);
+    this.currentPage.set(page);
     this.loadHistory();
   }
 
   onPageSizeChange(size: number) {
     this.pageSize.set(size);
-    this.currentPage.set(0);
+    this.currentPage.set(1);
     this.loadHistory();
   }
 
   onSearch(term: string) {
     this.searchTerm.set(term);
-    this.currentPage.set(0);
+    this.currentPage.set(1);
     this.loadHistory();
   }
 
   onDateFromChange(date: Date) {
     this.dateFrom.set(date);
-    this.currentPage.set(0);
+    this.currentPage.set(1);
     this.loadHistory();
   }
 
   onDateToChange(date: Date) {
     this.dateTo.set(date);
-    this.currentPage.set(0);
+    this.currentPage.set(1);
     this.loadHistory();
   }
 }

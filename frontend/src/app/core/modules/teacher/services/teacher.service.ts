@@ -30,10 +30,26 @@ export class TeacherService {
     return this.http.get<PageResponse<TeacherResponse>>(`${this.backendUrl}/teachers`, { params });
   }
 
+  search(search?: string): Observable<TeacherResponse[]> {
+    let params = new HttpParams();
+
+    if (search) {
+      params = params.set('search', search);
+    }
+
+    return this.http.get<TeacherResponse[]>(`${this.backendUrl}/teachers/search`, { params });
+  }
+
   create(request: TeacherRequest, foto: File | null, cv: File | null): Observable<TeacherResponse> {
     const formData = this.toFormData(request, foto, cv);
 
     return this.http.post<TeacherResponse>(`${this.backendUrl}/teachers`, formData);
+  }
+
+  downloadCurriculum(teacherId: number): Observable<Blob> {
+    return this.http.get(`${this.backendUrl}/teacher-details/${teacherId}/curriculum/download`, {
+      responseType: 'blob',
+    });
   }
 
   activate(id: number): Observable<TeacherResponse> {

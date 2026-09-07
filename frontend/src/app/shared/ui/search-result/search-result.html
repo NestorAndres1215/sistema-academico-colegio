@@ -47,6 +47,27 @@
           </div>
 
           <div class="result-actions">
+            @if (hasAction('download')) {
+              <app-button
+                [label]="downloadTooltip()"
+                icon="download"
+                variant="secondary"
+                [disabled]="isActionDisabled('download', item)"
+                (click)="onDownload(item, $event)"
+              >
+              </app-button>
+            }
+
+            @if (hasAction('viewContract')) {
+              <app-button
+                [label]="viewContractTooltip()"
+                icon="description"
+                variant="secondary"
+                [disabled]="isActionDisabled('viewContract', item)"
+                (click)="onViewContract(item, $event)"
+              >
+              </app-button>
+            }
             @if (hasAction('message')) {
               <app-button
                 [label]="messageTooltip()"

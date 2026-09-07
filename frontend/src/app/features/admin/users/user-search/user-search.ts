@@ -9,6 +9,7 @@ import { BreadCrumb } from "../../../../shared/ui/bread-crumb/bread-crumb";
 import { PageHeader } from "../../../../shared/ui/page-header/page-header";
 import { SearchResult } from "../../../../shared/ui/search-result/search-result";
 import { Search } from "../../../../shared/ui/search/search";
+import { FileService } from '../../../../core/services/file.service';
 
 @Component({
   imports: [BreadCrumb, PageHeader, SearchResult, Search],
