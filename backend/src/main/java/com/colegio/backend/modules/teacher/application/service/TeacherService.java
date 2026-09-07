@@ -26,6 +26,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Service
 public class TeacherService implements TeacherUseCase {
@@ -42,6 +44,7 @@ public class TeacherService implements TeacherUseCase {
 
     @Override
     public Page<TeacherResponse> findByAllStatus(String status, String search, Pageable pageable) {
+
         return teacherRepositoryPort.findByAllStatus(status, search, pageable)
                 .map(teacherMapper::toResponse);
     }
@@ -64,6 +67,21 @@ public class TeacherService implements TeacherUseCase {
         teacherContractUseCase.create(teacherContract,teacher);
 
         return teacher;
+    }
+
+    @Override
+    public List<TeacherResponse> search(String search) {
+        List<Teacher> teachers;
+
+        if (search == null || search.isBlank()) {
+            teachers = teacherRepositoryPort.findRandom(5);
+        } else {
+            teachers = teacherRepositoryPort.search(search.trim(), 5);
+        }
+
+        return teachers.stream()
+                .map(teacherMapper::toResponse)
+                .toList();
     }
 
 

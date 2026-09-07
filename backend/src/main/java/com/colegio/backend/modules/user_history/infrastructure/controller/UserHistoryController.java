@@ -34,8 +34,18 @@ public class UserHistoryController {
             @RequestParam(defaultValue = "desc") String sort) {
 
         return ResponseEntity.ok(
-                userHistoryUseCase.findWithFilters(email, status, action, dateFrom, dateTo, page, size, sort)
+                userHistoryUseCase.findWithFilters(
+                        email,
+                        status,
+                        action,
+                        dateFrom,
+                        dateTo,
+                        page,
+                        size,
+                        sort
+                )
         );
+
     }
 
     @Operation(summary = "Register a new user story")

@@ -24,7 +24,6 @@ public class TeacherContractEntity {
     @JoinColumn(name = "teacher_id")
     private TeacherEntity teacher; // Profesor asociado
 
-
     @Column(name = "contract_type")
     private String contractType; // Tipo de contrato
 

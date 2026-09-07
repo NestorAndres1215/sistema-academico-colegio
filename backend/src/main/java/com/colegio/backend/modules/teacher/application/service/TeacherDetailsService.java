@@ -6,9 +6,12 @@ import com.colegio.backend.modules.teacher.domain.model.TeacherDetails;
 import com.colegio.backend.modules.teacher.domain.port.repository.TeacherDetailsRepositoryPort;
 import com.colegio.backend.modules.teacher.domain.port.usecase.TeacherDetailsUseCase;
 import com.colegio.backend.shared.exception.NotFoundException;
+import org.springframework.core.io.Resource;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.net.MalformedURLException;
 
 @Service
 @RequiredArgsConstructor
@@ -27,7 +30,23 @@ public class TeacherDetailsService implements TeacherDetailsUseCase {
         return teacherDetailsRepositoryPort.save(teacherDetails);
     }
 
+    @Override
+    public Resource downloadCurriculum(Long teacherId) throws MalformedURLException {
+        TeacherDetails details = findByTeacherId(teacherId);
 
+        if (details.getCurriculum() == null || details.getCurriculum().isBlank()) {
+            throw new NotFoundException("El profesor no tiene curriculum registrado");
+        }
+
+        return fileUseCase.loadAsResource(details.getCurriculum());
+    }
+
+
+    private TeacherDetails findByTeacherId(Long teacherId) {
+        return teacherDetailsRepositoryPort.findByTeacher_Id(teacherId)
+                .orElseThrow(() ->
+                        new NotFoundException("Detalle del profesor no encontrado"));
+    }
 
     private void saveCv(TeacherDetails teacherDetails, MultipartFile cv) {
 

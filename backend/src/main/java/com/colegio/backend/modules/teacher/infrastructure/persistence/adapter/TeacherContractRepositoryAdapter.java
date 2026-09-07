@@ -6,8 +6,12 @@ import com.colegio.backend.modules.teacher.infrastructure.persistence.entity.Tea
 import com.colegio.backend.modules.teacher.infrastructure.persistence.mapper.TeacherContractMapperPersistence;
 import com.colegio.backend.modules.teacher.infrastructure.persistence.repository.JpaTeacherContractRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Component
@@ -38,5 +42,11 @@ public class TeacherContractRepositoryAdapter implements TeacherContractReposito
         TeacherContractEntity saved = jpaTeacherContractRepository.save(entity);
 
         return teacherContractMapperPersistence.toDomain(saved);
+    }
+
+    @Override
+    public Page<TeacherContract> findWithFilters(String teacherCode, LocalDate startDate, LocalDate endDate, Pageable pageable) {
+        return jpaTeacherContractRepository.findAllByFilters(teacherCode,startDate,endDate,"",pageable)
+                .map(teacherContractMapperPersistence::toDomain);
     }
 }
