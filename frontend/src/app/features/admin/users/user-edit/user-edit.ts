@@ -2,7 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { PageHeader } from '../../../../shared/ui/page-header/page-header';
-import { BreadCrumb } from '../../../../shared/ui/bread-crumb/bread-crumb';
+
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
@@ -16,12 +16,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormValidationService } from '../../../../core/services/form-validation.service';
 import { AlertService } from '../../../../core/services/alert.service';
 import { UserService } from '../../../../core/modules/user/services/user.service';
-import { BreadcrumbItem } from '../../../../shared/models/breadcrumb.model';
 import { HttpErrorService } from '../../../../core/services/http-error.service';
 
 @Component({
   imports: [
-    BreadCrumb,
     PageHeader,
     ReactiveFormsModule,
     MatFormFieldModule,
@@ -38,7 +36,6 @@ import { HttpErrorService } from '../../../../core/services/http-error.service';
 })
 export class UserEdit {
 
-  readonly breadcrumbs = signal<BreadcrumbItem[]>([]);
   readonly user = signal<UpdateUserRequest | null>(null);
   readonly icon = 'edit';
   readonly title = 'Editar usuario';
@@ -55,18 +52,10 @@ export class UserEdit {
 
   async ngOnInit(): Promise<void> {
     this.userId = Number(this.route.snapshot.paramMap.get('id'));
-    await this.initUser();
     await this.loadUser();
   }
 
-  private async initUser(): Promise<void> {
-    this.breadcrumbs.set([
-      { label: 'Inicio', href: '/admin' },
-      { label: 'Usuarios' },
-      { label: 'Listado de Usuarios', href: '/admin/usuarios/listar' },
-      { label: 'Editar Usuario' },
-    ]);
-  }
+
 
   readonly editForm: FormGroup = this.fb.group({
     username: ['', Validators.required],

@@ -1,3 +1,9 @@
+.container {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-bottom: calc(2rem + env(safe-area-inset-bottom, 0px));
+}
+
 .info-card {
   background: var(--color-bg-card);
   border: 1px solid var(--color-border);
@@ -27,6 +33,15 @@
   margin: 0;
 }
 
+.field-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-texto-secundario);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-bottom: 4px;
+}
 
 .field-input {
   width: 100%;
@@ -46,6 +61,7 @@
   position: relative;
   overflow: hidden;
   transition: border-color 0.2s;
+  flex-shrink: 0;
 }
 
 .avatar-preview:hover {
@@ -136,10 +152,93 @@
 
 /* Acciones */
 .form-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 0.75rem;
-    margin-top: 1rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--color-border);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  padding: 1.5rem 0 calc(1.5rem + env(safe-area-inset-bottom, 0px));
+  border-top: 1px solid var(--color-border);
+  position: relative;
+  z-index: 1;
+  flex-wrap: wrap;
+}
+
+.form-actions app-button {
+  flex-shrink: 0;
+}
+
+/* ============ RESPONSIVE ============ */
+
+@media (max-width: 991.98px) {
+  .info-card {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .container {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  .info-card {
+    padding: 1.25rem 1rem;
+    border-radius: 10px;
+  }
+
+  .section-header h3 {
+    font-size: 14px;
+  }
+
+  .row.align-items-center {
+    align-items: stretch !important;
+  }
+
+  .avatar-preview {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+  }
+
+  .cv-upload {
+    padding: 12px;
+    font-size: 12.5px;
+  }
+
+  .cv-nombre {
+    font-size: 12.5px;
+  }
+
+  /* Registrar arriba (más fácil de tocar), Limpiar fechas abajo */
+  .form-actions {
+    flex-direction: column-reverse;
+    flex-wrap: nowrap;
+    gap: 0.6rem;
+    width: 100%;
+    margin-bottom: 6rem;
+  }
+
+  .form-actions app-button {
+    width: 100%;
+    display: block;
+  }
+
+  .form-actions ::ng-deep button,
+  .form-actions ::ng-deep .mat-mdc-raised-button,
+  .form-actions ::ng-deep .mat-mdc-button {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .info-card {
+    padding: 1rem 0.75rem;
+  }
+
+  .avatar-preview {
+    width: 70px;
+    height: 70px;
+  }
 }

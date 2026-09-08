@@ -1,7 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
 import { PageHeader } from '../../../shared/ui/page-header/page-header';
-import { BreadCrumb } from '../../../shared/ui/bread-crumb/bread-crumb';
-import { BreadcrumbItem } from '../../../shared/models/breadcrumb.model';
 import { UserHistoryService } from '../../../core/modules/user-history/services/user-history.service';
 import { AuthService } from '../../../core/auth/service/auth.service';
 import { TableColumn } from '../../../shared/models/table.model';
@@ -26,7 +24,6 @@ import { UserHistoryFilter } from '../../../core/modules/user-history/models/use
     MatFormFieldModule,
     MatInputModule,
     MatNativeDateModule,
-    BreadCrumb,
     PageHeader,
     Button,
     DataTable,
@@ -43,15 +40,12 @@ export class UserHistory {
   readonly icon = 'history';
   readonly title = 'Historial de actividad';
   readonly subtitle = 'Registro de acciones realizadas en el sistema';
-  readonly breadcrumbs = signal<BreadcrumbItem[]>([]);
   readonly userName = signal('');
   readonly logs = signal<any[]>([]);
   readonly totalItems = signal(0);
   readonly searchTerm = signal('');
   readonly dateFrom = signal<Date | null>(null);
   readonly dateTo = signal<Date | null>(null);
-  // currentPage es SIEMPRE 1-indexado. Solo se convierte a 0-indexado
-  // justo antes de llamar al backend, dentro de loadHistory().
   readonly currentPage = signal(1);
   readonly pageSize = signal(10);
   readonly sort = signal<'asc' | 'desc'>('desc');
@@ -65,27 +59,11 @@ export class UserHistory {
   ];
 
   async ngOnInit(): Promise<void> {
-    await this.initUser();
+
     this.loadHistory();
   }
 
-  private async initUser(): Promise<void> {
-    const user = await firstValueFrom(this.authService.getCurrentUser());
 
-    if (!user) {
-      return;
-    }
-
-    this.userName.set(user.email);
-
-    const homeRoute = this.authService.getHomeByRole(user.role);
-
-    this.breadcrumbs.set([
-      { label: 'Inicio', href: homeRoute },
-      { label: 'Usuarios' },
-      { label: 'Historial de actividad' },
-    ]);
-  }
 
   async loadHistory(): Promise<void> {
     const filters: UserHistoryFilter = {

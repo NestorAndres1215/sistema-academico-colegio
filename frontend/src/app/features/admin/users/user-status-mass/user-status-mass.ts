@@ -3,32 +3,31 @@ import { firstValueFrom } from 'rxjs';
 import { TableAction } from '../../../../shared/ui/data-table/data-table.types';
 import { TableColumn } from '../../../../shared/models/table.model';
 import { SelectFilterOption } from '../../../../core/models/select-filter-option';
-import { BreadcrumbItem } from '../../../../shared/models/breadcrumb.model';
+
 import { UserResponse } from '../../../../core/modules/user/models/user-response';
 import { AlertService } from '../../../../core/services/alert.service';
 import { UserService } from '../../../../core/modules/user/services/user.service';
-import { DataTable } from "../../../../shared/ui/data-table/data-table";
-import { Pagination } from "../../../../shared/ui/pagination/pagination";
-import { Button } from "../../../../shared/ui/button/button";
-import { BreadCrumb } from "../../../../shared/ui/bread-crumb/bread-crumb";
-import { PageHeader } from "../../../../shared/ui/page-header/page-header";
+import { DataTable } from '../../../../shared/ui/data-table/data-table';
+import { Pagination } from '../../../../shared/ui/pagination/pagination';
+import { Button } from '../../../../shared/ui/button/button';
+
+import { PageHeader } from '../../../../shared/ui/page-header/page-header';
 import { SelectFilter } from '../../../../shared/ui/select-filter/select-filter';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  imports: [BreadCrumb, PageHeader, SelectFilter, Pagination, MatIconModule, Button, DataTable],
+  imports: [PageHeader, SelectFilter, Pagination, MatIconModule, Button, DataTable],
   selector: 'app-user-status-mass',
   styleUrl: './user-status-mass.css',
   templateUrl: './user-status-mass.html',
 })
 export class UserStatusMass {
-
   private readonly userService = inject(UserService);
   private readonly alertService = inject(AlertService);
   readonly icon = 'fact_check';
   readonly title = 'Cambio masivo de estado';
   readonly subtitle = 'Selecciona varios usuarios para activarlos o desactivarlos a la vez';
-  readonly breadcrumbs = signal<BreadcrumbItem[]>([]);
+
   readonly users = signal<UserResponse[]>([]);
   readonly totalItems = signal(0);
   readonly currentPage = signal(1);
@@ -87,16 +86,7 @@ export class UserStatusMass {
   );
 
   async ngOnInit(): Promise<void> {
-    await this.initHeader();
     await this.loadUsers();
-  }
-
-  private async initHeader(): Promise<void> {
-    this.breadcrumbs.set([
-      { label: 'Inicio', href: '/admin' },
-      { label: 'Usuarios' },
-      { label: 'Cambio masivo de estado' },
-    ]);
   }
 
   async loadUsers(): Promise<void> {
@@ -107,7 +97,7 @@ export class UserStatusMass {
         status,
         this.currentPage() - 1,
         this.pageSize(),
-        this.searchTerm()
+        this.searchTerm(),
       ),
     );
 
@@ -265,5 +255,4 @@ export class UserStatusMass {
       this.submitting.set(false);
     }
   }
-
 }

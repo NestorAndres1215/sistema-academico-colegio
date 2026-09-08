@@ -1,44 +1,106 @@
-.example-container {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    inset: 0;
-    height: 100vh;
-    font-family: var(--letra-principal);
+/* ==========================================================================
+   APP SHELL — layout raíz (toolbar + sidenav + contenido con scroll propio)
+   ========================================================================== */
+
+:host {
+  display: block;
+  height: 100%;
 }
 
-.example-sidenav-container {
-    flex: 1;
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  inset: 0;
+
+  /* Altura real disponible, con fallbacks en orden de menor a mayor soporte */
+  height: 100vh;
+  height: -webkit-fill-available;
+  height: 100dvh;
+
+  font-family: var(--letra-principal);
 }
 
-.csa-sidenav {
-    width: 400px !important;
-    background: var(--color-pagina-principal) !important;
-    border-right: 1px solid var(--color-border) !important;
-    box-shadow: 4px 0 20px var(--color-shadow) !important;
-    display: flex !important;
-    flex-direction: column !important;
+/* El toolbar no crece ni se encoge: ocupa su alto natural */
+.app-shell__toolbar {
+  flex: 0 0 auto;
 }
 
-.csa-content {
-    background: var(--color-pagina-principal);
+/* El cuerpo (sidenav + contenido) ocupa TODO el espacio restante.
+   min-height: 0 es obligatorio: sin esto, un flex item nunca se encoge
+   por debajo del tamaño de su contenido y el scroll interno se rompe. */
+.app-shell__body {
+  flex: 1 1 auto;
+  min-height: 0;
 }
 
+/* ---- Sidenav ---- */
+.app-shell__sidenav {
+  width: 400px !important;
+  background: var(--color-pagina-principal) !important;
+  border-right: 1px solid var(--color-border) !important;
+  box-shadow: 4px 0 20px var(--color-shadow) !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* ---- Contenido ---- */
+.app-shell__content {
+  background: var(--color-pagina-principal);
+  height: 100%;
+}
+
+/* Angular Material aplica su propio height/overflow al elemento real
+   (.mat-drawer-content) con bastante especificidad. Lo forzamos desde
+   afuera para garantizar que el scroll SIEMPRE viva ahí, nunca en el body. */
+::ng-deep .mat-drawer-container,
+::ng-deep .mat-sidenav-container {
+  height: 100% !important;
+}
+
+::ng-deep .mat-drawer-content {
+  height: 100% !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  -webkit-overflow-scrolling: touch !important;
+}
+
+/* ==========================================================================
+   RESPONSIVE — de pantallas grandes a chicas, sin solaparse entre sí
+   ========================================================================== */
+
+/* Laptops chicas / tablets grandes */
+@media (max-width: 1200px) {
+  .app-shell__sidenav {
+    width: 320px !important;
+  }
+}
+
+/* Tablets */
+@media (max-width: 1023.98px) {
+  .app-shell__sidenav {
+    width: 280px !important;
+  }
+}
+
+/* Tablets chicas / mobile grande (modo "over": el sidenav flota sobre el contenido) */
 @media (max-width: 768px) {
-    .csa-sidenav {
-        width: 85vw !important;
-    }
+  .app-shell__sidenav {
+    width: 85vw !important;
+    max-width: 320px !important;
+  }
 }
 
-@media (max-width: 1023px) {
-    .csa-sidenav {
-        width: 260px !important;
-    }
+@media (max-width: 575.98px) {
+  .app-shell__sidenav {
+    width: 85vw !important;
+    max-width: 280px !important;
+  }
 }
 
-@media (max-width: 768px) {
-    .csa-sidenav {
-        width: 85vw !important;
-        max-width: 320px !important;
-    }
+
+@media (max-height: 500px) and (orientation: landscape) {
+  .app-shell__toolbar {
+    min-height: 48px;
+  }
 }

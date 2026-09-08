@@ -1,13 +1,11 @@
 import { Component, inject, signal } from '@angular/core';
 import { ThemeOption } from '../../../core/models/theme.model';
 import { ThemeService } from '../../../core/services/theme.service';
-import { BreadcrumbItem } from '../../../shared/models/breadcrumb.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { BreadCrumb } from '../../../shared/ui/bread-crumb/bread-crumb';
 import { PageHeader } from '../../../shared/ui/page-header/page-header';
 import { Button } from '../../../shared/ui/button/button';
 
@@ -18,7 +16,6 @@ import { Button } from '../../../shared/ui/button/button';
     MatButtonModule,
     MatIconModule,
     MatTooltipModule,
-    BreadCrumb,
     PageHeader,
     Button,
   ],
@@ -34,10 +31,6 @@ export class Theme {
   themes = signal<ThemeOption[]>([]);
   private readonly themeService = inject(ThemeService);
 
-  readonly breadcrumbs: BreadcrumbItem[] = [
-    { label: 'Inicio', href: '/admin' },
-    { label: 'Cambio de Tema' },
-  ];
 
   ngOnInit(): void {
     const themes = this.getThemes();

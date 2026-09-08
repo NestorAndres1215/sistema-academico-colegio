@@ -6,13 +6,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { firstValueFrom } from 'rxjs';
-
-import { BreadCrumb } from '../../../shared/ui/bread-crumb/bread-crumb';
 import { FormValidationService } from '../../../core/services/form-validation.service';
 import { AlertService } from '../../../core/services/alert.service';
 import { Button } from '../../../shared/ui/button/button';
 import { AuthService } from '../../../core/auth/service/auth.service';
-import { BreadcrumbItem } from '../../../shared/models/breadcrumb.model';
 import { PasswordRequest } from '../../../core/modules/user/models/password-request';
 import { UserService } from '../../../core/modules/user/services/user.service';
 import { HttpErrorService } from '../../../core/services/http-error.service';
@@ -27,7 +24,6 @@ import { HttpErrorService } from '../../../core/services/http-error.service';
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    BreadCrumb,
     Button
   ],
   templateUrl: './change-password.html',
@@ -43,7 +39,6 @@ export class ChangePassword {
   readonly editMode = signal(false);
   readonly username = signal('');
   readonly currentRole = signal('');
-  readonly breadcrumbs = signal<BreadcrumbItem[]>([]);
   readonly showNueva = signal(false);
   readonly showConfirmar = signal(false);
   readonly showActual = signal(false);
@@ -71,17 +66,9 @@ export class ChangePassword {
 
     this.currentUserId.set(currentUser.id);
     this.username.set(currentUser.username);
-    this.currentRole.set(currentUser.role);
 
-    this.breadcrumbs.set([
-      {
-        label: 'Inicio',
-        href: this.authService.getHomeByRole(currentUser.role),
-      },
-      {
-        label: 'Cambiar Contraseña',
-      },
-    ]);
+
+
   }
 
   toggleEdit(): void {

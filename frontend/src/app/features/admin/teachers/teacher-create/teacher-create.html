@@ -1,5 +1,4 @@
 <div class="container mb-3">
-  <app-bread-crumb [items]="breadcrumbs()"></app-bread-crumb>
   <app-page-header [icon]="icon" [title]="title" [subtitle]="subtitle"></app-page-header>
 
   <form [formGroup]="form">
@@ -337,7 +336,7 @@
     </div>
 
     <!-- ACCIONES -->
-    <div class="form-actions">
+    <div class="form-actions ">
       <app-button label="Limpiar fechas" icon="close" variant="secondary" (clicked)="cancelar()">
       </app-button>
       <app-button label="Registrar" icon="add" variant="primary" (clicked)="guardar()">

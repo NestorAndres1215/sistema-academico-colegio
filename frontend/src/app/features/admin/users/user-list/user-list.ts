@@ -3,18 +3,15 @@ import { UserResponse } from '../../../../core/modules/user/models/user-response
 import { TableAction } from '../../../../shared/ui/data-table/data-table.types';
 import { firstValueFrom } from 'rxjs';
 import { TableColumn } from '../../../../shared/models/table.model';
-import { SelectFilterOption } from '../../../../core/models/select-filter-option';
-import { BreadcrumbItem } from '../../../../shared/models/breadcrumb.model';
 import { Router } from '@angular/router';
 import { UserService } from '../../../../core/modules/user/services/user.service';
 import { DataTable } from '../../../../shared/ui/data-table/data-table';
 import { Search } from '../../../../shared/ui/search/search';
 import { Pagination } from '../../../../shared/ui/pagination/pagination';
-import { BreadCrumb } from '../../../../shared/ui/bread-crumb/bread-crumb';
 import { PageHeader } from '../../../../shared/ui/page-header/page-header';
 
 @Component({
-  imports: [DataTable, Search, Pagination, BreadCrumb, PageHeader],
+  imports: [DataTable, Search, Pagination, PageHeader],
   selector: 'app-user-list',
   styleUrl: './user-list.css',
   templateUrl: './user-list.html',
@@ -22,7 +19,7 @@ import { PageHeader } from '../../../../shared/ui/page-header/page-header';
 export class UserList {
   private readonly userService = inject(UserService);
   private readonly router = inject(Router);
-  readonly breadcrumbs = signal<BreadcrumbItem[]>([]);
+ 
   readonly users = signal<UserResponse[]>([]);
   readonly totalItems = signal(0);
   readonly currentPage = signal(1);
@@ -42,17 +39,10 @@ export class UserList {
   ];
 
   async ngOnInit(): Promise<void> {
-    await this.initUser();
     this.loadUsers();
   }
 
-  private async initUser(): Promise<void> {
-    this.breadcrumbs.set([
-      { label: 'Inicio', href: '/admin' },
-      { label: 'Usuarios' },
-      { label: 'Listado de Usuarios' },
-    ]);
-  }
+
 
   async loadUsers(): Promise<void> {
     const response = await firstValueFrom(

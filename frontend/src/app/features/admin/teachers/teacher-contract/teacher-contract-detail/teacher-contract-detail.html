@@ -1,0 +1,75 @@
+<div class="container">
+  <app-page-header [icon]="icon" [title]="title" [subtitle]="subtitle"> </app-page-header>
+
+  @if (teacherContract(); as contract) {
+    <div class="info-card mb-3">
+      <div class="section-header">
+        <mat-icon>person</mat-icon>
+        <h3>Datos del profesor</h3>
+      </div>
+      <div class="row g-3">
+        <div class="col-12 col-sm-6 col-lg-3">
+          <span class="field-label">Código</span>
+          <p class="field-value">{{ contract.code }}</p>
+        </div>
+
+        <div class="col-12 col-sm-6 col-lg-3">
+          <span class="field-label">Nombre</span>
+          <p class="field-value">{{ contract.name }}</p>
+        </div>
+
+        <div class="col-12 col-sm-6 col-lg-3">
+          <span class="field-label">Apellido</span>
+          <p class="field-value">{{ contract.lastName }}</p>
+        </div>
+
+        <div class="col-12 col-sm-6 col-lg-3">
+          <span class="field-label">Estado</span>
+          <p class="field-value">
+            <span class="status-badge" [class.status-badge--active]="contract.status === 'ACTIVO'">
+              {{ contract.status }}
+            </span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-card mb-3">
+      <div class="section-header">
+        <mat-icon>work</mat-icon>
+        <h3>Datos del contrato</h3>
+      </div>
+      <div class="row g-3">
+        <div class="col-12 col-sm-6 col-lg-4">
+          <span class="field-label">Tipo de contrato</span>
+          <p class="field-value">{{ contract.contractType }}</p>
+        </div>
+
+        <div class="col-12 col-sm-6 col-lg-4">
+          <span class="field-label">Cargo / Posición</span>
+          <p class="field-value">{{ contract.position }}</p>
+        </div>
+
+        <div class="col-12 col-sm-6 col-lg-4">
+          <span class="field-label">Horas semanales</span>
+          <p class="field-value">{{ contract.weeklyHours }} hrs</p>
+        </div>
+
+        <div class="col-12 col-sm-6 col-lg-4">
+          <span class="field-label">Fecha de inicio</span>
+          <p class="field-value">{{ contract.startDate }}</p>
+        </div>
+
+        <div class="col-12 col-sm-6 col-lg-4">
+          <span class="field-label">Fecha de fin</span>
+          <p class="field-value">{{ contract.endDate }}</p>
+        </div>
+
+        <div class="col-12 col-sm-6 col-lg-4">
+          <span class="field-label">Salario</span>
+          <p class="field-value">S/ {{ contract.salary }}</p>
+        </div>
+      </div>
+    </div>
+  }
+</div>

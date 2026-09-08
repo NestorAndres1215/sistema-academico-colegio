@@ -1,7 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
-import { BreadCrumb } from '../../../../shared/ui/bread-crumb/bread-crumb';
+
 import { PageHeader } from '../../../../shared/ui/page-header/page-header';
-import { BreadcrumbItem } from '../../../../shared/models/breadcrumb.model';
 import { TeacherResponse } from '../../../../core/modules/teacher/models/teacher-response';
 import { Router } from '@angular/router';
 import { TeacherService } from '../../../../core/modules/teacher/services/teacher.service';
@@ -14,7 +13,7 @@ import { DataTable } from '../../../../shared/ui/data-table/data-table';
 import { Pagination } from '../../../../shared/ui/pagination/pagination';
 
 @Component({
-  imports: [BreadCrumb, PageHeader, Search, DataTable, Pagination],
+  imports: [ PageHeader, Search, DataTable, Pagination],
   selector: 'app-teacher-list',
   styleUrl: './teacher-list.css',
   templateUrl: './teacher-list.html',
@@ -22,7 +21,6 @@ import { Pagination } from '../../../../shared/ui/pagination/pagination';
 export class TeacherList {
   private readonly teacherService = inject(TeacherService);
   private readonly router = inject(Router);
-  readonly breadcrumbs = signal<BreadcrumbItem[]>([]);
   readonly teachers = signal<TeacherResponse[]>([]);
   readonly totalItems = signal(0);
   readonly currentPage = signal(1);
@@ -35,17 +33,9 @@ export class TeacherList {
   readonly tableActions: TableAction[] = ['detail', 'edit'];
   
   async ngOnInit(): Promise<void> {
-    await this.initUser();
     await this.loadTeachers();
   }
 
-  private async initUser(): Promise<void> {
-    this.breadcrumbs.set([
-      { label: 'Inicio', href: '/admin' },
-      { label: 'Profesores' },
-      { label: 'Listado de Profesores' },
-    ]);
-  }
 
   readonly statusOptions: SelectFilterOption[] = [
     { value: '', label: 'Todos los estados' },

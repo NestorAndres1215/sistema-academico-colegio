@@ -1,30 +1,27 @@
 .csa-menu {
-    border-radius: 10px !important;
-    box-shadow: 0 8px 32px var(--color-shadow) !important;
-    border-top: 3px solid var(--color-secundario) !important;
-    overflow: hidden !important;
-    min-width: 280px !important;
+  border-radius: 10px !important;
+  box-shadow: 0 8px 32px var(--color-shadow) !important;
+  border-top: 3px solid var(--color-secundario) !important;
+  overflow: hidden !important;
+  min-width: 280px !important;
 }
 
 .csa-menu--messages {
-    min-width: 320px !important;
+  min-width: 320px !important;
 }
-
 .menu-header-banner {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    
-    padding: 14px 18px 12px;
-    background: var(--color-principal);
-    color: var(--color-secundario);
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    pointer-events: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 14px 18px 12px;
+  background: var(--color-principal);
+  color: var(--color-secundario);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  pointer-events: none;
 }
-
-
 
 .menu-header-banner i {
     font-size: 15px;
@@ -156,7 +153,6 @@
     background: var(--color-principal);
     pointer-events: none;
 }
-
 .mobile-menu-avatar {
     width: 44px;
     height: 44px;

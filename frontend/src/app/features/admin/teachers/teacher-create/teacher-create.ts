@@ -7,9 +7,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { Router } from '@angular/router';
-import { BreadCrumb } from '../../../../shared/ui/bread-crumb/bread-crumb';
+
 import { PageHeader } from '../../../../shared/ui/page-header/page-header';
-import { BreadcrumbItem } from '../../../../shared/models/breadcrumb.model';
 import { AlertService } from '../../../../core/services/alert.service';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -33,7 +32,6 @@ import { Button } from "../../../../shared/ui/button/button";
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    BreadCrumb,
     PageHeader,
     MatDatepickerModule,
     MatNativeDateModule,
@@ -43,7 +41,7 @@ import { Button } from "../../../../shared/ui/button/button";
   styleUrl: './teacher-create.css',
 })
 export class TeacherCreate {
-  readonly breadcrumbs = signal<BreadcrumbItem[]>([]);
+
   readonly fotoPreview = signal<string | null>(null);
   readonly cvNombre = signal<string | null>(null);
   readonly icon = 'person_add';
@@ -93,13 +91,6 @@ export class TeacherCreate {
     }),
   });
 
-  ngOnInit(): void {
-    this.breadcrumbs.set([
-      { label: 'Inicio', href: '/admin' },
-      { label: 'Profesores' },
-      { label: 'Registrar Profesores' },
-    ]);
-  }
 
   // Foto
   triggerFoto(): void {

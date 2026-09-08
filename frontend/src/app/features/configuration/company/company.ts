@@ -6,14 +6,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { BreadCrumb } from '../../../shared/ui/bread-crumb/bread-crumb';
 import { FormValidationService } from '../../../core/services/form-validation.service';
 import { AlertService } from '../../../core/services/alert.service';
 import { Button } from '../../../shared/ui/button/button';
-
 import { AuthService } from '../../../core/auth/service/auth.service';
-import { BreadcrumbItem } from '../../../shared/models/breadcrumb.model';
-
 import { PageHeader } from '../../../shared/ui/page-header/page-header';
 import { FileService } from '../../../core/services/file.service';
 import { CompanyService } from '../../../core/modules/company/services/company.service';
@@ -31,7 +27,6 @@ import { HttpErrorService } from '../../../core/services/http-error.service';
     MatButtonModule,
     MatInputModule,
     MatTooltipModule,
-    BreadCrumb,
     Button,
     PageHeader,
   ],
@@ -45,7 +40,7 @@ export class Company implements OnInit {
   private readonly formValidationService = inject(FormValidationService);
   private readonly alertService = inject(AlertService);
   private readonly fileService = inject(FileService);
-  readonly breadcrumbs = signal<BreadcrumbItem[]>([]);
+
   readonly editMode = signal(false);
   readonly success = signal(false);
   readonly logoPreview = signal<string | null>(null);
@@ -73,26 +68,9 @@ export class Company implements OnInit {
 
   async ngOnInit(): Promise<void> {
     await this.getCompany();
-    await this.initUser();
+
   }
 
-  private async initUser(): Promise<void> {
-    const currentUser = await firstValueFrom(this.authService.getCurrentUser());
-
-    if (!currentUser) {
-      return;
-    }
-
-    this.breadcrumbs.set([
-      {
-        label: 'Inicio',
-        href: this.authService.getHomeByRole(currentUser.role),
-      },
-      {
-        label: 'Compañía',
-      },
-    ]);
-  }
 
   async getCompany(): Promise<void> {
     const data = await firstValueFrom(this.companyService.findByCode('COMSANANDRES'));

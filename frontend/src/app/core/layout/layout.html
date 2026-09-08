@@ -1,5 +1,6 @@
-<div class="example-container">
+<div class="app-shell">
   <app-toolbar
+    class="app-shell__toolbar"
     [nameSchool]="nameSchool()"
     [username]="username()"
     [userRoleName]="userRoleName()"
@@ -10,12 +11,12 @@
   >
   </app-toolbar>
 
-  <mat-sidenav-container class="example-sidenav-container" [hasBackdrop]="isMobile()">
+  <mat-sidenav-container class="app-shell__body" [hasBackdrop]="isMobile()">
     <mat-sidenav
       #sidenav
       [mode]="isMobile() ? 'over' : 'side'"
       [opened]="!isMobile()"
-      class="csa-sidenav"
+      class="app-shell__sidenav"
     >
       <app-sidebar
         [mainMenus]="mainMenus()"
@@ -26,7 +27,7 @@
       </app-sidebar>
     </mat-sidenav>
 
-    <mat-sidenav-content class="csa-content">
+    <mat-sidenav-content class="app-shell__content">
       <router-outlet></router-outlet>
     </mat-sidenav-content>
   </mat-sidenav-container>

@@ -1,40 +1,23 @@
 import { Component, inject, signal } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { BreadCrumb } from '../../../shared/ui/bread-crumb/bread-crumb';
+
 import { PageHeader } from '../../../shared/ui/page-header/page-header';
-import { firstValueFrom } from 'rxjs/internal/firstValueFrom';
-import { AuthService } from '../../../core/auth/service/auth.service';
-import { BreadcrumbItem } from '../../../shared/models/breadcrumb.model';
 import { HelpSection, IconExplanation } from '../../../core/models/help.model';
 
 @Component({
   selector: 'app-help-page',
   standalone: true,
-  imports: [MatIconModule, BreadCrumb, PageHeader],
+  imports: [MatIconModule, PageHeader],
   templateUrl: './help-page.html',
   styleUrl: './help-page.css',
 })
 export class HelpPage {
-  private readonly authService = inject(AuthService);
-  readonly breadcrumbs = signal<BreadcrumbItem[]>([]);
+
   readonly icon = 'help_outline';
   readonly title = 'Guía del Sistema';
   readonly subtitle = 'Aprende a utilizar los módulos y herramientas disponibles del sistema';
 
-  async ngOnInit(): Promise<void> {
-    await this.initBreadcrumbs();
-  }
 
-  private async initBreadcrumbs(): Promise<void> {
-    const user = await firstValueFrom(this.authService.getCurrentUser());
-
-    if (!user) return;
-
-    this.breadcrumbs.set([
-      { label: 'Inicio', href: this.authService.getHomeByRole(user.role) },
-      { label: 'Guía de Sistema' },
-    ]);
-  }
 
   readonly activeSection = signal('intro');
 

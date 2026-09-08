@@ -1,8 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
-import { BreadcrumbItem } from '../../../../../shared/models/breadcrumb.model';
-import { BreadCrumb } from '../../../../../shared/ui/bread-crumb/bread-crumb';
+
 import { PageHeader } from '../../../../../shared/ui/page-header/page-header';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TeacherContractFilter } from '../../../../../core/modules/teacher/models/teacher-contract-filter';
 import { firstValueFrom } from 'rxjs';
 import { TeacherContractService } from '../../../../../core/modules/teacher/services/teacher-contract.service';
@@ -14,15 +13,15 @@ import { TableAction } from '../../../../../shared/ui/data-table/data-table.type
 import { Button } from "../../../../../shared/ui/button/button";
 
 @Component({
-  imports: [BreadCrumb, PageHeader, DataTable, Pagination, Button],
+  imports: [PageHeader, DataTable, Pagination, Button],
   selector: 'app-teacher-contract-list',
   styleUrl: './teacher-contract-list.css',
   templateUrl: './teacher-contract-list.html',
 })
 export class TeacherContract {
-  readonly breadcrumbs = signal<BreadcrumbItem[]>([]);
-  private readonly teacherContractService = inject(TeacherContractService);
 
+  private readonly teacherContractService = inject(TeacherContractService);
+  private readonly router = inject(Router)
   readonly icon = 'description';
   readonly title = 'Contratos de profesores';
   readonly subtitle = 'Consulta y gestiona los contratos de los profesores.';
@@ -39,18 +38,10 @@ export class TeacherContract {
 
   async ngOnInit(): Promise<void> {
     this.code.set(this.route.snapshot.paramMap.get('code') ?? '');
-    await this.initUser();
     await this.loadTeacherContract();
   }
 
-  private async initUser(): Promise<void> {
-    this.breadcrumbs.set([
-      { label: 'Inicio', href: '/admin' },
-      { label: 'Profesores' },
-      { label: 'Búsqueda Profesores', href: '/admin/profesores/busqueda-avanzada' },
-      { label: 'Contrato de Profesor' },
-    ]);
-  }
+
 
   async loadTeacherContract(): Promise<void> {
     const filters: TeacherContractFilter = {
@@ -73,6 +64,15 @@ export class TeacherContract {
     { key: 'endDate', label: 'Fecha Fin' },
     { key: 'position', label: 'Posicion' },
   ];
+
+onDetail(teacherContractResponse: TeacherContractResponse): void {
+  this.router.navigate([
+    '/admin/profesores/contrato',
+    this.code(),
+    teacherContractResponse.id,
+  ]);
+}
+
 
   clearDateFilters() {
     this.endDate.set(null);

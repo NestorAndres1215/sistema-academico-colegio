@@ -8,10 +8,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
-import { BreadCrumb } from '../../../../shared/ui/bread-crumb/bread-crumb';
 import { PageHeader } from '../../../../shared/ui/page-header/page-header';
 import { Button } from '../../../../shared/ui/button/button';
-import { BreadcrumbItem } from '../../../../shared/models/breadcrumb.model';
 import { UserService } from '../../../../core/modules/user/services/user.service';
 import { FormValidationService } from '../../../../core/services/form-validation.service';
 import { AlertService } from '../../../../core/services/alert.service';
@@ -33,7 +31,6 @@ import { HttpErrorService } from '../../../../core/services/http-error.service';
     MatProgressSpinnerModule,
     MatDatepickerModule,
     PageHeader,
-    BreadCrumb,
     Button,
   ],
   selector: 'app-user-create',
@@ -41,7 +38,7 @@ import { HttpErrorService } from '../../../../core/services/http-error.service';
   templateUrl: './user-create.html',
 })
 export class UserCreate {
-  readonly breadcrumbs = signal<BreadcrumbItem[]>([]);
+
   private readonly fb = inject(FormBuilder);
   private readonly userService = inject(UserService);
   private readonly alertService = inject(AlertService);
@@ -53,18 +50,6 @@ export class UserCreate {
   readonly subtitle = 'Ingrese los datos requeridos para crear una nueva cuenta de usuario.';
   readonly hidePassword = signal(true);
   readonly hideConfirmPassword = signal(true);
-
-  async ngOnInit(): Promise<void> {
-    await this.initUser();
-  }
-
-  private async initUser(): Promise<void> {
-    this.breadcrumbs.set([
-      { label: 'Inicio', href: '/admin' },
-      { label: 'Usuarios' },
-      { label: 'Registrar de Usuarios' },
-    ]);
-  }
 
   readonly registerForm: FormGroup = this.fb.group({
     email: ['', [Validators.required]],

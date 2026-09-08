@@ -21,7 +21,16 @@ export const TEACHERS_ROUTES: Routes = [
   {
     path: 'contracto/:code',
     loadComponent: () =>
-      import('./teacher-contract/teacher-contract-list/teacher-contract-list').then((m) => m.TeacherContract),
+      import('./teacher-contract/teacher-contract-list/teacher-contract-list').then(
+        (m) => m.TeacherContract,
+      ),
+  },
+  {
+    path: 'contrato/:code/:id',
+    loadComponent: () =>
+      import('./teacher-contract/teacher-contract-detail/teacher-contract-detail').then(
+        (m) => m.TeacherContractDetail,
+      ),
   },
 
   /*

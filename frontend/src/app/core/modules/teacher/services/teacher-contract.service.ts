@@ -11,6 +11,7 @@ import { toApiDate } from '../../../utils/date.util';
 export class TeacherContractService {
   private readonly http = inject(HttpClient);
   private readonly backendUrl = environment.apiUrl;
+
   findWithFilters(
     filter: TeacherContractFilter,
   ): Observable<PageResponse<TeacherContractResponse>> {
@@ -31,8 +32,15 @@ export class TeacherContractService {
     }
 
     return this.http.get<PageResponse<TeacherContractResponse>>(
-      `${this.backendUrl}/teacher-contract/${filter.teacherCode}`,
+      `${this.backendUrl}/teacher-contract/teacher/${filter.teacherCode}`,
       { params },
     );
   }
+
+  findById(id: number): Observable<TeacherContractResponse> {
+    return this.http.get<TeacherContractResponse>(`${this.backendUrl}/teacher-contract/${id}`);
+  }
+
+
+
 }
