@@ -1,15 +1,14 @@
 package com.colegio.backend.modules.teacher.application.service;
 
-import com.colegio.backend.modules.file.domain.port.usecase.FileUseCase;
-import com.colegio.backend.modules.teacher.application.dto.TeacherContractResponse;
+import com.colegio.backend.modules.teacher.application.dto.teacher_contract.CreateTeacherContractRequest;
+import com.colegio.backend.modules.teacher.application.dto.teacher_contract.TeacherContractResponse;
 import com.colegio.backend.modules.teacher.application.mapper.TeacherContractMapper;
 import com.colegio.backend.modules.teacher.application.validator.TeacherContractValidator;
 import com.colegio.backend.modules.teacher.domain.model.Teacher;
 import com.colegio.backend.modules.teacher.domain.model.TeacherContract;
-import com.colegio.backend.modules.teacher.domain.model.TeacherDetails;
 import com.colegio.backend.modules.teacher.domain.port.repository.TeacherContractRepositoryPort;
+import com.colegio.backend.modules.teacher.domain.port.repository.TeacherRepositoryPort;
 import com.colegio.backend.modules.teacher.domain.port.usecase.TeacherContractUseCase;
-import com.colegio.backend.modules.user_history.application.dto.UserHistoryResponse;
 import com.colegio.backend.shared.constant.StatusConstants;
 import com.colegio.backend.shared.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +17,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 
 @Service
@@ -26,6 +24,7 @@ import java.time.LocalDate;
 public class TeacherContractService implements TeacherContractUseCase {
 
     private final TeacherContractRepositoryPort teacherContractRepositoryPort;
+    private final TeacherRepositoryPort teacherRepositoryPort;
     private final TeacherContractValidator teacherContractValidator;
     private final TeacherContractMapper teacherContractMapper;
 
@@ -42,6 +41,15 @@ public class TeacherContractService implements TeacherContractUseCase {
 
         return teacherContractRepositoryPort.save(teacherContract);
     }
+
+    @Override
+    public TeacherContract createContract(CreateTeacherContractRequest createTeacherContractRequest, String code) {
+        Teacher teacher = findByCode(code);
+
+        TeacherContract teacherContract = teacherContractMapper.toTeacherContract(createTeacherContractRequest);
+        return create(teacherContract,teacher);
+    }
+
 
     @Override
     public TeacherContract activate(Long id) {
@@ -67,6 +75,13 @@ public class TeacherContractService implements TeacherContractUseCase {
                 .map(teacherContractMapper::toResponse);
     }
 
+    @Override
+    public TeacherContractResponse findById(Long id) {
+        return teacherContractRepositoryPort.findById(id)
+                .map(teacherContractMapper::toResponse)
+                .orElseThrow(() -> new NotFoundException("Id no encontrado"));
+    }
+
     private TeacherContract updateStatus(Long id, String status) {
 
         TeacherContract teacherContract = findByTeacherId(id);
@@ -81,4 +96,8 @@ public class TeacherContractService implements TeacherContractUseCase {
                 .orElseThrow(() -> new NotFoundException("Teacher not found"));
     }
 
+    private Teacher findByCode(String code) {
+        return teacherRepositoryPort.findByCode(code)
+                .orElseThrow(() -> new NotFoundException("Teacher not found"));
+    }
 }

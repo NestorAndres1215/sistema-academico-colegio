@@ -1,4 +1,4 @@
-package com.colegio.backend.modules.teacher.application.dto;
+package com.colegio.backend.modules.teacher.application.dto.teacher;
 
 import jakarta.validation.constraints.*;
 import java.math.BigDecimal;

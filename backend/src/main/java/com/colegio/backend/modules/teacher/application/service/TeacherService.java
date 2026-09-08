@@ -1,9 +1,10 @@
 package com.colegio.backend.modules.teacher.application.service;
 
 import com.colegio.backend.modules.file.domain.port.usecase.FileUseCase;
-import com.colegio.backend.modules.teacher.application.dto.CreateTeacherRequest;
-import com.colegio.backend.modules.teacher.application.dto.TeacherRequest;
-import com.colegio.backend.modules.teacher.application.dto.TeacherResponse;
+import com.colegio.backend.modules.teacher.application.dto.teacher.CreateTeacherRequest;
+import com.colegio.backend.modules.teacher.application.dto.teacher.TeacherRequest;
+import com.colegio.backend.modules.teacher.application.dto.teacher.TeacherResponse;
+import com.colegio.backend.modules.teacher.application.dto.teacher.UpdateTeacherRequest;
 import com.colegio.backend.modules.teacher.application.mapper.TeacherContractMapper;
 import com.colegio.backend.modules.teacher.application.mapper.TeacherDetailsMapper;
 import com.colegio.backend.modules.teacher.application.mapper.TeacherMapper;
@@ -52,7 +53,11 @@ public class TeacherService implements TeacherUseCase {
     @Override
     public Teacher create(TeacherRequest teacherRequest, MultipartFile foto, MultipartFile cv) {
 
-        teacherValidator.validateBirthDate(teacherRequest.birthDate(), teacherRequest.startDate(), teacherRequest.endDate());
+        teacherValidator.validateBirthDate(
+                teacherRequest.birthDate(),
+                teacherRequest.startDate(),
+                teacherRequest.endDate()
+        );
 
         CreateTeacherRequest createTeacherRequest = teacherMapper.toCreateRequest(teacherRequest);
 
@@ -67,6 +72,29 @@ public class TeacherService implements TeacherUseCase {
         teacherContractUseCase.create(teacherContract,teacher);
 
         return teacher;
+    }
+
+    @Override
+    public Teacher update(
+            UpdateTeacherRequest teacherRequest,
+            Long id,
+            MultipartFile foto,
+            MultipartFile cv
+    ) {
+
+        Teacher teacher = findTeacherById(id);
+
+        teacherValidator.validateUpdate(teacherRequest, teacher);
+
+        teacherMapper.updateDomain(teacherRequest, teacher);
+
+        updatePhoto(teacher, foto);
+
+        Teacher teacherModel =teacherRepositoryPort.save(teacher);
+
+        teacherDetailsUseCase.update(teacherRequest,teacherModel,cv);
+
+        return teacherModel;
     }
 
     @Override
@@ -85,7 +113,11 @@ public class TeacherService implements TeacherUseCase {
     }
 
 
-    private  Teacher createTeacher(CreateTeacherRequest createTeacherRequest,String email, MultipartFile foto){
+    private  Teacher createTeacher(
+            CreateTeacherRequest createTeacherRequest,
+            String email,
+            MultipartFile foto
+    ){
 
         String code = generateCode(createTeacherRequest.dni());
 
@@ -111,6 +143,23 @@ public class TeacherService implements TeacherUseCase {
         teacher.setPhoto(fileUrl);
     }
 
+    private void updatePhoto(Teacher teacher, MultipartFile foto) {
+
+        if (foto == null || foto.isEmpty()) {
+            return;
+        }
+
+        String oldPhotoUrl = teacher.getPhoto();
+
+        String fileUrl = fileUseCase.storeFile(foto, "teacher");
+
+        teacher.setPhoto(fileUrl);
+
+        if (oldPhotoUrl != null && !oldPhotoUrl.isBlank()) {
+            fileUseCase.deleteFile(oldPhotoUrl);
+        }
+    }
+
     private String generateCode(String dni) {
         return "PR-" + dni;
     }
@@ -134,8 +183,6 @@ public class TeacherService implements TeacherUseCase {
 
         return teacherRepositoryPort.save(teacher);
     }
-
-
 
     private Teacher findTeacherById(Long id) {
         return teacherRepositoryPort.findById(id)

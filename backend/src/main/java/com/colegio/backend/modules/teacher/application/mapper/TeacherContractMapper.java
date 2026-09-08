@@ -1,7 +1,8 @@
 package com.colegio.backend.modules.teacher.application.mapper;
 
-import com.colegio.backend.modules.teacher.application.dto.TeacherContractResponse;
-import com.colegio.backend.modules.teacher.application.dto.TeacherRequest;
+import com.colegio.backend.modules.teacher.application.dto.teacher_contract.CreateTeacherContractRequest;
+import com.colegio.backend.modules.teacher.application.dto.teacher_contract.TeacherContractResponse;
+import com.colegio.backend.modules.teacher.application.dto.teacher.TeacherRequest;
 import com.colegio.backend.modules.teacher.domain.model.Teacher;
 import com.colegio.backend.modules.teacher.domain.model.TeacherContract;
 import com.colegio.backend.shared.constant.StatusConstants;
@@ -52,5 +53,16 @@ public class TeacherContractMapper {
         );
     }
 
-
+    public TeacherContract toTeacherContract(CreateTeacherContractRequest request) {
+        return TeacherContract.builder()
+                .contractType(request.contractType())
+                .startDate(request.startDate())
+                .endDate(request.endDate())
+                .position(request.position())
+                .weeklyHours(request.weeklyHours())
+                .salary(request.salary())
+                .status(StatusConstants.ACTIVE)
+                .createdAt(LocalDateTime.now())
+                .build();
+    }
 }

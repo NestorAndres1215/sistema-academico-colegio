@@ -1,17 +1,17 @@
 package com.colegio.backend.modules.teacher.infrastructure.persistence.repository;
 
 import com.colegio.backend.modules.teacher.infrastructure.persistence.entity.TeacherEntity;
-import com.colegio.backend.modules.user.infrastructure.persistence.entity.UserEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-
 import java.util.List;
 import java.util.Optional;
 
 public interface JpaTeacherRepository extends JpaRepository<TeacherEntity,Long> {
+
+    Optional<TeacherEntity> findByCode(String code);
 
     @Query("""
         SELECT t

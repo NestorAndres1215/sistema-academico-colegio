@@ -1,14 +1,17 @@
 package com.colegio.backend.modules.teacher.application.validator;
 
-import com.colegio.backend.modules.teacher.application.dto.CreateTeacherRequest;
+import com.colegio.backend.modules.teacher.application.dto.teacher.CreateTeacherRequest;
+import com.colegio.backend.modules.teacher.application.dto.teacher.UpdateTeacherRequest;
+import com.colegio.backend.modules.teacher.domain.model.Teacher;
 import com.colegio.backend.modules.teacher.domain.port.repository.TeacherRepositoryPort;
 import com.colegio.backend.shared.exception.BadRequestException;
 import com.colegio.backend.shared.exception.ConflictException;
+import com.colegio.backend.shared.utils.ValidationUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.util.Set;
+
 
 @Component
 @RequiredArgsConstructor
@@ -36,10 +39,10 @@ public class TeacherValidator {
 
     public void validate(CreateTeacherRequest request, String code) {
 
-        validateGender(request.gender());
-        validateAge(request.birthDate());
-        validateMaritalStatus(request.maritalStatus());
-        validateAcademicDegree(request.academicDegree());
+        ValidationUtils.validateGender(request.gender());
+        ValidationUtils.validateAge(request.birthDate());
+        ValidationUtils.validateMaritalStatus(request.maritalStatus());
+        ValidationUtils.validateAcademicDegree(request.academicDegree());
 
         if (teacherRepositoryPort.existsByDni(request.dni())) {
             throw new ConflictException("El DNI ya está registrado");
@@ -62,31 +65,40 @@ public class TeacherValidator {
         }
     }
 
-    private void validateGender(String gender) {
-        if (!"Masculino".equals(gender) && !"Femenino".equals(gender)) {
-            throw new BadRequestException("El género debe ser Masculino o Femenino");
-        }
-    }
 
-    private void validateAge(LocalDate birthDate) {
-        if (birthDate == null) {
-            return;
+
+
+    public void validateUpdate(
+            UpdateTeacherRequest request,
+            Teacher teacher
+    ) {
+        ValidationUtils.validateGender(request.gender());
+        ValidationUtils.validateAge(request.birthDate());
+        ValidationUtils.validateMaritalStatus(request.maritalStatus());
+        ValidationUtils.validateAcademicDegree(request.academicDegree());
+
+        if (!teacher.getDni().equals(request.dni())
+                && teacherRepositoryPort.existsByDni(request.dni())) {
+
+            throw new ConflictException("El DNI ya está registrado");
         }
 
-        if (birthDate.plusYears(18).isAfter(LocalDate.now())) {
-            throw new BadRequestException("El profesor debe tener al menos 18 años");
-        }
-    }
+        if (!teacher.getPhone().equals(request.phone())
+                && teacherRepositoryPort.existsByPhone(request.phone())) {
 
-    private void validateMaritalStatus(String maritalStatus) {
-        if (!Set.of("Soltero", "Casado", "Divorciado", "Viudo").contains(maritalStatus)) {
-            throw new BadRequestException("El estado civil no es válido");
+            throw new ConflictException("El teléfono ya está registrado");
         }
-    }
 
-    private void validateAcademicDegree(String academicDegree) {
-        if (!Set.of("Bachiller", "Licenciado", "Magíster", "Doctor").contains(academicDegree)) {
-            throw new BadRequestException("El grado académico no es válido");
+        if (request.professionalLicenseNumber() != null
+                && !request.professionalLicenseNumber().isBlank()
+                && !request.professionalLicenseNumber().equals(
+                teacher.getProfessionalLicenseNumber())
+                && teacherRepositoryPort.existsByProfessionalLicenseNumber(
+                request.professionalLicenseNumber())) {
+
+            throw new ConflictException(
+                    "El número de colegiatura ya está registrado"
+            );
         }
     }
 }

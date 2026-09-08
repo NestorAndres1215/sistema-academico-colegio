@@ -5,13 +5,11 @@ import com.colegio.backend.modules.teacher.domain.port.repository.TeacherReposit
 import com.colegio.backend.modules.teacher.infrastructure.persistence.entity.TeacherEntity;
 import com.colegio.backend.modules.teacher.infrastructure.persistence.mapper.TeacherMapperPersistence;
 import com.colegio.backend.modules.teacher.infrastructure.persistence.repository.JpaTeacherRepository;
-import com.colegio.backend.modules.user.domain.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -25,6 +23,12 @@ public class TeacherRepositoryAdapter implements TeacherRepositoryPort {
     @Override
     public Optional<Teacher> findById(Long id) {
         return jpaTeacherRepository.findById(id)
+                .map(teacherMapperPersistence::toDomain);
+    }
+
+    @Override
+    public Optional<Teacher> findByCode(String code) {
+        return jpaTeacherRepository.findByCode(code)
                 .map(teacherMapperPersistence::toDomain);
     }
 

@@ -1,6 +1,7 @@
 package com.colegio.backend.modules.teacher.application.service;
 
 import com.colegio.backend.modules.file.domain.port.usecase.FileUseCase;
+import com.colegio.backend.modules.teacher.application.dto.teacher.UpdateTeacherRequest;
 import com.colegio.backend.modules.teacher.domain.model.Teacher;
 import com.colegio.backend.modules.teacher.domain.model.TeacherDetails;
 import com.colegio.backend.modules.teacher.domain.port.repository.TeacherDetailsRepositoryPort;
@@ -21,7 +22,11 @@ public class TeacherDetailsService implements TeacherDetailsUseCase {
     private final FileUseCase fileUseCase;
 
     @Override
-    public TeacherDetails create(TeacherDetails teacherDetails, Teacher teacher, MultipartFile cv) {
+    public TeacherDetails create(
+            TeacherDetails teacherDetails,
+            Teacher teacher,
+            MultipartFile cv
+    ) {
 
         teacherDetails.setTeacher(teacher);
 
@@ -30,6 +35,19 @@ public class TeacherDetailsService implements TeacherDetailsUseCase {
         return teacherDetailsRepositoryPort.save(teacherDetails);
     }
 
+    @Override
+    public TeacherDetails update(
+            UpdateTeacherRequest updateTeacherRequest,
+            Teacher teacher,
+            MultipartFile cv
+    ) {
+
+        TeacherDetails teacherDetails = findByTeacherId(teacher.getId());
+
+        updateCv(teacherDetails, cv);
+
+        return teacherDetailsRepositoryPort.save(teacherDetails);
+    }
     @Override
     public Resource downloadCurriculum(Long teacherId) throws MalformedURLException {
         TeacherDetails details = findByTeacherId(teacherId);
@@ -57,6 +75,23 @@ public class TeacherDetailsService implements TeacherDetailsUseCase {
         String fileUrl = fileUseCase.storeFile(cv, "teacher-cv");
 
         teacherDetails.setCurriculum(fileUrl);
+    }
+
+    private void updateCv(TeacherDetails teacherDetails, MultipartFile cv) {
+
+        if (cv == null || cv.isEmpty()) {
+            return;
+        }
+
+        String oldCvUrl = teacherDetails.getCurriculum();
+
+        String fileUrl = fileUseCase.storeFile(cv, "teacher-cv");
+
+        teacherDetails.setCurriculum(fileUrl);
+
+        if (oldCvUrl != null && !oldCvUrl.isBlank()) {
+            fileUseCase.deleteFile(oldCvUrl);
+        }
     }
 
 

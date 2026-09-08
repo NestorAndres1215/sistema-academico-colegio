@@ -1,8 +1,9 @@
 package com.colegio.backend.modules.teacher.application.mapper;
 
-import com.colegio.backend.modules.teacher.application.dto.CreateTeacherRequest;
-import com.colegio.backend.modules.teacher.application.dto.TeacherRequest;
-import com.colegio.backend.modules.teacher.application.dto.TeacherResponse;
+import com.colegio.backend.modules.teacher.application.dto.teacher.CreateTeacherRequest;
+import com.colegio.backend.modules.teacher.application.dto.teacher.TeacherRequest;
+import com.colegio.backend.modules.teacher.application.dto.teacher.TeacherResponse;
+import com.colegio.backend.modules.teacher.application.dto.teacher.UpdateTeacherRequest;
 import com.colegio.backend.modules.teacher.domain.model.Teacher;
 import com.colegio.backend.modules.user.domain.model.User;
 import com.colegio.backend.shared.constant.StatusConstants;
@@ -34,6 +35,23 @@ public class TeacherMapper {
         );
     }
 
+    public void updateDomain(UpdateTeacherRequest request, Teacher teacher) {
+
+        teacher.setFirstName(request.firstName());
+        teacher.setMiddleName(request.middleName());
+        teacher.setPaternalLastName(request.paternalLastName());
+        teacher.setMaternalLastName(request.maternalLastName());
+        teacher.setDni(request.dni());
+        teacher.setBirthDate(request.birthDate());
+        teacher.setGender(request.gender());
+        teacher.setMaritalStatus(request.maritalStatus());
+        teacher.setPhone(request.phone());
+        teacher.setAddress(request.address());
+        teacher.setSpecialty(request.specialty());
+        teacher.setAcademicDegree(request.academicDegree());
+        teacher.setProfessionalLicenseNumber(request.professionalLicenseNumber());
+    }
+
     public Teacher toDomain(CreateTeacherRequest request, User user, String code) {
         return Teacher.builder()
                 .code(code)
@@ -55,7 +73,6 @@ public class TeacherMapper {
                 .createdAt(LocalDateTime.now())
                 .build();
     }
-
 
     public TeacherResponse toResponse(Teacher teacher) {
 
