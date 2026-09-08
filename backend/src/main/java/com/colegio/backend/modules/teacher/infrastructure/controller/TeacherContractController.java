@@ -4,7 +4,7 @@ import com.colegio.backend.modules.teacher.application.dto.teacher_contract.Crea
 import com.colegio.backend.modules.teacher.application.dto.teacher_contract.TeacherContractResponse;
 import com.colegio.backend.modules.teacher.domain.model.TeacherContract;
 import com.colegio.backend.modules.teacher.domain.port.usecase.TeacherContractUseCase;
-import com.colegio.backend.modules.user.application.dto.UserResponse;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;

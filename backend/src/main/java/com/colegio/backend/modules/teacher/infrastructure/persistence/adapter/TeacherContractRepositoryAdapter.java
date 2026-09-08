@@ -49,4 +49,10 @@ public class TeacherContractRepositoryAdapter implements TeacherContractReposito
         return jpaTeacherContractRepository.findAllByFilters(teacherCode,startDate,endDate,"",pageable)
                 .map(teacherContractMapperPersistence::toDomain);
     }
+
+    @Override
+    public Optional<TeacherContract> findByIdWithTeacher(Long id) {
+        return jpaTeacherContractRepository.findById(id)
+                .map(teacherContractMapperPersistence::toDomain);
+    }
 }

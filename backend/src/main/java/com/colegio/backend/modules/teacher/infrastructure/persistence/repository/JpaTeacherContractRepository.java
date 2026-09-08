@@ -30,5 +30,14 @@ public interface JpaTeacherContractRepository extends JpaRepository <TeacherCont
             Pageable pageable
     );
 
+    @Query("""
+        SELECT tc
+        FROM TeacherContractEntity tc
+        JOIN FETCH tc.teacher t
+        WHERE tc.id = :id
+    """)
+    Optional<TeacherContractEntity> findByIdWithTeacher(
+            @Param("id") Long id
+    );
 
 }
