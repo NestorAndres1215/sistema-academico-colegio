@@ -1,1 +1,98 @@
-<p>teacher-detail works!</p>
+<div class="container">
+  <app-page-header [icon]="icon" [title]="title" [subtitle]="subtitle"> </app-page-header>
+
+  @if (teacherContract(); as teacher) {
+    <div class="info-card mb-3">
+      <div class="section-header">
+        <mat-icon>person</mat-icon>
+        <h3>Datos personales</h3>
+      </div>
+      <div class="row g-3">
+        <div class="col-12 col-sm-6 col-lg-3">
+          <span class="field-label">Código</span>
+          <p class="field-value">{{ teacher.code }}</p>
+        </div>
+
+        <div class="col-12 col-sm-6 col-lg-3">
+          <span class="field-label">Nombre</span>
+          <p class="field-value">{{ teacher.name }}</p>
+        </div>
+
+        <div class="col-12 col-sm-6 col-lg-3">
+          <span class="field-label">Apellido</span>
+          <p class="field-value">{{ teacher.lastName }}</p>
+        </div>
+
+        <div class="col-12 col-sm-6 col-lg-3">
+          <span class="field-label">DNI</span>
+          <p class="field-value">{{ teacher.dni }}</p>
+        </div>
+
+        <div class="col-12 col-sm-6 col-lg-3">
+          <span class="field-label">Usuario</span>
+          <p class="field-value">{{ teacher.username }}</p>
+        </div>
+
+        <div class="col-12 col-sm-6 col-lg-3">
+          <span class="field-label">Email</span>
+          <p class="field-value field-value--break">{{ teacher.email }}</p>
+        </div>
+
+        <div class="col-12 col-sm-6 col-lg-3">
+          <span class="field-label">Teléfono</span>
+          <p class="field-value">{{ teacher.phone }}</p>
+        </div>
+
+        <div class="col-12 col-sm-6 col-lg-3">
+          <span class="field-label">Fecha de nacimiento</span>
+          <p class="field-value">{{ teacher.birthDate }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-card mb-3">
+      <div class="section-header">
+        <mat-icon>school</mat-icon>
+        <h3>Datos profesionales</h3>
+      </div>
+      <div class="row g-3">
+        <div class="col-12 col-sm-6 col-lg-4">
+          <span class="field-label">Especialidad</span>
+          <p class="field-value">{{ teacher.specialty }}</p>
+        </div>
+
+        <div class="col-12 col-sm-6 col-lg-4">
+          <span class="field-label">Grado académico</span>
+          <p class="field-value">{{ teacher.academicDegree || '—' }}</p>
+        </div>
+
+        <div class="col-12 col-sm-6 col-lg-4">
+          <span class="field-label">N° Licencia profesional</span>
+          <p class="field-value">{{ teacher.professionalLicenseNumber || '—' }}</p>
+        </div>
+
+        <div class="col-12 col-sm-6 col-lg-4">
+          <span class="field-label">Universidad</span>
+          <p class="field-value">{{ teacher.university || '—' }}</p>
+        </div>
+
+        <div class="col-12 col-sm-6 col-lg-4">
+          <span class="field-label">Años de experiencia</span>
+          <p class="field-value">{{ teacher.yearsOfExperience }} años</p>
+        </div>
+
+        @if (teacher.notes) {
+          <div class="col-12">
+            <span class="field-label">Notas / Observaciones</span>
+            <p class="field-value field-value--notes">{{ teacher.notes }}</p>
+          </div>
+        }
+      </div>
+    </div>
+  } @else {
+    <div class="info-card mb-3 loading-state">
+      <mat-icon>hourglass_empty</mat-icon>
+      <p>Cargando información del profesor...</p>
+    </div>
+  }
+</div>

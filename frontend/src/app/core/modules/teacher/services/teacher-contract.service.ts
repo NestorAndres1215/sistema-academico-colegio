@@ -40,7 +40,4 @@ export class TeacherContractService {
   findById(id: number): Observable<TeacherContractResponse> {
     return this.http.get<TeacherContractResponse>(`${this.backendUrl}/teacher-contract/${id}`);
   }
-
-
-
 }

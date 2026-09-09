@@ -90,10 +90,10 @@ export class TeacherList {
 
 
   onDetail(userResponse: TeacherResponse): void {
-    this.router.navigate(['/admin/usuarios', userResponse.id]);
+    this.router.navigate(['/admin/profesores', userResponse.id]);
   }
 
   onEdit(userResponse: TeacherResponse): void {
-    this.router.navigate(['/admin/usuarios', userResponse.id, 'edit']);
+    this.router.navigate(['/admin/profesores', userResponse.id, 'edit']);
   }
 }

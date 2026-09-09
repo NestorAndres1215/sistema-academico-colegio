@@ -4,13 +4,14 @@
   <div class="d-flex justify-content-end mb-3">
     <app-button label="Registrar" icon="add" variant="primary" class="register-btn"> </app-button>
   </div>
-  <app-data-table
-    [columns]="columns"
-    [data]="teacherContract()"
-    (detail)="onDetail($event)"
-    [actions]="tableActions"
-  >
-  </app-data-table>
+<app-data-table
+  [columns]="columns"
+  [data]="teacherContract()"
+  (detail)="onDetail($event)"
+  (download)="onDownload($event)"
+  [actions]="tableActions"
+>
+</app-data-table>
 
   <app-pagination
     [totalItems]="totalItems()"

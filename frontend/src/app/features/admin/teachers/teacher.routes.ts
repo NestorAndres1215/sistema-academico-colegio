@@ -32,14 +32,14 @@ export const TEACHERS_ROUTES: Routes = [
         (m) => m.TeacherContractDetail,
       ),
   },
+  {
+    path: ':id',
+    loadComponent: () => import('./teacher-detail/teacher-detail').then((m) => m.TeacherDetail),
+  },
 
-  /*
   {
     path: ':id/edit',
     loadComponent: () => import('./teacher-edit/teacher-edit').then((m) => m.TeacherEdit),
   },
-  {
-    path: ':id',
-    loadComponent: () => import('./teacher-detail/teacher-detail').then((m) => m.TeacherDetail),
-  },*/
+
 ];

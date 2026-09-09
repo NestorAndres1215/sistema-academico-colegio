@@ -11,6 +11,7 @@ import { TableColumn } from '../../../../../shared/models/table.model';
 import { TeacherContractResponse } from '../../../../../core/modules/teacher/models/teacher-contract-response';
 import { TableAction } from '../../../../../shared/ui/data-table/data-table.types';
 import { Button } from "../../../../../shared/ui/button/button";
+import { TeacherReportService } from '../../../../../core/modules/teacher/services/teacher-report.service';
 
 @Component({
   imports: [PageHeader, DataTable, Pagination, Button],
@@ -21,6 +22,7 @@ import { Button } from "../../../../../shared/ui/button/button";
 export class TeacherContract {
 
   private readonly teacherContractService = inject(TeacherContractService);
+  private readonly teacherReportService = inject(TeacherReportService)
   private readonly router = inject(Router)
   readonly icon = 'description';
   readonly title = 'Contratos de profesores';
@@ -41,14 +43,12 @@ export class TeacherContract {
     await this.loadTeacherContract();
   }
 
-
-
   async loadTeacherContract(): Promise<void> {
     const filters: TeacherContractFilter = {
       teacherCode: this.code(),
       startDate: this.startDate(),
       endDate: this.endDate(),
-      page: this.currentPage() - 1, // conversión a 0-indexado solo aquí, para el backend
+      page: this.currentPage() - 1,
       size: this.pageSize(),
       sort: this.sort(),
     };
@@ -65,14 +65,28 @@ export class TeacherContract {
     { key: 'position', label: 'Posicion' },
   ];
 
-onDetail(teacherContractResponse: TeacherContractResponse): void {
-  this.router.navigate([
-    '/admin/profesores/contrato',
-    this.code(),
-    teacherContractResponse.id,
-  ]);
-}
+  onDetail(teacherContractResponse: TeacherContractResponse): void {
+    this.router.navigate([
+      '/admin/profesores/contrato',
+      this.code(),
+      teacherContractResponse.id,
+    ]);
+  }
 
+  async onDownload(contract: TeacherContractResponse): Promise<void> {
+    const blob = await firstValueFrom(
+      this.teacherReportService.downloadContractPdf(contract.id)
+    );
+
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+
+    link.href = url;
+    link.download = `contrato-${contract.id}.pdf`;
+    link.click();
+
+    window.URL.revokeObjectURL(url);
+  }
 
   clearDateFilters() {
     this.endDate.set(null);

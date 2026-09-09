@@ -5,6 +5,7 @@ import { TeacherRequest } from '../models/teacher-request';
 import { Observable } from 'rxjs';
 import { TeacherResponse } from '../models/teacher-response';
 import { PageResponse } from '../../../models/page-response';
+import { TeacherListResponse } from '../models/teacher-list-response';
 
 @Service()
 export class TeacherService {
@@ -46,11 +47,7 @@ export class TeacherService {
     return this.http.post<TeacherResponse>(`${this.backendUrl}/teachers`, formData);
   }
 
-  downloadCurriculum(teacherId: number): Observable<Blob> {
-    return this.http.get(`${this.backendUrl}/teacher-details/${teacherId}/curriculum/download`, {
-      responseType: 'blob',
-    });
-  }
+
 
   activate(id: number): Observable<TeacherResponse> {
     return this.http.put<TeacherResponse>(`${this.backendUrl}/users/activate/${id}`, {});

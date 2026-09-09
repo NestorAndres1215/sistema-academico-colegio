@@ -8,6 +8,7 @@ import { SearchResult } from '../../../../shared/ui/search-result/search-result'
 import { Search } from '../../../../shared/ui/search/search';
 import { PageHeader } from '../../../../shared/ui/page-header/page-header';
 import { FileService } from '../../../../core/services/file.service';
+import { TeacherDetailService } from '../../../../core/modules/teacher/services/teacher-detail.service';
 
 @Component({
   imports: [SearchResult, Search, PageHeader],
@@ -17,6 +18,7 @@ import { FileService } from '../../../../core/services/file.service';
 })
 export class TeacherSearch {
   private readonly teacherService = inject(TeacherService);
+  private readonly teacherDetailService = inject(TeacherDetailService)
   private readonly router = inject(Router);
   private readonly fileService = inject(FileService);
  
@@ -55,7 +57,7 @@ export class TeacherSearch {
   }
 
   async onDownload(item: SearchResultItem): Promise<void> {
-    const blob = await firstValueFrom(this.teacherService.downloadCurriculum(Number(item.id)));
+    const blob = await firstValueFrom(this.teacherDetailService.downloadCurriculum(Number(item.id)));
 
     const url = URL.createObjectURL(blob);
 
