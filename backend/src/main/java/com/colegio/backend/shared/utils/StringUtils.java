@@ -17,4 +17,13 @@ public final class StringUtils {
 
         return first + " " + second;
     }
+
+    public static String safe(String value, String fallback) {
+        return (value == null || value.isBlank()) ? fallback : value;
+    }
+
+    public static boolean isBlank(String value) {
+        return value == null || value.isBlank();
+    }
+
 }
