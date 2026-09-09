@@ -52,7 +52,6 @@ public class TeacherContractReportService implements TeacherContractReportUseCas
 
         CompanyResponse company = getCompany();
 
-
         Document document = new Document(
                 PageSize.A4,
                 50,

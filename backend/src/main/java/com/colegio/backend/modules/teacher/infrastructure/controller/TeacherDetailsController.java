@@ -1,6 +1,8 @@
 package com.colegio.backend.modules.teacher.infrastructure.controller;
 
+import com.colegio.backend.modules.teacher.application.dto.teacher.TeacherListResponse;
 import com.colegio.backend.modules.teacher.domain.port.usecase.TeacherDetailsUseCase;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.core.io.Resource;
 import lombok.RequiredArgsConstructor;
@@ -35,5 +37,12 @@ public class TeacherDetailsController {
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)
                 .body(resource);
     }
+
+    @Operation(summary = "Get teacher details by teacher id")
+    @GetMapping("/teacher/{teacherId}")
+    public ResponseEntity<TeacherListResponse> findByTeacherId(@PathVariable Long teacherId) {
+        return ResponseEntity.ok(teacherDetailsUseCase.findByTeacherIdWithTeacher(teacherId));
+    }
+
 
 }

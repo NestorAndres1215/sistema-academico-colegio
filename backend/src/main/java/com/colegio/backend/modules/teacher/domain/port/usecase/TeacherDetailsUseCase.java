@@ -1,5 +1,6 @@
 package com.colegio.backend.modules.teacher.domain.port.usecase;
 
+import com.colegio.backend.modules.teacher.application.dto.teacher.TeacherListResponse;
 import com.colegio.backend.modules.teacher.application.dto.teacher.UpdateTeacherRequest;
 import com.colegio.backend.modules.teacher.domain.model.Teacher;
 import com.colegio.backend.modules.teacher.domain.model.TeacherDetails;
@@ -7,6 +8,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.net.MalformedURLException;
+import java.util.Optional;
 
 public interface TeacherDetailsUseCase {
 
@@ -15,4 +17,6 @@ public interface TeacherDetailsUseCase {
     TeacherDetails update(UpdateTeacherRequest teacherDetails, Teacher teacher, MultipartFile cv);
 
     Resource downloadCurriculum(Long teacherId) throws MalformedURLException;
+
+    TeacherListResponse findByTeacherIdWithTeacher(Long teacherId);
 }

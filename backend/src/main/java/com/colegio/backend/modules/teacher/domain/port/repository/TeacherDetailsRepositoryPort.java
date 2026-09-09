@@ -12,4 +12,6 @@ public interface TeacherDetailsRepositoryPort {
     Optional<TeacherDetails> findById(Long id);
 
     TeacherDetails save (TeacherDetails teacherDetails);
+
+    Optional<TeacherDetails> findByTeacherIdWithTeacher(Long teacherId);
 }

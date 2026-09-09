@@ -1,7 +1,9 @@
 package com.colegio.backend.modules.teacher.application.service;
 
 import com.colegio.backend.modules.file.domain.port.usecase.FileUseCase;
+import com.colegio.backend.modules.teacher.application.dto.teacher.TeacherListResponse;
 import com.colegio.backend.modules.teacher.application.dto.teacher.UpdateTeacherRequest;
+import com.colegio.backend.modules.teacher.application.mapper.TeacherDetailsMapper;
 import com.colegio.backend.modules.teacher.domain.model.Teacher;
 import com.colegio.backend.modules.teacher.domain.model.TeacherDetails;
 import com.colegio.backend.modules.teacher.domain.port.repository.TeacherDetailsRepositoryPort;
@@ -19,6 +21,7 @@ import java.net.MalformedURLException;
 public class TeacherDetailsService implements TeacherDetailsUseCase {
 
     private final TeacherDetailsRepositoryPort teacherDetailsRepositoryPort;
+    private final TeacherDetailsMapper teacherDetailsMapper;
     private final FileUseCase fileUseCase;
 
     @Override
@@ -59,6 +62,13 @@ public class TeacherDetailsService implements TeacherDetailsUseCase {
         return fileUseCase.loadAsResource(details.getCurriculum());
     }
 
+    @Override
+    public TeacherListResponse findByTeacherIdWithTeacher(Long teacherId) {
+
+        TeacherDetails teacherDetails = findByTeacherId(teacherId);
+
+        return teacherDetailsMapper.toListResponse(teacherDetails.getTeacher(), teacherDetails);
+    }
 
     private TeacherDetails findByTeacherId(Long teacherId) {
         return teacherDetailsRepositoryPort.findByTeacher_Id(teacherId)

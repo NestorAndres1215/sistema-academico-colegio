@@ -3,11 +3,8 @@ package com.colegio.backend.modules.teacher.infrastructure.persistence.adapter;
 import com.colegio.backend.modules.teacher.domain.model.TeacherDetails;
 import com.colegio.backend.modules.teacher.domain.port.repository.TeacherDetailsRepositoryPort;
 import com.colegio.backend.modules.teacher.infrastructure.persistence.entity.TeacherDetailsEntity;
-import com.colegio.backend.modules.teacher.infrastructure.persistence.entity.TeacherEntity;
 import com.colegio.backend.modules.teacher.infrastructure.persistence.mapper.TeacherDetailsMapperPersistence;
-import com.colegio.backend.modules.teacher.infrastructure.persistence.mapper.TeacherMapperPersistence;
 import com.colegio.backend.modules.teacher.infrastructure.persistence.repository.JpaTeacherDetailsRepository;
-import com.colegio.backend.modules.teacher.infrastructure.persistence.repository.JpaTeacherRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -40,5 +37,11 @@ public class TeacherDetailsRepositoryAdapter implements TeacherDetailsRepository
         TeacherDetailsEntity saved = jpaTeacherDetailsRepository.save(entity);
 
         return teacherDetailsMapperPersistence.toDomain(saved);
+    }
+
+    @Override
+    public Optional<TeacherDetails> findByTeacherIdWithTeacher(Long teacherId) {
+        return jpaTeacherDetailsRepository.findByTeacherIdWithTeacher(teacherId)
+                .map(teacherDetailsMapperPersistence::toDomain);
     }
 }
