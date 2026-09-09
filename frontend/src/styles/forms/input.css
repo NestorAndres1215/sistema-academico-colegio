@@ -1,8 +1,8 @@
 .mat-mdc-form-field input,
 .mat-mdc-form-field textarea,
 .mat-mdc-form-field .mdc-text-field__input {
-    font-size: 14px !important;
-    color: var(--color-texto-primario) !important;
+  font-size: 14px !important;
+  color: var(--color-texto-secundario) !important;
 }
 
 .mat-mdc-form-field input.mat-mdc-input-element:-webkit-autofill,
@@ -13,29 +13,29 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 1000px var(--color-bg-card) inset !important;
-    -webkit-text-fill-color: var(--color-texto-primario) !important;
-    caret-color: var(--color-texto-primario) !important;
-    transition:
-        background-color 99999s ease-in-out 0s,
-        color 99999s ease-in-out 0s !important;
+  -webkit-box-shadow: 0 0 0 1000px var(--color-bg-card) inset !important;
+  -webkit-text-fill-color: var(--color-texto-primario) !important;
+  caret-color: var(--color-texto-primario) !important;
+  transition:
+    background-color 99999s ease-in-out 0s,
+    color 99999s ease-in-out 0s !important;
 }
 
 .mat-mdc-form-field input::placeholder,
 .mat-mdc-form-field textarea::placeholder,
 .mat-mdc-form-field .mdc-text-field__input::placeholder {
-    color: var(--color-texto-secundario) !important;
-    opacity: 1 !important;
+  color: var(--color-texto-secundario) !important;
+  opacity: 1 !important;
 }
 
 input[type='number']::-webkit-inner-spin-button,
 input[type='number']::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    appearance: none;
-    margin: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
 }
 
 input[type='number'] {
-    -moz-appearance: textfield;
-    appearance: textfield;
+  -moz-appearance: textfield;
+  appearance: textfield;
 }
