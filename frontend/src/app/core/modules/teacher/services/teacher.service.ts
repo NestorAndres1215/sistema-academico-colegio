@@ -1,11 +1,13 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Service } from '@angular/core';
 import { environment } from '../../../../../environments/environment';
-import { TeacherRequest } from '../models/teacher-request';
+
 import { Observable } from 'rxjs';
 import { TeacherResponse } from '../models/teacher-response';
 import { PageResponse } from '../../../models/page-response';
-import { TeacherListResponse } from '../models/teacher-list-response';
+
+import { CreateTeacherRequest } from '../models/create-teacher-request';
+import { UpdateTeacherRequest } from '../models/update-teacher-request';
 
 @Service()
 export class TeacherService {
@@ -41,13 +43,26 @@ export class TeacherService {
     return this.http.get<TeacherResponse[]>(`${this.backendUrl}/teachers/search`, { params });
   }
 
-  create(request: TeacherRequest, foto: File | null, cv: File | null): Observable<TeacherResponse> {
+  create(
+    request: CreateTeacherRequest,
+    foto: File | null,
+    cv: File | null,
+  ): Observable<TeacherResponse> {
     const formData = this.toFormData(request, foto, cv);
 
     return this.http.post<TeacherResponse>(`${this.backendUrl}/teachers`, formData);
   }
 
+  update(
+    id: number,
+    request: UpdateTeacherRequest,
+    foto: File | null,
+    cv: File | null,
+  ): Observable<TeacherResponse> {
+    const formData = this.toFormData(request, foto, cv);
 
+    return this.http.put<TeacherResponse>(`${this.backendUrl}/teachers/${id}`, formData);
+  }
 
   activate(id: number): Observable<TeacherResponse> {
     return this.http.put<TeacherResponse>(`${this.backendUrl}/users/activate/${id}`, {});
@@ -57,7 +72,7 @@ export class TeacherService {
     return this.http.put<TeacherResponse>(`${this.backendUrl}/users/deactivate/${id}`, {});
   }
 
-  private toFormData(request: TeacherRequest, foto: File | null, cv: File | null): FormData {
+  private toFormData(request: any, foto: File | null, cv: File | null): FormData {
     const formData = new FormData();
 
     formData.append(

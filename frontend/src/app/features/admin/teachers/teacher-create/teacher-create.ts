@@ -13,13 +13,14 @@ import { AlertService } from '../../../../core/services/alert.service';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { SelectFilterOption } from '../../../../core/models/select-filter-option';
-import { TeacherRequest } from '../../../../core/modules/teacher/models/teacher-request';
+
 import { toApiDate } from '../../../../core/utils/date.util';
 import { firstValueFrom } from 'rxjs';
 import { TeacherService } from '../../../../core/modules/teacher/services/teacher.service';
 import { HttpErrorService } from '../../../../core/services/http-error.service';
 import { FormValidationService } from '../../../../core/services/form-validation.service';
 import { Button } from "../../../../shared/ui/button/button";
+import { CreateTeacherRequest } from '../../../../core/modules/teacher/models/create-teacher-request';
 
 @Component({
   selector: 'app-teacher-create',
@@ -36,7 +37,7 @@ import { Button } from "../../../../shared/ui/button/button";
     MatDatepickerModule,
     MatNativeDateModule,
     Button
-],
+  ],
   templateUrl: './teacher-create.html',
   styleUrl: './teacher-create.css',
 })
@@ -57,7 +58,7 @@ export class TeacherCreate {
   private readonly teacherService = inject(TeacherService);
   private readonly httpErrorService = inject(HttpErrorService);
   private readonly formValidationService = inject(FormValidationService);
-  
+
   readonly form: FormGroup = this.fb.group({
     personal: this.fb.group({
       firstName: ['', Validators.required],
@@ -145,7 +146,7 @@ export class TeacherCreate {
 
     const valores = this.form.getRawValue();
 
-    const payload: TeacherRequest = {
+    const payload: CreateTeacherRequest = {
       firstName: valores.personal.firstName,
       middleName: valores.personal.middleName,
       paternalLastName: valores.personal.paternalLastName,
@@ -206,7 +207,7 @@ export class TeacherCreate {
     { value: 'Femenino', label: 'Femenino' },
     { value: 'Otro', label: 'Otro' },
   ];
-  
+
   readonly contractTypeOptions: SelectFilterOption[] = [
     { value: '', label: 'Seleccione tipo de contrato' },
     { value: 'Tiempo completo', label: 'Tiempo completo' },

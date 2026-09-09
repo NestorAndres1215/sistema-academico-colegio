@@ -1,4 +1,4 @@
-export interface TeacherRequest {
+export interface CreateTeacherRequest {
     firstName: string;
     middleName: string;
     paternalLastName: string;

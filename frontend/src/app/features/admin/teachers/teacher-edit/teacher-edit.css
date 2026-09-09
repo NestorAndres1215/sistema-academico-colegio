@@ -1,0 +1,244 @@
+.container {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-bottom: calc(2rem + env(safe-area-inset-bottom, 0px));
+}
+
+.info-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 2rem;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.1rem 0 1rem;
+  color: var(--color-texto-primario);
+}
+
+.section-header mat-icon {
+  color: var(--color-texto-primario);
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.section-header h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-navy);
+  margin: 0;
+}
+
+.field-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-texto-secundario);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-bottom: 4px;
+}
+
+.field-input {
+  width: 100%;
+}
+
+/* Avatar foto */
+.avatar-preview {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 2px dashed var(--color-border);
+  background: var(--color-bg-page);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.2s;
+  flex-shrink: 0;
+}
+
+.avatar-preview:hover {
+  border-color: var(--color-blue);
+}
+
+.avatar-preview:hover .avatar-overlay {
+  opacity: 1;
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar-icon {
+  font-size: 40px;
+  width: 40px;
+  height: 40px;
+  color: var(--color-border);
+}
+
+.avatar-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.avatar-overlay mat-icon {
+  color: #fff;
+  font-size: 28px;
+}
+
+.file-hint {
+  font-size: 11px;
+  color: var(--color-texto-secundario) !important;
+}
+
+/* CV upload */
+.cv-upload {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 2px dashed var(--color-border);
+  border-radius: 10px;
+  background: var(--color-bg-page);
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--color-texto-secundario) !important;
+  transition:
+    border-color 0.2s,
+    background 0.2s;
+  min-height: 56px;
+}
+
+.cv-upload:hover {
+  border-color: var(--color-blue);
+  background: var(--color-bg-card);
+}
+
+.cv-icon {
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+  color: var(--color-texto-secundario) !important;
+  flex-shrink: 0;
+}
+
+.cv-icon.success {
+  color: var(--color-danger);
+}
+
+.cv-nombre {
+  flex: 1;
+  font-weight: 500;
+  color: var(--color-texto-primario);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Acciones */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  padding: 1.5rem 0 calc(1.5rem + env(safe-area-inset-bottom, 0px));
+  border-top: 1px solid var(--color-border);
+  position: relative;
+  z-index: 1;
+  flex-wrap: wrap;
+}
+
+.form-actions app-button {
+  flex-shrink: 0;
+}
+
+/* ============ RESPONSIVE ============ */
+
+@media (max-width: 991.98px) {
+  .info-card {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .container {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  .info-card {
+    padding: 1.25rem 1rem;
+    border-radius: 10px;
+  }
+
+  .section-header h3 {
+    font-size: 14px;
+  }
+
+  .row.align-items-center {
+    align-items: stretch !important;
+  }
+
+  .avatar-preview {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+  }
+
+  .cv-upload {
+    padding: 12px;
+    font-size: 12.5px;
+  }
+
+  .cv-nombre {
+    font-size: 12.5px;
+  }
+
+  /* Registrar arriba (más fácil de tocar), Limpiar fechas abajo */
+  .form-actions {
+    flex-direction: column-reverse;
+    flex-wrap: nowrap;
+    gap: 0.6rem;
+    width: 100%;
+    margin-bottom: 6rem;
+  }
+
+  .form-actions app-button {
+    width: 100%;
+    display: block;
+  }
+
+  .form-actions ::ng-deep button,
+  .form-actions ::ng-deep .mat-mdc-raised-button,
+  .form-actions ::ng-deep .mat-mdc-button {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .info-card {
+    padding: 1rem 0.75rem;
+  }
+
+  .avatar-preview {
+    width: 70px;
+    height: 70px;
+  }
+}
