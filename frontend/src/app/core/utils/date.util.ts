@@ -1,4 +1,3 @@
-
 /**
  * Convierte "yyyy-MM-dd" a Date local
  * Evita el problema del desfase por zona horaria.

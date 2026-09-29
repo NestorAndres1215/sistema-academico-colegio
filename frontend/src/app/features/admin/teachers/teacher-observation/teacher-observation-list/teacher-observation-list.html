@@ -1,17 +1,16 @@
 <div class="container">
   <app-page-header [icon]="icon" [title]="title" [subtitle]="subtitle"> </app-page-header>
-
-  <div class="d-flex justify-content-end mb-3">
-    <app-button label="Registrar" icon="add" variant="primary" class="register-btn"> </app-button>
+  <div class="my-3">
+    <app-search placeholder="Buscar por nombre o correo..." (searchChange)="onSearch($event)">
+    </app-search>
   </div>
-  <app-data-table
-    [columns]="columns"
-    [data]="teacherContract()"
-    (detail)="onDetail($event)"
-    (download)="onDownload($event)"
-    [actions]="tableActions"
-  >
-  </app-data-table>
+  <main class="results-column mb-5">
+    <app-search-result
+      [items]="results()"
+      [actions]="sessionAction"
+    >
+    </app-search-result>
+  </main>
 
   <app-pagination
     [totalItems]="totalItems()"

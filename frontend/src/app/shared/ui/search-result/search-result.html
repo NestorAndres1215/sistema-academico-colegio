@@ -20,13 +20,19 @@
             <div class="result-info">
               <div class="result-name-row">
                 <span class="result-name">{{ item.name }}</span>
+
                 @if (item.status) {
-                  <span class="status-dot" [class]="'status-' + item.status"></span>
+                  <span
+                    class="status-dot"
+                    [class]="'status-' + item.status"
+                  ></span>
                 }
               </div>
 
               @if (item.subtitle) {
-                <span class="result-subtitle">{{ item.subtitle }}</span>
+                <span class="result-subtitle">
+                  {{ item.subtitle }}
+                </span>
               }
 
               <div class="result-meta">
@@ -36,6 +42,7 @@
                     {{ item.role }}
                   </span>
                 }
+
                 @if (item.extraInfo) {
                   <span class="meta-chip">
                     <mat-icon>info</mat-icon>
@@ -47,91 +54,16 @@
           </div>
 
           <div class="result-actions">
-            @if (hasAction('download')) {
-              <app-button
-                [label]="downloadTooltip()"
-                icon="download"
-                variant="secondary"
-                [disabled]="isActionDisabled('download', item)"
-                (click)="onDownload(item, $event)"
-              >
-              </app-button>
-            }
+            @for (action of actions(); track action) {
+              @let config = getActionConfig(action);
 
-            @if (hasAction('viewContract')) {
               <app-button
-                [label]="viewContractTooltip()"
-                icon="description"
-                variant="secondary"
-                [disabled]="isActionDisabled('viewContract', item)"
-                (click)="onViewContract(item, $event)"
-              >
-              </app-button>
-            }
-            @if (hasAction('message')) {
-              <app-button
-                [label]="messageTooltip()"
-                icon="chat_bubble_outline"
-                variant="secondary"
-                [disabled]="isActionDisabled('message', item)"
-                (click)="onMessage(item, $event)"
-              >
-              </app-button>
-            }
-
-            @if (hasAction('viewProfile')) {
-              <app-button
-                [label]="viewProfileTooltip()"
-                icon="person"
-                variant="primary"
-                [disabled]="isActionDisabled('viewProfile', item)"
-                (click)="onViewProfile(item, $event)"
-              >
-              </app-button>
-            }
-
-            @if (hasAction('activate')) {
-              <app-button
-                [label]="activateTooltip()"
-                icon="check_circle"
-                variant="success"
-                [disabled]="isActionDisabled('activate', item)"
-                (click)="onActivate(item, $event)"
-              >
-              </app-button>
-            }
-
-            @if (hasAction('deactivate')) {
-              <app-button
-                [label]="deactivateTooltip()"
-                icon="block"
-                variant="danger"
-                [disabled]="isActionDisabled('deactivate', item)"
-                (click)="onDeactivate(item, $event)"
-              >
-              </app-button>
-            }
-
-            @if (hasAction('blocked')) {
-              <app-button
-                [label]="blockedTooltip()"
-                icon="lock_person"
-                variant="danger"
-                [disabled]="isActionDisabled('blocked', item)"
-                (click)="onBlocked(item, $event)"
-              >
-              </app-button>
-            }
-
-            @if (hasAction('closeSession')) {
-              <app-button
-                [label]="closeSessionTooltip()"
-                icon="logout"
-                variant="danger"
-                [disabled]="isActionDisabled('closeSession', item)"
-                (click)="onCloseSession(item, $event)"
-              >
-              </app-button>
+                [label]="getActionLabel(action)"
+                [icon]="config.icon"
+                [variant]="config.variant"
+                [disabled]="isActionDisabled(action, item)"
+                (click)="onAction(action, item, $event)"
+              ></app-button>
             }
           </div>
         </div>

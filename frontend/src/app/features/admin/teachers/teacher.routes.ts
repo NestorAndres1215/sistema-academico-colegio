@@ -33,6 +33,13 @@ export const TEACHERS_ROUTES: Routes = [
       ),
   },
   {
+    path: 'observaciones',
+    loadComponent: () =>
+      import('./teacher-observation/teacher-observation-list/teacher-observation-list').then(
+        (m) => m.TeacherObservationList,
+      )
+  },
+  {
     path: ':id',
     loadComponent: () => import('./teacher-detail/teacher-detail').then((m) => m.TeacherDetail),
   },
@@ -41,5 +48,4 @@ export const TEACHERS_ROUTES: Routes = [
     path: ':id/edit',
     loadComponent: () => import('./teacher-edit/teacher-edit').then((m) => m.TeacherEdit),
   },
-
 ];

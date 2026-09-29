@@ -4,7 +4,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
 import { Button } from '../button/button';
-import { SearchResultAction } from './search-result.types';
+import { SearchResultAction, SearchResultActionConfig } from './search-result.types';
+
 import { SearchResultItem } from '../../models/search-result-model';
 
 @Component({
@@ -14,7 +15,6 @@ import { SearchResultItem } from '../../models/search-result-model';
   templateUrl: './search-result.html',
 })
 export class SearchResult {
-
   readonly items = input<SearchResultItem[]>([]);
   readonly loading = input<boolean>(false);
   readonly emptyMessage = input<string>('No se encontraron resultados');
@@ -22,40 +22,122 @@ export class SearchResult {
   readonly actions = input<SearchResultAction[]>([
     'message',
     'viewProfile',
+    'viewObservation',
     'viewContract',
-    'closeSession'
+    'closeSession',
   ]);
 
   readonly downloadTooltip = input('Descargar');
   readonly messageTooltip = input('Enviar mensaje');
   readonly viewProfileTooltip = input('Ver Perfil');
+  readonly viewObservationTooltip = input('Ver observaciones');
   readonly viewContractTooltip = input('Ver contrato');
   readonly activateTooltip = input('Activar');
   readonly deactivateTooltip = input('Desactivar');
   readonly blockedTooltip = input('Bloquear');
   readonly closeSessionTooltip = input('Cerrar sesión');
 
-  readonly actionDisabled = input<
-    (action: SearchResultAction, item: SearchResultItem) => boolean
-  >(() => false);
+  readonly actionDisabled = input<(action: SearchResultAction, item: SearchResultItem) => boolean>(
+    () => false,
+  );
 
   readonly download = output<SearchResultItem>();
   readonly message = output<SearchResultItem>();
   readonly viewProfile = output<SearchResultItem>();
+  readonly viewObservation = output<SearchResultItem>();
   readonly viewContract = output<SearchResultItem>();
   readonly activate = output<SearchResultItem>();
   readonly deactivate = output<SearchResultItem>();
   readonly blocked = output<SearchResultItem>();
   readonly closeSession = output<SearchResultItem>();
 
+  private readonly actionConfigs: Record<SearchResultAction, SearchResultActionConfig> = {
+    download: {
+      icon: 'download',
+      variant: 'secondary',
+    },
+
+    message: {
+      icon: 'chat_bubble_outline',
+      variant: 'secondary',
+    },
+
+    viewProfile: {
+      icon: 'person',
+      variant: 'primary',
+    },
+
+    viewObservation: {
+      icon: 'visibility',
+      variant: 'secondary',
+    },
+
+    viewContract: {
+      icon: 'description',
+      variant: 'secondary',
+    },
+
+    activate: {
+      icon: 'check_circle',
+      variant: 'success',
+    },
+
+    deactivate: {
+      icon: 'block',
+      variant: 'danger',
+    },
+
+    blocked: {
+      icon: 'lock_person',
+      variant: 'danger',
+    },
+
+    closeSession: {
+      icon: 'logout',
+      variant: 'danger',
+    },
+  };
+
   hasAction(action: SearchResultAction): boolean {
     return this.actions().includes(action);
   }
 
-  isActionDisabled(
-    action: SearchResultAction,
-    item: SearchResultItem
-  ): boolean {
+  getActionConfig(action: SearchResultAction): SearchResultActionConfig {
+    return this.actionConfigs[action];
+  }
+
+  getActionLabel(action: SearchResultAction): string {
+    switch (action) {
+      case 'download':
+        return this.downloadTooltip();
+
+      case 'message':
+        return this.messageTooltip();
+
+      case 'viewProfile':
+        return this.viewProfileTooltip();
+
+      case 'viewObservation':
+        return this.viewObservationTooltip();
+
+      case 'viewContract':
+        return this.viewContractTooltip();
+
+      case 'activate':
+        return this.activateTooltip();
+
+      case 'deactivate':
+        return this.deactivateTooltip();
+
+      case 'blocked':
+        return this.blockedTooltip();
+
+      case 'closeSession':
+        return this.closeSessionTooltip();
+    }
+  }
+
+  isActionDisabled(action: SearchResultAction, item: SearchResultItem): boolean {
     return this.actionDisabled()(action, item);
   }
 
@@ -63,68 +145,50 @@ export class SearchResult {
     return name.charAt(0).toUpperCase();
   }
 
-  onDownload(item: SearchResultItem, event: Event): void {
+  onAction(action: SearchResultAction, item: SearchResultItem, event: Event): void {
     event.stopPropagation();
 
-    if (this.isActionDisabled('download', item)) return;
+    if (this.isActionDisabled(action, item)) {
+      return;
+    }
 
-    this.download.emit(item);
-  }
+    switch (action) {
+      case 'download':
+        this.download.emit(item);
+        break;
 
-  onMessage(item: SearchResultItem, event: Event): void {
-    event.stopPropagation();
+      case 'message':
+        this.message.emit(item);
+        break;
 
-    if (this.isActionDisabled('message', item)) return;
+      case 'viewProfile':
+        this.viewProfile.emit(item);
+        break;
 
-    this.message.emit(item);
-  }
+      case 'viewObservation':
+        this.viewObservation.emit(item);
+        break;
 
-  onViewProfile(item: SearchResultItem, event: Event): void {
-    event.stopPropagation();
+      case 'viewContract':
+        this.viewContract.emit(item);
+        break;
 
-    if (this.isActionDisabled('viewProfile', item)) return;
+      case 'activate':
+        this.activate.emit(item);
+        break;
 
-    this.viewProfile.emit(item);
-  }
+      case 'deactivate':
+        this.deactivate.emit(item);
+        break;
 
-  onViewContract(item: SearchResultItem, event: Event): void {
-    event.stopPropagation();
+      case 'blocked':
+        this.blocked.emit(item);
+        break;
 
-    if (this.isActionDisabled('viewContract', item)) return;
-
-    this.viewContract.emit(item);
-  }
-
-  onActivate(item: SearchResultItem, event: Event): void {
-    event.stopPropagation();
-
-    if (this.isActionDisabled('activate', item)) return;
-
-    this.activate.emit(item);
-  }
-
-  onDeactivate(item: SearchResultItem, event: Event): void {
-    event.stopPropagation();
-
-    if (this.isActionDisabled('deactivate', item)) return;
-
-    this.deactivate.emit(item);
-  }
-
-  onBlocked(item: SearchResultItem, event: Event): void {
-    event.stopPropagation();
-
-    if (this.isActionDisabled('blocked', item)) return;
-
-    this.blocked.emit(item);
-  }
-
-  onCloseSession(item: SearchResultItem, event: Event): void {
-    event.stopPropagation();
-
-    if (this.isActionDisabled('closeSession', item)) return;
-
-    this.closeSession.emit(item);
+      case 'closeSession':
+        this.closeSession.emit(item);
+        break;
+    }
   }
 
   trackByFn(index: number, item: SearchResultItem): number | string {
