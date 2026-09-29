@@ -18,8 +18,6 @@ public final class ValidationUtils {
             "Masculino", "Femenino"
     );
 
-    private ValidationUtils() {
-    }
 
     public static void validateAge(LocalDate birthDate) {
         if (birthDate != null && birthDate.plusYears(18).isAfter(LocalDate.now())) {

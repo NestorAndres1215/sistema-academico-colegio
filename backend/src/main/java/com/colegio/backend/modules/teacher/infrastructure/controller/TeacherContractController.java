@@ -22,7 +22,7 @@ public class TeacherContractController {
 
     private final TeacherContractUseCase teacherContractUseCase;
 
-    @Operation(summary = "Obtener contratos de profesor por code con filtros")
+    @Operation(summary = "Obtener contratos de profesor por código con filtros")
     @GetMapping("/teacher/{code}")
     public ResponseEntity<Page<TeacherContractResponse>> findWithFilters(
             @PathVariable String code,
@@ -35,7 +35,7 @@ public class TeacherContractController {
         return ResponseEntity.ok(teacherContractUseCase.findWithFilters(code, startDate, endDate, page, size, sort));
     }
 
-    @Operation(summary = "Create a new teacher")
+    @Operation(summary = "Registrar un nuevo contrato de profesor")
     @PostMapping("/{code}")
     public ResponseEntity<TeacherContract> create(
             @PathVariable String code,
@@ -44,7 +44,7 @@ public class TeacherContractController {
         return ResponseEntity.ok(teacherContractUseCase.createContract(createTeacherContractRequest,code));
     }
 
-    @Operation(summary = "Get user by id")
+    @Operation(summary = "Obtener contrato por ID")
     @GetMapping("/{id}")
     public ResponseEntity<TeacherContractResponse> findById(@PathVariable Long id) {
         return ResponseEntity.ok(teacherContractUseCase.findById(id));

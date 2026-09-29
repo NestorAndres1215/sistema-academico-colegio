@@ -27,7 +27,7 @@ public class TeacherController {
 
     private final TeacherUseCase teacherUseCase;
 
-    @Operation(summary = "Get all Teacher")
+    @Operation(summary = "Obtener profesores por estado")
     @GetMapping
     public ResponseEntity<Page<TeacherResponse>> findByAllStatus(
             @RequestParam(required = false) String status,
@@ -40,12 +40,13 @@ public class TeacherController {
         );
     }
 
+    @Operation(summary = "Buscar profesores")
     @GetMapping("/search")
     public ResponseEntity<List<TeacherResponse>> search(@RequestParam(required = false) String search) {
         return ResponseEntity.ok(teacherUseCase.search(search));
     }
 
-    @Operation(summary = "Create a new teacher")
+    @Operation(summary = "Registrar un nuevo profesor")
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Teacher> create(
             @RequestPart(value = "foto", required = false) MultipartFile foto,
@@ -55,7 +56,7 @@ public class TeacherController {
         return ResponseEntity.ok(teacherUseCase.create(teacherRequest, foto, cv));
     }
 
-    @Operation(summary = "Update teacher")
+    @Operation(summary = "Actualizar profesor")
     @PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Teacher> update(
             @PathVariable Long id,
@@ -69,13 +70,13 @@ public class TeacherController {
     }
 
 
-    @Operation(summary = "Activate admin")
+    @Operation(summary = "Activar profesor")
     @PutMapping("/activate/{id}")
     public ResponseEntity<Teacher> activate(@PathVariable Long id) {
         return ResponseEntity.ok(teacherUseCase.activate(id));
     }
 
-    @Operation(summary = "Deactivate teacher")
+    @Operation(summary = "Desactivar profesor")
     @PutMapping("/deactivate/{id}")
     public ResponseEntity<Teacher> deactivate(@PathVariable Long id) {
         return ResponseEntity.ok(teacherUseCase.deactivate(id));

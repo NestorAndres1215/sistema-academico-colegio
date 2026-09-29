@@ -28,26 +28,40 @@ public class TeacherDetailsMapper {
                 .build();
     }
 
+    public TeacherListResponse toListResponse(
+            Teacher teacher,
+            TeacherDetails details
+    ) {
 
-    public  TeacherListResponse toListResponse(Teacher teacher, TeacherDetails details) {
         User user = teacher.getUser();
 
         return new TeacherListResponse(
                 teacher.getId(),
                 teacher.getCode(),
-                valueOrEmpty(user, User::getEmail),
-                valueOrEmpty(user, User::getUsername),
+                user.getEmail(),
+                user.getUsername(),
                 buildName(teacher.getFirstName(), teacher.getMiddleName()),
                 buildName(teacher.getPaternalLastName(), teacher.getMaternalLastName()),
+                teacher.getFirstName(),
+                teacher.getMiddleName(),
+                teacher.getPaternalLastName(),
+                teacher.getMaternalLastName(),
                 teacher.getDni(),
-                teacher.getBirthDate() != null ? teacher.getBirthDate().toString() : "",
+                teacher.getBirthDate().toString(),
+                teacher.getGender(),
+                teacher.getMaritalStatus(),
                 teacher.getPhone(),
+                teacher.getAddress(),
                 teacher.getSpecialty(),
                 teacher.getAcademicDegree(),
                 teacher.getProfessionalLicenseNumber(),
-                valueOrEmpty(details, TeacherDetails::getUniversity),
-                details != null ? details.getYearsOfExperience() : 0,
-                valueOrEmpty(details, TeacherDetails::getNotes)
+                details.getUniversity(),
+                details.getGraduationDate().toString(),
+                 details.getYearsOfExperience(),
+                details.getCurriculum(),
+                details.getNotes(),
+                teacher.getPhoto(),
+                teacher.getStatus()
         );
     }
 
@@ -58,15 +72,4 @@ public class TeacherDetailsMapper {
                 .collect(Collectors.joining(" "));
     }
 
-    private static String valueOrEmpty(User user, Function<User, String> getter) {
-        return user != null && getter.apply(user) != null
-                ? getter.apply(user)
-                : "";
-    }
-
-    private static String valueOrEmpty(TeacherDetails details, Function<TeacherDetails, String> getter) {
-        return details != null && getter.apply(details) != null
-                ? getter.apply(details)
-                : "";
-    }
 }

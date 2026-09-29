@@ -16,14 +16,9 @@ public class JacksonResponseWriter implements JsonResponseWriter {
     private final ObjectMapper objectMapper;
 
     @Override
-    public void write(
-            HttpServletResponse response,
-            Object body
-    ) throws IOException {
-
+    public void write(HttpServletResponse response, Object body) throws IOException {
         response.setContentType(CONTENT_TYPE);
         response.setCharacterEncoding(CHARACTER_ENCODING);
-
         objectMapper.writeValue(response.getWriter(), body);
     }
 }

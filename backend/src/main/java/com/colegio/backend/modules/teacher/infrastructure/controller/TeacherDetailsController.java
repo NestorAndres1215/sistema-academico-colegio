@@ -24,6 +24,7 @@ public class TeacherDetailsController {
 
     private final TeacherDetailsUseCase teacherDetailsUseCase;
 
+    @Operation(summary = "Descargar currículum del profesor")
     @GetMapping("/{id}/curriculum/download")
     public ResponseEntity<Resource> downloadCurriculum(@PathVariable Long id) throws MalformedURLException {
 
@@ -38,7 +39,7 @@ public class TeacherDetailsController {
                 .body(resource);
     }
 
-    @Operation(summary = "Get teacher details by teacher id")
+    @Operation(summary = "Obtener detalles del profesor por ID")
     @GetMapping("/teacher/{teacherId}")
     public ResponseEntity<TeacherListResponse> findByTeacherId(@PathVariable Long teacherId) {
         return ResponseEntity.ok(teacherDetailsUseCase.findByTeacherIdWithTeacher(teacherId));

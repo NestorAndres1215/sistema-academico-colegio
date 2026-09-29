@@ -22,7 +22,7 @@ public class UserController {
 
     private final UserUseCase userUseCase;
 
-    @Operation(summary = "Get all administrators")
+    @Operation(summary = "Obtener usuarios por estado")
     @GetMapping
     public ResponseEntity<Page<UserResponse>> getByStatus(
             @RequestParam String status,
@@ -41,12 +41,13 @@ public class UserController {
 
     }
 
+    @Operation(summary = "Buscar usuarios")
     @GetMapping("/search")
     public ResponseEntity<List<UserResponse>> search(@RequestParam(required = false) String search) {
         return ResponseEntity.ok(userUseCase.search(search));
     }
 
-    @Operation(summary = "Create a new position")
+    @Operation(summary = "Registrar un nuevo usuario")
     @PostMapping
     public ResponseEntity<User> create(@Valid @RequestBody CreateUserRequest createUserRequest) {
         return ResponseEntity.ok(
@@ -59,7 +60,7 @@ public class UserController {
         );
     }
 
-    @Operation(summary = "Update user")
+    @Operation(summary = "Actualizar usuario")
     @PutMapping("/{id}")
     public ResponseEntity<User> update(
             @PathVariable Long id,
@@ -75,19 +76,19 @@ public class UserController {
         );
     }
 
-    @Operation(summary = "Get user by id")
+    @Operation(summary = "Obtener usuario por ID")
     @GetMapping("/{id}")
     public ResponseEntity<UserResponse> findById(@PathVariable Long id) {
         return ResponseEntity.ok(userUseCase.findById(id));
     }
 
-    @Operation(summary = "Get user by email")
+    @Operation(summary = "Obtener usuario por correo electrónico")
     @GetMapping("/email/{email}")
     public ResponseEntity<UserResponse> findByEmail(@PathVariable String email) {
         return ResponseEntity.ok(userUseCase.findByEmail(email));
     }
 
-    @Operation(summary = "Change user password")
+    @Operation(summary = "Cambiar contraseña de usuario")
     @PostMapping("/{id}/change-password")
     public ResponseEntity<User> changePassword(
             @PathVariable Long id,
@@ -97,7 +98,7 @@ public class UserController {
     }
 
 
-    @Operation(summary = "Update Change user password")
+    @Operation(summary = "Actualizar contraseña de usuario")
     @PostMapping("/{id}/update-change-password")
     public ResponseEntity<User> updateChangePassword(
             @PathVariable Long id,
@@ -106,13 +107,13 @@ public class UserController {
         return ResponseEntity.ok(userUseCase.updateChangePassword(id, updatePasswordRequest));
     }
 
-    @Operation(summary = "Activate admin")
+    @Operation(summary = "Activar usuario")
     @PutMapping("/activate/{id}")
     public ResponseEntity<User> activate(@PathVariable Long id) {
         return ResponseEntity.ok(userUseCase.activate(id));
     }
 
-    @Operation(summary = "Deactivate admin")
+    @Operation(summary = "Desactivar usuario")
     @PutMapping("/deactivate/{id}")
     public ResponseEntity<User> deactivate(@PathVariable Long id) {
         return ResponseEntity.ok(userUseCase.deactivate(id));

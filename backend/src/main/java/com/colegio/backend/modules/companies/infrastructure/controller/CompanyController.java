@@ -23,14 +23,13 @@ public class CompanyController {
 
     private final CompanyUseCase companyUseCase;
 
-    @Operation(summary = "Get company by Code")
+    @Operation(summary = "Obtener empresa por código")
     @GetMapping("/code/{code}")
     public ResponseEntity<CompanyResponse> getByCode(@PathVariable String code) {
         return ResponseEntity.ok(companyUseCase.findByCode(code));
     }
 
-
-    @Operation(summary = "Create a new company")
+    @Operation(summary = "Registrar una nueva empresa")
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Company> create(
             @RequestPart(value = "file", required = false) MultipartFile file,
@@ -39,13 +38,13 @@ public class CompanyController {
         return ResponseEntity.ok(companyUseCase.save(file, request));
     }
 
-    @Operation(summary = "Update an existing company")
+    @Operation(summary = "Actualizar una empresa")
     @PutMapping("/{id}")
     public ResponseEntity<Company> update(
             @PathVariable Long id,
             @RequestPart("file") MultipartFile file,
             @Valid @RequestPart("company") CompanyRequest request
     ) throws IOException {
-        return ResponseEntity.ok(companyUseCase.update(id,file,request));
+        return ResponseEntity.ok(companyUseCase.update(id, file, request));
     }
 }

@@ -1,6 +1,7 @@
 package com.colegio.backend.modules.file.infrastructure.controller;
 
 import com.colegio.backend.modules.file.domain.port.usecase.FileUseCase;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
@@ -18,6 +19,7 @@ public class FileController {
 
     private final FileUseCase fileUseCase;
 
+    @Operation(summary = "Obtener archivo")
     @GetMapping("/assets/{folder}/{filename:.+}")
     public ResponseEntity<Resource> getAsset(
             @PathVariable String folder,

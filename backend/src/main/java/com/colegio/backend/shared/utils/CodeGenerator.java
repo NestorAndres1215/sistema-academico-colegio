@@ -4,9 +4,6 @@ import java.util.UUID;
 
 public final class CodeGenerator {
 
-    private CodeGenerator() {
-    }
-
     public static String generateCode() {
         return UUID.randomUUID()
                 .toString()

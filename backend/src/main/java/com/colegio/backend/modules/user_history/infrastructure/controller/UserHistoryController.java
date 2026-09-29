@@ -48,19 +48,21 @@ public class UserHistoryController {
 
     }
 
-    @Operation(summary = "Register a new user story")
+    @Operation(summary = "Registrar un nuevo historial de usuario")
     @PostMapping
-    public ResponseEntity<UserHistory> save(@RequestBody UserHistoryRequest userHistoryRequest) {
+    public ResponseEntity<UserHistory> save(
+            @RequestBody UserHistoryRequest userHistoryRequest) {
+
         return ResponseEntity.ok(userHistoryUseCase.save(userHistoryRequest));
     }
 
-    @Operation(summary = "Activate user story")
+    @Operation(summary = "Activar historial de usuario")
     @PutMapping("/{id}/activate")
     public ResponseEntity<UserHistory> activate(@PathVariable Long id) {
         return ResponseEntity.ok(userHistoryUseCase.activate(id));
     }
 
-    @Operation(summary = "Deactivate user story")
+    @Operation(summary = "Desactivar historial de usuario")
     @PutMapping("/{id}/deactivate")
     public ResponseEntity<UserHistory> deactivate(@PathVariable Long id) {
         return ResponseEntity.ok(userHistoryUseCase.deactivate(id));

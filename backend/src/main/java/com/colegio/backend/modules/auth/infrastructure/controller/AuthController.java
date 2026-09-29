@@ -20,21 +20,23 @@ public class AuthController {
 
     private final AuthUseCase authUseCase;
 
-    @Operation(summary = "Generate authentication token")
+    @Operation(summary = "Generar token de autenticación")
     @PostMapping("/generate-token")
     public ResponseEntity<TokenResponse> generarToken(@RequestBody LoginRequest request) {
         return ResponseEntity.ok(authUseCase.login(request));
     }
 
-    @Operation(summary = "Get currently authenticated user")
+    @Operation(summary = "Obtener usuario autenticado")
     @GetMapping("/current-user")
     public ResponseEntity<UserResponse> getCurrentUser(Authentication authentication) {
         return ResponseEntity.ok(authUseCase.currentUser(authentication.getName()));
     }
 
+    @Operation(summary = "Cerrar sesión")
     @PostMapping("/logout")
     public ResponseEntity<Void> logout(@CookieValue(value = "jwt", required = false) String jwt) {
         authUseCase.logout(jwt);
         return ResponseEntity.ok().build();
     }
+
 }
