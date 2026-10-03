@@ -20,8 +20,8 @@ public class TeacherContractEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; // Identificador del contrato
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "teacher_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "teacher_id", nullable = false)
     private TeacherEntity teacher; // Profesor asociado
 
     @Column(name = "contract_type")

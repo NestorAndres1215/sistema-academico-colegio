@@ -51,6 +51,7 @@ public class TeacherDetailsService implements TeacherDetailsUseCase {
 
         return teacherDetailsRepositoryPort.save(teacherDetails);
     }
+
     @Override
     public Resource downloadCurriculum(Long teacherId) throws MalformedURLException {
         TeacherDetails details = findByTeacherId(teacherId);

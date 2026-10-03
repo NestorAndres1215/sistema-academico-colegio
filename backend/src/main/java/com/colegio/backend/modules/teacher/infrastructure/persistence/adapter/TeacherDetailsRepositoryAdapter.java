@@ -6,9 +6,10 @@ import com.colegio.backend.modules.teacher.infrastructure.persistence.entity.Tea
 import com.colegio.backend.modules.teacher.infrastructure.persistence.mapper.TeacherDetailsMapperPersistence;
 import com.colegio.backend.modules.teacher.infrastructure.persistence.repository.JpaTeacherDetailsRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
 
+import org.springframework.stereotype.Component;
 import java.util.Optional;
+
 @Component
 @RequiredArgsConstructor
 public class TeacherDetailsRepositoryAdapter implements TeacherDetailsRepositoryPort {
@@ -38,6 +39,7 @@ public class TeacherDetailsRepositoryAdapter implements TeacherDetailsRepository
 
         return teacherDetailsMapperPersistence.toDomain(saved);
     }
+
 
     @Override
     public Optional<TeacherDetails> findByTeacherIdWithTeacher(Long teacherId) {
